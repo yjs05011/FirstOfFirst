@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bg
+    uniqueID: 293018617
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bench
+    uniqueID: 3572362377
+    locked: 0
+  - name: Tree
+    uniqueID: 2809407699
     locked: 0
