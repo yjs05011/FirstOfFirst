@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Npc
+  - New tag
+  - New tag (1)
+  - New tag (2)
+  - New tag (3)
+  - New tag (4)
+  - New tag (5)
+  - New tag (6)
+  - New tag (7)
+  - New tag (8)
+  - New tag (9)
   layers:
   - Default
   - TransparentFX
@@ -41,4 +51,79 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 754742443
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 47941601
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 3632518745
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 3729427335
+    locked: 0
+  - name: New Layer 5
+    uniqueID: 1647384473
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 94849599
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 2785219501
+    locked: 0
+  - name: New Layer 8
+    uniqueID: 3764667477
+    locked: 0
+  - name: New Layer 9
+    uniqueID: 3037470669
+    locked: 0
+  - name: New Layer 10
+    uniqueID: 306269517
+    locked: 0
+  - name: New Layer 11
+    uniqueID: 1655897459
+    locked: 0
+  - name: New Layer 12
+    uniqueID: 3337237405
+    locked: 0
+  - name: New Layer 13
+    uniqueID: 798576821
+    locked: 0
+  - name: New Layer 14
+    uniqueID: 1408938487
+    locked: 0
+  - name: New Layer 15
+    uniqueID: 1785181467
+    locked: 0
+  - name: New Layer 16
+    uniqueID: 1744902281
+    locked: 0
+  - name: New Layer 17
+    uniqueID: 4084847519
+    locked: 0
+  - name: New Layer 18
+    uniqueID: 788197137
+    locked: 0
+  - name: New Layer 19
+    uniqueID: 2718989351
+    locked: 0
+  - name: New Layer 20
+    uniqueID: 3570257723
+    locked: 0
+  - name: New Layer 21
+    uniqueID: 879215599
+    locked: 0
+  - name: New Layer 22
+    uniqueID: 952466657
+    locked: 0
+  - name: New Layer 23
+    uniqueID: 3535340723
+    locked: 0
+  - name: New Layer 24
+    uniqueID: 4264125913
+    locked: 0
+  - name: New Layer 25
+    uniqueID: 1556648603
     locked: 0
