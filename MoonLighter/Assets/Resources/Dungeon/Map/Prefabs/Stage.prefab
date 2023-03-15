@@ -2145,6 +2145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1368656130}
+  - component: {fileID: 7190721321247902048}
   m_Layer: 0
   m_Name: Board2
   m_TagString: Untagged
@@ -2170,6 +2171,24 @@ Transform:
   m_Father: {fileID: 1825903895562948888}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7190721321247902048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368656129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc454bbb5e14b448bee1122d41fac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mIsMovableTop: 1
+  mIsMovableBottom: 1
+  mIsMovableLeft: 1
+  mIsMovableRight: 1
+  mObstacles: []
+  mObjects: []
 --- !u!1 &1610549632
 GameObject:
   m_ObjectHideFlags: 0
@@ -10781,6 +10800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825903895776075303}
+  - component: {fileID: 315091153204399766}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -10807,6 +10827,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &315091153204399766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825903895776075302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdafed53f3a97ba4cb686cea9fb338c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mBoards:
+  - {fileID: 1053721882400337488}
+  - {fileID: 7190721321247902048}
+  - {fileID: 9021069264704049899}
+  - {fileID: 8037621436891324036}
 --- !u!1 &1825903895786532903
 GameObject:
   m_ObjectHideFlags: 0
@@ -11052,13 +11089,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825903895914537620}
+  - component: {fileID: 1053721882400337488}
   m_Layer: 0
   m_Name: Board1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1825903895914537620
 Transform:
   m_ObjectHideFlags: 0
@@ -11077,6 +11115,24 @@ Transform:
   m_Father: {fileID: 1825903895562948888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1053721882400337488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825903895914537623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc454bbb5e14b448bee1122d41fac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mIsMovableTop: 1
+  mIsMovableBottom: 0
+  mIsMovableLeft: 1
+  mIsMovableRight: 1
+  mObstacles: []
+  mObjects: []
 --- !u!1 &1825903895939745474
 GameObject:
   m_ObjectHideFlags: 0
@@ -21333,7 +21389,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.15217394, y: 0.15217394, z: 0}
+  m_ChunkCullingBounds: {x: 0.125, y: 0.125, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -21349,6 +21405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4615800880326757689}
+  - component: {fileID: 9021069264704049899}
   m_Layer: 0
   m_Name: Board2-1
   m_TagString: Untagged
@@ -21373,6 +21430,24 @@ Transform:
   m_Father: {fileID: 1825903895562948888}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9021069264704049899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245860794239263855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc454bbb5e14b448bee1122d41fac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mIsMovableTop: 1
+  mIsMovableBottom: 1
+  mIsMovableLeft: 1
+  mIsMovableRight: 1
+  mObstacles: []
+  mObjects: []
 --- !u!1 &2715963666419507189
 GameObject:
   m_ObjectHideFlags: 0
@@ -25913,13 +25988,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5145619151741039620}
+  - component: {fileID: 8037621436891324036}
   m_Layer: 0
   m_Name: Board4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5145619151741039620
 Transform:
   m_ObjectHideFlags: 0
@@ -25938,6 +26014,24 @@ Transform:
   m_Father: {fileID: 1825903895562948888}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8037621436891324036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014817179657629660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc454bbb5e14b448bee1122d41fac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mIsMovableTop: 1
+  mIsMovableBottom: 1
+  mIsMovableLeft: 1
+  mIsMovableRight: 1
+  mObstacles: []
+  mObjects: []
 --- !u!1 &8087994123176404895
 GameObject:
   m_ObjectHideFlags: 0
