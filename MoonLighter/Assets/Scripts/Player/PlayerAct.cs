@@ -6,7 +6,9 @@ using UnityEngine;
 public enum ActState
 {
     STATE_MOVE,
-    STATE_ATTACK,
+    STATE_ATTACK_COMBO_ONE,
+    STATE_ATTACK_COMBO_TWO,
+    STATE_ATTACK_COMBO_THREE,
     STATE_EVASION
 }
 public class PlayerAct : MonoBehaviour
@@ -25,6 +27,8 @@ public class PlayerAct : MonoBehaviour
     public bool mIsEvasion = false;
     // 플레이어가 공격키를 여러번 누르는지 확인하는 변수
     public int mAttackRoll = 0;
+    // 플레이어 콤보 공격 확인용 bool 변수
+    public bool mIsCombo = false;
     // 플레이어가 방향을 나타내는 변수 (0:아래, 1:위 , 2:왼쪽,3:오른쪽)
     public int mPlayerDirection = 0;
     // 플레이어 상태 머신 변수
@@ -39,6 +43,7 @@ public class PlayerAct : MonoBehaviour
     // 플레이어 공격시 박스의 크기를 결정해줌;
     public BoxCollider2D mWeaponeHitBox;
     public RectTransform mWeaponeHitBoxPosition;
+    public float mTime = 0;
 
     // 플레이어 상태 머신 타입 변경
     public void SetActionType(ActState state)
@@ -52,8 +57,16 @@ public class PlayerAct : MonoBehaviour
         }
         switch (state)
         {
-            case global::ActState.STATE_ATTACK:
-                mNowState = gameObject.AddComponent<PlayerAttack>();
+            case global::ActState.STATE_ATTACK_COMBO_ONE:
+                mNowState = gameObject.AddComponent<PlayerAttackComboOne>();
+                mNowState.Action(state);
+                break;
+            case global::ActState.STATE_ATTACK_COMBO_TWO:
+                mNowState = gameObject.AddComponent<PlayerAttackComboTwo>();
+                mNowState.Action(state);
+                break;
+            case global::ActState.STATE_ATTACK_COMBO_THREE:
+                mNowState = gameObject.AddComponent<PlayerAttackComboThree>();
                 mNowState.Action(state);
                 break;
             case global::ActState.STATE_EVASION:
@@ -66,7 +79,7 @@ public class PlayerAct : MonoBehaviour
     }
     void Awake()
     {
-        Time.timeScale = 1f / 24f;
+
         mPlayerAnimator = GetComponent<Animator>();
         mPlayerRigid = GetComponent<Rigidbody2D>();
         mPlayerHitBox = GetComponent<BoxCollider2D>();
@@ -82,39 +95,72 @@ public class PlayerAct : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(mState);
         if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
         {
-            mAttackRoll++;
+            if (!mIsCombo)
+            {
+                mAttackRoll++;
+            }
+
 
         }
         switch (mState)
         {
             case ActState.STATE_MOVE:
-                if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
+                if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
                 {
                     SetActionType(ActState.STATE_EVASION);
                 }
-                if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
+                else if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
                 {
-                    SetActionType(ActState.STATE_ATTACK);
+                    mTime = 0;
+                    mIsCombo = true;
+                    SetActionType(ActState.STATE_ATTACK_COMBO_ONE);
 
+                }
+                PlayerMove();
+                break;
+            case ActState.STATE_ATTACK_COMBO_ONE:
+                mPlayerRigid.velocity = Vector2.zero;
+                mTime += Time.deltaTime;
+                Debug.Log(mTime);
+                if (mTime > 1.3f)
+                {
+                    mTime = 0;
+                    SetActionType(ActState.STATE_MOVE);
+                    mPlayerAnimator.SetBool("IsAttack", false);
+                }
+                if (mIsCombo)
+                {
+                    mTime = 0;
+                    SetActionType(ActState.STATE_ATTACK_COMBO_TWO);
                 }
                 break;
-            case ActState.STATE_ATTACK:
-                if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
+            case ActState.STATE_ATTACK_COMBO_TWO:
+                mTime += Time.deltaTime;
+                Debug.Log(mTime);
+                if (mTime > 1.3f)
                 {
-
+                    mTime = 0;
+                    SetActionType(ActState.STATE_MOVE);
+                    mPlayerAnimator.SetBool("IsAttack", false);
                 }
+                if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
+                {
+                    if (mIsCombo)
+                    {
+
+                        SetActionType(ActState.STATE_ATTACK_COMBO_THREE);
+                    }
+                }
+
                 break;
             case ActState.STATE_EVASION:
 
                 break;
         }
-        if (mIsEvasion) { }
-        else
-        {
-            PlayerMove();
-        }
+
 
     }
     //플레이어 이동 구현
@@ -125,32 +171,43 @@ public class PlayerAct : MonoBehaviour
         if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
         {
             mIsMove = true;
-            mPlayerAnimator.SetInteger("Run", 1);
-            mPlayerAnimator.SetInteger("Idle", 2);
+            mPlayerAnimator.SetFloat("InputX", 0);
+            mPlayerAnimator.SetFloat("InputY", 1);
+            mPlayerAnimator.SetBool("IsRun", true);
+
             mPlayerDirection = 1;
             vertical = 1;
         }
         if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
         {
             mIsMove = true;
-            mPlayerAnimator.SetInteger("Run", 2);
-            mPlayerAnimator.SetInteger("Idle", 1);
+            mPlayerAnimator.SetFloat("InputX", 0);
+            mPlayerAnimator.SetFloat("InputY", -1);
+            mPlayerAnimator.SetBool("IsRun", true);
+            // mPlayerAnimator.SetInteger("Run", 2);
+            // mPlayerAnimator.SetInteger("Idle", 1);
             mPlayerDirection = 0;
             vertical = -1;
         }
         if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
         {
             mIsMove = true;
-            mPlayerAnimator.SetInteger("Run", 3);
-            mPlayerAnimator.SetInteger("Idle", 3);
+            mPlayerAnimator.SetFloat("InputX", -1);
+            mPlayerAnimator.SetFloat("InputY", 0);
+            mPlayerAnimator.SetBool("IsRun", true);
+            // mPlayerAnimator.SetInteger("Run", 3);
+            // mPlayerAnimator.SetInteger("Idle", 3);
             mPlayerDirection = 2;
             Horizontal = -1;
         }
         if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
         {
             mIsMove = true;
-            mPlayerAnimator.SetInteger("Run", 4);
-            mPlayerAnimator.SetInteger("Idle", 4);
+            mPlayerAnimator.SetFloat("InputX", +1);
+            mPlayerAnimator.SetFloat("InputY", 0);
+            mPlayerAnimator.SetBool("IsRun", true);
+            // mPlayerAnimator.SetInteger("Run", 4);
+            // mPlayerAnimator.SetInteger("Idle", 4);
             mPlayerDirection = 3;
             Horizontal = 1;
 
@@ -160,18 +217,22 @@ public class PlayerAct : MonoBehaviour
         if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
         {
             mIsMove = false;
+            mPlayerAnimator.SetBool("IsRun", false);
         }
         if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
         {
             mIsMove = false;
+            mPlayerAnimator.SetBool("IsRun", false);
         }
         if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
         {
             mIsMove = false;
+            mPlayerAnimator.SetBool("IsRun", false);
         }
         if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
         {
             mIsMove = false;
+            mPlayerAnimator.SetBool("IsRun", false);
 
         }
 
@@ -182,7 +243,7 @@ public class PlayerAct : MonoBehaviour
         mPlayerRigid.velocity = playerVector;
         if (!mIsMove)
         {
-            mPlayerAnimator.SetInteger("Run", 0);
+            mPlayerAnimator.SetBool("IsRun", false);
         }
     }
     //플레이어 회피
