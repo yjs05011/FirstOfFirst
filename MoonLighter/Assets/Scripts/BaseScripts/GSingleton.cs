@@ -36,7 +36,7 @@ public class GSingleton<T> : GComponent where T : GSingleton<T>
     {
         /* Do something */
     }
-    public static T CreateObj<T>(string objName) where T : Component
+    public static T CreateObj<K>(string objName) where K : Component
     {
         GameObject newObj = new GameObject(objName);
         return newObj.AddComponent<T>();
