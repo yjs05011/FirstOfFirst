@@ -267,7 +267,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &3763968048126692962
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -313,11 +313,13 @@ MonoBehaviour:
   mIsMove: 0
   mIsEvasion: 0
   mAttackRoll: 0
+  mIsCombo: 0
   mPlayerDirection: 0
   mPlayerNowWeapone: 0
   mPlayerWeaponePosition: {fileID: 0}
   mWeaponeHitBox: {fileID: 0}
   mWeaponeHitBoxPosition: {fileID: 0}
+  mTime: 0
 --- !u!95 &3763968048126692967
 Animator:
   serializedVersion: 5

@@ -15,9 +15,9 @@ public class GSingleton<T> : GComponent where T : GSingleton<T>
                 GSingleton<T>._instance = 
                     GFunc.CreateObj<T>(typeof(T).ToString());
                 DontDestroyOnLoad(_instance.gameObject);
-            }       // if: ÀÎ½ºÅÏ½º°¡ ºñ¾î ÀÖÀ» ¶§ »õ·Î ÀÎ½ºÅÏ½ºÈ­ ÇÑ´Ù
+            }       // if: ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½È­ ï¿½Ñ´ï¿½
 
-            // ¿©±â¼­ ºÎÅÍ´Â ÀÎ½ºÅÏ½º°¡ Àý´ë ºñ¾îÀÖÁö ¾ÊÀ»µí?
+            // ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½Í´ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
             return _instance;
         }
     }
@@ -35,5 +35,11 @@ public class GSingleton<T> : GComponent where T : GSingleton<T>
     protected virtual void Init()
     {
         /* Do something */
+    }
+    
+    public static T CreateObj<K>(string objName) where K : Component
+    {
+        GameObject newObj = new GameObject(objName);
+        return newObj.AddComponent<T>();
     }
 }

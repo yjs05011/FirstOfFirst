@@ -796,15 +796,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a12141fd69910a4b83adec2b45a7477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSlotWidth: 5
-  mSlotHeight: 4
-  mSlotMargin: 10
-  mSlotAreaPadding: 20
-  mSlotSize: 68
-  mSlotRect: {fileID: 0}
-  mSlotPrefab: {fileID: 0}
-  mInventory: {fileID: 0}
-  mSlotList: []
 --- !u!1 &1911249465
 GameObject:
   m_ObjectHideFlags: 0
