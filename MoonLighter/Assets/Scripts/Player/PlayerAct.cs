@@ -42,8 +42,10 @@ public class PlayerAct : MonoBehaviour
     public RectTransform mPlayerWeaponePosition;
     // 플레이어 공격시 박스의 크기를 결정해줌;
     public BoxCollider2D mWeaponeHitBox;
+    // 플레이어 공격시 박스 위치를 결정해줌
     public RectTransform mWeaponeHitBoxPosition;
     public float mTime = 0;
+    // 플레이어에 사용된 애니메이션 클립을 가져오기위한 변수 선언
     public List<AnimationClip> mPlayerAnimation = new List<AnimationClip>();
     // 플레이어 상태 머신 타입 변경
     public void SetActionType(ActState state)
@@ -258,6 +260,18 @@ public class PlayerAct : MonoBehaviour
             {
 
             }
+        }
+        if (other.tag == "Untagged")
+        {
+            mPlayerAnimator.SetBool("IsPool", true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Untagged")
+        {
+            mPlayerAnimator.SetBool("IsPool", false);
         }
     }
 
