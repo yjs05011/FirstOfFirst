@@ -18,15 +18,16 @@ public class Item : ScriptableObject
     }
 
     
-    //저주 아이템 구현시 활성화 시킬 함수
+    #region 저주 아이템 구현시 활성화 시킬 함수
     // public enum ItemCurseEnum
     // {
     //     Broken = 0,
 
     // }
+    #endregion
 
 
-    // //아이템 타입
+    //아이템 타입
     public ItemEnumType mItemType;    
     //아이템 이름
     public string mItemName;
