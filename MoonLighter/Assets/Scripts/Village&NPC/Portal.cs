@@ -12,7 +12,8 @@ public class Portal : MonoBehaviour
     void Start()
     {
         portalAni= GetComponent<Animator>();
-        talk = transform.Find("talk").gameObject;
+        talk = transform.Find("Talk").gameObject;
+        talk.SetActive(false);
     }
 
 
@@ -24,14 +25,21 @@ public class Portal : MonoBehaviour
         {
             Vector3 mPlayerPos = player.transform.localPosition;
             float mDistance = Vector3.Distance(this.transform.localPosition, mPlayerPos);
-            if(mDistance < 0.5f) 
+            if(mDistance <2)
             {
                 talk.SetActive(true);
+                if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
+                {
+                    talk.SetActive(false);
+                    player.SetActive(false);
+                    portalAni.SetTrigger("EnterTheDungeon");
+                }
             }
             else
             {
                 talk.SetActive(false);
             }
+
         }
     }
 
