@@ -44,7 +44,7 @@ public class PlayerAct : MonoBehaviour
     public BoxCollider2D mWeaponeHitBox;
     public RectTransform mWeaponeHitBoxPosition;
     public float mTime = 0;
-
+    public List<AnimationClip> mPlayerAnimation = new List<AnimationClip>();
     // 플레이어 상태 머신 타입 변경
     public void SetActionType(ActState state)
     {
@@ -95,7 +95,6 @@ public class PlayerAct : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(mState);
         if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
         {
             if (!mIsCombo)
@@ -124,7 +123,6 @@ public class PlayerAct : MonoBehaviour
             case ActState.STATE_ATTACK_COMBO_ONE:
                 mPlayerRigid.velocity = Vector2.zero;
                 mTime += Time.deltaTime;
-                Debug.Log(mTime);
                 if (mTime > 1.3f)
                 {
                     mTime = 0;
@@ -139,7 +137,6 @@ public class PlayerAct : MonoBehaviour
                 break;
             case ActState.STATE_ATTACK_COMBO_TWO:
                 mTime += Time.deltaTime;
-                Debug.Log(mTime);
                 if (mTime > 1.3f)
                 {
                     mTime = 0;
