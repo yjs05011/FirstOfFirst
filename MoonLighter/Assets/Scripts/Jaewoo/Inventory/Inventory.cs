@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         mSlot = mChangeSlotGrideSetting.GetComponentsInChildren<Slot>();
-        mSlotEquip = mChnageEquipmentSlotGrideSetting.GetComponentsInChildren<Slot>();
+       // mSlotEquip = mChnageEquipmentSlotGrideSetting.GetComponentsInChildren<Slot>();
     }
 
     

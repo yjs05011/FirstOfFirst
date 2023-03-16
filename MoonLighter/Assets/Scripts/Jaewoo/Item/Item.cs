@@ -9,10 +9,12 @@ public class Item : ScriptableObject
     //아이템 유형
     public enum ItemEnumType
     {
+        //None 기준
+        None = 0,
         //장비
-        Equiment = 0,
+        Equiment ,
         //포션
-        Protion,
+        Potion,
         //재료
         Ingredient
     }

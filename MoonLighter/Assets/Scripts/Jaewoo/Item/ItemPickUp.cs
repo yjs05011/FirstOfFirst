@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-   public Item mItem;
-   public GameObject mPlayerDistance = default;
-   private Rigidbody2D mItemRigidBody = default;
+    public Item mItem;
+    public GameObject mPlayerBagDistance = default;
+    private Rigidbody2D mItemRigidBody = default;
 
-   void start()
-   {
+    void start()
+    {
         mItemRigidBody = gameObject.GetComponent<Rigidbody2D>();
-   }
+    }
 
-  
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag.Equals("Player"))
+        {
 
-   
+            Destroy(this.gameObject);
+        }
+    }
 
-   
+
 }
