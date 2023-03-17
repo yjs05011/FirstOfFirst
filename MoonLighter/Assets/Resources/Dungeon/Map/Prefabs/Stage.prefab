@@ -235,7 +235,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1266,13 +1266,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666186563}
+  - component: {fileID: 1578942413181917625}
   m_Layer: 0
   m_Name: HealingPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &666186563
 Transform:
   m_ObjectHideFlags: 0
@@ -1292,6 +1293,24 @@ Transform:
   m_Father: {fileID: 1825903895562948888}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1578942413181917625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666186562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc454bbb5e14b448bee1122d41fac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mIsMovableTop: 1
+  mIsMovableBottom: 1
+  mIsMovableLeft: 1
+  mIsMovableRight: 1
+  mObstacles: []
+  mObjects: []
 --- !u!1 &712684930
 GameObject:
   m_ObjectHideFlags: 0
@@ -8306,6 +8325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825903895205691266}
+  - component: {fileID: 7300249547836869939}
   m_Layer: 0
   m_Name: Camp
   m_TagString: Untagged
@@ -8331,6 +8351,24 @@ Transform:
   m_Father: {fileID: 1825903895562948888}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7300249547836869939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825903895205691277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc454bbb5e14b448bee1122d41fac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mIsMovableTop: 1
+  mIsMovableBottom: 1
+  mIsMovableLeft: 1
+  mIsMovableRight: 1
+  mObstacles: []
+  mObjects: []
 --- !u!1 &1825903895213664258
 GameObject:
   m_ObjectHideFlags: 0
@@ -10982,6 +11020,13 @@ MonoBehaviour:
   - {fileID: 7190721321247902048}
   - {fileID: 9021069264704049899}
   - {fileID: 8037621436891324036}
+  - {fileID: 7300249547836869939}
+  - {fileID: 1578942413181917625}
+  mDoorRight: {fileID: 5283361505723927445}
+  mDoorLeft: {fileID: 8394761715176331110}
+  mDoorUp: {fileID: 1825903896282836812}
+  mDoorDown: {fileID: 3862974374312693266}
+  mDoorDirections: 0
 --- !u!1 &1825903895786532903
 GameObject:
   m_ObjectHideFlags: 0
