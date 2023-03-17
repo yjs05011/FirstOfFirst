@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class DungeonBoard : MonoBehaviour
 {
-    public const int DIRECTION_NONE = 0;
-    public const int DIRECTION_TOP = 1;
-    public const int DIRECTION_BOTTOM = 2;
-    public const int DIRECTION_LEFT = 4;
-    public const int DIRECTION_RIGHT = 8;
+    public enum BoardType { None, HealingPool, Camp}
 
-    // 해당 보드의 문 활성화 가능 여부
+    public BoardType mType = BoardType.None;
+
+    // 해당 보드의 문의 방향으로 이동 가능 여부
     public bool mIsMovableTop = false;
     public bool mIsMovableBottom = false;
     public bool mIsMovableLeft = false;
@@ -21,14 +19,15 @@ public class DungeonBoard : MonoBehaviour
 
     public List<GameObject> mObjects = new List<GameObject>();
 
-    
-    // 입력: 위 아래 
-    // 실제로 이 맵은: 위 아래 오른쪽  
+    public BoardType GetBoardType() 
+    { 
+        return mType; 
+    }
 
     // 문이 활성화 되어 있는가?
     public bool IsMovableDirection(int directions)
     {
-        if ((directions & DIRECTION_TOP) == DIRECTION_TOP)
+        if ((directions & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
             if(!mIsMovableTop) // true
             {
@@ -36,7 +35,7 @@ public class DungeonBoard : MonoBehaviour
             }
         }
 
-        if ((directions & DIRECTION_BOTTOM) == DIRECTION_BOTTOM)
+        if ((directions & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
         {
             if (!mIsMovableBottom) // true
             {
@@ -44,7 +43,7 @@ public class DungeonBoard : MonoBehaviour
             }
         }
 
-        if ((directions & DIRECTION_LEFT) == DIRECTION_LEFT)
+        if ((directions & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
         {
             if (!mIsMovableLeft)    // false
             {
@@ -52,7 +51,7 @@ public class DungeonBoard : MonoBehaviour
             }
         }
 
-        if ((directions & DIRECTION_RIGHT) == DIRECTION_RIGHT)
+        if ((directions & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
         {
             if (!mIsMovableRight) // true
             {

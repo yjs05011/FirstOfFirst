@@ -215,7 +215,7 @@ public class BabySlime : Monster
 
 
 
-    public  void OnDamage(int damage)
+    public override void OnDamage(int damage)
     {
         
         if (mState != State.DIE)
