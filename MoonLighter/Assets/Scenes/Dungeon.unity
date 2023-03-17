@@ -426,10 +426,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage
       objectReference: {fileID: 0}
-    - target: {fileID: 1825903895776075302, guid: f1b393ec7e989e24b9975ef1d1505487, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1825903895776075303, guid: f1b393ec7e989e24b9975ef1d1505487, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -24,7 +24,7 @@ public class DungeonBoard : MonoBehaviour
         return mType; 
     }
 
-    // 문이 활성화 되어 있는가?
+    // 이동 가능한 문 방향 체크 
     public bool IsMovableDirection(int directions)
     {
         if ((directions & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
