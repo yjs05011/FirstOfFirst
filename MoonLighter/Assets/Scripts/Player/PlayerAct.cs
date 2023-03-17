@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum ActState
 {
+    None,
     State_Move,
     State_Attack_Combo_One,
     State_Attack_Combo_Two,
     State_Attack_Combo_Three,
     State_Evasion,
     State_Enter_Pool,
-    State_Monster_Hit
-
+    State_Die
 }
 public class PlayerAct : MonoBehaviour
 {
@@ -28,6 +27,8 @@ public class PlayerAct : MonoBehaviour
     public bool mIsMove = false;
     // 플레이어가 회피 중인지 체크하기 위한 bool 변수
     public bool mIsEvasion = false;
+    // 플레이어가 맞는 딜레이를 체크하기 위한 bool 변수
+    public bool mIsDelay = false;
     // 플레이어가 공격키를 여러번 누르는지 확인하는 변수
     public int mAttackRoll = 0;
     // 플레이어 콤보 공격 확인용 bool 변수
@@ -35,11 +36,8 @@ public class PlayerAct : MonoBehaviour
     // 플레이어가 방향을 나타내는 변수 (0:아래, 1:위 , 2:왼쪽,3:오른쪽)
     public int mPlayerDirection = 0;
     // 플레이어 상태 머신 변수
-    private ActState mState;
+    public ActState mState;
     // 플레이어 상태 머신 변수
-    private PlayerState mNowState;
-
-    // 플레이어 현재 무기 상태(1:대검,2:단검,3:활,4:글러브,5:창)
     public int mPlayerNowWeapone;
     // 플레이어 애니매이션을 위한 무기 위치 렉트 트랜스폼 변수
     public RectTransform mPlayerWeaponePosition;
@@ -51,6 +49,9 @@ public class PlayerAct : MonoBehaviour
     // 플레이어에 사용된 애니메이션 클립을 가져오기위한 변수 선언
     public List<AnimationClip> mPlayerAnimation = new List<AnimationClip>();
     // 플레이어 상태 머신 타입 변경
+    private PlayerState mNowState;
+
+    // 플레이어 현재 무기 상태(1:대검,2:단검,3:활,4:글러브,5:창)
     public void SetActionType(ActState state)
     {
         this.mState = state;
@@ -88,7 +89,6 @@ public class PlayerAct : MonoBehaviour
         mPlayerAnimator = GetComponent<Animator>();
         mPlayerRigid = GetComponent<Rigidbody2D>();
         mPlayerHitBox = GetComponent<BoxCollider2D>();
-        mPlayerWeaponePosition = transform.GetChild(1).GetComponent<RectTransform>();
         mWeaponeHitBoxPosition = transform.GetChild(0).GetComponent<RectTransform>();
         mWeaponeHitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
     }
@@ -168,15 +168,16 @@ public class PlayerAct : MonoBehaviour
                 //     mPlayerAnimator.SetBool("IsEvasion", false);
                 // }
                 break;
-            case ActState.State_Monster_Hit:
 
-                break;
             case ActState.State_Enter_Pool:
                 PlayerMove();
                 if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
                 {
                     SetActionType(ActState.State_Evasion);
                 }
+                break;
+            case ActState.State_Die:
+
                 break;
         }
 
@@ -255,8 +256,8 @@ public class PlayerAct : MonoBehaviour
 
         }
 
-        float xSpeed = Horizontal * Time.deltaTime * mPlayerSpeed * 1000;
-        float ySpeed = vertical * Time.deltaTime * mPlayerSpeed * 1000;
+        float xSpeed = Horizontal * mPlayerSpeed;
+        float ySpeed = vertical * mPlayerSpeed;
 
         Vector2 playerVector = new Vector2(xSpeed, ySpeed);
         if (Horizontal != 0 && vertical != 0)
@@ -275,28 +276,58 @@ public class PlayerAct : MonoBehaviour
         //0.625(애니메이션 시간)
         // if (is)
     }
+    public void OnDamage(float MonsterDamage)
+    {
+        if (mIsDelay)
+        {
+        }
+        else
+        {
+            mIsDelay = true;
+            StartCoroutine(HitDelay(0.5f));
+            // float calculateDamage = MonsterDamage -PlayerManager.Instance.PlayerStat.Defence
+            // if(calculateDamge<0){
+            //} else{
+            //  playerManager.Instance.PlayerState.Hp -= calculateDamage;
+            // SetActionType(ActState.State_Monster_Hit);
+            //  }
+            // if (playerManager.Instance.PlayerState.Hp < 0)
+            // {
+            //     SetActionType(ActState.State_Die);
+            // }
+        }
+
+
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "NPC")
-        {
-            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
-            {
-
-            }
-        }
-        if (other.tag == "Untagged")
+        if (CompareTag("Pool"))
         {
             mPlayerAnimator.SetBool("IsPool", true);
             mIsEvasion = false;
             mPlayerAnimator.SetBool("IsEvasion", false);
             SetActionType(ActState.State_Enter_Pool);
         }
+        if (CompareTag("Hole"))
+        {
+            if (mIsEvasion)
+            {
+
+            }
+            else
+            {
+                mPlayerAnimator.SetTrigger("IsFalling");
+                mPlayerRigid.velocity *= 0.1f;
+                mIsEvasion = false;
+            }
+
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Untagged")
+        if (CompareTag("Pool"))
         {
             mPlayerAnimator.SetBool("IsPool", false);
             mIsEvasion = false;
@@ -304,6 +335,11 @@ public class PlayerAct : MonoBehaviour
             SetActionType(ActState.State_Move);
 
         }
+    }
+    IEnumerator HitDelay(float Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+        mIsDelay = false;
     }
 
 
