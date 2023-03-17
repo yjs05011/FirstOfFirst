@@ -7,12 +7,12 @@ public class Monster : MonoBehaviour
 
     public float mMoveSpeed;
     public string mName;
-    public int mHP;
+    public float mHP;
 
     public int mBaseAttack;
     public Vector3 mStartPos;
 
-    public virtual void OnDamage(int damage)
+    public virtual void OnDamage(float damage)
     {
 
     }

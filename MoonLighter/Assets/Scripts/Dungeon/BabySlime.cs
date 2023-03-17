@@ -33,7 +33,7 @@ public class BabySlime : Monster
 
     public Image mImgHp = null;
 
-    public int mMaxHP = 0;
+    public float mMaxHP = 0;
 
     // 일단 스폰 작업 안되있으니 임의로 설정.
 
@@ -215,7 +215,7 @@ public class BabySlime : Monster
 
 
 
-    public override void OnDamage(int damage)
+    public override void OnDamage(float damage)
     {
         
         if (mState != State.DIE)
@@ -230,7 +230,7 @@ public class BabySlime : Monster
 
             // 데미지 차감
             mHP -= damage;
-            mImgHp.fillAmount = (float)mHP / (float)mMaxHP;
+            mImgHp.fillAmount = mHP / mMaxHP;
          
 
 
