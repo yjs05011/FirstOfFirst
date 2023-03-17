@@ -17,8 +17,8 @@ public class DungeonGenerator : MonoBehaviour
     public const int DIRECTION_LEFT = 4;
     public const int DIRECTION_RIGHT = 8;
 
-    public static int TOTAL_COUNT = 20;
-
+    public const int TOTAL_COUNT = 20;
+    public static int CREATE_COUNT = 0;
 
     public static int[] mDungeonBoard = new int[WIDTH * HEIGHT];
 
@@ -38,8 +38,10 @@ public class DungeonGenerator : MonoBehaviour
 
     public void OnGenerate()
     {
-        int creatCount = 0;
-        GenerateStage(START_X, START_Y, START_X, START_Y, GenerateDirections(DIRECTION_NONE, START_X, START_Y, creatCount), creatCount);
+        //int creatCount = 0;
+        //GenerateStage(START_X, START_Y, START_X, START_Y, GenerateDirections(DIRECTION_NONE, START_X, START_Y, creatCount), creatCount);
+        ++CREATE_COUNT;
+        GenerateStage(START_X, START_Y, START_X, START_Y, GenerateDirections(DIRECTION_NONE, START_X, START_Y));
 
         for (int idy = 0; idy < HEIGHT; ++idy)
         {
@@ -68,7 +70,7 @@ public class DungeonGenerator : MonoBehaviour
 
     }
 
-    public void GenerateStage(int x, int y, int px, int py, int directions, int creatCount)
+    public void GenerateStage(int x, int y, int px, int py, int directions)
     {
 
         // 현재 방이 빈방이 아닌경우
@@ -81,11 +83,11 @@ public class DungeonGenerator : MonoBehaviour
 
         DebugDirections(x, y, directions);
 
-        ++creatCount;
+       // ++CREATE_COUNT;
 
         int linkDoors = DIRECTION_NONE;
         GameObject roomObject = Instantiate(mStagePrefab);
-        roomObject.name = "Stage" + creatCount;
+        roomObject.name = "Stage" + CREATE_COUNT;
         roomObject.transform.position = new Vector3(x * 26.0f, y * 15.0f, 0);
 
         DungeonStage room = roomObject.GetComponent<DungeonStage>();
@@ -102,9 +104,10 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     if (IsEmpty(nextX, nextY))
                     {
-                        if (creatCount < TOTAL_COUNT)
+                        if (CREATE_COUNT < TOTAL_COUNT)
                         {
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_BOTTOM, nextX, nextY, creatCount), creatCount);
+                            ++CREATE_COUNT;
+                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_BOTTOM, nextX, nextY));
                             linkDoors |= DIRECTION_TOP;
                         }
                     }
@@ -126,9 +129,11 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     if (IsEmpty(nextX, nextY))
                     {
-                        if (creatCount < TOTAL_COUNT)
+                        if (CREATE_COUNT < TOTAL_COUNT)
                         {
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_TOP, nextX, nextY, creatCount), creatCount);
+                            ++CREATE_COUNT;
+                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_TOP, nextX, nextY));
+                          
                             linkDoors |= DIRECTION_BOTTOM;
                         }
                     }
@@ -150,9 +155,11 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     if (IsEmpty(nextX, nextY))
                     {
-                        if ((creatCount < TOTAL_COUNT))
+                        if ((CREATE_COUNT < TOTAL_COUNT))
                         {
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_RIGHT, nextX, nextY, creatCount), creatCount);
+                            ++CREATE_COUNT;
+                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_RIGHT, nextX, nextY));
+                          
                             linkDoors |= DIRECTION_LEFT;
                         }
                     }
@@ -174,9 +181,11 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     if (IsEmpty(nextX, nextY))
                     {
-                        if ((creatCount < TOTAL_COUNT))
+                        if ((CREATE_COUNT < TOTAL_COUNT))
                         {
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_LEFT, nextX, nextY, creatCount), creatCount);
+                            ++CREATE_COUNT;
+                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_LEFT, nextX, nextY));
+                          
                             linkDoors |= DIRECTION_RIGHT;
                         }
                     }
@@ -191,11 +200,13 @@ public class DungeonGenerator : MonoBehaviour
         room.SetDoorDirections(linkDoors);
     }
 
-    public int GenerateDirections(int backward, int x, int y, int creatCount)
+    // 문 방향 랜덤 설정
+    public int GenerateDirections(int backward, int x, int y)
     {
         int output = DIRECTION_NONE;
         int randomPercent = 90;
 
+        // 이전방 문과 연결될 방향 넣기.(이전 방에서 위의 방향으로 온경우, 아래 방향 문이 열려있어야 하니까, backward로 넣어준다)
         output |= backward;
 
 
@@ -205,11 +216,19 @@ public class DungeonGenerator : MonoBehaviour
             if (random < randomPercent && y < HEIGHT)
             {
                 output |= DIRECTION_TOP;
-
-
                 randomPercent -= random;
             }
 
+        }
+ 
+        {
+            int random = UnityEngine.Random.Range(0, 100 + 1);
+
+            if (random < randomPercent && x >= 1)
+            {
+                output |= DIRECTION_LEFT;
+                randomPercent -= random;
+            }
         }
 
         {
@@ -218,19 +237,6 @@ public class DungeonGenerator : MonoBehaviour
             if (random < randomPercent && y >= 1)
             {
                 output |= DIRECTION_BOTTOM;
-
-                randomPercent -= random;
-            }
-
-        }
-
-        {
-            int random = UnityEngine.Random.Range(0, 100 + 1);
-
-            if (random < randomPercent && x >= 1)
-            {
-                output |= DIRECTION_LEFT;
-
                 randomPercent -= random;
             }
 
@@ -241,19 +247,17 @@ public class DungeonGenerator : MonoBehaviour
             if (random < randomPercent && x < WIDTH)
             {
                 output |= DIRECTION_RIGHT;
-
-
             }
-
         }
         if (output == DIRECTION_NONE)
         {
-            return GenerateDirections(backward, x, y, creatCount);
+            return GenerateDirections(backward, x, y);
         }
 
         return output;
     }
 
+    
 
     public void DebugDirections(int x, int y, int directions)
     {
