@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+   //5x5 정수배열을 만듬
+   //정수 배열 위치마다 slot프리팹의 위치를 순서대로 받게 해줌.
+   //정수 배열 위치마다 slot값을 받게 해줌.
+   //
    private Slot[] mSlot;
    [SerializeField]
    //슬롯 5x5 배열 
@@ -22,16 +26,21 @@ public class InventoryManager : MonoBehaviour
    private GameObject[] mSlotValueArray = new GameObject[2];
 
    [SerializeField]
-   //2차원배열로 구분되는 위치
+   //배열 자리
    private int[,] mInventoryArray = new int[5,5];
 
+   // void Start()
+   // {
+   //    for(int indexArrayY = 0; indexArrayY < mInventoryArray.Length; )
+   //    mInventoryArray
+   // }
    public void InventorySlotArray()
    {      
       for(int indexY = 0; indexY < mSlotArray.Length ; indexY ++)
       {
          for(int indexX = 0; indexX < mSlotArray.Length; indexX ++)
          {
-            mSlotArray[indexY,indexX]= default;
+            //mSlotArray[indexY,indexX]
          }
       }
    }
