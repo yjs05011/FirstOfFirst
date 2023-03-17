@@ -12,5 +12,8 @@ public class Monster : MonoBehaviour
     public int mBaseAttack;
     public Vector3 mStartPos;
 
+    public virtual void OnDamage(int damage)
+    {
 
+    }
 }

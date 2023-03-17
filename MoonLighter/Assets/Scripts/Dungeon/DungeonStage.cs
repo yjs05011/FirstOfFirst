@@ -19,7 +19,6 @@ public class DungeonStage : MonoBehaviour
     // 문 방향에 맞는 보드 설정
     void SetStageBoard()
     {
-       // int directions = DungeonBoard.DIRECTION_TOP | DungeonBoard.DIRECTION_BOTTOM;
 
         List<DungeonBoard> boards = new List<DungeonBoard>();
         GetFilteredBoards(mDoorDirections, ref boards);

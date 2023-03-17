@@ -46,12 +46,12 @@ public class DungeonGenerator : MonoBehaviour
 
             for (int idx = 0; idx < WIDTH; ++idx)
             {
-                //GenerateStage(START_X, START_Y, START_X, START_Y, GenerateDirections(DIRECTION_NONE, START_X, START_Y, false));
+                
                 Debug.Log(mDungeonBoard[idy * WIDTH + idx]);
             }
 
         }
-        // CheckDirections();
+      
     }
 
     // 좌표에 방이 비었는지 체크
