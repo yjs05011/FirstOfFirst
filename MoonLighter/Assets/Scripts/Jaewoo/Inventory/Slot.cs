@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
+    
     public Item mItem;
     public int mItemCount;
     public Sprite mItemSprite;
@@ -41,7 +42,7 @@ public class Slot : MonoBehaviour
         SetColor(1);
     }
 
-    //슬롯에 대한 아이템 갯수
+    //슬롯에 대한 아이템 갯수 업데이트
     public void SetSlotCount(int slotItemCount)
     {
         mItemCount += slotItemCount;
