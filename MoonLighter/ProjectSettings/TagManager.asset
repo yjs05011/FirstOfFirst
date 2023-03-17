@@ -5,16 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Npc
-  - New tag
-  - New tag (1)
-  - New tag (2)
-  - New tag (3)
-  - New tag (4)
-  - New tag (5)
-  - New tag (6)
-  - New tag (7)
-  - New tag (8)
-  - New tag (9)
   layers:
   - Default
   - TransparentFX
