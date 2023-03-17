@@ -63,7 +63,7 @@ public class PlayerAttackComboThree : PlayerState
         player.mAttackRoll = 0;
         player.mPlayerAnimator.SetBool("IsAttack", false);
         player.mPlayerAnimator.SetBool("IsAttackComboThree", false);
-        player.SetActionType(ActState.STATE_MOVE);
+        player.SetActionType(ActState.State_Move);
         player.mIsCombo = false;
 
     }
@@ -87,7 +87,7 @@ public class PlayerAttackComboThree : PlayerState
     //     player.mAttackRoll = 0;
     //     player.mPlayerAnimator.SetBool("IsAttack", false);
     //     player.mPlayerAnimator.SetBool("IsAttackComboThree", false);
-    //     player.SetActionType(ActState.STATE_MOVE);
+    //     player.SetActionType(ActState.State_Move);
     //     player.mIsCombo = false;
 
     // }
@@ -115,7 +115,7 @@ public class PlayerAttackComboThree : PlayerState
     //     // player.mPlayerAnimator.SetBool("IsAttack", false);
     //     // player.mPlayerAnimator.SetBool("IsAttackComboThree", false);
     //     yield return new WaitForSeconds(player.mPlayerAnimation[2].length);
-    //     player.SetActionType(ActState.STATE_MOVE);
+    //     player.SetActionType(ActState.State_Move);
     //     player.mPlayerAnimator.SetBool("IsAttackComboThree", false);
     //     player.mPlayerAnimator.SetBool("IsAttack", false);
     //     mIsAttack = false;
@@ -144,7 +144,7 @@ public class PlayerAttackComboThree : PlayerState
     //     player.mAttackRoll = 0;
     //     player.mPlayerAnimator.SetBool("IsAttack", false);
     //     player.mPlayerAnimator.SetBool("IsAttackComboThree", false);
-    //     player.SetActionType(ActState.STATE_MOVE);
+    //     player.SetActionType(ActState.State_Move);
     //     player.mIsCombo = false;
 
     // }
