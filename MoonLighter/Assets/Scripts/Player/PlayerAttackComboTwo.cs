@@ -77,7 +77,7 @@ public class PlayerAttackComboTwo : PlayerState
             player.mPlayerAnimator.SetBool("IsAttackComboTwo", false);
             player.mAttackRoll = 0;
             player.mPlayerAnimator.SetBool("IsAttack", false);
-            player.SetActionType(ActState.STATE_MOVE);
+            player.SetActionType(ActState.State_Move);
         }
 
 
@@ -115,7 +115,7 @@ public class PlayerAttackComboTwo : PlayerState
     //             player.mPlayerAnimator.SetBool("IsAttackComboTwo", false);
     //             player.mAttackRoll = 0;
     //             player.mPlayerAnimator.SetBool("IsAttack", false);
-    //             player.SetActionType(ActState.STATE_MOVE);
+    //             player.SetActionType(ActState.State_Move);
     //         }
     //     }
     //     IEnumerator BigSwordRightCombo2()
@@ -154,7 +154,7 @@ public class PlayerAttackComboTwo : PlayerState
     //         //     player.mPlayerAnimator.SetBool("IsAttackComboTwo", false);
     //         //     player.mAttackRoll = 0;
     //         //     player.mPlayerAnimator.SetBool("IsAttack", false);
-    //         //     player.SetActionType(ActState.STATE_MOVE);
+    //         //     player.SetActionType(ActState.State_Move);
     //         // }
     //     }
     //     IEnumerator BigSwordUpCombo2()
@@ -190,7 +190,7 @@ public class PlayerAttackComboTwo : PlayerState
     //             player.mPlayerAnimator.SetBool("IsAttackComboTwo", false);
     //             player.mAttackRoll = 0;
     //             player.mPlayerAnimator.SetBool("IsAttack", false);
-    //             player.SetActionType(ActState.STATE_MOVE);
+    //             player.SetActionType(ActState.State_Move);
     //         }
     //     }
 }

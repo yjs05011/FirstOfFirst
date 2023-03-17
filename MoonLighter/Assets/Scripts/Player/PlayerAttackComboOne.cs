@@ -73,7 +73,7 @@ public class PlayerAttackComboOne : PlayerState
             player.mAttackRoll = 0;
             player.mPlayerAnimator.SetBool("IsAttack", false);
             player.mPlayerAnimator.SetBool("IsAttackComboOne", false);
-            player.SetActionType(ActState.STATE_MOVE);
+            player.SetActionType(ActState.State_Move);
         }
 
 
@@ -106,7 +106,7 @@ public class PlayerAttackComboOne : PlayerState
     //         player.mAttackRoll = 0;
     //         player.mPlayerAnimator.SetBool("IsAttack", false);
     //         player.mPlayerAnimator.SetBool("IsAttackComboOne", false);
-    //         player.SetActionType(ActState.STATE_MOVE);
+    //         player.SetActionType(ActState.State_Move);
     //     }
 
 
@@ -148,7 +148,7 @@ public class PlayerAttackComboOne : PlayerState
     //     //     player.mAttackRoll = 0;
     //     //     player.mPlayerAnimator.SetBool("IsAttack", false);
     //     //     player.mPlayerAnimator.SetBool("IsAttackComboOne", false);
-    //     //     player.SetActionType(ActState.STATE_MOVE);
+    //     //     player.SetActionType(ActState.State_Move);
     //     // }
 
 
@@ -186,7 +186,7 @@ public class PlayerAttackComboOne : PlayerState
     //         player.mAttackRoll = 0;
     //         player.mPlayerAnimator.SetBool("IsAttack", false);
     //         player.mPlayerAnimator.SetBool("IsAttackComboOne", false);
-    //         player.SetActionType(ActState.STATE_MOVE);
+    //         player.SetActionType(ActState.State_Move);
     //     }
 
 
