@@ -1,0 +1,1009 @@
+fileFormatVersion: 2
+guid: 256b7d6b5e26a114d9dd470009325e09
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 0.5
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 172
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eb259306d933d9469197a9e24254824
+      internalID: -245468101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_1
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 172
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8952c56a773f8a1439cd0735c06035a8
+      internalID: -411344548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_2
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 172
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b82708f56c997946b2b6145156af9ba
+      internalID: -1309039694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 172
+        width: 11
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccabfceeff410254aa7868e381c37617
+      internalID: 533185041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_4
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 172
+        width: 20
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad5205dba0913314abcf45eee52a2831
+      internalID: 91679428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_8
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 143
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0ab9c8adc39c724390d823472ed701a
+      internalID: -1799546116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_9
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 145
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 835ec81796ce54e4683cbbbeb9740b69
+      internalID: 993904804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_10
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 138
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03e59723a0b29834ba761dab93762400
+      internalID: 1904700284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_13
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 138
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37ad5a5718903ce42b92fddafa6f1ae0
+      internalID: 1136416467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_14
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 129
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90d1a63cc9a8866449f8c626d476d826
+      internalID: -1494677888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_15
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 112
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a66a7978b739dcd40bef9540f434eba4
+      internalID: -1715086018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_16
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 106
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ccbe8c915873b44f93162de4a5f4105
+      internalID: 982451485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_17
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 111
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bf7d6345305aa34ebf4f5f84558ac54
+      internalID: -1719410614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_18
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 109
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 217954abecccf6846895ac89e3f0f3c6
+      internalID: -1645588460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 110
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93852f0cea8d33747bd7a0b98fcc3a2e
+      internalID: 1110000096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_20
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 104
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97bb20afea6b28d4b9f812763677de76
+      internalID: 1620568295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_21
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 76
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcdb50265b6d7ea4aa102a414a00d475
+      internalID: 1648713244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_22
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 76
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73b0f080401011f469cef62e97b13eed
+      internalID: 48181480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_23
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 72
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51f285edddd649c4f9d6cfff8fdf5591
+      internalID: -1387567073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_24
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 74
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 828bbd5b6954518448f051dd86417a1e
+      internalID: 1501037810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_25
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 72
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf92887aadad5aa43985bf767d7b5119
+      internalID: -396466979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_26
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 77
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ac2d7bd4c962441b9bc042496ad83a
+      internalID: 1385912149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_27
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 78
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a38e59035d2097c4dbe4efbf3eed78e4
+      internalID: -455032083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_28
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 43
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 073c75f9c86984f42b2ac3bf6eb7d27a
+      internalID: -1096119232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_29
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 44
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d23c47c049a5f94ba6744318784f9fc
+      internalID: 1360274439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_30
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 42
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 566f40265b50215459feaf2a59ac0430
+      internalID: 2109297480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_31
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 41
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27a3c518da371a5468d212b99e754649
+      internalID: -1929155472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_32
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 43
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e8061cd7fa73d44f9853691218be6c2
+      internalID: -1109441167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_33
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 44
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d0309e372c9f834d9ee045f6e76bb2e
+      internalID: -738085360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_34
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 43
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0647e046745f974f9f0275129161f26
+      internalID: 648572747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_35
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 8
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddb29d3f2a632a94ea27835aea0343f9
+      internalID: -777516653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_36
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 6
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 782a90815b7f88f4c901a3b2e5188578
+      internalID: -274129316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_37
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 6
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1723df92c553ab64db385cac22ba0c3c
+      internalID: -989326158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_38
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 8
+        width: 20
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e3311179c511c64285003175b3e54e6
+      internalID: 1110592413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_39
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 6
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55aa62ba332450a4b98100ee606c96dc
+      internalID: 141766635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_40
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 12
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d532849461f61f4cad042f24338954f
+      internalID: -168196927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_41
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 14
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a7fe798917ee2b43b1c94d039147b33
+      internalID: -172993203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_42
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 4
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 015e98a965887384cb17bae6d0ee4c55
+      internalID: 278702023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteAtlasTexture-golem_items-256x256-fmt4_5
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 143
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeda3157d85ad44499aedd1495e4be14
+      internalID: 1801424427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: e32e3f4a9bf521248a219c7fa69b358b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      SpriteAtlasTexture-golem_items-256x256-fmt4_0: -245468101
+      SpriteAtlasTexture-golem_items-256x256-fmt4_1: -411344548
+      SpriteAtlasTexture-golem_items-256x256-fmt4_10: 1904700284
+      SpriteAtlasTexture-golem_items-256x256-fmt4_11: 763016339
+      SpriteAtlasTexture-golem_items-256x256-fmt4_12: -1948206610
+      SpriteAtlasTexture-golem_items-256x256-fmt4_13: 1136416467
+      SpriteAtlasTexture-golem_items-256x256-fmt4_14: -1494677888
+      SpriteAtlasTexture-golem_items-256x256-fmt4_15: -1715086018
+      SpriteAtlasTexture-golem_items-256x256-fmt4_16: 982451485
+      SpriteAtlasTexture-golem_items-256x256-fmt4_17: -1719410614
+      SpriteAtlasTexture-golem_items-256x256-fmt4_18: -1645588460
+      SpriteAtlasTexture-golem_items-256x256-fmt4_19: 1110000096
+      SpriteAtlasTexture-golem_items-256x256-fmt4_2: -1309039694
+      SpriteAtlasTexture-golem_items-256x256-fmt4_20: 1620568295
+      SpriteAtlasTexture-golem_items-256x256-fmt4_21: 1648713244
+      SpriteAtlasTexture-golem_items-256x256-fmt4_22: 48181480
+      SpriteAtlasTexture-golem_items-256x256-fmt4_23: -1387567073
+      SpriteAtlasTexture-golem_items-256x256-fmt4_24: 1501037810
+      SpriteAtlasTexture-golem_items-256x256-fmt4_25: -396466979
+      SpriteAtlasTexture-golem_items-256x256-fmt4_26: 1385912149
+      SpriteAtlasTexture-golem_items-256x256-fmt4_27: -455032083
+      SpriteAtlasTexture-golem_items-256x256-fmt4_28: -1096119232
+      SpriteAtlasTexture-golem_items-256x256-fmt4_29: 1360274439
+      SpriteAtlasTexture-golem_items-256x256-fmt4_3: 533185041
+      SpriteAtlasTexture-golem_items-256x256-fmt4_30: 2109297480
+      SpriteAtlasTexture-golem_items-256x256-fmt4_31: -1929155472
+      SpriteAtlasTexture-golem_items-256x256-fmt4_32: -1109441167
+      SpriteAtlasTexture-golem_items-256x256-fmt4_33: -738085360
+      SpriteAtlasTexture-golem_items-256x256-fmt4_34: 648572747
+      SpriteAtlasTexture-golem_items-256x256-fmt4_35: -777516653
+      SpriteAtlasTexture-golem_items-256x256-fmt4_36: -274129316
+      SpriteAtlasTexture-golem_items-256x256-fmt4_37: -989326158
+      SpriteAtlasTexture-golem_items-256x256-fmt4_38: 1110592413
+      SpriteAtlasTexture-golem_items-256x256-fmt4_39: 141766635
+      SpriteAtlasTexture-golem_items-256x256-fmt4_4: 91679428
+      SpriteAtlasTexture-golem_items-256x256-fmt4_40: -168196927
+      SpriteAtlasTexture-golem_items-256x256-fmt4_41: -172993203
+      SpriteAtlasTexture-golem_items-256x256-fmt4_42: 278702023
+      SpriteAtlasTexture-golem_items-256x256-fmt4_5: 1801424427
+      SpriteAtlasTexture-golem_items-256x256-fmt4_6: 1290659593
+      SpriteAtlasTexture-golem_items-256x256-fmt4_7: 1069865047
+      SpriteAtlasTexture-golem_items-256x256-fmt4_8: -1799546116
+      SpriteAtlasTexture-golem_items-256x256-fmt4_9: 993904804
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
