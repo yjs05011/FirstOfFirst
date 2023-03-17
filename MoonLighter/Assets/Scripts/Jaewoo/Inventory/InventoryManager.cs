@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
 
    
    //확인된 아이템의 이름을 판단해서 인벤토리에서 인스턴스?
+   
    private Slot[] mSlot;
    [SerializeField]
    //슬롯 5x5 배열 
@@ -28,7 +29,7 @@ public class InventoryManager : MonoBehaviour
 
    [SerializeField]
    //슬롯 아이템 값 5x5배열
-   private GameObject[,] mSlotItemArray = new GameObject[5,5];
+   private GameObject[,] mSlotItemArray = new GameObject[4,5];
 
    [SerializeField]
    //자리 바꿀시 값 저장 배열
@@ -36,22 +37,22 @@ public class InventoryManager : MonoBehaviour
 
    [SerializeField]
    //배열 자리
-   private int[,] mInventoryArray = new int[5,5];
+   private int[,] mInventoryArray = new int[4,5];
+   private int[] mArray = new int[20];
 
    
    void Start()
-   {
+   {      
       //배열 초기화 및 선언
-      for(int indexArrayY = 0; indexArrayY < mInventoryArray.Length; indexArrayY ++)
+      for(int indexArrayY = 0; indexArrayY < 4; indexArrayY ++)
       {
-         for(int indexArrayX = 0; indexArrayX < mInventoryArray.Length; indexArrayX ++)
+         for(int indexArrayX = 0; indexArrayX < 5; indexArrayX ++)
          {
-            //mInventoryArray[indexArrayY,indexArrayX] = 
+         // mInventoryArray[indexArrayY,indexArrayX] = SlotPositionArray.mSlotArrays[]]; 
          }
-
-      }
-      
+      }      
    }
+
    public void InventorySlotArray()
    {      
       for(int indexY = 0; indexY < mSlotArray.Length ; indexY ++)
