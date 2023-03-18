@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DungeonBoard : MonoBehaviour
 {
-    public enum BoardType { None, HealingPool, Camp}
+    public enum BoardType { RANDOM, POOL, CAMP, BOSS }
 
-    public BoardType mType = BoardType.None;
+    public BoardType mType = BoardType.RANDOM;
 
     // 해당 보드의 문의 방향으로 이동 가능 여부
     public bool mIsMovableTop = false;
@@ -18,6 +18,11 @@ public class DungeonBoard : MonoBehaviour
     public List<GameObject> mObstacles= new List<GameObject>();
 
     public List<GameObject> mObjects = new List<GameObject>();
+
+    public void SetBoardType(BoardType type)
+    {
+        mType = type;
+    }
 
     public BoardType GetBoardType() 
     { 

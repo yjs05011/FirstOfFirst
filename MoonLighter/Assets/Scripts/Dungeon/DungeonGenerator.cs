@@ -5,8 +5,8 @@ using UnityEngine;
 public class DungeonGenerator : MonoBehaviour
 {
     public GameObject mStagePrefab = null; 
-    public const int WIDTH = 7;
-    public const int HEIGHT = 7;
+    public const int WIDTH = 10;
+    public const int HEIGHT = 10;
 
     public const int START_X = 0;
     public const int START_Y = 0;
@@ -17,7 +17,7 @@ public class DungeonGenerator : MonoBehaviour
     public const int DIRECTION_LEFT = 4;
     public const int DIRECTION_RIGHT = 8;
 
-    public const int TOTAL_COUNT = 20;
+    public static int TOTAL_COUNT = 10;
     public static int CREATE_COUNT = 0;
 
     public static int[] mDungeonBoard = new int[WIDTH * HEIGHT];
@@ -27,6 +27,13 @@ public class DungeonGenerator : MonoBehaviour
 
     public void Start()
     {
+        int safetyTotalCount = (Mathf.Max(WIDTH, HEIGHT) / 2) * Mathf.Min(WIDTH, HEIGHT);
+        if(TOTAL_COUNT > safetyTotalCount)
+        {
+            TOTAL_COUNT = safetyTotalCount;
+        }
+
+
         for (int idx = 0; idx < mDungeonBoard.Length; ++idx)
         {
             mDungeonBoard[idx] = 0;
@@ -38,21 +45,13 @@ public class DungeonGenerator : MonoBehaviour
 
     public void OnGenerate()
     {
-        //int creatCount = 0;
+        Debug.LogFormat("w: {0}, h : {1}", WIDTH, HEIGHT);
+            //int creatCount = 0;
         //GenerateStage(START_X, START_Y, START_X, START_Y, GenerateDirections(DIRECTION_NONE, START_X, START_Y, creatCount), creatCount);
-        ++CREATE_COUNT;
+        //++CREATE_COUNT;
         GenerateStage(START_X, START_Y, START_X, START_Y, GenerateDirections(DIRECTION_NONE, START_X, START_Y));
+        Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
 
-        for (int idy = 0; idy < HEIGHT; ++idy)
-        {
-
-            for (int idx = 0; idx < WIDTH; ++idx)
-            {
-                
-                Debug.Log(mDungeonBoard[idy * WIDTH + idx]);
-            }
-
-        }
       
     }
 
@@ -67,32 +66,26 @@ public class DungeonGenerator : MonoBehaviour
         {
             return true;
         }
+    }
 
+    public void SetRoom(int x, int y)
+    {
+        mDungeonBoard[y * WIDTH + x] = 1;
     }
 
     public void GenerateStage(int x, int y, int px, int py, int directions)
     {
 
-        // 현재 방이 빈방이 아닌경우
-        if (IsEmpty(x, y) == false)
-        {
-            return;
-        }
-
-        mDungeonBoard[y * WIDTH + x] = 1;
-
         DebugDirections(x, y, directions);
-
-       // ++CREATE_COUNT;
 
         int linkDoors = DIRECTION_NONE;
         GameObject roomObject = Instantiate(mStagePrefab);
-        roomObject.name = "Stage" + CREATE_COUNT;
+        roomObject.name = string.Format("Stage {0},{1}" , x, y);
         roomObject.transform.position = new Vector3(x * 26.0f, y * 15.0f, 0);
-
+ 
         DungeonStage room = roomObject.GetComponent<DungeonStage>();
 
-        bool isLastRoom = (TOTAL_COUNT >= 20);
+     
 
         if ((directions & DIRECTION_TOP) == DIRECTION_TOP)
         {
@@ -100,18 +93,8 @@ public class DungeonGenerator : MonoBehaviour
             int nextY = y + 1;
             if (nextX != px || nextY != py)
             {
-                if (nextY < HEIGHT)
-                {
-                    if (IsEmpty(nextX, nextY))
-                    {
-                        if (CREATE_COUNT < TOTAL_COUNT)
-                        {
-                            ++CREATE_COUNT;
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_BOTTOM, nextX, nextY));
-                            linkDoors |= DIRECTION_TOP;
-                        }
-                    }
-                }
+                GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_BOTTOM, nextX, nextY));
+                linkDoors |= DIRECTION_TOP;
             }
             else
             {
@@ -125,19 +108,8 @@ public class DungeonGenerator : MonoBehaviour
             int nextY = y - 1;
             if (nextX != px || nextY != py)
             {
-                if (nextY < 0)
-                {
-                    if (IsEmpty(nextX, nextY))
-                    {
-                        if (CREATE_COUNT < TOTAL_COUNT)
-                        {
-                            ++CREATE_COUNT;
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_TOP, nextX, nextY));
-                          
-                            linkDoors |= DIRECTION_BOTTOM;
-                        }
-                    }
-                }
+                GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_TOP, nextX, nextY));
+                linkDoors |= DIRECTION_BOTTOM;
             }
             else
             {
@@ -151,19 +123,8 @@ public class DungeonGenerator : MonoBehaviour
             int nextY = y;
             if (nextX != px || nextY != py)
             {
-                if (nextX < 0)
-                {
-                    if (IsEmpty(nextX, nextY))
-                    {
-                        if ((CREATE_COUNT < TOTAL_COUNT))
-                        {
-                            ++CREATE_COUNT;
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_RIGHT, nextX, nextY));
-                          
-                            linkDoors |= DIRECTION_LEFT;
-                        }
-                    }
-                }
+                GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_RIGHT, nextX, nextY));
+                linkDoors |= DIRECTION_LEFT;
             }
             else
             {
@@ -177,19 +138,8 @@ public class DungeonGenerator : MonoBehaviour
             int nextY = y;
             if (nextX != px || nextY != py)
             {
-                if (nextX < WIDTH)
-                {
-                    if (IsEmpty(nextX, nextY))
-                    {
-                        if ((CREATE_COUNT < TOTAL_COUNT))
-                        {
-                            ++CREATE_COUNT;
-                            GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_LEFT, nextX, nextY));
-                          
-                            linkDoors |= DIRECTION_RIGHT;
-                        }
-                    }
-                }
+                GenerateStage(nextX, nextY, x, y, GenerateDirections(DIRECTION_LEFT, nextX, nextY));
+                linkDoors |= DIRECTION_RIGHT;
             }
             else
             {
@@ -197,63 +147,107 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        room.SetDoorDirections(linkDoors);
+        room.SetStyle(linkDoors,DungeonBoard.BoardType.RANDOM);
     }
 
     // 문 방향 랜덤 설정
     public int GenerateDirections(int backward, int x, int y)
     {
+        //int validCreatRoomCount = TOTAL_COUNT - CREATE_COUNT;
         int output = DIRECTION_NONE;
         int randomPercent = 90;
 
         // 이전방 문과 연결될 방향 넣기.(이전 방에서 위의 방향으로 온경우, 아래 방향 문이 열려있어야 하니까, backward로 넣어준다)
         output |= backward;
 
-
+        // 추가 가능한 방 개수가 1개만 경우, 연결될 문 방향만 넣고 리턴,
+        if (TOTAL_COUNT - CREATE_COUNT == 0)
         {
-            int random = UnityEngine.Random.Range(0, 100 + 1);
+            return output;
+        }
+        else
+        {
+            int prevCreateCount = CREATE_COUNT;
 
-            if (random < randomPercent && y < HEIGHT)
+            while (prevCreateCount == CREATE_COUNT)
             {
-                output |= DIRECTION_TOP;
-                randomPercent -= random;
+                if (TOTAL_COUNT - CREATE_COUNT >= 1 && backward != DIRECTION_TOP)
+                {
+                    int random = UnityEngine.Random.Range(0, 100 + 1);
+                    if(random < randomPercent)
+                    {
+                        int nextValue = y + 1;
+                        if (nextValue < HEIGHT && IsEmpty(x, nextValue))
+                        {
+                            SetRoom(x, nextValue);
+
+                            output |= DIRECTION_TOP;
+                            //randomPercent -= random;
+                            ++CREATE_COUNT;
+                            
+                            //--validCreatRoomCount;
+                        }
+                    }
+
+                }
+                if (TOTAL_COUNT - CREATE_COUNT >= 1 && backward != DIRECTION_LEFT)
+                {
+                    int random = UnityEngine.Random.Range(0, 100 + 1);
+
+                    if (random < randomPercent)
+                    {
+                        int nextValue = x - 1;
+                        if (nextValue >= 0 && IsEmpty(nextValue, y))
+                        {
+                            SetRoom(nextValue, y);
+
+                            output |= DIRECTION_LEFT;
+                            //randomPercent -= random;
+                            ++CREATE_COUNT;
+                            //--validCreatRoomCount;
+                        }
+                    }
+                }
+                if (TOTAL_COUNT - CREATE_COUNT >= 1 && backward != DIRECTION_BOTTOM)
+                {
+                    int random = UnityEngine.Random.Range(0, 100 + 1);
+
+                    if (random < randomPercent)
+                    {
+                        int nextValue = y - 1;
+                        if(nextValue >= 0 && IsEmpty(x, nextValue)) 
+                        {
+                            SetRoom(x, nextValue);
+
+                            output |= DIRECTION_BOTTOM;
+                            //randomPercent -= random;
+                            ++CREATE_COUNT;
+                            //--validCreatRoomCount;
+                        }
+                    }
+
+                }
+                if (TOTAL_COUNT - CREATE_COUNT >= 1 && backward != DIRECTION_RIGHT)
+                {
+                    int random = UnityEngine.Random.Range(0, 100 + 1);
+
+                    if (random < randomPercent)
+                    {
+                        int nextValue = x + 1;
+                        if(nextValue < WIDTH && IsEmpty(nextValue, y))
+                        {
+                            SetRoom(nextValue, y);
+
+                            output |= DIRECTION_RIGHT;
+                            ++CREATE_COUNT;
+                            //--validCreatRoomCount;
+                        }
+                    }
+                }
             }
 
+        
         }
- 
-        {
-            int random = UnityEngine.Random.Range(0, 100 + 1);
-
-            if (random < randomPercent && x >= 1)
-            {
-                output |= DIRECTION_LEFT;
-                randomPercent -= random;
-            }
-        }
-
-        {
-            int random = UnityEngine.Random.Range(0, 100 + 1);
-
-            if (random < randomPercent && y >= 1)
-            {
-                output |= DIRECTION_BOTTOM;
-                randomPercent -= random;
-            }
-
-        }
-        {
-            int random = UnityEngine.Random.Range(0, 100 + 1);
-
-            if (random < randomPercent && x < WIDTH)
-            {
-                output |= DIRECTION_RIGHT;
-            }
-        }
-        if (output == DIRECTION_NONE)
-        {
-            return GenerateDirections(backward, x, y);
-        }
-
         return output;
     }
 
