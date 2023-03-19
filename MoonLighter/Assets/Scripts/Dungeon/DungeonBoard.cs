@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DungeonBoard : MonoBehaviour
 {
-    public enum BoardType { RANDOM, POOL, CAMP, BOSS }
+    public enum BoardType { RANDOM, POOL, CAMP, BOSS , Start}
 
     public BoardType mType = BoardType.RANDOM;
 
@@ -34,7 +34,7 @@ public class DungeonBoard : MonoBehaviour
     {
         if ((directions & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
-            if(!mIsMovableTop) // true
+            if(!mIsMovableTop) 
             {
                 return false;
             }
@@ -42,7 +42,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
         {
-            if (!mIsMovableBottom) // true
+            if (!mIsMovableBottom) 
             {
                 return false;
             }
@@ -50,7 +50,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
         {
-            if (!mIsMovableLeft)    // false
+            if (!mIsMovableLeft) 
             {
                 return false;
             }
@@ -58,7 +58,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
         {
-            if (!mIsMovableRight) // true
+            if (!mIsMovableRight) 
             {
                 return false;
             }
