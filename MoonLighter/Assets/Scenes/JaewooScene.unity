@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -424,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2280533469802265669, guid: 01d1402cddc233f4596ded0d981112b5, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2280533469802265669, guid: 01d1402cddc233f4596ded0d981112b5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -538,7 +538,7 @@ RectTransform:
   - {fileID: 1765300555}
   - {fileID: 1389088173}
   m_Father: {fileID: 1832099371}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -828,7 +828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 768}
   m_SizeDelta: {x: 1279, y: 716}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1363661657
@@ -1163,10 +1163,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1267595123}
-  - {fileID: 495649042}
   - {fileID: 400197043300572525}
   - {fileID: 470845106}
   - {fileID: 3033896947969927743}
+  - {fileID: 495649042}
   m_Father: {fileID: 216900580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1354,7 +1354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1444010750435759022, guid: 9858300fe49147c498b2a8a638cf62a0, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1444010750435759022, guid: 9858300fe49147c498b2a8a638cf62a0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1456,7 +1456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 465449884895721214, guid: 6a1ee1ebd5403e64597ee05c24777f42, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 465449884895721214, guid: 6a1ee1ebd5403e64597ee05c24777f42, type: 3}
       propertyPath: m_AnchorMax.x
