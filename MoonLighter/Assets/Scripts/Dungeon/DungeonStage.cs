@@ -14,7 +14,7 @@ public class DungeonStage : MonoBehaviour
     public DungeonDoor mDoorBottom = null;
     public DungeonDoor mDoorLeft = null;
   
-
+    public int mFloor = 0;
     public int mDoorDirections = 0;
     public int mBoardX = 0;
     public int mBoardY = 0;
@@ -45,7 +45,14 @@ public class DungeonStage : MonoBehaviour
         mDoorBottom.SetDoorDirection(DungeonGenerator.DIRECTION_BOTTOM);
         mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
     }
-
+    public void SetFloor(int floor)
+    {
+        mFloor = floor;
+    }
+    public int GetFloor()
+    {
+        return mFloor;
+    }
 
     public Vector3 GetStartPoint(int direction) 
     {
@@ -178,6 +185,11 @@ public class DungeonStage : MonoBehaviour
             if(index == random)
             {
                 boards[index].gameObject.SetActive(true);
+                if(mBoradStyle == DungeonBoard.BoardType.POOL)
+                {
+                    DungeonHealingPool healingPool = boards[index].transform.Find("Pool").gameObject.GetComponent<DungeonHealingPool>();
+                    healingPool.InitPoolHeal();
+                }
                 break;    
             }
         }
@@ -190,6 +202,7 @@ public class DungeonStage : MonoBehaviour
         {
             SetAddDoor(type);
         }
+      
         SetStageBoard();
 
     }
@@ -200,7 +213,7 @@ public class DungeonStage : MonoBehaviour
 
 
     // 문 방향에 맞는 보드 리스트 필터링
-    public void GetFilteredBoards(int directions,DungeonBoard.BoardType type, ref List<DungeonBoard> output)
+    public void GetFilteredBoards(int directions, DungeonBoard.BoardType type, ref List<DungeonBoard> output)
     {
         
         int count = mBoards.Count;
@@ -287,11 +300,12 @@ public class DungeonStage : MonoBehaviour
         mDoorRight.DoorClose();
     }
 
-    //다음 층 문 추가
+    //문 추가 (보스 stage : 다음 층 연결 문 추가 | 시작 stage : 던전 입장 or 해당 층 입장 문 추가)
     public void SetAddDoor(DungeonBoard.BoardType type)
     {
         if ((mDoorDirections & DungeonGenerator.DIRECTION_TOP) != DungeonGenerator.DIRECTION_TOP)
         {
+            mDoorTop.SetCurrStage(this);
             if (type == DungeonBoard.BoardType.BOSS)
             {
                 mDoorTop.SetFloorDoor();
@@ -304,6 +318,7 @@ public class DungeonStage : MonoBehaviour
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_LEFT) != DungeonGenerator.DIRECTION_LEFT)
         {
+            mDoorLeft.SetCurrStage(this);
             if (type == DungeonBoard.BoardType.BOSS)
             {
                 mDoorLeft.SetFloorDoor();
@@ -316,6 +331,7 @@ public class DungeonStage : MonoBehaviour
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_RIGHT) != DungeonGenerator.DIRECTION_RIGHT)
         {
+            mDoorRight.SetCurrStage(this);
             if (type == DungeonBoard.BoardType.BOSS)
             {
                 mDoorRight.SetFloorDoor();
@@ -328,6 +344,7 @@ public class DungeonStage : MonoBehaviour
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_BOTTOM) != DungeonGenerator.DIRECTION_BOTTOM)
         {
+            mDoorBottom.SetCurrStage(this);
             if (type == DungeonBoard.BoardType.BOSS)
             {
                 mDoorBottom.SetFloorDoor();
@@ -340,6 +357,7 @@ public class DungeonStage : MonoBehaviour
         }
 
     }
+
 
     public int GetDoorDirections()
     {

@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,38 +6,93 @@ using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    public GameObject mStagePrefab = null; 
+    public static DungeonGenerator Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    // 스테이지 프리팹
+    public GameObject mStagePrefab = null;
+    public GameObject mHiddenStagePrefab = null;
+
+    // 던전 맵(스테이지가 그려진 전체 board)의 가로 , 세로
     public const int WIDTH = 10;
     public const int HEIGHT = 10;
 
-    public const int START_X = 0;
-    public const int START_Y = 0;
+    // 시작 스테이지 x,y 
+    public int START_X = 0;
+    public int START_Y = 0;
 
+    // 방향 const (비트 연산을 위한 값)
     public const int DIRECTION_NONE = 0;
     public const int DIRECTION_TOP = 1;
     public const int DIRECTION_BOTTOM = 2;
     public const int DIRECTION_LEFT = 4;
     public const int DIRECTION_RIGHT = 8;
 
+    // 힐링 풀 max 힐량 const
+    public const int POOL_MAX_HEAL_POINT = 100;
+
+    // 생설될 스테이지 최대 개수 (시작 스테이지 제외한 개수)
     public static int TOTAL_COUNT = 10;
+    // 생성된 스테이지 카운트용 변수
     public static int CREATE_COUNT = 0;
 
+    // 던전 맵 (스테이지가 그려질 전체 보드) 
     public static int[] mDungeonBoard = new int[WIDTH * HEIGHT];
 
+    // 생성된 스테이지들의 리스트 
     public List<DungeonStage> mStages = new List<DungeonStage>();
-  
+
+    // 캠프 타입 스테이지 생성여부 체크용 bool type 변수
     public bool IsCreatedCampRoom = false;
-   
-    public DungeonBoard.BoardType mBoardType = DungeonBoard.BoardType.Start;
+
+
+    //public DungeonBoard.BoardType mBoardType = DungeonBoard.BoardType.Start;
 
     public int mDepth = 0;
     public DungeonStage mLastRoom = null;
+
+    public int mFloor = 0;
     public void Start()
     {
-       
+
+        //// 방 생성 종 개수 방어로직
+        //int safetyTotalCount = (Mathf.Max(WIDTH, HEIGHT) / 2) * Mathf.Min(WIDTH, HEIGHT);
+        //if(TOTAL_COUNT > safetyTotalCount)
+        //{
+        //    TOTAL_COUNT = safetyTotalCount;
+        //}
+        //// 보드 전체 빈 방으로 설정.
+        //for (int idx = 0; idx < mDungeonBoard.Length; ++idx)
+        //{
+        //    mDungeonBoard[idx] = 0;
+        //}
+        //IsCreatedCampRoom = false;
+        // OnGenerate(0,0);
+      
+        InitDungeonBorad(0,0,1, DIRECTION_NONE);
+    }
+
+    public void InitDungeonBorad(int x, int y, int floor, int direction)
+    {
+        SetFloor(floor); 
+        SetStartStageXY(x, y);
+        
         // 방 생성 종 개수 방어로직
         int safetyTotalCount = (Mathf.Max(WIDTH, HEIGHT) / 2) * Mathf.Min(WIDTH, HEIGHT);
-        if(TOTAL_COUNT > safetyTotalCount)
+        if (TOTAL_COUNT > safetyTotalCount)
         {
             TOTAL_COUNT = safetyTotalCount;
         }
@@ -46,13 +102,41 @@ public class DungeonGenerator : MonoBehaviour
             mDungeonBoard[idx] = 0;
         }
         IsCreatedCampRoom = false;
-        OnGenerate();
+        StagesDelete();
+        //mStages.Clear();
+        CREATE_COUNT = 0;
+        OnGenerate(direction);
     }
 
- 
 
-    public void OnGenerate()
+    public void StagesDelete()
     {
+        for (int i = 0; i < mStages.Count; )
+        {
+            GameObject.Destroy(mStages[i]);
+            mStages.Remove(mStages[i]);
+        }
+      
+    }
+
+    public void SetStartStageXY(int x, int y)
+    {
+        START_X = x;
+        START_Y = y;
+    }
+    public void SetFloor(int floor)
+    {
+        mFloor = floor;
+    }
+    public int GetFloor()
+    {
+        return mFloor;
+    }
+
+
+    public void OnGenerate(int direction)
+    {
+        
         Debug.LogFormat("w: {0}, h : {1}", WIDTH, HEIGHT);
 
         GameObject roomObject = Instantiate(mStagePrefab);
@@ -60,10 +144,18 @@ public class DungeonGenerator : MonoBehaviour
         roomObject.transform.position = new Vector3(START_X * 26.0f, START_Y * 15.0f, 0);
 
         DungeonStage startStage = roomObject.GetComponent<DungeonStage>();
+        startStage.SetFloor(mFloor);
         startStage.SetBoardXY(START_X, START_Y);
         mStages.Add(startStage);
 
-        GenerateStage(startStage, startStage, GenerateDirections(DIRECTION_NONE, START_X, START_Y));
+        if (startStage.GetFloor() == 1)
+        {
+            GenerateStage(startStage, startStage, GenerateDirections(direction, START_X, START_Y));
+        }
+        else
+        {
+            GenerateStage(startStage, mLastRoom, GenerateDirections(direction, START_X, START_Y));
+        }
         Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
        
         CheckLastRoom(startStage, startStage, mDepth);
