@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DungeonBoard : MonoBehaviour
 {
-    public enum BoardType { None, HealingPool, Camp}
+    public enum BoardType { RANDOM, POOL, CAMP, BOSS , Start}
 
-    public BoardType mType = BoardType.None;
+    public BoardType mType = BoardType.RANDOM;
 
     // 해당 보드의 문의 방향으로 이동 가능 여부
     public bool mIsMovableTop = false;
@@ -19,6 +19,11 @@ public class DungeonBoard : MonoBehaviour
 
     public List<GameObject> mObjects = new List<GameObject>();
 
+    public void SetBoardType(BoardType type)
+    {
+        mType = type;
+    }
+
     public BoardType GetBoardType() 
     { 
         return mType; 
@@ -29,7 +34,7 @@ public class DungeonBoard : MonoBehaviour
     {
         if ((directions & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
-            if(!mIsMovableTop) // true
+            if(!mIsMovableTop) 
             {
                 return false;
             }
@@ -37,7 +42,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
         {
-            if (!mIsMovableBottom) // true
+            if (!mIsMovableBottom) 
             {
                 return false;
             }
@@ -45,7 +50,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
         {
-            if (!mIsMovableLeft)    // false
+            if (!mIsMovableLeft) 
             {
                 return false;
             }
@@ -53,7 +58,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
         {
-            if (!mIsMovableRight) // true
+            if (!mIsMovableRight) 
             {
                 return false;
             }
