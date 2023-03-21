@@ -6,7 +6,7 @@ public class Create : MonoBehaviour
 {
     private void Awake()
     {
-        SetPosition.Instance.Create();
+        ShopManager.Instance.Create();
     }
     // Start is called before the first frame update
     void Start()

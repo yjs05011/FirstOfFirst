@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7363724454907753612}
   - component: {fileID: 7270120928282443962}
   - component: {fileID: 3687996255893909460}
-  - component: {fileID: 7733413450087057588}
   - component: {fileID: -6798297985886563238}
+  - component: {fileID: 988898661662117494}
   m_Layer: 0
   m_Name: Merchant_female_01_Shop
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 7363724454907753615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1563954886586622736}
   m_Father: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2e7a81a945ad2b94e9eb098170ae92f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -135,22 +135,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
---- !u!114 &7733413450087057588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7363724454907753615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eab141c26b4924428eb6e3f7fd31eeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mID: 0
-  mTalkIndex: 0
-  mTalkManager: {fileID: 0}
-  mText: {fileID: 0}
 --- !u!114 &-6798297985886563238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +149,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mTables: {fileID: 0}
   mGetItem: {fileID: 699314933863774209}
+  mMoveCount: 0
+--- !u!50 &988898661662117494
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363724454907753615}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &8577814553816982398
 GameObject:
   m_ObjectHideFlags: 0

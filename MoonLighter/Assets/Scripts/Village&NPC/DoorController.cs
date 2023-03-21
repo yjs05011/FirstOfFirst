@@ -30,7 +30,6 @@ public class DoorController : MonoBehaviour
                 {
                     mOpen.SetActive(false);
                     mStartShop.SetActive(false);
-                    mDoorAni.SetBool("OpenTheDoor", true);
                     mTimer = 0;
                 }
             }
@@ -55,6 +54,10 @@ public class DoorController : MonoBehaviour
             mStartShop.SetActive(true);
             mOpen.SetActive(true);
         }
+        if(other.tag  == "Npc")
+        {
+            mDoorAni.SetBool("OpenTheDoor", true);
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -62,6 +65,11 @@ public class DoorController : MonoBehaviour
         {
             mStartShop.SetActive(false);
             mOpen.SetActive(false);
+        }
+        if (other.tag == "Npc")
+        {
+            mDoorAni.SetBool("OpenTheDoor", false);
+
         }
     }
 }

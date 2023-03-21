@@ -5,25 +5,34 @@ using UnityEngine.Rendering;
 
 public class ShopManager : GSingleton<ShopManager>
 {
-    private List<GameObject> mItemTables;
+    public List<GameObject> mItemTables;
     private List<int> mTableNumber;
     private Sprite[] mItems;
+    
+    public static List<GameObject> mShopNPC = new List<GameObject>();
     public bool mIsShopStart = false;
 
     public override void Update()
     {
         if(mIsShopStart)
         {
-            
+            if(mShopNPC.Count > 0)
+            {
+                if(mTableNumber.Count > 0)
+                {
+
+                }
+            }
         }
+        
     }
 
     protected override void Init()
     {
         base.Init();
-        mTableNumber.Clear();
+        
         mItemTables = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemTable"));
-        mItems= new Sprite[mItemTables.Count];
+        mItems = new Sprite[mItemTables.Count];
     }
 
     public void SetOnItem(int tableNumber,Sprite item)

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
@@ -30,18 +28,14 @@ public class NPCSpawner : MonoBehaviour
         if (timeAfterSpawn >= spawnRate)
         {
             timeAfterSpawn = 0f;
-            var Ring = ShopNPCPool.GetObject(); // 수정
-            if (Camera.main.transform.localPosition.x < 140)
-            {
+            var NPC = ShopNPCPool.GetObject(); // 수정
 
-                Ring.transform.position = transform.position;
-                spawnRate = Random.Range(spawnRateMin, spawnRateMax);
-            }
-            else
+            if (NPC != null)
             {
-                ShopNPCPool.ReturnObject(Ring);
+                NPC.transform.position = transform.position;
             }
 
+            spawnRate = Random.Range(spawnRateMin, spawnRateMax);
 
         }
 
