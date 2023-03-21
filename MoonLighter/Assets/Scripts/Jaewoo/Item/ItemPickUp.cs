@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-    public Inventory mInventoryTest;
+    public Inventory mInventory;
     public Item mItem;
     public GameObject mPlayerBagDistance = default;
     private Rigidbody2D mItemRigidBody = default;
@@ -18,7 +18,8 @@ public class ItemPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            mInventoryTest.AcpuireItem(gameObject.transform.GetComponent<ItemPickUp>().mItem);
+            int mItemCount = 1;
+            mInventory.AcpuireItem(gameObject.transform.GetComponent<ItemPickUp>().mItem, mItemCount);
             Destroy(this.gameObject);
         }
         

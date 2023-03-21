@@ -9,18 +9,7 @@ public class TestPlayer : MonoBehaviour
     private Inventory mInventoryTest;
     
 
-    private void ItemPickUp()
-    {
-        if(!isPickUp)
-        {
-            
-        }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        isPickUp = false;
-    }
+   
     
    
 

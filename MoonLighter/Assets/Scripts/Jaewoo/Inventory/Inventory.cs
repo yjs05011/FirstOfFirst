@@ -62,7 +62,7 @@ public class Inventory : MonoBehaviour
         mChangeInventoryBase.SetActive(false);
     }
 
-    public void AcpuireItem(Item item, int itemCount = 1)
+    public void AcpuireItem(Item item, int itemCount)
     {
         //얻은 아이템이 장비 타입과 다를때
         if(Item.ItemEnumType.Equiment != item.mItemType)
@@ -75,7 +75,7 @@ public class Inventory : MonoBehaviour
                     if(mSlot[index].mItem.mItemName == item.mItemName)
                     {   
                         //슬롯 개수 올림
-                        mSlot[index].SetSlotCount(itemCount);
+                        mSlot[index].SetSlotCount(itemCount += itemCount);
                         return;
                     }
                 }
