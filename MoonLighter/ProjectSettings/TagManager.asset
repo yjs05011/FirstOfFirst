@@ -9,6 +9,7 @@ TagManager:
   - Hole
   - Trap
   - Pool
+  - Item
   layers:
   - Default
   - TransparentFX

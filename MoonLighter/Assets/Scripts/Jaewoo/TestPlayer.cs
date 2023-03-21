@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TestPlayer : MonoBehaviour
 {
+    private bool isMove = false;
     private bool isPickUp = false;
-    private Inventory mInvetoryTest;
+    private Inventory mInventoryTest;
+    
 
     private void ItemPickUp()
     {
@@ -22,11 +24,10 @@ public class TestPlayer : MonoBehaviour
     
    
 
-    public void OntriggerEnter2D(Collider2D other)
-    {
-        if(gameObject.CompareTag("Item"))
-        {
-            mInvetoryTest.AcpuireItem(other.gameObject.transform.GetComponent<ItemPickUp>().mItem);            
-        }
-    }
+   
+
+    
+       
+
+    
 }
