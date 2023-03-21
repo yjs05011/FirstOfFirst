@@ -7,6 +7,7 @@ public class InitManager : MonoBehaviour
     private void Awake()
     {
         GameKeyManger.Instance.Create();
+        PlayerManager.Instance.Create();
     }
     // Start is called before the first frame update
     void Start()
