@@ -181,7 +181,7 @@ public class PlayerAct : MonoBehaviour
     //플레이어 이동 구현
     public void OnDamage(float MonsterDamage)
     {
-        if (mIsDelay)
+        if (mIsDelay || mState == ActState.State_Die)
         {
         }
         else
