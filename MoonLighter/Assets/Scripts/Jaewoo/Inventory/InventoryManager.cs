@@ -17,56 +17,61 @@ public class InventoryManager : MonoBehaviour
 
    
    //확인된 아이템의 이름을 판단해서 인벤토리에서 인스턴스?
-   
-   private Slot[] mSlot;
-   [SerializeField]
-   //슬롯 5x5 배열 
-   private GameObject[] mSlotArray = new GameObject[20];
-
-   //[SerializeField]
-   ////오브젝트 local position 배열값저장
-  // private GameObject[,] m
-
-   [SerializeField]
-   //슬롯 아이템 값 5x5배열
-   private GameObject[,] mSlotItemArray = new GameObject[4,5];
-
-   [SerializeField]
-   //자리 바꿀시 값 저장 배열
-   private GameObject[] mSlotValueArray = new GameObject[2];
-
-   [SerializeField]
-   //배열 자리
-   private int[,] mInventoryArray = new int[4,5];
-   private int[] mArray = new int[20];
 
    
-   void Start()
-   {      
-      for(int index = 0; index < mSlotArray.Length; index ++)
-      {
-         mSlotArray[index];
-      }
-      //배열 초기화 및 선언
-      for(int indexArrayY = 0; indexArrayY < 4; indexArrayY ++)
-      {
-         for(int indexArrayX = 0; indexArrayX < 5; indexArrayX ++)
-         {
-             mSlotArray[]
-         }
-      }      
-   }
 
-   public void InventorySlotArray()
-   {      
-      for(int indexY = 0; indexY < mSlotArray.Length ; indexY ++)
-      {
-         for(int indexX = 0; indexX < mSlotArray.Length; indexX ++)
-         {
-           // mSlotArray[indexY,indexX]
-         }
-      }
-   }
+   //1차원 배열로 아이템 자리값
+   private Transform[] mItemValue = new Transform[20];
+   //2차원배열
+   private GameObject[,] mSlotArray = new GameObject[5,5];
+
+   
+
+
+
+
+
+   // private Slot[] mSlot;
+   // [SerializeField]
+   // //슬롯 5x5 배열 
+   // private GameObject[] mSlotArray = new GameObject[20];   
+   // [SerializeField]
+   // //슬롯 아이템 값 4x5배열
+   // private GameObject[,] mSlotItemArray = new GameObject[4,5];
+   // [SerializeField]
+   // //자리 바꿀시 값 저장 배열
+   // private GameObject[] mSlotValueArray = new GameObject[2];
+   // [SerializeField]
+   // //배열 자리
+   // private int[,] mInventoryArray = new int[4,5];
+   // private Transform[] mArray = new Transform[20];
+   
+   // void Start()
+   // {  
+   //    for(int index = 0; index < mSlotArray.Length; index ++)
+   //    {
+   //       mArray[index] = mSlotArray[index];
+   //    }
+   //    //배열 초기화 및 선언
+   //    for(int indexArrayY = 0; indexArrayY < 4; indexArrayY ++)
+   //    {
+   //       for(int indexArrayX = 0; indexArrayX < 5; indexArrayX ++)
+   //       {
+   //           mSlotArray[indexArrayY, indexArrayX] =
+   //       }
+   //    }      
+   // }
+
+   // public void InventorySlotArray()
+   // {      
+   //    for(int indexY = 0; indexY < mSlotArray.Length ; indexY ++)
+   //    {
+   //       for(int indexX = 0; indexX < mSlotArray.Length; indexX ++)
+   //       {
+   //         // mSlotArray[indexY,indexX]
+   //       }
+   //    }
+   // }
 
    
 
