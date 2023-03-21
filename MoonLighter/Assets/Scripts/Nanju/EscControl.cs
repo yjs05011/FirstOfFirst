@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Esc : MonoBehaviour
+public class EscControl : MonoBehaviour
 {
-    public GameObject GameBackButton;
-    public GameObject OptionButton;
-    public GameObject MainMenuButton;
-    public GameObject ExitButton;
+    public GameObject GameBackCursorImage;
+    public GameObject OptionCursorImage;
+    public GameObject MainMenuCursorImage;
+    public GameObject ExitCursorImage;
+
+    // public KeyCode mUpKey= KeyCode.W;
 
     public int mTextCheck;
 
@@ -59,7 +61,7 @@ public class Esc : MonoBehaviour
 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+                    Application.Quit();
 #endif
                     break;
             }
@@ -68,23 +70,23 @@ public class Esc : MonoBehaviour
         switch (mTextCheck)
         {
             case 0:
-                GameBackButton.SetActive(true);
-                OptionButton.SetActive(false);
+                GameBackCursorImage.SetActive(true);
+                OptionCursorImage.SetActive(false);
                 break;
 
             case 1:
-                OptionButton.SetActive(true);
-                GameBackButton.SetActive(false);
-                MainMenuButton.SetActive(false);
+                OptionCursorImage.SetActive(true);
+                GameBackCursorImage.SetActive(false);
+                MainMenuCursorImage.SetActive(false);
                 break;
             case 2:
-                MainMenuButton.SetActive(true);
-                OptionButton.SetActive(false);
-                ExitButton.SetActive(false);
+                MainMenuCursorImage.SetActive(true);
+                OptionCursorImage.SetActive(false);
+                ExitCursorImage.SetActive(false);
                 break;
             case 3:
-                ExitButton.SetActive(true);
-                MainMenuButton.SetActive(false);
+                ExitCursorImage.SetActive(true);
+                MainMenuCursorImage.SetActive(false);
                 break;
         }
 
