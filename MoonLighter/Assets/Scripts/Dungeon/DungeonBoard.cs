@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DungeonBoard : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class DungeonBoard : MonoBehaviour
     {
         if ((directions & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
-            if(!mIsMovableTop) 
+            if (!mIsMovableTop)
             {
                 return false;
             }
@@ -54,7 +55,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
         {
-            if (!mIsMovableBottom) 
+            if (!mIsMovableBottom)
             {
                 return false;
             }
@@ -62,7 +63,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
         {
-            if (!mIsMovableLeft) 
+            if (!mIsMovableLeft)
             {
                 return false;
             }
@@ -70,7 +71,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
         {
-            if (!mIsMovableRight) 
+            if (!mIsMovableRight)
             {
                 return false;
             }
@@ -80,5 +81,12 @@ public class DungeonBoard : MonoBehaviour
 
     }
 
-  
+    public bool IsHole(Vector3 worldPosition/*캐릭터 좌표+가려는방향(0.2?)*/)
+    {
+        if(mHole != null)
+        {
+            return mHole.IsHole(worldPosition);
+        }
+        return false;
+    }
 }

@@ -113,7 +113,7 @@ public class DungeonHealingPool : MonoBehaviour
        while (player.GetPlayerMaxHp() != player.GetPlayerHp() || GetPoolHealPoint() <= 0)
        {
            SetPoolHealPoint(-1.0f);
-           player.OnHealing(1.0f); 
+           //player.OnHealing(1.0f); 
 
            totalTime -= delay;
            yield return new WaitForSeconds(totalTime - delay);

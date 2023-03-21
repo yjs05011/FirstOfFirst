@@ -2,10 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using static DungeonStage;
 
 public class DungeonStage : MonoBehaviour
 {
+    // Grid
+    public DungeonBoard mBoard = null;
+
+
     // 바닥 형태 리스트
     public List<DungeonBoard> mBoards = new List<DungeonBoard>();
     // 문 4방향 오브젝트
@@ -36,6 +41,7 @@ public class DungeonStage : MonoBehaviour
     public GameObject mStartPointLeft = null;
 
     public Vector3 mEntryPosition = Vector3.zero;
+    public int mBackwardDirection = DungeonGenerator.DIRECTION_NONE;
 
 
     public void Awake()
@@ -81,25 +87,24 @@ public class DungeonStage : MonoBehaviour
         return mEntryPosition;
     }
 
-    public void SetEntryPoint(int direction)
+    public void SetEntryPoint(int backwardDirection)
     {
-        if ((direction & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
+        if ((backwardDirection & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
             mEntryPosition = mStartPointTop.transform.position;
         }
-        if ((direction & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
+        if ((backwardDirection & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
         {
             mEntryPosition = mStartPointBottom.transform.position;
         }
-        if ((direction & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
+        if ((backwardDirection & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
         {
             mEntryPosition = mStartPointLeft.transform.position;
         }
-        if ((direction & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
+        if ((backwardDirection & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
         {
             mEntryPosition = mStartPointRight.transform.position;
-        }
-       
+        }  
     }
 
 
@@ -184,11 +189,13 @@ public class DungeonStage : MonoBehaviour
             
             if(index == random)
             {
-                boards[index].SetHoleToStage(this);
-                boards[index].gameObject.SetActive(true);
+                mBoard = boards[index];
+
+                mBoard.SetHoleToStage(this);
+                mBoard.gameObject.SetActive(true);
                 if(mBoradStyle == DungeonBoard.BoardType.POOL)
                 {
-                    DungeonHealingPool healingPool = boards[index].transform.Find("Pool").gameObject.GetComponent<DungeonHealingPool>();
+                    DungeonHealingPool healingPool = mBoard.transform.Find("Pool").gameObject.GetComponent<DungeonHealingPool>();
                     healingPool.InitPoolHeal();
                 }
                 break;    
@@ -198,7 +205,15 @@ public class DungeonStage : MonoBehaviour
 
     public void SetBoadStyle(DungeonBoard.BoardType type)
     {
-        mBoradStyle = type;
+        // 3층 마지막 방 예외처리 (3층의 마지막 방은 랜덤 타입 보드가 나와야해서) 
+        if (GetFloor() == 3 && type == DungeonBoard.BoardType.BOSS)
+        {
+            mBoradStyle = DungeonBoard.BoardType.RANDOM;
+        }
+        else
+        {
+            mBoradStyle = type;
+        }
         if (type == DungeonBoard.BoardType.BOSS || type == DungeonBoard.BoardType.Start)
         {
             SetAddDoor(type);
@@ -304,115 +319,103 @@ public class DungeonStage : MonoBehaviour
     //문 추가 (보스 stage : 다음 층 연결 문 추가 | 시작 stage : 던전 입장 or 해당 층 입장 문 추가)
     public void SetAddDoor(DungeonBoard.BoardType type)
     {
-        if ((mDoorDirections & DungeonGenerator.DIRECTION_TOP) != DungeonGenerator.DIRECTION_TOP)
+        // 시작방의 문을 설정하는 부분
+        if(type == DungeonBoard.BoardType.Start)
         {
-           
-            if (type == DungeonBoard.BoardType.BOSS)
+            // 이전 층에서 내려온 경우 (차원문)
+            if(mBackwardDirection != DungeonGenerator.DIRECTION_NONE)
             {
-                int nextStageX = GetBoardX();
-                int nextStageY = GetBoardY()+1;
-
-                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                if(mBackwardDirection == DungeonGenerator.DIRECTION_TOP)
                 {
                     mDoorTop.SetCurrStage(this);
                     mDoorTop.SetFloorDoor();
-                    return;
                 }
-            }
-            if (type == DungeonBoard.BoardType.Start)
-            {
-                if (GetFloor() > 1)
+                if (mBackwardDirection == DungeonGenerator.DIRECTION_BOTTOM)
                 {
                     mDoorBottom.SetCurrStage(this);
                     mDoorBottom.SetFloorDoor();
-                    return;
                 }
-            }
-        }
-        if ((mDoorDirections & DungeonGenerator.DIRECTION_LEFT) != DungeonGenerator.DIRECTION_LEFT)
-        {
-           
-            if (type == DungeonBoard.BoardType.BOSS)
-            {
-                int nextStageX = GetBoardX()-1;
-                int nextStageY = GetBoardY();
-
-                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                if (mBackwardDirection == DungeonGenerator.DIRECTION_LEFT)
                 {
                     mDoorLeft.SetCurrStage(this);
                     mDoorLeft.SetFloorDoor();
-                    return;
                 }
-            }
-            if (type == DungeonBoard.BoardType.Start)
-            {
-                if (GetFloor() > 1)
+                if (mBackwardDirection == DungeonGenerator.DIRECTION_RIGHT)
                 {
                     mDoorRight.SetCurrStage(this);
                     mDoorRight.SetFloorDoor();
-                    return;
                 }
+
+            }
+            // 처음 1층에 진입한 경우 (황토색문)
+            else
+            {
+                mDoorBottom.SetCurrStage(this);
+                mDoorBottom.SetEntryDoor();
             }
         }
-        if ((mDoorDirections & DungeonGenerator.DIRECTION_RIGHT) != DungeonGenerator.DIRECTION_RIGHT)
+
+
+        if(type == DungeonBoard.BoardType.BOSS)
         {
-            
-            if (type == DungeonBoard.BoardType.BOSS)
+            if (mFloor == 3)
             {
-                int nextStageX = GetBoardX() + 1;
-                int nextStageY = GetBoardY();
-
-                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
-                {
-                    mDoorRight.SetCurrStage(this);
-                    mDoorRight.SetFloorDoor();
-                    return;
-                }
+                mDoorTop.SetCurrStage(this);
+                mDoorTop.SetBossRoomDoor();
+                return;
             }
-            if (type == DungeonBoard.BoardType.Start)
+            else
             {
-                if (GetFloor() > 1)
+                if ((mDoorDirections & DungeonGenerator.DIRECTION_TOP) != DungeonGenerator.DIRECTION_TOP)
                 {
-                    mDoorLeft.SetCurrStage(this);
-                    mDoorLeft.SetFloorDoor();
-                    return;
+                    int nextStageX = GetBoardX();
+                    int nextStageY = GetBoardY() + 1;
+
+                    if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                    {
+                        mDoorTop.SetCurrStage(this);
+                        mDoorTop.SetFloorDoor();
+                        return;
+                    }
+                }
+                if ((mDoorDirections & DungeonGenerator.DIRECTION_LEFT) != DungeonGenerator.DIRECTION_LEFT)
+                {
+                    int nextStageX = GetBoardX() - 1;
+                    int nextStageY = GetBoardY();
+
+                    if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                    {
+                        mDoorLeft.SetCurrStage(this);
+                        mDoorLeft.SetFloorDoor();
+                        return;
+                    }
+                }
+                if ((mDoorDirections & DungeonGenerator.DIRECTION_RIGHT) != DungeonGenerator.DIRECTION_RIGHT)
+                {
+                    int nextStageX = GetBoardX() + 1;
+                    int nextStageY = GetBoardY();
+
+                    if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                    {
+                        mDoorRight.SetCurrStage(this);
+                        mDoorRight.SetFloorDoor();
+                        return;
+                    }
+                }
+                if ((mDoorDirections & DungeonGenerator.DIRECTION_BOTTOM) != DungeonGenerator.DIRECTION_BOTTOM)
+                {
+                    int nextStageX = GetBoardX();
+                    int nextStageY = GetBoardY() - 1;
+
+                    if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                    {
+                        mDoorBottom.SetCurrStage(this);
+                        mDoorBottom.SetFloorDoor();
+                        return;
+                    }
                 }
             }
         }
-        if ((mDoorDirections & DungeonGenerator.DIRECTION_BOTTOM) != DungeonGenerator.DIRECTION_BOTTOM)
-        {
-           
-            if (type == DungeonBoard.BoardType.BOSS)
-            {
-
-                int nextStageX = GetBoardX();
-                int nextStageY = GetBoardY() - 1;
-
-                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
-                {
-                    mDoorBottom.SetCurrStage(this);
-                    mDoorBottom.SetFloorDoor();
-                    return;
-                }
-            }
-            if (type == DungeonBoard.BoardType.Start)
-            {
-                if (GetFloor() > 1)
-                {
-                    mDoorTop.SetCurrStage(this);
-                    mDoorTop.SetFloorDoor();
-                    return;
-                }
-                else
-                {
-                    mDoorBottom.SetCurrStage(this);
-                    mDoorBottom.SetEntryDoor();
-                    return;
-                }
-
-            }
-        }
-
     }
 
 
@@ -450,5 +453,8 @@ public class DungeonStage : MonoBehaviour
         }
     }
 
-
+    public bool IsHole(Vector3 worldPosition/*캐릭터 좌표+가려는방향(0.2?)*/)
+    {
+        return mBoard.IsHole(worldPosition);
+    }
 }
