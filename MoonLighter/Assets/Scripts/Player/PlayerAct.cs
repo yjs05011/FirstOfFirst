@@ -15,12 +15,19 @@ public enum ActState
 }
 public class PlayerAct : MonoBehaviour
 {
+    public PlayerScriptObjs mPlayerDefaultStat;
     // 플레이어 리지드바디 2d 선언 (물리력 생성을 위해 선언)
     public Rigidbody2D mPlayerRigid;
     //플레이어 BoxCollider2D 선언 (플레이어 히트박스로 사용 예정)
     public BoxCollider2D mPlayerHitBox;
     // 플레이어 스텟: 스피드를 나타낸다 (임시)
     public float mPlayerSpeed = 0;
+    // 플레이어 스텟: 힘을 나타낸다.
+    public float mPlayerStr = 0;
+    // 플레이어 스텟: 방어력을 나타낸다.
+    public float mPlayerDef = 0;
+    // 플레이어 스텟: 체력을 나타낸다.
+    public float mPlayerHp = 0;
     // 플레이어 애니메이션을 나타낸다.
     public Animator mPlayerAnimator;
     // 플레이어가 움직이는지 체크하기 위한 bool 변수
@@ -45,13 +52,202 @@ public class PlayerAct : MonoBehaviour
     public BoxCollider2D mWeaponeHitBox;
     // 플레이어 공격시 박스 위치를 결정해줌
     public RectTransform mWeaponeHitBoxPosition;
+    // 플레이어의 상태가 변화를 위한 시간 변수
     public float mTime = 0;
+    // 플레이어가 키를 몇초간 눌렀는지 알기 위한 시간 변수
+    public float mHoldingTime = 0;
     // 플레이어에 사용된 애니메이션 클립을 가져오기위한 변수 선언
     public List<AnimationClip> mPlayerAnimation = new List<AnimationClip>();
     // 플레이어 상태 머신 타입 변경
     private PlayerState mNowState;
 
-    // 플레이어 현재 무기 상태(1:대검,2:단검,3:활,4:글러브,5:창)
+
+    void Awake()
+    {
+
+        mPlayerAnimator = GetComponent<Animator>();
+        mPlayerRigid = GetComponent<Rigidbody2D>();
+        mPlayerHitBox = GetComponent<BoxCollider2D>();
+        mWeaponeHitBoxPosition = transform.GetChild(0).GetComponent<RectTransform>();
+        mWeaponeHitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
+    }
+    void Start()
+    {
+        SetActionType(ActState.State_Move);
+        mPlayerNowWeapone = 1;
+        PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
+        PlayerManager.Instance.mPlayerStat.Speed = mPlayerDefaultStat.Speed;
+        PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
+        PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
+        PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
+        mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
+        mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
+        mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
+        mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
+        if (PlayerManager.Instance.mPlayerBeforPos != null)
+        {
+            transform.position = PlayerManager.Instance.mPlayerBeforPos;
+        }
+
+
+    }
+
+    void Update()
+    {
+        if (PlayerManager.Instance.mIsUiActive)
+        {
+
+        }
+        else
+        {
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
+            {
+                if (!mIsCombo)
+                {
+                    mAttackRoll++;
+                }
+
+
+            }
+            switch (mState)
+            {
+                case ActState.State_Move:
+                    mNowState.Action(ActState.State_Move);
+                    if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
+                    {
+                        mTime = 0;
+                        SetActionType(ActState.State_Evasion);
+                    }
+                    else if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]) && !PlayerManager.Instance.mIsShop)
+                    {
+                        mTime = 0;
+                        mIsCombo = true;
+                        SetActionType(ActState.State_Attack_Combo_One);
+
+                    }
+                    // PlayerMove();
+                    break;
+                case ActState.State_Attack_Combo_One:
+                    mPlayerRigid.velocity = Vector2.zero;
+                    mTime += Time.deltaTime;
+                    if (mTime > 1.3f)
+                    {
+                        mTime = 0;
+                        SetActionType(ActState.State_Move);
+                        mPlayerAnimator.SetBool("IsAttack", false);
+                    }
+                    if (mIsCombo)
+                    {
+                        mTime = 0;
+                        SetActionType(ActState.State_Attack_Combo_Two);
+                    }
+                    break;
+                case ActState.State_Attack_Combo_Two:
+                    mTime += Time.deltaTime;
+                    if (mTime > 1.3f)
+                    {
+                        mTime = 0;
+                        SetActionType(ActState.State_Move);
+                        mPlayerAnimator.SetBool("IsAttack", false);
+                    }
+                    if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
+                    {
+                        if (mIsCombo)
+                        {
+
+                            SetActionType(ActState.State_Attack_Combo_Three);
+                        }
+                    }
+
+                    break;
+                case ActState.State_Evasion:
+                    break;
+
+                case ActState.State_Enter_Pool:
+                    mNowState.Action(ActState.State_Enter_Pool);
+                    if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
+                    {
+                        SetActionType(ActState.State_Evasion);
+                    }
+                    break;
+                case ActState.State_Die:
+                    break;
+            }
+        }
+
+
+
+    }
+    //플레이어 이동 구현
+    public void OnDamage(float MonsterDamage)
+    {
+        if (mIsDelay)
+        {
+        }
+        else
+        {
+            mIsDelay = true;
+            StartCoroutine(HitDelay(0.5f));
+            float calculateDamage = MonsterDamage - mPlayerDef;
+            if (calculateDamage < 0)
+            {
+            }
+            else
+            {
+                mPlayerHp -= calculateDamage;
+            }
+            if (mPlayerHp < 0)
+            {
+                SetActionType(ActState.State_Die);
+                PlayerManager.Instance.mPlayerStat.isDie = true;
+            }
+        }
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Pool"))
+        {
+            mPlayerAnimator.SetBool("IsPool", true);
+            mIsEvasion = false;
+            mPlayerAnimator.SetBool("IsEvasion", false);
+            SetActionType(ActState.State_Enter_Pool);
+        }
+        if (other.CompareTag("Hole"))
+        {
+            if (mIsEvasion)
+            {
+
+            }
+            else
+            {
+                mPlayerAnimator.SetTrigger("IsFalling");
+                mPlayerRigid.velocity *= 0.1f;
+                mIsEvasion = false;
+            }
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Pool"))
+        {
+            mPlayerAnimator.SetBool("IsPool", false);
+            mIsEvasion = false;
+            mPlayerAnimator.SetBool("IsEvasion", false);
+            SetActionType(ActState.State_Move);
+
+        }
+    }
+    void HoldingKey()
+    {
+        mHoldingTime = 0;
+        mHoldingTime += Time.deltaTime;
+    }
+    // 플레이어 현재 상태를 저장하는 함수
     public void SetActionType(ActState state)
     {
         this.mState = state;
@@ -79,261 +275,14 @@ public class PlayerAct : MonoBehaviour
                 mNowState = gameObject.AddComponent<PlayerEvasion>();
                 mNowState.Action(state);
                 break;
+            case global::ActState.State_Move:
+                mNowState = gameObject.AddComponent<PlayerMove>();
+                break;
+            case global::ActState.State_Enter_Pool:
+                mNowState = gameObject.AddComponent<PlayerMove>();
+                break;
             default:
                 break;
-        }
-    }
-    void Awake()
-    {
-
-        mPlayerAnimator = GetComponent<Animator>();
-        mPlayerRigid = GetComponent<Rigidbody2D>();
-        mPlayerHitBox = GetComponent<BoxCollider2D>();
-        mWeaponeHitBoxPosition = transform.GetChild(0).GetComponent<RectTransform>();
-        mWeaponeHitBox = transform.GetChild(0).GetComponent<BoxCollider2D>();
-    }
-    void Start()
-    {
-        SetActionType(ActState.State_Move);
-        mPlayerNowWeapone = 1;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
-        {
-            if (!mIsCombo)
-            {
-                mAttackRoll++;
-            }
-
-
-        }
-        switch (mState)
-        {
-            case ActState.State_Move:
-                if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
-                {
-                    mTime = 0;
-                    SetActionType(ActState.State_Evasion);
-                }
-                else if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
-                {
-                    mTime = 0;
-                    mIsCombo = true;
-                    SetActionType(ActState.State_Attack_Combo_One);
-
-                }
-                PlayerMove();
-                break;
-            case ActState.State_Attack_Combo_One:
-                mPlayerRigid.velocity = Vector2.zero;
-                mTime += Time.deltaTime;
-                if (mTime > 1.3f)
-                {
-                    mTime = 0;
-                    SetActionType(ActState.State_Move);
-                    mPlayerAnimator.SetBool("IsAttack", false);
-                }
-                if (mIsCombo)
-                {
-                    mTime = 0;
-                    SetActionType(ActState.State_Attack_Combo_Two);
-                }
-                break;
-            case ActState.State_Attack_Combo_Two:
-                mTime += Time.deltaTime;
-                if (mTime > 1.3f)
-                {
-                    mTime = 0;
-                    SetActionType(ActState.State_Move);
-                    mPlayerAnimator.SetBool("IsAttack", false);
-                }
-                if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
-                {
-                    if (mIsCombo)
-                    {
-
-                        SetActionType(ActState.State_Attack_Combo_Three);
-                    }
-                }
-
-                break;
-            case ActState.State_Evasion:
-                // mTime += Time.deltaTime;
-                // if (mTime > 0.5f)
-                // {
-                //     mTime = 0;
-                //     SetActionType(ActState.State_Move);
-                //     mPlayerAnimator.SetBool("IsEvasion", false);
-                // }
-                break;
-
-            case ActState.State_Enter_Pool:
-                PlayerMove();
-                if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
-                {
-                    SetActionType(ActState.State_Evasion);
-                }
-                break;
-            case ActState.State_Die:
-
-                break;
-        }
-
-
-    }
-    //플레이어 이동 구현
-    void PlayerMove()
-    {
-        float Horizontal = 0;
-        float vertical = 0;
-        if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
-        {
-            mIsMove = true;
-            mPlayerAnimator.SetFloat("InputX", 0);
-            mPlayerAnimator.SetFloat("InputY", 1);
-            mPlayerAnimator.SetBool("IsRun", true);
-
-            mPlayerDirection = 1;
-            vertical = 1;
-        }
-        if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
-        {
-            mIsMove = true;
-            mPlayerAnimator.SetFloat("InputX", 0);
-            mPlayerAnimator.SetFloat("InputY", -1);
-            mPlayerAnimator.SetBool("IsRun", true);
-            // mPlayerAnimator.SetInteger("Run", 2);
-            // mPlayerAnimator.SetInteger("Idle", 1);
-            mPlayerDirection = 0;
-            vertical = -1;
-        }
-        if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
-        {
-            mIsMove = true;
-            mPlayerAnimator.SetFloat("InputX", -1);
-            mPlayerAnimator.SetFloat("InputY", 0);
-            mPlayerAnimator.SetBool("IsRun", true);
-            // mPlayerAnimator.SetInteger("Run", 3);
-            // mPlayerAnimator.SetInteger("Idle", 3);
-            mPlayerDirection = 2;
-            Horizontal = -1;
-        }
-        if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
-        {
-            mIsMove = true;
-            mPlayerAnimator.SetFloat("InputX", +1);
-            mPlayerAnimator.SetFloat("InputY", 0);
-            mPlayerAnimator.SetBool("IsRun", true);
-            // mPlayerAnimator.SetInteger("Run", 4);
-            // mPlayerAnimator.SetInteger("Idle", 4);
-            mPlayerDirection = 3;
-            Horizontal = 1;
-
-        }
-
-
-        if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
-        {
-            mIsMove = false;
-            mPlayerAnimator.SetBool("IsRun", false);
-        }
-        if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
-        {
-            mIsMove = false;
-            mPlayerAnimator.SetBool("IsRun", false);
-        }
-        if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
-        {
-            mIsMove = false;
-            mPlayerAnimator.SetBool("IsRun", false);
-        }
-        if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
-        {
-            mIsMove = false;
-            mPlayerAnimator.SetBool("IsRun", false);
-
-        }
-
-        float xSpeed = Horizontal * mPlayerSpeed;
-        float ySpeed = vertical * mPlayerSpeed;
-
-        Vector2 playerVector = new Vector2(xSpeed, ySpeed);
-        if (Horizontal != 0 && vertical != 0)
-        {
-            playerVector /= Mathf.Sqrt(2);
-        }
-        mPlayerRigid.velocity = playerVector;
-        if (!mIsMove)
-        {
-            mPlayerAnimator.SetBool("IsRun", false);
-        }
-    }
-    //플레이어 회피
-    public void PlayerEvasion()
-    {
-        //0.625(애니메이션 시간)
-        // if (is)
-    }
-    public void OnDamage(float MonsterDamage)
-    {
-        if (mIsDelay)
-        {
-        }
-        else
-        {
-            mIsDelay = true;
-            StartCoroutine(HitDelay(0.5f));
-            // float calculateDamage = MonsterDamage -PlayerManager.Instance.PlayerStat.Defence
-            // if(calculateDamge<0){
-            //} else{
-            //  playerManager.Instance.PlayerState.Hp -= calculateDamage;
-            // SetActionType(ActState.State_Monster_Hit);
-            //  }
-            // if (playerManager.Instance.PlayerState.Hp < 0)
-            // {
-            //     SetActionType(ActState.State_Die);
-            // }
-        }
-
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (CompareTag("Pool"))
-        {
-            mPlayerAnimator.SetBool("IsPool", true);
-            mIsEvasion = false;
-            mPlayerAnimator.SetBool("IsEvasion", false);
-            SetActionType(ActState.State_Enter_Pool);
-        }
-        if (CompareTag("Hole"))
-        {
-            if (mIsEvasion)
-            {
-
-            }
-            else
-            {
-                mPlayerAnimator.SetTrigger("IsFalling");
-                mPlayerRigid.velocity *= 0.1f;
-                mIsEvasion = false;
-            }
-
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (CompareTag("Pool"))
-        {
-            mPlayerAnimator.SetBool("IsPool", false);
-            mIsEvasion = false;
-            mPlayerAnimator.SetBool("IsEvasion", false);
-            SetActionType(ActState.State_Move);
-
         }
     }
     IEnumerator HitDelay(float Delay)
@@ -341,6 +290,5 @@ public class PlayerAct : MonoBehaviour
         yield return new WaitForSeconds(Delay);
         mIsDelay = false;
     }
-
 
 }
