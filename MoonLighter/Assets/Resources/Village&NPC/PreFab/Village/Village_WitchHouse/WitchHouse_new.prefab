@@ -164,6 +164,8 @@ GameObject:
   - component: {fileID: 6649140064044912966}
   - component: {fileID: 4515918070470226175}
   - component: {fileID: 202514858524986471}
+  - component: {fileID: 1481887904363197706}
+  - component: {fileID: 1983418593058342974}
   m_Layer: 0
   m_Name: Witch
   m_TagString: Untagged
@@ -275,6 +277,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6eab141c26b4924428eb6e3f7fd31eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1481887904363197706
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250748759594703302}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56400f6ded2df9544b1a63ff7bed9d3f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1983418593058342974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250748759594703302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c988f1df74a2c354bb313baff82ec0cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &926490921743756188

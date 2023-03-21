@@ -38,7 +38,7 @@ public class PlayerAct : MonoBehaviour
     private ActState mState;
     // 플레이어 상태 머신 변수
     private PlayerState mNowState;
-
+    
     // 플레이어 현재 무기 상태(1:대검,2:단검,3:활,4:글러브,5:창)
     public int mPlayerNowWeapone;
     // 플레이어 애니매이션을 위한 무기 위치 렉트 트랜스폼 변수
