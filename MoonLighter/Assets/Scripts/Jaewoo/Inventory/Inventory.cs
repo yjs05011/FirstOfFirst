@@ -17,8 +17,9 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject mChnageEquipmentSlotGrideSetting;
 
-    private Slot[] mSlot;
-    private Slot[] mSlotEquip;
+    
+    public Slot[] mSlot;
+    public Slot[] mSlotEquip;
    
     void Start()
     {
@@ -64,6 +65,7 @@ public class Inventory : MonoBehaviour
 
     public void AcpuireItem(Item item, int itemCount)
     {
+        //Debug.Log(Item.ItemE)
         //얻은 아이템이 장비 타입과 다를때
         if(Item.ItemEnumType.Equiment != item.mItemType)
         {

@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
+    public Slot[] mSlot;
     public Inventory mInventory;
     public Item mItem;
     public GameObject mPlayerBagDistance = default;
     private Rigidbody2D mItemRigidBody = default;
 
+    private void Awake()
+    {
+        mInventory = GameObject.FindObjectOfType<Inventory>();
+    }
     void start()
     {
         mItemRigidBody = gameObject.GetComponent<Rigidbody2D>();
@@ -18,11 +23,21 @@ public class ItemPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            int mItemCount = 1;
-            mInventory.AcpuireItem(gameObject.transform.GetComponent<ItemPickUp>().mItem, mItemCount);
-            Destroy(this.gameObject);
+            int mItemCount = default;
+            mItemCount++;
+            if(this.gameObject.transform.GetComponent<ItemPickUp>().mItem != null)
+            {
+                mInventory.AcpuireItem(this.gameObject.transform.GetComponent<ItemPickUp>().mItem, mItemCount);
+                GetItemMove();
+                return;
+            }                       
         }
+    }
+
+    public void GetItemMove()
+    {
         
+        Destroy(this.gameObject);
     }
 
 

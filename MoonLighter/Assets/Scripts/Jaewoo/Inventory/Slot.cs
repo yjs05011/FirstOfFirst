@@ -9,8 +9,8 @@ public class Slot : MonoBehaviour
     public int mItemCount;
     public Sprite mItemSprite;
 
-    [SerializeField]
-    private Text mTextCount;
+    //[SerializeField]
+    public Text mTextCount = default;
     [SerializeField]
     private GameObject mChangeImage;
     
@@ -24,10 +24,11 @@ public class Slot : MonoBehaviour
     public void AddItem(Item item, int itemCount =1)
     {
         mItem = item;
+        //mTextCount = Text.
         mItemCount = itemCount;
         mItemSprite = mItem.mItemSprite;
 
-        //아이템 enum 타입이 소비일때
+        //아이템 타입 구분
         if(mItem.mItemType != Item.ItemEnumType.Equiment)
         {
             mChangeImage.SetActive(true);
@@ -35,6 +36,7 @@ public class Slot : MonoBehaviour
         }
         else
         {
+            Debug.Log(mTextCount.text);
             mTextCount.text = " ";
             mChangeImage.SetActive(false);
         }
