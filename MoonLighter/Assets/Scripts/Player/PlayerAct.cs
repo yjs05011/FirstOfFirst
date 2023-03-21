@@ -28,6 +28,8 @@ public class PlayerAct : MonoBehaviour
     public float mPlayerDef = 0;
     // 플레이어 스텟: 체력을 나타낸다.
     public float mPlayerHp = 0;
+    // 플레이어 스텟: 플레이어의 최대 체력을 나타낸다.
+    public float mPlayerMaxHp = 0;
     // 플레이어 애니메이션을 나타낸다.
     public Animator mPlayerAnimator;
     // 플레이어가 움직이는지 체크하기 위한 bool 변수
@@ -60,6 +62,8 @@ public class PlayerAct : MonoBehaviour
     public List<AnimationClip> mPlayerAnimation = new List<AnimationClip>();
     // 플레이어 상태 머신 타입 변경
     private PlayerState mNowState;
+    // 플레이어가 풀 안에서 힐을 하고 있는지 확인하는 변수
+    private bool mIsHealing;
 
 
     void Awake()
@@ -84,7 +88,7 @@ public class PlayerAct : MonoBehaviour
         mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
         mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
         mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
-        if (PlayerManager.Instance.mPlayerBeforPos != null)
+        if (PlayerManager.Instance.mPlayerBeforPos != default)
         {
             transform.position = PlayerManager.Instance.mPlayerBeforPos;
         }
@@ -169,6 +173,10 @@ public class PlayerAct : MonoBehaviour
                     {
                         SetActionType(ActState.State_Evasion);
                     }
+                    if (mIsHealing)
+                    {
+                        mIsHealing = false;
+                    }
                     break;
                 case ActState.State_Die:
                     break;
@@ -178,39 +186,14 @@ public class PlayerAct : MonoBehaviour
 
 
     }
-    //플레이어 이동 구현
-    public void OnDamage(float MonsterDamage)
-    {
-        if (mIsDelay || mState == ActState.State_Die)
-        {
-        }
-        else
-        {
-            mIsDelay = true;
-            StartCoroutine(HitDelay(0.5f));
-            float calculateDamage = MonsterDamage - mPlayerDef;
-            if (calculateDamage < 0)
-            {
-            }
-            else
-            {
-                mPlayerHp -= calculateDamage;
-            }
-            if (mPlayerHp < 0)
-            {
-                SetActionType(ActState.State_Die);
-                PlayerManager.Instance.mPlayerStat.isDie = true;
-            }
-        }
 
-
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Pool"))
         {
             mPlayerAnimator.SetBool("IsPool", true);
+            mIsHealing = true;
             mIsEvasion = false;
             mPlayerAnimator.SetBool("IsEvasion", false);
             SetActionType(ActState.State_Enter_Pool);
@@ -231,12 +214,14 @@ public class PlayerAct : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Pool"))
         {
             mPlayerAnimator.SetBool("IsPool", false);
             mIsEvasion = false;
+            mIsHealing = false;
             mPlayerAnimator.SetBool("IsEvasion", false);
             SetActionType(ActState.State_Move);
 
@@ -289,6 +274,61 @@ public class PlayerAct : MonoBehaviour
     {
         yield return new WaitForSeconds(Delay);
         mIsDelay = false;
+    }
+
+    public float GetPlayerMaxHp()
+    {
+        return mPlayerMaxHp;
+    }
+    public float GetPlayerHp()
+    {
+        return mPlayerHp;
+    }
+    void OnHealing(float number)
+    {
+        if (mPlayerMaxHp < mPlayerHp)
+        {
+            mPlayerHp += number;
+        }
+
+    }
+    //플레이어 낭떨어지 떨어졌을 경우 데미지 구현
+    void OnFalling(float number)
+    {
+        mPlayerHp -= Mathf.Floor(number);
+        if (mPlayerHp < 0)
+        {
+            SetActionType(ActState.State_Die);
+            PlayerManager.Instance.mPlayerStat.isDie = true;
+        }
+
+    }
+    //플레이어 몬스터 히트 구현
+    public void OnDamage(float MonsterDamage)
+    {
+        if (mIsDelay || mState == ActState.State_Die)
+        {
+        }
+        else
+        {
+            mIsDelay = true;
+            StartCoroutine(HitDelay(0.5f));
+            float calculateDamage = MonsterDamage - mPlayerDef;
+            if (calculateDamage < 0)
+            {
+            }
+            else
+            {
+                mPlayerHp -= calculateDamage;
+            }
+            if (mPlayerHp < 0)
+            {
+                SetActionType(ActState.State_Die);
+                PlayerManager.Instance.mPlayerStat.isDie = true;
+            }
+        }
+
+
     }
 
 }
