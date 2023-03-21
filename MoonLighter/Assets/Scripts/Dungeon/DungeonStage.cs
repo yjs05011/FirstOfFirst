@@ -14,7 +14,7 @@ public class DungeonStage : MonoBehaviour
     public DungeonDoor mDoorBottom = null;
     public DungeonDoor mDoorLeft = null;
   
-    public int mFloor = 0;
+    public int mFloor;
     public int mDoorDirections = 0;
     public int mBoardX = 0;
     public int mBoardY = 0;
@@ -305,55 +305,111 @@ public class DungeonStage : MonoBehaviour
     {
         if ((mDoorDirections & DungeonGenerator.DIRECTION_TOP) != DungeonGenerator.DIRECTION_TOP)
         {
-            mDoorTop.SetCurrStage(this);
+           
             if (type == DungeonBoard.BoardType.BOSS)
             {
-                mDoorTop.SetFloorDoor();
+                int nextStageX = GetBoardX();
+                int nextStageY = GetBoardY()+1;
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorTop.SetCurrStage(this);
+                    mDoorTop.SetFloorDoor();
+                    return;
+                }
             }
             if (type == DungeonBoard.BoardType.Start)
             {
-                mDoorTop.SetEntryDoor();
+                if (GetFloor() > 1)
+                {
+                    mDoorBottom.SetCurrStage(this);
+                    mDoorBottom.SetFloorDoor();
+                    return;
+                }
             }
-            return;
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_LEFT) != DungeonGenerator.DIRECTION_LEFT)
         {
-            mDoorLeft.SetCurrStage(this);
+           
             if (type == DungeonBoard.BoardType.BOSS)
             {
-                mDoorLeft.SetFloorDoor();
+                int nextStageX = GetBoardX()-1;
+                int nextStageY = GetBoardY();
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorLeft.SetCurrStage(this);
+                    mDoorLeft.SetFloorDoor();
+                    return;
+                }
             }
             if (type == DungeonBoard.BoardType.Start)
             {
-                mDoorLeft.SetEntryDoor();
+                if (GetFloor() > 1)
+                {
+                    mDoorRight.SetCurrStage(this);
+                    mDoorRight.SetFloorDoor();
+                    return;
+                }
             }
-            return;
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_RIGHT) != DungeonGenerator.DIRECTION_RIGHT)
         {
-            mDoorRight.SetCurrStage(this);
+            
             if (type == DungeonBoard.BoardType.BOSS)
             {
-                mDoorRight.SetFloorDoor();
+                int nextStageX = GetBoardX() + 1;
+                int nextStageY = GetBoardY();
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorRight.SetCurrStage(this);
+                    mDoorRight.SetFloorDoor();
+                    return;
+                }
             }
             if (type == DungeonBoard.BoardType.Start)
             {
-                mDoorRight.SetEntryDoor();
+                if (GetFloor() > 1)
+                {
+                    mDoorLeft.SetCurrStage(this);
+                    mDoorLeft.SetFloorDoor();
+                    return;
+                }
             }
-            return;
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_BOTTOM) != DungeonGenerator.DIRECTION_BOTTOM)
         {
-            mDoorBottom.SetCurrStage(this);
+           
             if (type == DungeonBoard.BoardType.BOSS)
             {
-                mDoorBottom.SetFloorDoor();
+
+                int nextStageX = GetBoardX();
+                int nextStageY = GetBoardY() - 1;
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorBottom.SetCurrStage(this);
+                    mDoorBottom.SetFloorDoor();
+                    return;
+                }
             }
             if (type == DungeonBoard.BoardType.Start)
             {
-                mDoorBottom.SetEntryDoor();
+                if (GetFloor() > 1)
+                {
+                    mDoorTop.SetCurrStage(this);
+                    mDoorTop.SetFloorDoor();
+                    return;
+                }
+                else
+                {
+                    mDoorBottom.SetCurrStage(this);
+                    mDoorBottom.SetEntryDoor();
+                    return;
+                }
+
             }
-            return;
         }
 
     }
