@@ -19,7 +19,6 @@ public class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             mInventoryTest.AcpuireItem(gameObject.transform.GetComponent<ItemPickUp>().mItem);
-
             Destroy(this.gameObject);
         }
         

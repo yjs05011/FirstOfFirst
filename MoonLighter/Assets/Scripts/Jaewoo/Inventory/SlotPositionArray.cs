@@ -13,7 +13,7 @@ public class SlotPositionArray : MonoBehaviour
         for (int index = 0; index < mSlotArrays.Length; index++)
         {
             mSlotArrays[index] = transform.GetChild(index);
-            mSlotArrays[index].transform.position = transform.GetChild(index).position;
+            //mSlotArrays[index].transform.position = transform.GetChild(index).position;
         }
     }
 
