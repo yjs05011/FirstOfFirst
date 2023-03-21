@@ -123,6 +123,27 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &394397414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1825903896119652535, guid: f1b393ec7e989e24b9975ef1d1505487, type: 3}
+  m_PrefabInstance: {fileID: 1825903895988300922}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &394397419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394397414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mDelayTime: 0.2
+  mTimer: 0
+  mFallingDamegeRate: 0.45
+  mIsFall: 0
 --- !u!1 &446642296
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +508,10 @@ PrefabInstance:
     - target: {fileID: 1825903895776075303, guid: f1b393ec7e989e24b9975ef1d1505487, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825903896119652523, guid: f1b393ec7e989e24b9975ef1d1505487, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1825903896193597156, guid: f1b393ec7e989e24b9975ef1d1505487, type: 3}
       propertyPath: m_IsActive

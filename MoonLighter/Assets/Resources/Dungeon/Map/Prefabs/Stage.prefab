@@ -3370,6 +3370,7 @@ GameObject:
   - component: {fileID: 1610549636}
   - component: {fileID: 1610549635}
   - component: {fileID: 1610549634}
+  - component: {fileID: 2889413623870978187}
   m_Layer: 0
   m_Name: HoleTile
   m_TagString: Hole
@@ -4325,12 +4326,24 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &2889413623870978187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610549632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1624736367
 GameObject:
   m_ObjectHideFlags: 0
@@ -5120,6 +5133,7 @@ GameObject:
   - component: {fileID: 750713175428951591}
   - component: {fileID: 5531345573421999318}
   - component: {fileID: 8289912432682705919}
+  - component: {fileID: 6479680171369210353}
   m_Layer: 0
   m_Name: HoleTile
   m_TagString: Untagged
@@ -5825,12 +5839,24 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &6479680171369210353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122095305631530786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &139719791995225037
 GameObject:
   m_ObjectHideFlags: 0
@@ -6517,6 +6543,7 @@ GameObject:
   - component: {fileID: 8858665928893196544}
   - component: {fileID: 8953114524863957956}
   - component: {fileID: 9155003435788610838}
+  - component: {fileID: 6451268915479908812}
   m_Layer: 0
   m_Name: HoleTile
   m_TagString: Untagged
@@ -7842,12 +7869,24 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &6451268915479908812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778520896514484990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1075528676447806811
 GameObject:
   m_ObjectHideFlags: 0
@@ -9174,6 +9213,7 @@ MonoBehaviour:
   mBasicDoorAnim: {fileID: 0}
   mFloorDoorAnim: {fileID: 0}
   mEntryDoorAnim: {fileID: 0}
+  mDoorStatus: 0
 --- !u!61 &8048698854104008840
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13417,6 +13457,7 @@ MonoBehaviour:
   mDoorRight: {fileID: 8071836332368973760}
   mDoorBottom: {fileID: 3809215809679327685}
   mDoorLeft: {fileID: 4943450145319962598}
+  mFloor: 0
   mDoorDirections: 0
   mBoardX: 0
   mBoardY: 0
@@ -14131,6 +14172,7 @@ GameObject:
   - component: {fileID: 1825903896119652522}
   - component: {fileID: 1825903896119652533}
   - component: {fileID: 1825903896119652523}
+  - component: {fileID: 2978507704956365893}
   m_Layer: 0
   m_Name: HoleTile
   m_TagString: Hole
@@ -15556,12 +15598,24 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &2978507704956365893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825903896119652535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1825903896184048526
 GameObject:
   m_ObjectHideFlags: 0
@@ -18095,6 +18149,7 @@ MonoBehaviour:
   mBasicDoorAnim: {fileID: 0}
   mFloorDoorAnim: {fileID: 0}
   mEntryDoorAnim: {fileID: 0}
+  mDoorStatus: 0
 --- !u!61 &2924294096720582761
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20711,6 +20766,7 @@ GameObject:
   - component: {fileID: 3915432881913716437}
   - component: {fileID: 3140147489009832204}
   - component: {fileID: 998907120611560611}
+  - component: {fileID: 1723117842238246471}
   m_Layer: 0
   m_Name: HoleTile
   m_TagString: Hole
@@ -21654,12 +21710,24 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &1723117842238246471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3216930688641934437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3408844180003472792
 GameObject:
   m_ObjectHideFlags: 0
@@ -27662,6 +27730,7 @@ MonoBehaviour:
   mBasicDoorAnim: {fileID: 0}
   mFloorDoorAnim: {fileID: 0}
   mEntryDoorAnim: {fileID: 0}
+  mDoorStatus: 0
 --- !u!61 &1343146999333234944
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -28116,6 +28185,7 @@ MonoBehaviour:
   mBasicDoorAnim: {fileID: 0}
   mFloorDoorAnim: {fileID: 0}
   mEntryDoorAnim: {fileID: 0}
+  mDoorStatus: 0
 --- !u!61 &5155961213127799279
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29072,6 +29142,7 @@ GameObject:
   - component: {fileID: 9193471747222224495}
   - component: {fileID: 854092758601268500}
   - component: {fileID: 7549111579477649869}
+  - component: {fileID: 1742195454800248963}
   m_Layer: 0
   m_Name: HoleTile
   m_TagString: Hole
@@ -29297,12 +29368,24 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!114 &1742195454800248963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8618850577061311183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8671378209692942270
 GameObject:
   m_ObjectHideFlags: 0
