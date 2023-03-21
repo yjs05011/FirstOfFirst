@@ -9,7 +9,7 @@ public class HealthBarControl : MonoBehaviour
     // 하트 표시 하기
     public GameObject mHpEmptyHeart;
     public GameObject mHpFullHeart;
-
+    public PlayerAct mPlayer;
     public Image mHpBar;
     public float mMaxHp = 170f;
     public float mMinHp = 0f;
@@ -22,39 +22,44 @@ public class HealthBarControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Hp 0으로 초기화
         // mCurrentHp = mMaxHp;
 
-        // Hp 0으로 초기화
         mHpText.text = mCurrentHp.ToString();
 
-        StartCoroutine(WaiteForIt());
+        // StartCoroutine(WaiteForIt());
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        // mMaxHp = PlayerManager.Instance.mPlayerStat.Hp;
+        // if (PlayerManager.Instance.mIsPlayerHpChange)
+        // {
+        //     HpChange();
+        // }
     }
 
 
     // 체력 회복하기
-    public void HealZone()
+    public void HpChange()
     {
-        if (mMinHp < 170)
+        mCurrentHp = mPlayer.mPlayerHp;
+        mHpBar.fillAmount = mCurrentHp / mMaxHp;
+        mHpText.text = mCurrentHp.ToString();
+
+
+        if (mCurrentHp == mMaxHp / 2)
         {
-            mCurrentHp += mHeal;
-            mHpBar.fillAmount = mCurrentHp / mMaxHp;
-            // Debug.Log(mCurrentHp / mMaxHp);
-
-            mHpText.text = mCurrentHp.ToString();
-
-            // Hp가 35가 되면 풀 하트 표시 하기
-            if (mCurrentHp == 35)
-            {
-                mHpEmptyHeart.SetActive(false);
-                mHpFullHeart.SetActive(true);
-            }
+            mHpEmptyHeart.SetActive(false);
+            mHpFullHeart.SetActive(true);
         }
+        else
+        {
+            mHpFullHeart.SetActive(false);
+            mHpEmptyHeart.SetActive(true);
+        }
+
     }
 
 
@@ -78,15 +83,15 @@ public class HealthBarControl : MonoBehaviour
     // }
 
     // 체력 소모가 되는지 시간 줘서 확인하기
-    IEnumerator WaiteForIt()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            // DamageZone();
-            HealZone();
-        }
+    // IEnumerator WaiteForIt()
+    // {
+    //     while (true)
+    //     {
+    //         yield return new WaitForSeconds(1f);
+    //         // DamageZone();
+    //         HealZone();
+    //     }
 
-    }
+    // }
 
 }
