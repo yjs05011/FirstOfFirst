@@ -16,11 +16,9 @@ public class PlayerEvasion : PlayerState
 
         PlayerAct player = GetComponent<PlayerAct>();
 
-
         if (player.mIsEvasion) { }
         else
         {
-
             bool isPool = player.mPlayerAnimator.GetBool("IsPool");
 
             if (isPool)
@@ -32,11 +30,12 @@ public class PlayerEvasion : PlayerState
             player.mPlayerAnimator.SetBool("IsEvasion", true);
             player.mIsEvasion = true;
             Vector2 Evasion = player.mPlayerRigid.velocity;
+            Debug.Log(Evasion);
             player.mPlayerRigid.velocity = Evasion;
             yield return new WaitForSeconds(0.5f);
             player.mIsEvasion = false;
             player.mPlayerAnimator.SetBool("IsEvasion", false);
-            Debug.Log(isPool);
+            // Debug.Log(isPool);
             if (isPool)
             {
                 player.mPlayerAnimator.SetBool("IsPool", true);
@@ -44,7 +43,8 @@ public class PlayerEvasion : PlayerState
 
             }
             else { player.SetActionType(ActState.State_Move); }
-            player.mPlayerRigid.velocity = Vector2.zero;
+            Evasion = Vector2.zero;
+            player.mPlayerRigid.velocity = Evasion;
         }
     }
 

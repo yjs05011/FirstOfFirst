@@ -5,7 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Npc
+<<<<<<< HEAD
   - ItemTable
+=======
+  - Monster
+  - Hole
+  - Trap
+  - Pool
+  - Item
+>>>>>>> 6e967babf0c5ac66e81a3261566b929fc56e9508
   layers:
   - Default
   - TransparentFX
