@@ -1420,6 +1420,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 0}
   mObstacles: []
   mObjects: []
 --- !u!1 &712684930
@@ -2962,6 +2963,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 2889413623870978187}
   mObstacles: []
   mObjects: []
 --- !u!1 &1548118219
@@ -4344,6 +4346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mDelayTime: 0.2
+  mFallingDamegeRate: 0.45
 --- !u!1 &1624736367
 GameObject:
   m_ObjectHideFlags: 0
@@ -5857,6 +5861,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mDelayTime: 0.2
+  mFallingDamegeRate: 0.45
 --- !u!1 &139719791995225037
 GameObject:
   m_ObjectHideFlags: 0
@@ -7887,6 +7893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mDelayTime: 0.2
+  mFallingDamegeRate: 0.45
 --- !u!1 &1075528676447806811
 GameObject:
   m_ObjectHideFlags: 0
@@ -12387,6 +12395,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 0}
   mObstacles: []
   mObjects: []
 --- !u!1 &1825903895213664258
@@ -13654,6 +13663,7 @@ MonoBehaviour:
   mIsMovableBottom: 0
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 2978507704956365893}
   mObstacles: []
   mObjects: []
 --- !u!1 &1825903895939745474
@@ -15616,6 +15626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mDelayTime: 0.2
+  mFallingDamegeRate: 0.45
 --- !u!1 &1825903896184048526
 GameObject:
   m_ObjectHideFlags: 0
@@ -19888,6 +19900,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 1723117842238246471}
   mObstacles: []
   mObjects: []
 --- !u!1 &2590507783576502705
@@ -21728,6 +21741,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mDelayTime: 0.2
+  mFallingDamegeRate: 0.45
 --- !u!1 &3408844180003472792
 GameObject:
   m_ObjectHideFlags: 0
@@ -23337,6 +23352,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 0}
   mObstacles: []
   mObjects: []
 --- !u!1 &4559348046079630551
@@ -24553,6 +24569,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 6451268915479908812}
   mObstacles: []
   mObjects: []
 --- !u!1 &5397649578241728189
@@ -25545,6 +25562,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 0}
   mObstacles: []
   mObjects: []
 --- !u!1 &6481455422082018553
@@ -28299,6 +28317,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 1742195454800248963}
   mObstacles: []
   mObjects: []
 --- !u!1 &8087994123176404895
@@ -29386,6 +29405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be8e25b8c1935b46bd15539edbd7011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mDelayTime: 0.2
+  mFallingDamegeRate: 0.45
 --- !u!1 &8671378209692942270
 GameObject:
   m_ObjectHideFlags: 0
@@ -29664,6 +29685,7 @@ MonoBehaviour:
   mIsMovableBottom: 1
   mIsMovableLeft: 1
   mIsMovableRight: 1
+  mHole: {fileID: 6479680171369210353}
   mObstacles: []
   mObjects: []
 --- !u!1 &8859905404363461588

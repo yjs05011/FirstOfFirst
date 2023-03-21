@@ -16,6 +16,7 @@ public class DungeonHealingPool : MonoBehaviour
     private float mBubbleIntervalTime= 1.0f;
     private float mTimer = 0.0f;
     private int mBubbleCounter = 0;
+    private bool mIsHealing = false;
 
     // Èú¸µ Ç® º¸À¯ Èú·® º¯¼ö
     public float mHealPoint = 0;
@@ -36,28 +37,32 @@ public class DungeonHealingPool : MonoBehaviour
 
     public void Update()
     {
-        mTimer += Time.deltaTime;
 
-        if(mTimer > mBubbleIntervalTime)
-        {
-            mTimer = 0.0f;
-            mBubbles[mBubbleCounter].SetActive(true);
+         if (mTimer > mBubbleIntervalTime)
+         {
+             mTimer = 0.0f;
+             mBubbles[mBubbleCounter].SetActive(true);
 
-            if (mBubbleCounter == mBubbles.Count - 1)
-            { 
-                mBubbleCounter = 0; 
-            }
-            else
-            {
-                ++mBubbleCounter;
-            }
-        }
+             if (mBubbleCounter == mBubbles.Count - 1)
+             {
+                 mBubbleCounter = 0;
+             }
+             else
+             {
+                 ++mBubbleCounter;
+             }
+         }
 
-        if(mHealPoint <= 0)
+        if (mIsHealing)
         {
             Debug.LogFormat("Èú Æ÷ÀÎÆ® : {0}", GetPoolHealPoint());
 
-            SetPoolHealEmpty();
+            if (mHealPoint <= 0)
+            {
+                Debug.LogFormat("Èú empty");
+                mIsHealing = false;
+                SetPoolHealEmpty();
+            }
         }
     }
     public void InitPoolHeal()
@@ -79,7 +84,7 @@ public class DungeonHealingPool : MonoBehaviour
     }
     public void SetPoolHealPoint(float value)
     {
-        mHealPoint = value;
+        mHealPoint += value;
     }
 
 
@@ -88,28 +93,32 @@ public class DungeonHealingPool : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            mIsHealing = true;
 
             StartCoroutine(Healing(other));
+            
             Debug.Log("Player Healing");
 
         }
     }
 
+
+
     IEnumerator Healing(Collider2D other)
     {
-        float delay = 0.005f;
-        float totalTime = 0.1f;
+        float delay = 0.05f;
+        float totalTime = 1.0f;
         PlayerAct player = other.GetComponent<PlayerAct>();
         
-      // while (player.GetPlayerMaxHp() != player.GetPlayerHp() || GetPoolHealPoint() <= 0)
-      // {
-      //     SetPoolHealPoint(-1.0f);
-      //     player.OnHealing(1.0f);
-      //    
-      //     totalTime -= delay;
-      //     yield return new WaitForSeconds(totalTime - delay);
-      // }
-        yield return null;
+       while (player.GetPlayerMaxHp() != player.GetPlayerHp() || GetPoolHealPoint() <= 0)
+       {
+           SetPoolHealPoint(-1.0f);
+           player.OnHealing(1.0f); 
+
+           totalTime -= delay;
+           yield return new WaitForSeconds(totalTime - delay);
+       }
+       
         
     }
 
@@ -117,6 +126,7 @@ public class DungeonHealingPool : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+           mIsHealing = false;
            StopCoroutine(Healing(other));
         }
     }

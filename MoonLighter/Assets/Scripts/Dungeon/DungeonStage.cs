@@ -184,6 +184,7 @@ public class DungeonStage : MonoBehaviour
             
             if(index == random)
             {
+                boards[index].SetHoleToStage(this);
                 boards[index].gameObject.SetActive(true);
                 if(mBoradStyle == DungeonBoard.BoardType.POOL)
                 {
