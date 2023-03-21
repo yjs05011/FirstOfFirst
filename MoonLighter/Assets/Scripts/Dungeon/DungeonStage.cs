@@ -2,32 +2,106 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DungeonStage;
 
 public class DungeonStage : MonoBehaviour
 {
     // 바닥 형태 리스트
     public List<DungeonBoard> mBoards = new List<DungeonBoard>();
-    // 일반 문 리스트
-    public List<GameObject> mBasicDoors = new List<GameObject>();
-    // 막힌 문(벽) 리스트
-    public List<GameObject> mBlockDoors = new List<GameObject>();
-    // 보스 방 문 리스트
-    public List<GameObject> mBossRoomDoors = new List<GameObject>();
-    // 문 방향 enum
-    public enum DoorDirection { UP, RIGHT, DOWN, LEFT };
-
+    // 문 4방향 오브젝트
+    public DungeonDoor mDoorTop = null;
+    public DungeonDoor mDoorRight = null;
+    public DungeonDoor mDoorBottom = null;
+    public DungeonDoor mDoorLeft = null;
+  
+    public int mFloor;
     public int mDoorDirections = 0;
     public int mBoardX = 0;
     public int mBoardY = 0;
 
     [SerializeField]
-    private DungeonStage[] mConnectedStage = new DungeonStage[4];
+    private DungeonStage mConnectedStageTop = null;
+    [SerializeField]
+    private DungeonStage mConnectedStageRight = null;
+    [SerializeField]
+    private DungeonStage mConnectedStageBottom = null;
+    [SerializeField]
+    private DungeonStage mConnectedStageLeft= null;
+
     public DungeonBoard.BoardType mBoradStyle = DungeonBoard.BoardType.Start;
+
+    public GameObject mStartPointTop = null;
+    public GameObject mStartPointRight = null;
+    public GameObject mStartPointBottom = null;
+    public GameObject mStartPointLeft = null;
+
+    public Vector3 mEntryPosition = Vector3.zero;
+
 
     public void Awake()
     {
-        mConnectedStage = new DungeonStage[4];
+        mDoorTop.SetDoorDirection(DungeonGenerator.DIRECTION_TOP);
+        mDoorRight.SetDoorDirection(DungeonGenerator.DIRECTION_RIGHT);
+        mDoorBottom.SetDoorDirection(DungeonGenerator.DIRECTION_BOTTOM);
+        mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
     }
+    public void SetFloor(int floor)
+    {
+        mFloor = floor;
+    }
+    public int GetFloor()
+    {
+        return mFloor;
+    }
+
+    public Vector3 GetStartPoint(int direction) 
+    {
+        if ((direction & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
+        {
+            return mStartPointTop.transform.position;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
+        {
+            return mStartPointBottom.transform.position;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
+        {
+            return mStartPointLeft.transform.position;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
+        {
+            return mStartPointRight.transform.position;
+        }
+        return Vector3.zero; 
+   
+    }
+
+    public Vector3 GetEntryPosition()
+    {
+        return mEntryPosition;
+    }
+
+    public void SetEntryPoint(int direction)
+    {
+        if ((direction & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
+        {
+            mEntryPosition = mStartPointTop.transform.position;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
+        {
+            mEntryPosition = mStartPointBottom.transform.position;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
+        {
+            mEntryPosition = mStartPointLeft.transform.position;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
+        {
+            mEntryPosition = mStartPointRight.transform.position;
+        }
+       
+    }
+
 
     public int GetBoardX()
     {
@@ -42,44 +116,56 @@ public class DungeonStage : MonoBehaviour
         mBoardX = x;
         mBoardY = y;
     }
-    public DungeonStage GetConnectedStage(DoorDirection direction)
+    public DungeonStage GetConnectedStage(int direction)
     {
-        switch (direction)
+        if ((direction & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
-            case DoorDirection.UP:
-                return mConnectedStage[(int)DoorDirection.UP];
-                
-            case DoorDirection.RIGHT:
-                return mConnectedStage[(int)DoorDirection.RIGHT];
-                
-            case DoorDirection.DOWN:
-                return mConnectedStage[(int)DoorDirection.DOWN];
-               
-            case DoorDirection.LEFT:
-                return mConnectedStage[(int)DoorDirection.LEFT];
-
-            default:
-                return null;
+            return mConnectedStageTop;
         }
+        if ((direction & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
+        {
+            return mConnectedStageBottom;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
+        {
+            return mConnectedStageLeft;
+        }
+        if ((direction & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
+        {
+            return mConnectedStageRight;
+        }
+        return null;
     }
 
-    public void SetConnectedStage(DoorDirection direction,  DungeonStage stage)
+    public void SetConnectedStage(int direction,  DungeonStage stage)
     {
-        switch (direction)
+
+        if ((direction & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP) 
         {
-            case DoorDirection.UP:
-                mConnectedStage[0] = stage;
-                break;
-            case DoorDirection.RIGHT:
-                mConnectedStage[1] = stage;
-                break;
-            case DoorDirection.DOWN:
-                mConnectedStage[(int)DoorDirection.DOWN] = stage;
-                break;
-            case DoorDirection.LEFT:
-                mConnectedStage[(int)DoorDirection.LEFT] = stage;
-                break;
+            mConnectedStageTop = stage;
+            mDoorTop.SetCurrStage(this);
+            mDoorTop.SetNextStage(stage);
         }
+        if ((direction & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
+        {
+            mConnectedStageRight = stage;
+            mDoorRight.SetCurrStage(this);
+            mDoorRight.SetNextStage(stage);
+        }
+        if ((direction & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
+        {
+            mConnectedStageBottom = stage;
+            mDoorBottom.SetCurrStage(this);
+            mDoorBottom.SetNextStage(stage);
+        }
+        if ((direction & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)  
+        {
+            mConnectedStageLeft = stage;
+            mDoorLeft.SetCurrStage(this);
+            mDoorLeft.SetNextStage(stage);
+            
+        }
+  
     }
 
     // 문 방향에 맞는 보드 설정
@@ -99,6 +185,11 @@ public class DungeonStage : MonoBehaviour
             if(index == random)
             {
                 boards[index].gameObject.SetActive(true);
+                if(mBoradStyle == DungeonBoard.BoardType.POOL)
+                {
+                    DungeonHealingPool healingPool = boards[index].transform.Find("Pool").gameObject.GetComponent<DungeonHealingPool>();
+                    healingPool.InitPoolHeal();
+                }
                 break;    
             }
         }
@@ -107,10 +198,11 @@ public class DungeonStage : MonoBehaviour
     public void SetBoadStyle(DungeonBoard.BoardType type)
     {
         mBoradStyle = type;
-        if (type == DungeonBoard.BoardType.BOSS)
+        if (type == DungeonBoard.BoardType.BOSS || type == DungeonBoard.BoardType.Start)
         {
-            SetFloorDoors();
+            SetAddDoor(type);
         }
+      
         SetStageBoard();
 
     }
@@ -121,7 +213,7 @@ public class DungeonStage : MonoBehaviour
 
 
     // 문 방향에 맞는 보드 리스트 필터링
-    public void GetFilteredBoards(int directions,DungeonBoard.BoardType type, ref List<DungeonBoard> output)
+    public void GetFilteredBoards(int directions, DungeonBoard.BoardType type, ref List<DungeonBoard> output)
     {
         
         int count = mBoards.Count;
@@ -143,54 +235,185 @@ public class DungeonStage : MonoBehaviour
     }
 
 
-    //문 방향 결정
+    //문 방향 설정
     public void SetDoors(int doorDirections)
     {
-        
         mDoorDirections = doorDirections;
-   
-        mBasicDoors[(int)DoorDirection.RIGHT].SetActive((doorDirections & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT);
-        mBasicDoors[(int)DoorDirection.LEFT].SetActive((doorDirections & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT);
-        mBasicDoors[(int)DoorDirection.UP].SetActive((doorDirections & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP);
-        mBasicDoors[(int)DoorDirection.DOWN].SetActive((doorDirections & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM);
 
-
-        mBlockDoors[(int)DoorDirection.RIGHT].SetActive((doorDirections & DungeonGenerator.DIRECTION_RIGHT) != DungeonGenerator.DIRECTION_RIGHT);
-        mBlockDoors[(int)DoorDirection.LEFT].SetActive((doorDirections & DungeonGenerator.DIRECTION_LEFT) != DungeonGenerator.DIRECTION_LEFT);
-        mBlockDoors[(int)DoorDirection.UP].SetActive((doorDirections & DungeonGenerator.DIRECTION_TOP) != DungeonGenerator.DIRECTION_TOP);
-        mBlockDoors[(int)DoorDirection.DOWN].SetActive((doorDirections & DungeonGenerator.DIRECTION_BOTTOM) != DungeonGenerator.DIRECTION_BOTTOM);
-
+            if ((doorDirections & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
+            {
+                    mDoorTop.SetDoors();
+            }
+            if ((doorDirections & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
+            {
+                    mDoorBottom.SetDoors();
+            }
+            if ((doorDirections & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
+            {
+                    mDoorLeft.SetDoors();
+            }
+            if ((doorDirections & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
+            {
+                    mDoorRight.SetDoors();
+            }
+        
     }
-    //다음 층 문 추가
-    public void SetFloorDoors()
+
+    public DungeonDoor GetDoorByDirection(int doorDirections)
     {
-       
-        if((mDoorDirections & DungeonGenerator.DIRECTION_TOP) != DungeonGenerator.DIRECTION_TOP)
+        if ((doorDirections & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
-            mBlockDoors[(int)DoorDirection.UP].SetActive(false);
-            mBossRoomDoors[(int)DoorDirection.UP].SetActive(true);
-            return;
+            return mDoorTop;
+        }
+        if ((doorDirections & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
+        {
+            return mDoorBottom;
+        }
+        if ((doorDirections & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
+        {
+            return mDoorLeft;
+        }
+        if ((doorDirections & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
+        {
+            return mDoorRight;
+        }
+        else
+        {
+            return null;    
+        }
+    }
+
+    public void SetDoorsOpen()
+    {
+        mDoorTop.DoorOpen();
+        mDoorBottom.DoorOpen();
+        mDoorLeft.DoorOpen();
+        mDoorRight.DoorOpen();
+    }
+
+
+    public void SetDoorsClose()
+    {
+        mDoorTop.DoorClose();
+        mDoorBottom.DoorClose();
+        mDoorLeft.DoorClose();
+        mDoorRight.DoorClose();
+    }
+
+    //문 추가 (보스 stage : 다음 층 연결 문 추가 | 시작 stage : 던전 입장 or 해당 층 입장 문 추가)
+    public void SetAddDoor(DungeonBoard.BoardType type)
+    {
+        if ((mDoorDirections & DungeonGenerator.DIRECTION_TOP) != DungeonGenerator.DIRECTION_TOP)
+        {
+           
+            if (type == DungeonBoard.BoardType.BOSS)
+            {
+                int nextStageX = GetBoardX();
+                int nextStageY = GetBoardY()+1;
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorTop.SetCurrStage(this);
+                    mDoorTop.SetFloorDoor();
+                    return;
+                }
+            }
+            if (type == DungeonBoard.BoardType.Start)
+            {
+                if (GetFloor() > 1)
+                {
+                    mDoorBottom.SetCurrStage(this);
+                    mDoorBottom.SetFloorDoor();
+                    return;
+                }
+            }
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_LEFT) != DungeonGenerator.DIRECTION_LEFT)
         {
-            mBlockDoors[(int)DoorDirection.LEFT].SetActive(false);
-            mBossRoomDoors[(int)DoorDirection.LEFT].SetActive(true);
-            return;
+           
+            if (type == DungeonBoard.BoardType.BOSS)
+            {
+                int nextStageX = GetBoardX()-1;
+                int nextStageY = GetBoardY();
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorLeft.SetCurrStage(this);
+                    mDoorLeft.SetFloorDoor();
+                    return;
+                }
+            }
+            if (type == DungeonBoard.BoardType.Start)
+            {
+                if (GetFloor() > 1)
+                {
+                    mDoorRight.SetCurrStage(this);
+                    mDoorRight.SetFloorDoor();
+                    return;
+                }
+            }
         }
-        if((mDoorDirections & DungeonGenerator.DIRECTION_RIGHT) != DungeonGenerator.DIRECTION_RIGHT)
+        if ((mDoorDirections & DungeonGenerator.DIRECTION_RIGHT) != DungeonGenerator.DIRECTION_RIGHT)
         {
-             mBlockDoors[(int)DoorDirection.RIGHT].SetActive(false);
-             mBossRoomDoors[(int)DoorDirection.RIGHT].SetActive(true);
-             return;
+            
+            if (type == DungeonBoard.BoardType.BOSS)
+            {
+                int nextStageX = GetBoardX() + 1;
+                int nextStageY = GetBoardY();
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorRight.SetCurrStage(this);
+                    mDoorRight.SetFloorDoor();
+                    return;
+                }
+            }
+            if (type == DungeonBoard.BoardType.Start)
+            {
+                if (GetFloor() > 1)
+                {
+                    mDoorLeft.SetCurrStage(this);
+                    mDoorLeft.SetFloorDoor();
+                    return;
+                }
+            }
         }
         if ((mDoorDirections & DungeonGenerator.DIRECTION_BOTTOM) != DungeonGenerator.DIRECTION_BOTTOM)
         {
-            mBlockDoors[(int)DoorDirection.DOWN].SetActive(false);
-            mBossRoomDoors[(int)DoorDirection.DOWN].SetActive(true);
-            return;
+           
+            if (type == DungeonBoard.BoardType.BOSS)
+            {
+
+                int nextStageX = GetBoardX();
+                int nextStageY = GetBoardY() - 1;
+
+                if (DungeonGenerator.Instance.GetStageByXY(nextStageX, nextStageY) == null)
+                {
+                    mDoorBottom.SetCurrStage(this);
+                    mDoorBottom.SetFloorDoor();
+                    return;
+                }
+            }
+            if (type == DungeonBoard.BoardType.Start)
+            {
+                if (GetFloor() > 1)
+                {
+                    mDoorTop.SetCurrStage(this);
+                    mDoorTop.SetFloorDoor();
+                    return;
+                }
+                else
+                {
+                    mDoorBottom.SetCurrStage(this);
+                    mDoorBottom.SetEntryDoor();
+                    return;
+                }
+
+            }
         }
 
     }
+
 
     public int GetDoorDirections()
     {
@@ -202,23 +425,23 @@ public class DungeonStage : MonoBehaviour
         if ((mDoorDirections & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
 
-            return GetConnectedStage(DoorDirection.UP);
+            return GetConnectedStage(DungeonGenerator.DIRECTION_TOP);
         }
         else if ((mDoorDirections & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
         {
 
-            return GetConnectedStage(DoorDirection.LEFT);
+            return GetConnectedStage(DungeonGenerator.DIRECTION_LEFT);
         }
         else if ((mDoorDirections & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
         {
 
-            return GetConnectedStage(DoorDirection.RIGHT);
+            return GetConnectedStage(DungeonGenerator.DIRECTION_RIGHT);
 
         }
         else if ((mDoorDirections & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
         {
 
-            return GetConnectedStage(DoorDirection.DOWN);
+            return GetConnectedStage(DungeonGenerator.DIRECTION_BOTTOM);
         }
         else
         {
