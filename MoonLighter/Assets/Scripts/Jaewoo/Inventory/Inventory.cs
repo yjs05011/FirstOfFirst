@@ -32,8 +32,10 @@ public class Inventory : MonoBehaviour
         TryOpenInventory();   
     }
 
+    //인벤토리 켰을때
     private void TryOpenInventory()
     {
+        //gamemanger pull하고나면 수정
         if(Input.GetKeyDown(KeyCode.I))
         {
             
@@ -66,8 +68,7 @@ public class Inventory : MonoBehaviour
         if(Item.ItemEnumType.Equiment != item.mItemType)
         {
             for(int index = 0; index < mSlot.Length; index ++)
-            {
-                //슬롯이 null이면 런타임 오류
+            {                
                 if(mSlot[index].mItem != null)
                 {
                     //슬롯[index]의 이름과 아이템의 이름이 같으면
@@ -83,7 +84,7 @@ public class Inventory : MonoBehaviour
 
         for(int index = 0; index < mSlot.Length; index ++)
         {
-            if(mSlot[index].mItem ==null)
+            if(mSlot[index].mItem == null)
             {
                 mSlot[index].AddItem(item, itemCount);
                 return;
