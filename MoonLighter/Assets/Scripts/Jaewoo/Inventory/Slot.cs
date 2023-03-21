@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-    
     public Item mItem;
     public int mItemCount;
     public Sprite mItemSprite;
