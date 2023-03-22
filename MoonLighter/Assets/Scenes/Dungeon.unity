@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -446,8 +446,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 73
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7.46
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -495,6 +495,7 @@ MonoBehaviour:
   mCameraBoundaryMin: {x: 0, y: 0}
   mCameraBoundaryMax: {x: 0, y: 0}
   mMovePos: {x: 0, y: 0, z: 0}
+  mType: 0
 --- !u!1001 &1793679331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -646,6 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mPlayerCurrStage: {fileID: 0}
+  mDungeonBossStage: {fileID: 0}
   mCamera: {fileID: 1409357668}
 --- !u!1001 &1825903895988300922
 PrefabInstance:

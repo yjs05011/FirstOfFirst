@@ -28,6 +28,7 @@ public class DungeonDoor : MonoBehaviour
     public Animator mBossRoomDoorAnim = null;
 
     public enum DoorType { BASIC, FLOOR, ENTRY, BLOCK ,BOSS};
+    [SerializeField]
     private DoorType mDoorType = DoorType.BLOCK; // 문없는 타입 
 
     public enum DoorStatus { CLOSE, OPEN };
@@ -36,35 +37,79 @@ public class DungeonDoor : MonoBehaviour
     public void Awake()
     {
         mBlockDoor.SetActive(true);
-        mBasicDoorAnim = mBasicDoor.GetComponent<Animator>();   
-        mEntryDoorAnim= mEntryDoor.GetComponent<Animator>();
-        mFloorDoorAnim = mFloorDoor.GetComponent<Animator>();
+       
 
-        if (mBossRoomDoor !=null) 
+    }
+    public void Init()
+    {
+        if (mBasicDoor != null)
         {
-            mBossRoomDoorAnim = mBossRoomDoor.GetComponent<Animator>(); 
+            mBasicDoorAnim = mBasicDoor.GetComponent<Animator>();
+        }
+        if (mEntryDoor != null)
+        {
+            mEntryDoorAnim = mEntryDoor.GetComponent<Animator>();
+        }
+        if (mFloorDoor != null)
+        {
+            mFloorDoorAnim = mFloorDoor.GetComponent<Animator>();
         }
 
+        if (mBossRoomDoor != null)
+        {
+            mBossRoomDoorAnim = mBossRoomDoor.GetComponent<Animator>();
+        }
+        
     }
 
     public void DoorOpen()
     {
+        Init();
         SetDoorStatus(DoorStatus.OPEN);
-        mBasicDoorAnim.SetTrigger("DoorOpen");
-        mFloorDoorAnim.SetTrigger("DoorOpen");
+        if (mBasicDoor != null && mBasicDoor.activeSelf)
+        {
+            mBasicDoorAnim.SetTrigger("DoorOpen");
+        }
+        if (mFloorDoor != null && mFloorDoor.activeSelf)
+        {
+            mFloorDoorAnim.SetTrigger("DoorOpen");
+        }
     }
  
     public void DoorClose()
     {
+        Init();
         SetDoorStatus(DoorStatus.CLOSE);
-        mBasicDoorAnim.SetTrigger("DoorClose");
-        mFloorDoorAnim.SetTrigger("DoorClose");
+        if (mBasicDoor != null)
+        {
+            mBasicDoorAnim.SetTrigger("DoorClose");
+        }
+        if (mFloorDoor != null)
+        {
+            mFloorDoorAnim.SetTrigger("DoorClose");
+        }
     }
 
     public void BossRoomDoorOpen()
     {
-        mBossRoomDoorAnim.SetTrigger("DoorOpen");
+        Init();
+        if (mBossRoomDoor != null)
+        {
+            SetDoorStatus(DoorStatus.OPEN);
+            mBossRoomDoorAnim.SetTrigger("DoorOpen");
+        }
     }
+    
+    public void BossRoomDoorClose()
+    {
+        Init();
+        if (mBossRoomDoor != null)
+        {
+            SetDoorStatus(DoorStatus.CLOSE);
+            mBossRoomDoorAnim.SetTrigger("DoorClose");
+        }
+    }
+
 
     public void SetCurrStage(DungeonStage stage)
     {
@@ -264,6 +309,35 @@ public class DungeonDoor : MonoBehaviour
                             nextFloor.SetIsEnterd(true);
                         }
                         break;
+                    case DoorType.BOSS:
+                        {
+
+                            if (this.GetCurrStage().GetFloor() == 3)
+                            {
+                                // 문 닫히는 연출 끝날떄까지 대기해야함
+                                // ~~~~~~
+                                Debug.Log("player 보스방으로 이동");
+                                DungeonStage bossStage = DungeonManager.Instance.GetDungeonBossRoom();
+                                other.transform.position = bossStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM);
+
+                               
+                                // 보스방 이전 스테이지 (3층 라스트 룸)의 포지션에 y 축만 증가한 좌표
+                                Vector3 bossRoomCameraPos = new Vector3(this.GetCurrStage().transform.position.x , this.GetCurrStage().transform.position.x + 15.0f, 0);
+                                // 카메라 이동 타입 변경 (보스 스테이지 입장시 즉시 카메라 이동을위해)
+                                DungeonManager.Instance.GetDungeonCamera().SetCameraType(DungeonCameraController.CameraMoveType.Immediately);
+                                // 카메라 이동할 위치 
+                                DungeonManager.Instance.CameraMoveByPos(bossRoomCameraPos);
+                                // 플레이어가 위치한 스테이지 정보 갱신 (보스 스테이지)
+                                DungeonManager.Instance.SetPlayerCurrStage(bossStage);
+                                // 스테이지의 플레이어 입장 여부 갱신
+                                bossStage.SetIsEnterd(true);
+                            }
+                            else
+                            {
+                                Debug.LogError("잘못생성된 문입니다.");
+                            }
+                            break;
+                        }
                 }
             }
            
