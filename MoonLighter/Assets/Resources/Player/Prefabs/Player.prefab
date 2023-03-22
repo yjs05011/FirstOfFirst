@@ -129,7 +129,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -140,7 +140,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.2}
+  m_Size: {x: 0.5, y: 0.6}
   m_EdgeRadius: 0
 --- !u!114 &717795527396746523
 MonoBehaviour:
@@ -154,20 +154,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1695bd7387664445a170be666f93395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mPlayerDefaultStat: {fileID: 11400000, guid: d653da43600eaf7489a2ec3086f43ed7, type: 2}
   mPlayerRigid: {fileID: 0}
   mPlayerHitBox: {fileID: 0}
   mPlayerSpeed: 1
+  mPlayerStr: 0
+  mPlayerDef: 0
+  mPlayerHp: 0
+  mPlayerMaxHp: 0
   mPlayerAnimator: {fileID: 0}
   mIsMove: 0
   mIsEvasion: 0
+  mIsDelay: 0
   mAttackRoll: 0
   mIsCombo: 0
   mPlayerDirection: 0
+  mState: 0
   mPlayerNowWeapone: 0
   mPlayerWeaponePosition: {fileID: 0}
   mWeaponeHitBox: {fileID: 0}
   mWeaponeHitBoxPosition: {fileID: 0}
   mTime: 0
+  mHoldingTime: 0
   mPlayerAnimation:
   - {fileID: 7400000, guid: aa83edcbba9e47b48913137da0f71a71, type: 2}
   - {fileID: 7400000, guid: 75cb3d2a5aad40e4ca221b21b60663c6, type: 2}
@@ -269,6 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b88b20f79b53642ba2eb51c39eb366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mDamage: 0
+  player: {fileID: 0}
 --- !u!50 &4452463289657011721
 Rigidbody2D:
   serializedVersion: 4
