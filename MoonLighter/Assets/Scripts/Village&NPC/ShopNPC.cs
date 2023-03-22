@@ -1,23 +1,25 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopNPC : MonoBehaviour
 {
     public GameObject mTables;
     public SpriteRenderer mGetItem;
+    public Vector3 mTablePosition;
+    public Sprite mItem;
+    public int mTableNumber;
 
-    private Sprite mItem;
-    private Tables mTable;
+
     private Animator mNpcAni;
     private float mSpeed = 1f;
-    public int mMoveCount;
+    private int mMoveCount;
     private bool IsGoOut = false;
     private bool IsFirst = true;
+    private bool IsCalculate = true;
     private Vector3 mPosition;
-    private Vector3 mTablePosition;
     // Start is called before the first frame update
     public void Start()
     {
+        mTableNumber = 0;
         mMoveCount = 0;
         //mTable = mTables.GetComponent<Tables>();
         mNpcAni = GetComponent<Animator>();
@@ -31,64 +33,70 @@ public class ShopNPC : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if(IsFirst)
+        if (IsFirst)
         {
             MoveDirection();
-            ShopManager.mShopNPC.Add(this.gameObject);
-            IsFirst= false;
+            ShopManager.Instance.mShopNPC.Add(this.gameObject);
+            IsFirst = false;
         }
-        
-        //for (int index = 0; index < mTable.mTables.Length; index++)
-        //{
-        //    mItem = mTable.mTables[index].Find("Item").GetComponent<SpriteRenderer>().sprite;
-        //    if (mItem != null)
-        //    {
-        //        mTablePosition = mTable.mTables[index].position;
-        //        break;
-        //    }
-        //    else
-        //    {
-        //        mTablePosition = Vector3.zero;
-        //    }
-        //}
-        if (mTablePosition != Vector3.zero)
+        if (Shop.mIsShopStart)
         {
-            mNpcAni.SetBool("IsWalking", true);
-            Vector3 tableDirection = mTablePosition - transform.position;
-            transform.Translate(tableDirection.normalized * mSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, mTablePosition) <= 0.2f)
+            if (mTablePosition != Vector3.zero)
             {
-                mGetItem.sprite = mItem;
-                mItem = null;
+
+                Vector3 tableDirection = mTablePosition - transform.position;
+                transform.Translate(tableDirection.normalized * mSpeed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, mTablePosition) <= 0.2f)
+                {
+                    mNpcAni.SetBool("IsWalking", false);
+                    if (IsGoOut)
+                    {
+                        GoOutShop();
+                    }
+                    else
+                    {
+
+                        if (!IsCalculate)
+                        {
+                            Invoke("GoOut", 0);
+                        }
+                        else
+                        {
+
+                            ShopManager.Instance.mItemTables[mTableNumber].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = null;
+                            mGetItem.sprite = mItem;
+                            mItem = null;
+                            Invoke("GoCash", 0);
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+                Vector3 direction = mPosition - transform.position;
+                transform.Translate(direction.normalized * mSpeed * Time.deltaTime);
+                if (Vector3.Distance(transform.position, mPosition) <= 0.2f)
+                {
+                    mNpcAni.SetBool("IsWalking", false);
+                    if (IsGoOut)
+                    {
+                        GoOutShop();
+                    }
+                    if (mMoveCount < 3)
+                    {
+                        Invoke("RandomPosition", 3);
+                    }
+                    else
+                    {
+                        Invoke("GoOut", 3);
+                    }
+                }
             }
         }
         else
         {
-            Vector3 direction = mPosition - transform.position;
-            transform.Translate(direction.normalized * mSpeed * Time.deltaTime);
-            mNpcAni.SetBool("IsWalking", true);
-
-            if (Vector3.Distance(transform.position, mPosition) <= 0.2f)
-            {
-                if(IsGoOut)
-                {
-                    mMoveCount = 0;
-                    IsGoOut= false;
-                    IsFirst = true;
-                    ShopNPCPool.ReturnObject(this);
-                }
-                if (mMoveCount < 3)
-                {
-                    mNpcAni.SetBool("IsWalking", false);
-                    
-                    Invoke("RandomPosition", 3);
-                }
-                else
-                {
-                    mNpcAni.SetBool("IsWalking", false);
-                    Invoke("GoOut", 3);
-                }
-            }
+            Invoke("GoOut", 0);
         }
 
     }
@@ -96,6 +104,7 @@ public class ShopNPC : MonoBehaviour
     public void RandomPosition()
     {
         CancelInvoke();
+        mNpcAni.SetBool("IsWalking", false);
         mMoveCount++;
         mPosition = new Vector3(transform.position.x + Random.Range(-3, 4), transform.position.y + Random.Range(-3, 4), 0);
         if (mPosition.x > 3.5) { mPosition = new Vector3(3.5f, mPosition.y, 0); }
@@ -108,13 +117,50 @@ public class ShopNPC : MonoBehaviour
     public void GoOut()
     {
         CancelInvoke();
-        mPosition = new Vector3(1, -6.5f, 0);
-        IsGoOut = true;
+        mNpcAni.SetBool("IsWalking", false);
+        if (mTablePosition != Vector3.zero)
+        {
+            mTablePosition = new Vector3(1, -6.5f, 0);
+        }
+        else
+        {
+            mPosition = new Vector3(1, -6.5f, 0);
+        }
+
         MoveDirection();
+        IsGoOut = true;
+    }
+    public void GoCash()
+    {
+        CancelInvoke();
+        mNpcAni.SetBool("IsWalking", false);
+        mTablePosition = new Vector3(1, -3.9f, 0);
+        MoveDirection();
+        IsCalculate = false;
+    }
+    public void GoOutShop()
+    {
+        ShopManager.Instance.mShopNPC.Remove(this.gameObject);
+        mMoveCount = 0;
+        IsGoOut = false;
+        IsCalculate = true;
+        IsFirst = true;
+        mTablePosition = Vector3.zero;
+        mTableNumber = 0;
+        mGetItem.sprite = null;
+        ShopNPCPool.ReturnObject(this);
     }
     public void MoveDirection()
     {
-        Vector3 direction = mPosition - transform.position;
+        Vector3 direction;
+        if (mTablePosition != Vector3.zero)
+        {
+            direction = mTablePosition - transform.position;
+        }
+        else
+        {
+            direction = mPosition - transform.position;
+        }
 
         if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
         {
@@ -138,5 +184,6 @@ public class ShopNPC : MonoBehaviour
                 mNpcAni.SetInteger("Direction", 1);
             }
         }
+        mNpcAni.SetBool("IsWalking", true);
     }
 }

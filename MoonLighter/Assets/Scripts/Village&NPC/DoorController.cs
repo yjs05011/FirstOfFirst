@@ -1,10 +1,12 @@
 using System.Threading;
 using UnityEngine;
+using static GameKeyManger;
 
 public class DoorController : MonoBehaviour
 {
     public GameObject mStartShop;
     public GameObject mOpen;
+    public GameObject mNPCSpawner;
 
     private Animator mDoorAni;
     private float mTimer;
@@ -12,6 +14,7 @@ public class DoorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mNPCSpawner.SetActive(false);
         mTimer = 0;
         mStartShop.SetActive(false);
         mOpen.SetActive(false);
@@ -23,24 +26,27 @@ public class DoorController : MonoBehaviour
     {
         if (mOpen.activeSelf)
         {
-            if(Input.GetKey(KeyCode.E))     // 상점 시작
+            if(Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))     // 상점 시작
             {
                 mTimer += Time.deltaTime;
-                if (mTimer > 3)
+                if (mTimer > 2)
                 {
+                    Shop.mIsShopStart= true;
+                    mNPCSpawner.SetActive(true);
                     mOpen.SetActive(false);
                     mStartShop.SetActive(false);
                     mTimer = 0;
                 }
             }
-            if(Input.GetKeyUp(KeyCode.E))       // 상점 나가기
+            if(Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))       // 상점 나가기
             {
-                if (mTimer <= 3)
+                if (mTimer <= 2)
                 {
                     mOpen.SetActive(false);
                     mStartShop.SetActive(false);
                     mDoorAni.SetBool("OpenTheDoor", true);
                     mDoorAni.SetBool("OpenTheDoor", false);
+                    GFunc.LoadScene("VillageScene");
                 }
                 mTimer = 0;
             }

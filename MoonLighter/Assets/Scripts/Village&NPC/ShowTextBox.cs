@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShowTextBox : MonoBehaviour
@@ -5,7 +6,6 @@ public class ShowTextBox : MonoBehaviour
 
     public int mID = default;
     public int mTalkIndex = default;
-    public TalkManager mTalkManager;
     public GameObject mText;
 
     private GameObject talk = default;
@@ -31,7 +31,7 @@ public class ShowTextBox : MonoBehaviour
             if (talk.activeSelf)
             {
                 mTalkIndex = 0;
-                string talkData = mTalkManager.GetTalk(mID, mTalkIndex);
+                string talkData = TalkManager.Instance.GetTalk(mID, mTalkIndex);
                 GFunc.SetText(mText, talkData);
                 talk.SetActive(false);
             }
@@ -43,23 +43,37 @@ public class ShowTextBox : MonoBehaviour
             {
                 if (mID == 600)
                 {
-                    GFunc.LoadScene("ShopLv1");
+                    GFunc.LoadScene("ShopLv2");
+                    
+                }
+                else if(mID == 700)
+                {
+                    // 게시판 UI
+                }
+                else if(mID == 2000 && mTalkIndex == 1)
+                {
+                    // 대장간 UI
+                }
+                else if (mID == 3000 && mTalkIndex == 1)
+                {
+                    // 마녀 UI
                 }
                 else
                 {
                     Talk(mID);
                 }
+
             }
         }
     }
     private void Talk(int id)
     {
         mTalkIndex++;
-        string talkData = mTalkManager.GetTalk(id, mTalkIndex);
+        string talkData = TalkManager.Instance.GetTalk(id, mTalkIndex);
         if (talkData == null)
         {
             mTalkIndex = 0;
-            talkData = mTalkManager.GetTalk(id, mTalkIndex);
+            talkData = TalkManager.Instance.GetTalk(id, mTalkIndex);
         }
         GFunc.SetText(mText, talkData);
 
