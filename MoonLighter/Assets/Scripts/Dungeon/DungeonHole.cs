@@ -41,8 +41,10 @@ public class DungeonHole : MonoBehaviour
 
     //}
 
+
+
     //worldPosition : 캐릭터 좌표+입력한 방향키 방향 + 0.2? 정도의 값이 홀인지 체크 
-    public bool IsHole(Vector3 worldPosition/**/)
+    public bool IsHole(Vector3 worldPosition)
     {
         Vector3Int xyz = mTilemap.WorldToCell(worldPosition);
         TileBase tileBase = mTilemap.GetTile(xyz);

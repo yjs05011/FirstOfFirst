@@ -7,8 +7,9 @@ public class DungeonDoor : MonoBehaviour
 {
     [SerializeField]
     private int mDirection = DungeonGenerator.DIRECTION_NONE;
-
+    // 현재 스테이지
     public DungeonStage mCurrStage = null;
+    // 문에 연결된 스테이지
     public DungeonStage mNextStage = null;
     // 일반 문 
     public GameObject mBasicDoor = null;
@@ -38,7 +39,12 @@ public class DungeonDoor : MonoBehaviour
         mBasicDoorAnim = mBasicDoor.GetComponent<Animator>();   
         mEntryDoorAnim= mEntryDoor.GetComponent<Animator>();
         mFloorDoorAnim = mFloorDoor.GetComponent<Animator>();
-        mBossRoomDoorAnim = mBossRoomDoor.GetComponent<Animator>();
+
+        if (mBossRoomDoor !=null) 
+        {
+            mBossRoomDoorAnim = mBossRoomDoor.GetComponent<Animator>(); 
+        }
+
     }
 
     public void DoorOpen()
@@ -160,11 +166,14 @@ public class DungeonDoor : MonoBehaviour
                         // 캐릭터 다음 스테이지로 이동
                         Debug.LogFormat("{0} stage로 이동", mNextStage.name);
 
+
                         if ((mDirection & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
                         {
                             Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).y);
                             other.transform.position = mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM);
+
                             mNextStage.SetEntryPoint(DungeonGenerator.DIRECTION_BOTTOM);
+
                         }
                         if ((mDirection & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
                         {
@@ -186,10 +195,16 @@ public class DungeonDoor : MonoBehaviour
                             other.transform.position = mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_LEFT);
                             mNextStage.SetEntryPoint(DungeonGenerator.DIRECTION_LEFT);
                         }
+                        // 플레이어가 이동한 스테이지 좌표로 카메라 이동 
+                        DungeonManager.Instance.CameraMoveByPos(mNextStage.transform.position);
+                        // 플레이어가 위치한 스테이지 정보 갱신
+                        DungeonManager.Instance.SetPlayerCurrStage(mNextStage);
+                        // 스테이지의 플레이어 입장 여부 갱신
+                        mNextStage.SetIsEnterd(true);
                         break;
 
                     case DoorType.FLOOR:
-                        //다음층 스타트 스테이지 x,y
+                        //다음층 시작 스테이지의 백워드 방향 설정 
                         int nextFloorBackwardDirection = 0;
                         if ((mDirection & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
                         {
@@ -209,7 +224,8 @@ public class DungeonDoor : MonoBehaviour
                         }
 
                         int currFloor = this.GetCurrStage().GetFloor();
-                        if (currFloor <= 3)
+                        // 3층 이하
+                        if (currFloor < 3)
                         {
                             DungeonStage nextFloor = DungeonGenerator.Instance.InitDungeonBorad(0, 0, currFloor + 1, nextFloorBackwardDirection);
 
@@ -240,6 +256,12 @@ public class DungeonDoor : MonoBehaviour
                                 other.transform.position = nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_LEFT);
                                 nextFloor.SetEntryPoint(DungeonGenerator.DIRECTION_LEFT);
                             }
+                            // 플레이어가 이동한 스테이지 좌표로 카메라 이동 
+                            DungeonManager.Instance.CameraMoveByPos(nextFloor.transform.position);
+                            // 플레이어가 위치한 스테이지 정보 갱신 (다음 층 시작 스테이지)
+                            DungeonManager.Instance.SetPlayerCurrStage(nextFloor);
+                            // 스테이지의 플레이어 입장 여부 갱신
+                            nextFloor.SetIsEnterd(true);
                         }
                         break;
                 }

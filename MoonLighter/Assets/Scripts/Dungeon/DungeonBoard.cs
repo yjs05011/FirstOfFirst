@@ -81,7 +81,7 @@ public class DungeonBoard : MonoBehaviour
 
     }
 
-    public bool IsHole(Vector3 worldPosition/*캐릭터 좌표+가려는방향(0.2?)*/)
+    public bool IsHole(Vector3 worldPosition)
     {
         if(mHole != null)
         {

@@ -69,7 +69,9 @@ public class DungeonGenerator : MonoBehaviour
         int floor = 1;
 
         InitDungeonBorad(startX, startY, floor, DIRECTION_NONE);
-       
+
+        
+
     }
 
     public DungeonStage InitDungeonBorad(int startX, int startY, int floor, int backwardDirection)
@@ -112,6 +114,10 @@ public class DungeonGenerator : MonoBehaviour
         {
             GenerateStage(startStage, startStage, GenerateDirections(backwardDirection, startX, startY), floor);
             CheckLastRoom(startStage, startStage, mDepth);
+            // 플레이어가 위치한 스테이지 정보 갱신
+            DungeonManager.Instance.SetPlayerCurrStage(startStage);
+            // 스테이지의 플레이어 입장 여부 갱신
+            startStage.SetIsEnterd(true);
         }
         else
         {

@@ -7,9 +7,8 @@ using static DungeonStage;
 
 public class DungeonStage : MonoBehaviour
 {
-    // Grid
+    // 스테이지 바닥 형태
     public DungeonBoard mBoard = null;
-
 
     // 바닥 형태 리스트
     public List<DungeonBoard> mBoards = new List<DungeonBoard>();
@@ -19,11 +18,15 @@ public class DungeonStage : MonoBehaviour
     public DungeonDoor mDoorBottom = null;
     public DungeonDoor mDoorLeft = null;
   
+    // 스테이지의 층
     public int mFloor;
+    // 스테이지가 가진 문의 방향 변수
     public int mDoorDirections = 0;
+    // 던전 보드상 스테이지의 x,y 값
     public int mBoardX = 0;
     public int mBoardY = 0;
 
+    // 스테이지에 연결된 상/하/좌/우 방향의 스테이지 설정 변수 
     [SerializeField]
     private DungeonStage mConnectedStageTop = null;
     [SerializeField]
@@ -33,15 +36,23 @@ public class DungeonStage : MonoBehaviour
     [SerializeField]
     private DungeonStage mConnectedStageLeft= null;
 
+    // 스테이지 바닥(보드)의 타입
     public DungeonBoard.BoardType mBoradStyle = DungeonBoard.BoardType.Start;
 
+    // 스테이지 4방향 스타트 포인트 
     public GameObject mStartPointTop = null;
     public GameObject mStartPointRight = null;
     public GameObject mStartPointBottom = null;
     public GameObject mStartPointLeft = null;
 
+    // 입장 포지션
     public Vector3 mEntryPosition = Vector3.zero;
+    // 
     public int mBackwardDirection = DungeonGenerator.DIRECTION_NONE;
+
+    // 플레이어가 스테이지에 온적 있는지 체크 용 변수
+    public bool mIsPlayerEntered = false;
+
 
 
     public void Awake()
@@ -60,6 +71,16 @@ public class DungeonStage : MonoBehaviour
         return mFloor;
     }
 
+
+    public void SetIsEnterd(bool value)
+    {
+        mIsPlayerEntered = value;
+    }
+
+    public bool GetIsEnterd()
+    {
+        return mIsPlayerEntered;
+    }
     public Vector3 GetStartPoint(int direction) 
     {
         if ((direction & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
@@ -453,7 +474,7 @@ public class DungeonStage : MonoBehaviour
         }
     }
 
-    public bool IsHole(Vector3 worldPosition/*캐릭터 좌표+가려는방향(0.2?)*/)
+    public bool IsHole(Vector3 worldPosition)
     {
         return mBoard.IsHole(worldPosition);
     }
