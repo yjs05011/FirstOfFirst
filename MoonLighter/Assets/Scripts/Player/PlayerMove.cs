@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : PlayerState
 {
+
     // Start is called before the first frame update
     public override void Action(ActState state)
     {
@@ -11,15 +12,16 @@ public class PlayerMove : PlayerState
 
         float Horizontal = 0;
         float vertical = 0;
+
         if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
         {
             player.mIsMove = true;
             player.mPlayerAnimator.SetFloat("InputX", 0);
             player.mPlayerAnimator.SetFloat("InputY", 1);
             player.mPlayerAnimator.SetBool("IsRun", true);
-
             player.mPlayerDirection = 1;
             vertical = 1;
+
         }
         if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
         {
@@ -55,6 +57,7 @@ public class PlayerMove : PlayerState
             Horizontal = 1;
 
         }
+
         if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
         {
             player.mIsMove = false;
@@ -89,7 +92,18 @@ public class PlayerMove : PlayerState
         {
             player.mPlayerAnimator.SetBool("IsRun", false);
         }
+        if (player.mIsMove)
+        {
+            player.mTime += Time.deltaTime;
+            if (player.mTime > 1f)
+            {
+                player.mTime = 0;
 
+                player.SetPosToFallCheck();
+
+
+            }
+        }
 
     }
 }

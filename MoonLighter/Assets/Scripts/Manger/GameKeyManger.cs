@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameKeyManger : GSingleton<GameKeyManger>
 {
-    public enum KeyAction { UP, DOWN, LEFT, RIGHT, INTERRUPT, EVASION, ATTACK, KEYCOUNT }
+    public enum KeyAction { UP, DOWN, LEFT, RIGHT, INTERRUPT, EVASION, ATTACK, SKILL, KEYCOUNT }
 
-    public KeyCode[] defaultKeys = new KeyCode[] { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.E, KeyCode.Space, KeyCode.J };
+    public KeyCode[] defaultKeys = new KeyCode[] { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.E, KeyCode.Space, KeyCode.J, KeyCode.K };
     protected override void Init()
     {
 

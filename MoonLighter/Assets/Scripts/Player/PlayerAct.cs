@@ -11,15 +11,41 @@ public enum ActState
     State_Attack_Combo_Three,
     State_Evasion,
     State_Enter_Pool,
+    State_Attack_Skill,
     State_Die
 }
 public class PlayerAct : MonoBehaviour
 {
+    #region  변수 Public
     public PlayerScriptObjs mPlayerDefaultStat;
     // 플레이어 리지드바디 2d 선언 (물리력 생성을 위해 선언)
     public Rigidbody2D mPlayerRigid;
+    // 플레이어 애니메이션을 나타낸다.
+    public RectTransform mPlayerWeaponePosition;
+    // 플레이어 공격시 박스의 크기를 결정해줌;
+    public BoxCollider2D mWeaponeHitBox;
+    // 플레이어 공격시 박스 위치를 결정해줌
+    public RectTransform mWeaponeHitBoxPosition;
+    // 플레이어의 상태가 변화를 위한 시간 변수
+    public Animator mPlayerAnimator;
     //플레이어 BoxCollider2D 선언 (플레이어 히트박스로 사용 예정)
+    public ActState mState;
+    // 플레이어 상태 머신 변수
     public BoxCollider2D mPlayerHitBox;
+    // 플레이어에 사용된 애니메이션 클립을 가져오기위한 변수 선언
+    public List<AnimationClip> mPlayerAnimation = new List<AnimationClip>();
+    // 플레이어가 벽에 부딛치고 있을때(떨어지는 상태) 위치 확인을 위한 변수
+    public Vector2 mPlayerPosCheck;
+    // 플레이어가 공격키를 여러번 누르는지 확인하는 변수
+    public int mAttackRoll = 0;
+    // 플레이어가 방향을 나타내는 변수 (0:아래, 1:위 , 2:왼쪽,3:오른쪽)
+    public int mPlayerDirection = 0;
+    // 플레이어 상태 머신 변수
+    public int mPlayerNowWeapone;
+    // 플레이어 애니매이션을 위한 무기 위치 렉트 트랜스폼 변수
+    public float mTime = 0;
+    // 플레이어가 키를 몇초간 눌렀는지 알기 위한 시간 변수
+    public float mHoldingTime = 0;
     // 플레이어 스텟: 스피드를 나타낸다 (임시)
     public float mPlayerSpeed = 0;
     // 플레이어 스텟: 힘을 나타낸다.
@@ -30,45 +56,25 @@ public class PlayerAct : MonoBehaviour
     public float mPlayerHp = 0;
     // 플레이어 스텟: 플레이어의 최대 체력을 나타낸다.
     public float mPlayerMaxHp = 0;
-    // 플레이어 애니메이션을 나타낸다.
-    public Animator mPlayerAnimator;
     // 플레이어가 움직이는지 체크하기 위한 bool 변수
     public bool mIsMove = false;
     // 플레이어가 회피 중인지 체크하기 위한 bool 변수
     public bool mIsEvasion = false;
     // 플레이어가 맞는 딜레이를 체크하기 위한 bool 변수
     public bool mIsDelay = false;
-    // 플레이어가 공격키를 여러번 누르는지 확인하는 변수
-    public int mAttackRoll = 0;
+    // 플레이어가 스킬을 사용하는지 체크하기 위한 bool 변수
+    public bool mIsSkillUse;
+    // 키를 꾹 누르고 있는지 확인
+    public bool mIsHolding = false;
     // 플레이어 콤보 공격 확인용 bool 변수
     public bool mIsCombo = false;
-    // 플레이어가 방향을 나타내는 변수 (0:아래, 1:위 , 2:왼쪽,3:오른쪽)
-    public int mPlayerDirection = 0;
-    // 플레이어 상태 머신 변수
-    public ActState mState;
-    // 플레이어 상태 머신 변수
-    public int mPlayerNowWeapone;
-    // 플레이어 애니매이션을 위한 무기 위치 렉트 트랜스폼 변수
-    public RectTransform mPlayerWeaponePosition;
-    // 플레이어 공격시 박스의 크기를 결정해줌;
-    public BoxCollider2D mWeaponeHitBox;
-    // 플레이어 공격시 박스 위치를 결정해줌
-    public RectTransform mWeaponeHitBoxPosition;
-    // 플레이어의 상태가 변화를 위한 시간 변수
-    public float mTime = 0;
-    // 플레이어가 키를 몇초간 눌렀는지 알기 위한 시간 변수
-    public float mHoldingTime = 0;
-    // 플레이어에 사용된 애니메이션 클립을 가져오기위한 변수 선언
-    public List<AnimationClip> mPlayerAnimation = new List<AnimationClip>();
+    #endregion
     // 플레이어 상태 머신 타입 변경
     private PlayerState mNowState;
     // 플레이어가 풀 안에서 힐을 하고 있는지 확인하는 변수
     private bool mIsHealing;
-
-
     void Awake()
     {
-
         mPlayerAnimator = GetComponent<Animator>();
         mPlayerRigid = GetComponent<Rigidbody2D>();
         mPlayerHitBox = GetComponent<BoxCollider2D>();
@@ -98,6 +104,7 @@ public class PlayerAct : MonoBehaviour
 
     void Update()
     {
+
         if (PlayerManager.Instance.mIsUiActive)
         {
 
@@ -110,12 +117,14 @@ public class PlayerAct : MonoBehaviour
                 {
                     mAttackRoll++;
                 }
-
-
             }
+
             switch (mState)
             {
                 case ActState.State_Move:
+                    mPlayerAnimator.SetBool("IsAttack", false);
+                    mPlayerAnimator.SetBool("IsPool", false);
+                    mPlayerHitBox.isTrigger = false;
                     mNowState.Action(ActState.State_Move);
                     if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
                     {
@@ -129,9 +138,17 @@ public class PlayerAct : MonoBehaviour
                         SetActionType(ActState.State_Attack_Combo_One);
 
                     }
-                    // PlayerMove();
+                    if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.SKILL]))
+                    {
+                        mPlayerRigid.velocity = Vector2.zero;
+                        mTime = 0;
+                        mPlayerAnimator.SetBool("IsSkill", true);
+                        mPlayerAnimator.SetTrigger("IsSkillTrigger");
+                        SetActionType(ActState.State_Attack_Skill);
+                    }
                     break;
                 case ActState.State_Attack_Combo_One:
+                    mPlayerHitBox.isTrigger = false;
                     mPlayerRigid.velocity = Vector2.zero;
                     mTime += Time.deltaTime;
                     if (mTime > 1.3f)
@@ -147,6 +164,7 @@ public class PlayerAct : MonoBehaviour
                     }
                     break;
                 case ActState.State_Attack_Combo_Two:
+                    mPlayerHitBox.isTrigger = false;
                     mTime += Time.deltaTime;
                     if (mTime > 1.3f)
                     {
@@ -158,16 +176,36 @@ public class PlayerAct : MonoBehaviour
                     {
                         if (mIsCombo)
                         {
-
                             SetActionType(ActState.State_Attack_Combo_Three);
                         }
                     }
+                    break;
+                case ActState.State_Attack_Skill:
+                    mTime += Time.deltaTime;
 
+                    if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.SKILL]))
+                    {
+                        if (mTime > 0.5f)
+                        {
+                            mTime = 0;
+                            mNowState.Action(ActState.State_Attack_Skill);
+                            mPlayerAnimator.SetBool("IsSkillUse", true);
+                        }
+                        else
+                        {
+                            SetActionType(ActState.State_Move);
+                            mPlayerAnimator.SetBool("IsSkill", false);
+                            mPlayerAnimator.SetBool("IsSKillHoling", false);
+                            mPlayerAnimator.SetBool("IsSkillUse", false);
+                        }
+
+                    }
                     break;
                 case ActState.State_Evasion:
+                    mPlayerHitBox.isTrigger = true;
                     break;
-
                 case ActState.State_Enter_Pool:
+                    mPlayerHitBox.isTrigger = false;
                     mNowState.Action(ActState.State_Enter_Pool);
                     if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
                     {
@@ -212,8 +250,20 @@ public class PlayerAct : MonoBehaviour
             }
 
         }
-    }
 
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Untagged"))
+        {
+            mPlayerHitBox.isTrigger = false;
+            mPlayerRigid.position = mPlayerPosCheck;
+        }
+        if (other.CompareTag("Hole"))
+        {
+
+        }
+    }
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -227,7 +277,7 @@ public class PlayerAct : MonoBehaviour
 
         }
     }
-    void HoldingKey()
+    public void HoldingKey()
     {
         mHoldingTime = 0;
         mHoldingTime += Time.deltaTime;
@@ -266,10 +316,14 @@ public class PlayerAct : MonoBehaviour
             case global::ActState.State_Enter_Pool:
                 mNowState = gameObject.AddComponent<PlayerMove>();
                 break;
+            case global::ActState.State_Attack_Skill:
+                mNowState = gameObject.AddComponent<PlayerAttackSkill>();
+                break;
             default:
                 break;
         }
     }
+    //키입력에 딜레이를 주기 위한 변수
     IEnumerator HitDelay(float Delay)
     {
         yield return new WaitForSeconds(Delay);
@@ -284,16 +338,20 @@ public class PlayerAct : MonoBehaviour
     {
         return mPlayerHp;
     }
-    void OnHealing(float number)
+    public void OnHealing(float number)
     {
         if (mPlayerMaxHp < mPlayerHp)
         {
             mPlayerHp += number;
+            if (mPlayerHp <= mPlayerMaxHp)
+            {
+                mPlayerHp = mPlayerMaxHp;
+            }
         }
 
     }
     //플레이어 낭떨어지 떨어졌을 경우 데미지 구현
-    void OnFalling(float number)
+    public void OnFalling(float number)
     {
         mPlayerHp -= Mathf.Floor(number);
         if (mPlayerHp < 0)
@@ -331,4 +389,37 @@ public class PlayerAct : MonoBehaviour
 
     }
 
+    public IEnumerator HolingTimer(float time)
+    {
+
+        yield return new WaitForSeconds(time);
+        mIsHolding = true;
+
+    }
+    public void SetPosToFallCheck()
+    {
+        switch (mPlayerDirection)
+        {
+            //아래
+            case 0:
+                mPlayerPosCheck = mPlayerRigid.position + new Vector2(0, -0.2f);
+                break;
+            //위
+            case 1:
+                mPlayerPosCheck = mPlayerRigid.position + new Vector2(0, +0.2f);
+                break;
+            //왼쪽
+            case 2:
+                mPlayerPosCheck = mPlayerRigid.position + new Vector2(-0.2f, 0);
+                break;
+            //오른쪽
+            case 3:
+                mPlayerPosCheck = mPlayerRigid.position + new Vector2(0.2f, 0);
+                break;
+        }
+    }
+    public void SetSkillAnimation()
+    {
+        mPlayerAnimator.SetBool("IsSKillHoling", true);
+    }
 }
