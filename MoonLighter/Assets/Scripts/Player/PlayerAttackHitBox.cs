@@ -13,23 +13,27 @@ public class PlayerAttackHitBox : MonoBehaviour
     }
     public void OnEnable()
     {
-        // mDamage = PlayerManager.Instance.PlayerStat.damage;
+        mDamage = PlayerManager.Instance.mPlayerStat.Str;
         if (player.mPlayerNowWeapone == 1 && player.mState == ActState.State_Attack_Combo_Three)
         {
-            // mDamage = PlayerManager.Instance.PlayerStat.damage * 2 ;
+            mDamage = PlayerManager.Instance.mPlayerStat.Str * 2;
 
+        }
+        else if (player.mPlayerNowWeapone == 1 && player.mState == ActState.State_Attack_Skill)
+        {
+            mDamage = PlayerManager.Instance.mPlayerStat.Str * 3;
         }
         else
         {
-            // mDamage = PlayerManager.Instance.PlayerStat.damage; 
+            mDamage = PlayerManager.Instance.mPlayerStat.Str;
         }
     }
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (CompareTag("Enemy"))
+        if (other.CompareTag("Monster"))
         {
-            Debug.Log("hit da hit");
+            Debug.Log(mDamage);
             // other.GetComponent<Monster>().OnDamage(mDamage);
         }
     }

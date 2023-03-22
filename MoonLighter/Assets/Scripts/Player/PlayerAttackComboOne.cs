@@ -19,6 +19,7 @@ public class PlayerAttackComboOne : PlayerState
                 if (!mIsAttack)
                 {
                     mIsAttack = true;
+                    player.mPlayerAnimator.SetFloat("WeaponType", 1f);
                     StartCoroutine(BigSwordCombo1(player.mPlayerDirection, player));
                 }
                 break;

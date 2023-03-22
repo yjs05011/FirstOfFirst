@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DungeonBoard : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class DungeonBoard : MonoBehaviour
     public bool mIsMovableLeft = false;
     public bool mIsMovableRight = false;
 
+    public DungeonHole mHole = null;
     // 장애물 리스트 (임시)
     public List<GameObject> mObstacles= new List<GameObject>();
     // 오브젝트 리스트 (임시)
@@ -32,12 +34,20 @@ public class DungeonBoard : MonoBehaviour
         return mType; 
     }
 
+    public void SetHoleToStage(DungeonStage stage)
+    {
+        if (mHole != null)
+        {
+            mHole.SetStage(stage);
+        }
+    }
+
     // 이동 가능한 문 방향 체크 
     public bool IsMovableDirection(int directions)
     {
         if ((directions & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
         {
-            if(!mIsMovableTop) 
+            if (!mIsMovableTop)
             {
                 return false;
             }
@@ -45,7 +55,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
         {
-            if (!mIsMovableBottom) 
+            if (!mIsMovableBottom)
             {
                 return false;
             }
@@ -53,7 +63,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
         {
-            if (!mIsMovableLeft) 
+            if (!mIsMovableLeft)
             {
                 return false;
             }
@@ -61,7 +71,7 @@ public class DungeonBoard : MonoBehaviour
 
         if ((directions & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
         {
-            if (!mIsMovableRight) 
+            if (!mIsMovableRight)
             {
                 return false;
             }
@@ -71,5 +81,12 @@ public class DungeonBoard : MonoBehaviour
 
     }
 
-  
+    public bool IsHole(Vector3 worldPosition)
+    {
+        if(mHole != null)
+        {
+            return mHole.IsHole(worldPosition);
+        }
+        return false;
+    }
 }

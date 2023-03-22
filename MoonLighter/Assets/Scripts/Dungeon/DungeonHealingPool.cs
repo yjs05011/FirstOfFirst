@@ -16,9 +16,10 @@ public class DungeonHealingPool : MonoBehaviour
     private float mBubbleIntervalTime= 1.0f;
     private float mTimer = 0.0f;
     private int mBubbleCounter = 0;
+    private bool mIsHealing = false;
 
     // 힐링 풀 보유 힐량 변수
-    public int mHealPoint = 0;
+    public float mHealPoint = 0;
 
     public void Awake()
     {
@@ -36,28 +37,32 @@ public class DungeonHealingPool : MonoBehaviour
 
     public void Update()
     {
-        mTimer += Time.deltaTime;
 
-        if(mTimer > mBubbleIntervalTime)
-        {
-            mTimer = 0.0f;
-            mBubbles[mBubbleCounter].SetActive(true);
+         if (mTimer > mBubbleIntervalTime)
+         {
+             mTimer = 0.0f;
+             mBubbles[mBubbleCounter].SetActive(true);
 
-            if (mBubbleCounter == mBubbles.Count - 1)
-            { 
-                mBubbleCounter = 0; 
-            }
-            else
-            {
-                ++mBubbleCounter;
-            }
-        }
+             if (mBubbleCounter == mBubbles.Count - 1)
+             {
+                 mBubbleCounter = 0;
+             }
+             else
+             {
+                 ++mBubbleCounter;
+             }
+         }
 
-        if(mHealPoint <= 0)
+        if (mIsHealing)
         {
             Debug.LogFormat("힐 포인트 : {0}", GetPoolHealPoint());
 
-            SetPoolHealEmpty();
+            if (mHealPoint <= 0)
+            {
+                Debug.LogFormat("힐 empty");
+                mIsHealing = false;
+                SetPoolHealEmpty();
+            }
         }
     }
     public void InitPoolHeal()
@@ -73,40 +78,57 @@ public class DungeonHealingPool : MonoBehaviour
         mPoolWaterSprite.color = new Color(125.0f, 125.0f, 125.0f);
     }
     
-    public int GetPoolHealPoint()
+    public float GetPoolHealPoint()
     {
         return mHealPoint;
     }
-    public void SetPoolHealPoint(int value)
+    public void SetPoolHealPoint(float value)
     {
-        mHealPoint = value;
+        mHealPoint += value;
     }
 
 
-
-    // [ 테스트 코드 ] ===============================================================================
-    // 일단 힐 풀 기능 확인용으로 넣어둠
-    // 플레이어가 입장시 플레이어 HP 증가 시키고, pool 의 보유 hp 차감 필요
-    // 플레이어 exit or pool 보유 hp 0 이되면 더이상 힐안되게 처리 필요
+      
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
+            mIsHealing = true;
 
+            StartCoroutine(Healing(other));
+            
             Debug.Log("Player Healing");
 
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+
+
+    IEnumerator Healing(Collider2D other)
+    {
+        float delay = 0.05f;
+        float totalTime = 1.0f;
+        PlayerAct player = other.GetComponent<PlayerAct>();
+        
+       while (player.GetPlayerMaxHp() != player.GetPlayerHp() || GetPoolHealPoint() <= 0)
+       {
+           SetPoolHealPoint(-1.0f);
+           player.OnHealing(1.0f); 
+
+           totalTime -= delay;
+           yield return new WaitForSeconds(totalTime - delay);
+       }
+       
+        
+    }
+
+    private void OntrrigerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            if (mHealPoint > 0)
-            {
-                mHealPoint -= 1;
-            }
+           mIsHealing = false;
+           StopCoroutine(Healing(other));
         }
     }
-    // [ 테스트 코드 ] ===============================================================================
+    
 }
