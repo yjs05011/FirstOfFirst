@@ -42,6 +42,7 @@ public class ShopNPCPool : MonoBehaviour
             var obj = Instance.poolingObjectQueue.Dequeue();
             obj.transform.SetParent(null);
             obj.gameObject.SetActive(true);
+            
             return obj;
         }
         else
@@ -56,6 +57,7 @@ public class ShopNPCPool : MonoBehaviour
 
     public static void ReturnObject(ShopNPC obj)
     {
+        
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
         Instance.poolingObjectQueue.Enqueue(obj);

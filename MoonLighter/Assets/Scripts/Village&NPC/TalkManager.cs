@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TalkManager : MonoBehaviour
+public class TalkManager : GSingleton<TalkManager>
 {
     Dictionary<int, string[]> mTalkData;
 
-    private void Awake()
+    protected override void Init()
     {
+        base.Init();
         mTalkData = new Dictionary<int, string[]>();
         GenerateData();
     }
@@ -19,6 +20,7 @@ public class TalkManager : MonoBehaviour
         mTalkData.Add(400, new string[] { "읽기", "나무 모자" });     // 나무 모자 표지판
         mTalkData.Add(500, new string[] { "읽기", "문라이트" });      // 문라이트 표지판
         mTalkData.Add(600, new string[] { "들어가기" });        // 문라이트
+        mTalkData.Add(700, new string[] { "읽기" });            // 게시판
         mTalkData.Add(1000, new string[] { "말하기", "힘차고 강한 아침!!" });     // NPC 
         mTalkData.Add(2000, new string[] { "말하기" , "대장간의 불꽃은 네가 원하는 건\n뭐든지 제작할 준비가 되어 있지!" });        //대장간
         mTalkData.Add(3000, new string[] { "말하기" , "여기선 신선한 물약을 제조하거나\n신기한 마법을 부여할 수 있어" });        //마녀의 집
@@ -26,7 +28,7 @@ public class TalkManager : MonoBehaviour
         mTalkData.Add(210, new string[] { "읽기", "숲 던전", "영웅만 입장할 수 있는 던전.\n상인에게는 추천하지 않음" });
         mTalkData.Add(310, new string[] { "읽기", "사막 던전", "영웅 전용" });
         mTalkData.Add(410, new string[] { "읽기", "기술 던전", "입장 불가" });
-
+        mTalkData.Add(120, new string[] { "배치" });
     }
 
     public string GetTalk(int id, int talkIndex)
