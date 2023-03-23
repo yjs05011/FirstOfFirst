@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         mSlot = mChangeSlotGrideSetting.GetComponentsInChildren<Slot>();
-       // mSlotEquip = mChnageEquipmentSlotGrideSetting.GetComponentsInChildren<Slot>();
+       mSlotEquip = mChnageEquipmentSlotGrideSetting.GetComponentsInChildren<Slot>();
     }
 
     
@@ -77,7 +77,8 @@ public class Inventory : MonoBehaviour
                     if(mSlot[index].mItem.mItemName == item.mItemName)
                     {   
                         //슬롯 개수 올림
-                        mSlot[index].SetSlotCount(itemCount += itemCount);
+                        //mSlot[index].SetSlotCount(itemCount += itemCount);
+                        mSlot[index].SetSlotCount(itemCount ++);
                         return;
                     }
                 }

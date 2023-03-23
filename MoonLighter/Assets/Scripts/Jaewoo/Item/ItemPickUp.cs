@@ -23,8 +23,8 @@ public class ItemPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            int mItemCount = default;
-            mItemCount++;
+            int mItemCount = 1;
+            
             if(this.gameObject.transform.GetComponent<ItemPickUp>().mItem != null)
             {
                 mInventory.AcpuireItem(this.gameObject.transform.GetComponent<ItemPickUp>().mItem, mItemCount);
