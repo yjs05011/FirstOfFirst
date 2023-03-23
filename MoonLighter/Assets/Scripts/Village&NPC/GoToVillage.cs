@@ -9,7 +9,8 @@ public class GoToVillage : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GFunc.LoadScene("VillageScene");
+            LoadingManager.LoadScene("VillageScene");
+            //GFunc.LoadScene("VillageScene");
         }
     }
 }

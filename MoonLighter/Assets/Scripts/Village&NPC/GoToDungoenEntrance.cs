@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GoToDungoenEntrance : MonoBehaviour
 {
-    
+    public Vector3 mPosition;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player")
         {
-            
-            GFunc.LoadScene("DungeonEntrance");
+            SetPosition.Instance.mSettingPosition= mPosition;
+            LoadingManager.LoadScene("DungeonEntrance");
+            //GFunc.LoadScene("DungeonEntrance");
             
         }
     }
