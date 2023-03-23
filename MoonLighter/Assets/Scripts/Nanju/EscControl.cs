@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EscControl : MonoBehaviour
 {
-    public GameObject GameBackCursorImage;
-    public GameObject OptionCursorImage;
-    public GameObject MainMenuCursorImage;
-    public GameObject ExitCursorImage;
+    public GameObject mGameBackCursorImage;
+    public GameObject mOptionCursorImage;
+    public GameObject mMainMenuCursorImage;
+    public GameObject mExitCursorImage;
 
     // public KeyCode mUpKey= KeyCode.W;
 
@@ -45,6 +45,7 @@ public class EscControl : MonoBehaviour
                 mTextCheck--;
             }
         }
+        // 선택하였을때 실행
         if (Input.GetKeyDown(KeyCode.E))
         {
             switch (mTextCheck)
@@ -66,27 +67,27 @@ public class EscControl : MonoBehaviour
                     break;
             }
         }
-
+        // 무슨 이름인지 체크하여 활성화,비활성화 하기
         switch (mTextCheck)
         {
             case 0:
-                GameBackCursorImage.SetActive(true);
-                OptionCursorImage.SetActive(false);
+                mGameBackCursorImage.SetActive(true);
+                mOptionCursorImage.SetActive(false);
                 break;
 
             case 1:
-                OptionCursorImage.SetActive(true);
-                GameBackCursorImage.SetActive(false);
-                MainMenuCursorImage.SetActive(false);
+                mOptionCursorImage.SetActive(true);
+                mGameBackCursorImage.SetActive(false);
+                mMainMenuCursorImage.SetActive(false);
                 break;
             case 2:
-                MainMenuCursorImage.SetActive(true);
-                OptionCursorImage.SetActive(false);
-                ExitCursorImage.SetActive(false);
+                mMainMenuCursorImage.SetActive(true);
+                mOptionCursorImage.SetActive(false);
+                mExitCursorImage.SetActive(false);
                 break;
             case 3:
-                ExitCursorImage.SetActive(true);
-                MainMenuCursorImage.SetActive(false);
+                mExitCursorImage.SetActive(true);
+                mMainMenuCursorImage.SetActive(false);
                 break;
         }
 
