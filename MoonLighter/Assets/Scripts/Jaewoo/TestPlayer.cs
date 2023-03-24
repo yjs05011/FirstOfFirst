@@ -4,23 +4,65 @@ using UnityEngine;
 
 public class TestPlayer : MonoBehaviour
 {
-    private bool isMove = false;
-    private bool isPickUp = false;
+    private float mMoveSpeed = 5f;
+    private bool misMove = false;
+    private bool misPickUp = false;
     private Inventory mInventoryTest;
-    
+    public Rigidbody2D mPlayerRigid = default;
 
-    private void ItemPickUp()
-    {
-        if(!isPickUp)
-        {
-            
-        }
-    }
-    // Start is called before the first frame update
     void Start()
     {
-        isPickUp = false;
+        mPlayerRigid = gameObject.GetComponent<Rigidbody2D>();
+        misMove = false;
     }
+
+    void Update()
+    {
+
+        if(!misMove)
+        {
+            mPlayerRigid.velocity =  Vector2.zero;
+        }
+
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            misMove = true;
+            mPlayerRigid.velocity = Vector2.right * mMoveSpeed;
+        }
+        if(Input.GetKeyUp(KeyCode.D))
+        {
+            misMove = false;
+        }
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            misMove = true;
+            mPlayerRigid.velocity = Vector2.left * mMoveSpeed;
+        }
+        if(Input.GetKeyUp(KeyCode.A))
+        {
+            misMove = false;
+        }
+         if(Input.GetKeyDown(KeyCode.W))
+        {
+            misMove = true;
+            mPlayerRigid.velocity = Vector2.up * mMoveSpeed;
+        }
+        if(Input.GetKeyUp(KeyCode.W))
+        {
+            misMove = false;
+        }
+         if(Input.GetKeyDown(KeyCode.S))
+        {
+            misMove = true;
+            mPlayerRigid.velocity = Vector2.down * mMoveSpeed;
+        }
+        if(Input.GetKeyUp(KeyCode.S))
+        {
+            misMove = false;
+        }
+    }
+
+   
     
    
 

@@ -2,43 +2,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Slot : MonoBehaviour
 {
-    public Item mItem;
     public int mItemCount;
+    public Item mItem;
     public Sprite mItemSprite;
-
+    public SpriteRenderer slotRender = default;
     [SerializeField]
-    private Text mTextCount;
+    private TMP_Text mTextCount = default;
     [SerializeField]
     private GameObject mChangeImage;
     
-    //알파값 조절
-    private void SetColor(float alpha)
-    {    
-        transform.gameObject.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f, alpha);
+
+    private void Start()
+    {
+        
+        mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
+        slotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();
+        
     }
 
-    
-    public void AddItem(Item item, int itemCount =1)
+    //아이템 값 저장
+    public Item mInventoryItemVaule
+    {
+        get { return mInventoryItemVaule; }
+        set
+        {
+            mInventoryItemVaule = value;
+            if (mInventoryItemVaule != null)
+            {
+                mItemSprite = mInventoryItemVaule.mItemSprite;
+                SetColor(1);
+            }
+            else
+            {
+                SetColor(0);
+            }
+        }
+    }
+
+    //알파값 조절
+    private void SetColor(float alpha)
+    {
+        transform.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
+    }
+
+
+    public void AddItem(Item item, int itemCount)
     {
         mItem = item;
         mItemCount = itemCount;
         mItemSprite = mItem.mItemSprite;
 
-        //아이템 enum 타입이 소비일때
-        if(mItem.mItemType != Item.ItemEnumType.Equiment)
+        slotRender.sprite = item.mItemSprite;
+        // Debug.Log(mItem.mItemType);
+        // Debug.Log(mItem.mItemType != Item.ItemEnumType.Equiment);
+        //아이템 타입 구분
+        if (mItem.mItemType != Item.ItemEnumType.Equiment)
         {
-            mChangeImage.SetActive(true);
-            mTextCount.text = mItemCount.ToString();
+
+            //mChangeImage.FindChildObj("ItemImage").transform.GetComponent<SpriteRenderer>();
+            // mChangeImage.SetActive(true);
+             mTextCount.text = mItemCount.ToString();
+            SetColor(1);
         }
         else
         {
-            mTextCount.text = " ";
-            mChangeImage.SetActive(false);
+            SetColor(1);
+             mTextCount.text = " ";
+            // mChangeImage.SetActive(false);
         }
-        SetColor(1);
+        //SetColor(1);
     }
 
     //슬롯에 대한 아이템 갯수 업데이트
@@ -47,7 +83,7 @@ public class Slot : MonoBehaviour
         mItemCount += slotItemCount;
         mTextCount.text = mItemCount.ToString();
 
-        if(mItemCount <= 0)
+        if (mItemCount <= 0)
         {
             ClearSlot();
         }

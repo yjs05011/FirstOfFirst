@@ -46,7 +46,8 @@ public class DoorController : MonoBehaviour
                     mStartShop.SetActive(false);
                     mDoorAni.SetBool("OpenTheDoor", true);
                     mDoorAni.SetBool("OpenTheDoor", false);
-                    GFunc.LoadScene("VillageScene");
+                    LoadingManager.LoadScene("VillageScene");
+                    //GFunc.LoadScene("VillageScene");
                 }
                 mTimer = 0;
             }

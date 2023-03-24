@@ -14,7 +14,7 @@ public class ShopCameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(mPlayer.position.y < mSwitchPosition)
+        if(mPlayer.position.y > mSwitchPosition)
         {
             mPosition = mShopPosition;
         }

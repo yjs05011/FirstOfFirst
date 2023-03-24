@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e616170c4767734c8b380e263d7c7c0, type: 3}
   m_Name: TrainingBigSword
   m_EditorClassIdentifier: 
-  mItemType: 0
+  mItemType: 1
   mItemName: TrainingBigSword
-  mItemHp: 0
-  mItemDamage: 25
-  mItemDefense: 0
-  mItemMoveSpeed: -10
-  mItemPrice: 1000
   mItemSprite: {fileID: 21300000, guid: 019a28dad5acf934a8d8cf430ed6333d, type: 3}
   mItemPrefab: {fileID: 2489566172174643124, guid: c5d978abdb6e6614dbae413299c33083, type: 3}
