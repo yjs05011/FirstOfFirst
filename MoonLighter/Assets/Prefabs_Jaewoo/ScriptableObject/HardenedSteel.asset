@@ -18,6 +18,6 @@ MonoBehaviour:
   mItemDamage: 0
   mItemDefense: 0
   mItemMoveSpeed: 0
-  mItemPrice: 0
+  mItemPrice: 375
   mItemSprite: {fileID: 1110000096, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
   mItemPrefab: {fileID: 5671928412267310151, guid: 600a785ce3402b44989f3e5a5815a42f, type: 3}
