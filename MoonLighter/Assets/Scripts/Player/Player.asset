@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   hp: 100
+  MaxHp: 100
   Speed: 5
   str: 5
   def: 10

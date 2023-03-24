@@ -214,7 +214,7 @@ public class DungeonStage : MonoBehaviour
 
                 mBoard.SetHoleToStage(this);
                 mBoard.gameObject.SetActive(true);
-                if(mBoradStyle == DungeonBoard.BoardType.POOL)
+                if(mBoradStyle == DungeonBoard.BoardType.Pool)
                 {
                     DungeonHealingPool healingPool = mBoard.transform.Find("Pool").gameObject.GetComponent<DungeonHealingPool>();
                     healingPool.InitPoolHeal();
@@ -227,15 +227,15 @@ public class DungeonStage : MonoBehaviour
     public void SetBoadStyle(DungeonBoard.BoardType type)
     {
         // 3층 마지막 방 예외처리 (3층의 마지막 방은 랜덤 타입 보드가 나와야해서) 
-        if (GetFloor() == 3 && type == DungeonBoard.BoardType.BOSS)
+        if (GetFloor() == 3 && type == DungeonBoard.BoardType.Boss)
         {
-            mBoradStyle = DungeonBoard.BoardType.RANDOM;
+            mBoradStyle = DungeonBoard.BoardType.Random;
         }
         else
         {
             mBoradStyle = type;
         }
-        if (type == DungeonBoard.BoardType.BOSS || type == DungeonBoard.BoardType.Start)
+        if (type == DungeonBoard.BoardType.Boss || type == DungeonBoard.BoardType.Start)
         {
             SetAddDoor(type);
         }
@@ -337,13 +337,13 @@ public class DungeonStage : MonoBehaviour
         mDoorRight.DoorClose();
     }
 
-    //문 추가 (보스 stage : 다음 층 연결 문 추가 | 시작 stage : 던전 입장 or 해당 층 입장 문 추가)
+    //문 추가 (층 보스 stage : 다음 층 연결 문 추가 | 시작 stage : 던전 입장 or 해당 층 입장 문 추가)
     public void SetAddDoor(DungeonBoard.BoardType type)
     {
         // 시작방의 문을 설정하는 부분
         if(type == DungeonBoard.BoardType.Start)
         {
-            // 이전 층에서 내려온 경우 (차원문)
+            // 이전 층에서 내려온 경우 (층이동 문 설정)
             if(mBackwardDirection != DungeonGenerator.DIRECTION_NONE)
             {
                 if(mBackwardDirection == DungeonGenerator.DIRECTION_TOP)
@@ -377,7 +377,7 @@ public class DungeonStage : MonoBehaviour
         }
 
 
-        if(type == DungeonBoard.BoardType.BOSS)
+        if(type == DungeonBoard.BoardType.Boss)
         {
             if (mFloor == 3)
             {

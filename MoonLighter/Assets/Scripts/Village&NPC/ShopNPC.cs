@@ -8,6 +8,10 @@ public class ShopNPC : MonoBehaviour
     public Sprite mItem;
     public int mTableNumber;
 
+    public Vector3 mMinimumPosition;
+    public Vector3 mMaximumPosition;
+    public Vector3 mDoorPosition;
+    public Vector3 mCasherPosition;
 
     private Animator mNpcAni;
     private float mSpeed = 1f;
@@ -107,10 +111,10 @@ public class ShopNPC : MonoBehaviour
         mNpcAni.SetBool("IsWalking", false);
         mMoveCount++;
         mPosition = new Vector3(transform.position.x + Random.Range(-3, 4), transform.position.y + Random.Range(-3, 4), 0);
-        if (mPosition.x > 3.5) { mPosition = new Vector3(3.5f, mPosition.y, 0); }
-        if (mPosition.x < 0) { mPosition = new Vector3(0, mPosition.y, 0); }
-        if (mPosition.y > -4) { mPosition = new Vector3(mPosition.x, -4, 0); }
-        if (mPosition.y < -6) { mPosition = new Vector3(mPosition.x, -6, 0); }
+        if (mPosition.x > mMaximumPosition.x) { mPosition = new Vector3(mMaximumPosition.x, mPosition.y, 0); }
+        if (mPosition.x < mMinimumPosition.x) { mPosition = new Vector3(mMinimumPosition.x, mPosition.y, 0); }
+        if (mPosition.y > mMaximumPosition.y) { mPosition = new Vector3(mPosition.x, mMaximumPosition.y, 0); }
+        if (mPosition.y < mMinimumPosition.y) { mPosition = new Vector3(mPosition.x, mMinimumPosition.y, 0); }
         MoveDirection();
     }
 
@@ -120,11 +124,11 @@ public class ShopNPC : MonoBehaviour
         mNpcAni.SetBool("IsWalking", false);
         if (mTablePosition != Vector3.zero)
         {
-            mTablePosition = new Vector3(1, -6.5f, 0);
+            mTablePosition = mDoorPosition;
         }
         else
         {
-            mPosition = new Vector3(1, -6.5f, 0);
+            mPosition = mDoorPosition;
         }
 
         MoveDirection();
@@ -134,7 +138,7 @@ public class ShopNPC : MonoBehaviour
     {
         CancelInvoke();
         mNpcAni.SetBool("IsWalking", false);
-        mTablePosition = new Vector3(1, -3.9f, 0);
+        mTablePosition = mCasherPosition;
         MoveDirection();
         IsCalculate = false;
     }

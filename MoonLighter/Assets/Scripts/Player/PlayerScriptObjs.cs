@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerScriptObjs : ScriptableObject
 {
     public float hp;
+    public float MaxHp;
     public float Speed;
     public float str;
     public float def;

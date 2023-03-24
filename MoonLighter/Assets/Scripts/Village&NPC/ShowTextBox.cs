@@ -43,8 +43,12 @@ public class ShowTextBox : MonoBehaviour
             {
                 if (mID == 600)
                 {
-                    GFunc.LoadScene("ShopLv2");
-                    
+                    //GFunc.LoadScene("ShopLv2");
+                    LoadingManager.LoadScene("ShopLv2");
+                }
+                else if(mID == 120)
+                {
+                    // 상점의 테이블
                 }
                 else if(mID == 700)
                 {
