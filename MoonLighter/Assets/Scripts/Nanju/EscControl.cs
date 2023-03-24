@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Esc : MonoBehaviour
+public class EscControl : MonoBehaviour
 {
-    public GameObject GameBackButton;
-    public GameObject OptionButton;
-    public GameObject MainMenuButton;
-    public GameObject ExitButton;
+    public GameObject mGameBackCursorImage;
+    public GameObject mOptionCursorImage;
+    public GameObject mMainMenuCursorImage;
+    public GameObject mExitCursorImage;
+
+    // public KeyCode mUpKey= KeyCode.W;
 
     public int mTextCheck;
 
@@ -43,6 +45,7 @@ public class Esc : MonoBehaviour
                 mTextCheck--;
             }
         }
+        // 선택하였을때 실행
         if (Input.GetKeyDown(KeyCode.E))
         {
             switch (mTextCheck)
@@ -59,32 +62,32 @@ public class Esc : MonoBehaviour
 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+                    Application.Quit();
 #endif
                     break;
             }
         }
-
+        // 무슨 이름인지 체크하여 활성화,비활성화 하기
         switch (mTextCheck)
         {
             case 0:
-                GameBackButton.SetActive(true);
-                OptionButton.SetActive(false);
+                mGameBackCursorImage.SetActive(true);
+                mOptionCursorImage.SetActive(false);
                 break;
 
             case 1:
-                OptionButton.SetActive(true);
-                GameBackButton.SetActive(false);
-                MainMenuButton.SetActive(false);
+                mOptionCursorImage.SetActive(true);
+                mGameBackCursorImage.SetActive(false);
+                mMainMenuCursorImage.SetActive(false);
                 break;
             case 2:
-                MainMenuButton.SetActive(true);
-                OptionButton.SetActive(false);
-                ExitButton.SetActive(false);
+                mMainMenuCursorImage.SetActive(true);
+                mOptionCursorImage.SetActive(false);
+                mExitCursorImage.SetActive(false);
                 break;
             case 3:
-                ExitButton.SetActive(true);
-                MainMenuButton.SetActive(false);
+                mExitCursorImage.SetActive(true);
+                mMainMenuCursorImage.SetActive(false);
                 break;
         }
 

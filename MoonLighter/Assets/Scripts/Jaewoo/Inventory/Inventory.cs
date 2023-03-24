@@ -17,13 +17,14 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject mChnageEquipmentSlotGrideSetting;
 
-    private Slot[] mSlot;
-    private Slot[] mSlotEquip;
+    
+    public Slot[] mSlot;
+    public Slot[] mSlotEquip;
    
     void Start()
     {
         mSlot = mChangeSlotGrideSetting.GetComponentsInChildren<Slot>();
-       // mSlotEquip = mChnageEquipmentSlotGrideSetting.GetComponentsInChildren<Slot>();
+       mSlotEquip = mChnageEquipmentSlotGrideSetting.GetComponentsInChildren<Slot>();
     }
 
     
@@ -62,8 +63,9 @@ public class Inventory : MonoBehaviour
         mChangeInventoryBase.SetActive(false);
     }
 
-    public void AcpuireItem(Item item, int itemCount = 1)
+    public void AcpuireItem(Item item, int itemCount)
     {
+        //Debug.Log(Item.ItemE)
         //얻은 아이템이 장비 타입과 다를때
         if(Item.ItemEnumType.Equiment != item.mItemType)
         {
@@ -75,7 +77,8 @@ public class Inventory : MonoBehaviour
                     if(mSlot[index].mItem.mItemName == item.mItemName)
                     {   
                         //슬롯 개수 올림
-                        mSlot[index].SetSlotCount(itemCount);
+                        //mSlot[index].SetSlotCount(itemCount += itemCount);
+                        mSlot[index].SetSlotCount(itemCount ++);
                         return;
                     }
                 }

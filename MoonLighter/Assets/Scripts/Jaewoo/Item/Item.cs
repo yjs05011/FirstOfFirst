@@ -35,16 +35,16 @@ public class Item : ScriptableObject
     public string mItemName;
 
     //아이템 체력
-    public int mItemHp;
+    public int mItemHp {get;set;}
     //아이템 공격력
-    public int mItemDamage;
+    public int mItemDamage{get;set;}
     //아이템 방어력
-    public int mItemDefense;
+    public int mItemDefense{get;set;}
     //아이템 이속
-    public int mItemMoveSpeed;
+    public int mItemMoveSpeed{get;set;}
 
     //아이템 가격
-    public int mItemPrice;
+    public int mItemPrice{get;set;}
     //아이템 이미지
     public Sprite mItemSprite;
     //아이템 프리팹

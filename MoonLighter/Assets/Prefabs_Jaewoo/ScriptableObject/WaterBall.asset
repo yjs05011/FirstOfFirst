@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e616170c4767734c8b380e263d7c7c0, type: 3}
   m_Name: WaterBall
   m_EditorClassIdentifier: 
-  mItemType: 0
+  mItemType: 3
   mItemName: WaterBall
-  mItemHp: 0
-  mItemDamage: 0
-  mItemDefense: 0
-  mItemMoveSpeed: 0
-  mItemPrice: 0
   mItemSprite: {fileID: 1904700284, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
   mItemPrefab: {fileID: 1681433741531369586, guid: ddbd748992538c246858b17120dcc786, type: 3}
