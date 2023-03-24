@@ -761,7 +761,7 @@ GameObject:
   - component: {fileID: 238653209}
   m_Layer: 0
   m_Name: Village_Sign_Desert
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2967,7 +2967,6 @@ GameObject:
   - component: {fileID: 1302230316}
   - component: {fileID: 1302230317}
   - component: {fileID: 1302230318}
-  - component: {fileID: 1302230319}
   m_Layer: 0
   m_Name: DungeonsEntrance_Base
   m_TagString: Untagged
@@ -3144,32 +3143,6 @@ PolygonCollider2D:
       - {x: -13.680021, y: -3.957336}
       - {x: -1, y: -4}
       - {x: -1, y: -2.5}
---- !u!61 &1302230319
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302230314}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.35, y: -21.3}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 50.166668, y: 42.833332}
-    newSize: {x: 12.04, y: 10.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.73, y: 2}
-  m_EdgeRadius: 0
 --- !u!1 &1302821579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3406,7 +3379,7 @@ GameObject:
   - component: {fileID: 1541611477}
   m_Layer: 0
   m_Name: Village_Sign_Tesla
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3561,7 +3534,7 @@ GameObject:
   - component: {fileID: 1542827407}
   m_Layer: 0
   m_Name: Village_Sign_Forest
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4493,8 +4466,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1095704345
-  m_SortingLayer: 7
+  m_SortingLayerID: 947933601
+  m_SortingLayer: 10
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 53a65214e170d2f45a7b21852cafd63b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4629,8 +4602,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1095704345
-  m_SortingLayer: 7
+  m_SortingLayerID: 947933601
+  m_SortingLayer: 10
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 22e80ca3101d0fd4fba02e258501939c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4767,7 +4740,7 @@ GameObject:
   - component: {fileID: 2132778794}
   m_Layer: 0
   m_Name: GoToVillage
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4952,6 +4925,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6736476615115484876, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
+      propertyPath: m_TagString
+      value: Npc
+      objectReference: {fileID: 0}
     - target: {fileID: 6736476615115484879, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -4967,6 +4944,10 @@ PrefabInstance:
     - target: {fileID: 6736476615378258242, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
       propertyPath: m_Name
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6736476615378258242, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
+      propertyPath: m_TagString
+      value: Npc
       objectReference: {fileID: 0}
     - target: {fileID: 6736476615378258243, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
       propertyPath: m_RootOrder

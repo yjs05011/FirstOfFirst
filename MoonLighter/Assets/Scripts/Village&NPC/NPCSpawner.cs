@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
 {
-    public GameObject NPCspawner;
-    public GameObject NPCPrefab;
-    public float spawnRateMin = 0.5f;
-    public float spawnRateMax = 1f;
-
-
+    
+    public float spawnRateMin;
+    public float spawnRateMax;
+    public Vector3 mMinimumPosition;
+    public Vector3 mMaximumPosition;
+    public Vector3 mDoorPosition;
+    public Vector3 mCasherPosition;
     private float spawnRate;
     private float timeAfterSpawn;
     // Start is called before the first frame update
@@ -29,6 +30,10 @@ public class NPCSpawner : MonoBehaviour
         {
             timeAfterSpawn = 0f;
             var NPC = ShopNPCPool.GetObject(); // ¼öÁ¤
+            NPC.GetComponent<ShopNPC>().mMinimumPosition = mMinimumPosition;
+            NPC.GetComponent<ShopNPC>().mMaximumPosition = mMaximumPosition;
+            NPC.GetComponent<ShopNPC>().mDoorPosition = mDoorPosition;
+            NPC.GetComponent<ShopNPC>().mCasherPosition = mCasherPosition;
 
             if (NPC != null)
             {
