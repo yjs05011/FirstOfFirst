@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+
 
 public class Shop : MonoBehaviour
 {
     public static bool mIsShopStart = false;
-
+    
     // Start is called before the first frame update
     public virtual void Start()
     {

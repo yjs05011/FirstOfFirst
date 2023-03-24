@@ -5,5 +5,6 @@ using UnityEngine;
 public class SetPosition : GSingleton<SetPosition>
 {
     //public static SetPosition mInstance;
-    public Vector3 mSettingPosition;
+    public Vector3 mSettingPosition = default;
+    public bool mIsNight = false;
 }
