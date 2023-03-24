@@ -6,9 +6,9 @@ using UnityEngine.Tilemaps;
 public class DungeonBoard : MonoBehaviour
 {
     //보드 타입 enum
-    public enum BoardType { RANDOM, POOL, CAMP, BOSS , Start}
+    public enum BoardType { Random, Pool, Camp, Boss , Start, DungeonBoss}
     // 보드의 타입
-    public BoardType mType = BoardType.RANDOM;
+    public BoardType mType = BoardType.Random;
 
     // 해당 보드의 문의 방향으로 이동 가능 여부
     public bool mIsMovableTop = false;

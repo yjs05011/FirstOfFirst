@@ -53,7 +53,7 @@ public class BabySlime : Monster
         mHP = 10;
         mName = "BabySlime";
         mMoveSpeed = 1.0f;
-        mBaseAttack = 1;
+        mBaseAttack = 10;
    
         mMaxHP = mHP;
         mImgHp.enabled = true;
@@ -62,7 +62,7 @@ public class BabySlime : Monster
 
         mAreaRadius = 10.0f;
         mMoveRadius = 4.0f;
-        mAttackRadius = 1.0f;
+        mAttackRadius = 0.1f;
         mAttackActionTime = 1.0f;
 
         mState = State.IDLE;
@@ -206,8 +206,8 @@ public class BabySlime : Monster
         }
         if (Vector3.Distance(mTarget.position, transform.position) < 1.0f)
         {
-            // 플레이어 접근해야하니 재욱이가 만든 플레이어 컨트롤 스크립트 찾아서 on damage 처리
-            //mTarget.GetComponent<PlayerController>().OnDamege(mBaseAttack);
+            // 플레이어 접근해야하니 플레이어 컨트롤 스크립트 찾아서 on damage 함수에 데미지 전달. 
+            mTarget.GetComponent<PlayerAct>().OnDamage(mBaseAttack);
         }
     }
 

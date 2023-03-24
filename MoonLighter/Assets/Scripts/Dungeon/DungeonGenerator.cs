@@ -2,6 +2,7 @@ using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 
@@ -123,13 +124,33 @@ public class DungeonGenerator : MonoBehaviour
         {
             GenerateStage(startStage, mLastRoom, GenerateDirections(backwardDirection, startX, startY), floor);
             CheckLastRoom(startStage, mLastRoom, mDepth);
+
+            // 3층인 경우, 라스트룸 위에 보스 룸 추가 생성
+            if (floor == 3)
+            {
+                int bossRoomX = mLastRoom.GetBoardX();
+                int bossRoomY = mLastRoom.GetBoardY() + 1;
+                GameObject bossRoomObject = Instantiate(mBossStagePrefab);
+
+                bossRoomObject.name = string.Format("Stage {0},{1}", bossRoomX, bossRoomY);
+                bossRoomObject.transform.position = new Vector3(mLastRoom.transform.position.x, mLastRoom.transform.position.y + 23.8f, 0);
+
+                DungeonStage BossStage = bossRoomObject.GetComponent<DungeonStage>();
+                BossStage.SetFloor(floor);
+                BossStage.SetBoardXY(bossRoomX, bossRoomY);
+                BossStage.mBackwardDirection = DIRECTION_TOP;
+
+                mLastRoom.SetConnectedStage(DIRECTION_TOP, BossStage);
+                BossStage.SetConnectedStage(DIRECTION_BOTTOM, mLastRoom);
+
+                mStages.Add(BossStage);
+                DungeonManager.Instance.SetDungeonBossRoom(BossStage);
+            }
         }
-        Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
-
-
         SetRoomStyle(startX, startY);
         SetDoorOpen();
 
+        Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
         return startStage;
     }
 
@@ -309,38 +330,42 @@ public class DungeonGenerator : MonoBehaviour
        
         for (int i = 0; i < mStages.Count; ++i)
         {
-
+         
             if (mStages[i].GetBoardX() == startX && mStages[i].GetBoardY() == startY)
             {
                 mStages[i].SetBoadStyle(DungeonBoard.BoardType.Start);
             }
             else if (mStages[i] == mLastRoom)
             {
-                mStages[i].SetBoadStyle(DungeonBoard.BoardType.BOSS);
+                mStages[i].SetBoadStyle(DungeonBoard.BoardType.Boss);
             }
             else if (mStages[i] == mLastRoom.GetPrevStage())
             {
-                mStages[i].SetBoadStyle(DungeonBoard.BoardType.POOL);
+                mStages[i].SetBoadStyle(DungeonBoard.BoardType.Pool);
+            }
+            else if (mStages[i] == DungeonManager.Instance.GetDungeonBossRoom())
+            {
+                mStages[i].SetBoadStyle(DungeonBoard.BoardType.DungeonBoss);
             }
             else if(i >= TOTAL_COUNT / 2)
             {
                 if (IsCreatedCampRoom == false)
                 {
-                    if (mStages[i].GetBoardType() != DungeonBoard.BoardType.BOSS && mStages[i].GetBoardType() != DungeonBoard.BoardType.POOL)
+                    if (mStages[i].GetBoardType() != DungeonBoard.BoardType.Boss && mStages[i].GetBoardType() != DungeonBoard.BoardType.Pool && mStages[i].GetBoardType() != DungeonBoard.BoardType.DungeonBoss)
                     {
                         IsCreatedCampRoom = true;
-                        mStages[i].SetBoadStyle(DungeonBoard.BoardType.CAMP);
+                        mStages[i].SetBoadStyle(DungeonBoard.BoardType.Camp);
                     }
 
                 }
                 else
                 {
-                    mStages[i].SetBoadStyle(DungeonBoard.BoardType.RANDOM);
+                    mStages[i].SetBoadStyle(DungeonBoard.BoardType.Random);
                 }
             }
             else
             {
-                mStages[i].SetBoadStyle(DungeonBoard.BoardType.RANDOM);
+                mStages[i].SetBoadStyle(DungeonBoard.BoardType.Random);
             }
 
         }
@@ -386,7 +411,10 @@ public class DungeonGenerator : MonoBehaviour
             mLastRoom = stage;
         }
         
-        
+    }
+    public DungeonStage GetLastRoom()
+    {
+        return mLastRoom;
     }
 
     public DungeonStage GetStageByXY(int x, int y)
