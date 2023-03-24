@@ -90,21 +90,42 @@ public class PlayerAct : MonoBehaviour
         PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
         PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
         PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
+        PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
         mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
         mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
         mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
         mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
+        mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
         if (PlayerManager.Instance.mPlayerBeforPos != default)
         {
             transform.position = PlayerManager.Instance.mPlayerBeforPos;
         }
+        if (SetPosition.Instance.mSettingPosition != default)
+        {
+            transform.position = SetPosition.Instance.mSettingPosition;
+            SetPosition.Instance.mSettingPosition = Vector3.zero;
+        }
+
+
 
 
     }
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            GameManager.Instance.mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
+            GameManager.Instance.mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
+            GameManager.Instance.mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
+            GameManager.Instance.mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
+            GameManager.Instance.mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
+            GameManager.Instance.mPlayerMoney = PlayerManager.Instance.mPlayerStat.Money;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            DataManager.Instance.JsonLoad();
+        }
         if (PlayerManager.Instance.mIsUiActive)
         {
 
@@ -124,8 +145,12 @@ public class PlayerAct : MonoBehaviour
                 case ActState.State_Move:
                     mPlayerAnimator.SetBool("IsAttack", false);
                     mPlayerAnimator.SetBool("IsPool", false);
+                    transform.GetChild(0).gameObject.SetActive(false);
                     mPlayerHitBox.isTrigger = false;
                     mNowState.Action(ActState.State_Move);
+                    mPlayerAnimator.SetBool("IsSkill", false);
+                    mPlayerAnimator.SetBool("IsSKillHoling", false);
+                    mPlayerAnimator.SetBool("IsSkillUse", false);
                     if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
                     {
                         mTime = 0;
@@ -206,7 +231,11 @@ public class PlayerAct : MonoBehaviour
                     break;
                 case ActState.State_Enter_Pool:
                     mPlayerHitBox.isTrigger = false;
+                    transform.GetChild(0).gameObject.SetActive(false);
                     mNowState.Action(ActState.State_Enter_Pool);
+                    mPlayerAnimator.SetBool("IsSkill", false);
+                    mPlayerAnimator.SetBool("IsSKillHoling", false);
+                    mPlayerAnimator.SetBool("IsSkillUse", false);
                     if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.EVASION]))
                     {
                         SetActionType(ActState.State_Evasion);
@@ -244,11 +273,15 @@ public class PlayerAct : MonoBehaviour
             }
             else
             {
-                mPlayerAnimator.SetTrigger("IsFalling");
-                mPlayerRigid.velocity *= 0.1f;
+
                 mIsEvasion = false;
             }
 
+        }
+        if (other.CompareTag("Untagged"))
+        {
+            mPlayerHitBox.isTrigger = false;
+            mPlayerRigid.position = mPlayerPosCheck;
         }
 
     }
@@ -340,7 +373,7 @@ public class PlayerAct : MonoBehaviour
     }
     public void OnHealing(float number)
     {
-        if (mPlayerMaxHp < mPlayerHp)
+        if (mPlayerMaxHp > mPlayerHp)
         {
             mPlayerHp += number;
             if (mPlayerHp <= mPlayerMaxHp)
@@ -359,11 +392,19 @@ public class PlayerAct : MonoBehaviour
             SetActionType(ActState.State_Die);
             PlayerManager.Instance.mPlayerStat.isDie = true;
         }
+        else
+        {
+            mPlayerAnimator.SetTrigger("IsFalling");
+            mPlayerRigid.velocity *= 0.1f;
+            transform.position = DungeonManager.Instance.GetPlayerCurrStage().GetEntryPosition();
+        }
+
 
     }
     //플레이어 몬스터 히트 구현
     public void OnDamage(float MonsterDamage)
     {
+        Debug.Log(MonsterDamage);
         if (mIsDelay || mState == ActState.State_Die)
         {
         }

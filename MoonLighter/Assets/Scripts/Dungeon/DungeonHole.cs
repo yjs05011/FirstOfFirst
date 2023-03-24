@@ -17,29 +17,6 @@ public class DungeonHole : MonoBehaviour
         mStage = stage;
     }
  
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        StartCoroutine(Falling(other));
-    //        Debug.Log("Player Fall");
-
-    //        other.transform.position = mStage.GetEntryPosition();
-
-    //    }
-    //}
-
-    //IEnumerator Falling(Collider2D other)
-    //{
-      
-    //    yield return new WaitForSeconds(mDelayTime);
-
-    //    PlayerAct player = other.GetComponent<PlayerAct>();
-    //    float falldamage = player.GetPlayerMaxHp() * mFallingDamegeRate;
-
-    //    player.OnFalling(falldamage);
-
-    //}
 
 
 

@@ -159,32 +159,6 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 1
---- !u!1102 &-8335054379003948013
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Player_BigSword_Skill_Down
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e72140b7b692ef34096b6de0c75cc4f3, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &-8332669306048916552
 AnimatorState:
   serializedVersion: 6
@@ -443,43 +417,37 @@ AnimatorStateMachine:
     m_Position: {x: 670, y: 1610, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6036621346955209378}
-    m_Position: {x: 10, y: 1760, z: 0}
+    m_Position: {x: -30, y: 1760, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -255122559191942633}
     m_Position: {x: 290, y: 1880, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6524055300379201484}
-    m_Position: {x: 10, y: 1690, z: 0}
+    m_Position: {x: -30, y: 1700, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3251319713089428067}
-    m_Position: {x: 10, y: 1810, z: 0}
+    m_Position: {x: -30, y: 1820, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7496310996179162956}
-    m_Position: {x: -280, y: 1380, z: 0}
+    m_Position: {x: -260, y: 1390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 954301281143970556}
-    m_Position: {x: -70, y: 1380, z: 0}
+    m_Position: {x: -30, y: 1390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3586282565544233791}
-    m_Position: {x: -10, y: 1620, z: 0}
+    m_Position: {x: -30, y: 1640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1068341753765106020}
-    m_Position: {x: 10, y: 1880, z: 0}
+    m_Position: {x: -30, y: 1880, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1435585002571701895}
     m_Position: {x: 590, y: 1880, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -8335054379003948013}
-    m_Position: {x: 625, y: 1945, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -7116101937408097053}
-    m_Position: {x: 10, y: 1550, z: 0}
+    m_Position: {x: -30, y: 1570, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2199769124148052170}
-    m_Position: {x: 140, y: 1440, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 3493286523791649376}
-    m_Position: {x: 220, y: 1960, z: 0}
+    m_Position: {x: -20, y: 1510, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -5783197309201630285}
@@ -492,7 +460,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -210, y: 1620, z: 0}
+  m_AnyStatePosition: {x: -310, y: 1710, z: 0}
   m_EntryPosition: {x: 300, y: 1440, z: 0}
   m_ExitPosition: {x: 520, y: 1440, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -1281,103 +1249,103 @@ AnimatorController:
     m_DefaultFloat: 0.5
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: InputY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsRun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsEvasion
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAttackComboOne
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAttackComboTwo
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAttackComboThree
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsPool
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsSkill
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsFalling
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsDie
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsPortal
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: WeaponType
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsSkillUse
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsSKillHoling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsSkillTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1820,32 +1788,6 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
---- !u!1102 &3493286523791649376
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Player_BigSword_Skill_KeyHolding
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ed349b56fc9fa3849a1e8907114431e7, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1102 &3586282565544233791
 AnimatorState:
   serializedVersion: 6

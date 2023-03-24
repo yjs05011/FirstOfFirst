@@ -36,12 +36,16 @@ public class PlayerAttackSkill : PlayerState
     IEnumerator BigSwordSkill(int direct, PlayerAct player)
     {
         player.mPlayerAnimator.SetBool("IsSkill", true);
-        player.mWeaponeHitBox.gameObject.SetActive(true);
         player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, 0f);
         player.mWeaponeHitBox.size = new Vector2(4, 4);
         yield return new WaitForSeconds(0.1f);
+        player.mWeaponeHitBox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.033f);
+        player.mWeaponeHitBox.gameObject.SetActive(false);
         player.mPlayerRigid.AddForce(new Vector2(0, -90));
-        yield return new WaitForSeconds(0.933f);
+        yield return new WaitForSeconds(0.1f);
+        player.mWeaponeHitBox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.8f);
         player.mWeaponeHitBox.gameObject.SetActive(false);
         player.SetActionType(ActState.State_Move);
         player.mPlayerAnimator.SetBool("IsSkill", false);

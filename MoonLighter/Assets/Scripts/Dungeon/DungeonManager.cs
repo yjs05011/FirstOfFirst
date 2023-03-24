@@ -8,8 +8,9 @@ public class DungeonManager : MonoBehaviour
 
     // 현재 플레이어가 위치한 스테이지 
     public DungeonStage mPlayerCurrStage = null;
-    // 현재 진행중인 던전 층 
-   
+    // 현재 던전의 보스 스테이지 
+    public DungeonStage mDungeonBossStage = null;
+    // 던전 카메라 제어 스크립트
     public DungeonCameraController mCamera = null;
 
     private void Awake()
@@ -26,6 +27,10 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    public DungeonCameraController GetDungeonCamera()
+    {
+        return mCamera;
+    }
 
     // 플레이어 스테이지 이동시 설정하는 함수
     public void SetPlayerCurrStage(DungeonStage stage)
@@ -39,7 +44,20 @@ public class DungeonManager : MonoBehaviour
         return mPlayerCurrStage;
     }
 
-   
+    // 던전 보스 스테이지 설정 함수
+    public void SetDungeonBossRoom(DungeonStage bossStage)
+    {
+        mDungeonBossStage = bossStage;
+    }
+
+    // 던전 보스 스테이지 반환 함수
+    public DungeonStage GetDungeonBossRoom()
+    {
+        return mDungeonBossStage;
+    }
+
+
+    // 카메라 좌표 이동 
     public void CameraMoveByPos(Vector3 NextPos)
     {
         mCamera.CameraMoveByPos(NextPos);
