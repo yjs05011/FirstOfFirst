@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterGolemMine : DungeonMonster
+public class MonsterGolemMine : Monster
 {
     public Animator mAnimator;
 

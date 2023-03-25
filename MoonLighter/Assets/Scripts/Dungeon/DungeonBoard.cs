@@ -23,7 +23,7 @@ public class DungeonBoard : MonoBehaviour
     public List<GameObject> mObjects = new List<GameObject>();
 
     public Transform mMonstersObject = null;
-    private List<DungeonMonster> mMonsters = new List<DungeonMonster>();
+    private List<Monster> mMonsters = new List<Monster>();
 
 
 
@@ -101,7 +101,7 @@ public class DungeonBoard : MonoBehaviour
             mMonsters.Clear();
             for (int i = 0; i < mMonstersObject.childCount; ++i)
             {
-                mMonsters.Add(mMonstersObject.GetChild(i).gameObject.GetComponent<DungeonMonster>());
+                mMonsters.Add(mMonstersObject.GetChild(i).gameObject.GetComponent<Monster>());
             }
         }
 
