@@ -39,7 +39,24 @@ public class MonsterGolemTurret : Monster
             {
                 if (mTarget)
                 {
-                    mTarget.OnDamage(this.mDamage);
+                    if (mProjectilePreset)
+                    {
+                        GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
+                        instance.transform.position = this.transform.position;
+                        if (instance)
+                        {
+                            Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;
+
+                            Projectile projectile = instance.GetComponent<Projectile>();
+                            projectile.SetData(this, DungeonUtils.Convert2CardinalDirections(direction));
+                        }
+                        this.SetState(State.AttackCooltime);
+                    }
+                    else
+                    {
+                        mTarget.OnDamage(this.mDamage);
+                        this.SetState(State.AttackCooltime);
+                    }
                 }
                 else
                 {
@@ -59,6 +76,16 @@ public class MonsterGolemTurret : Monster
                 }
 
                 transform.position = nextPosition;
+            }
+        }
+        // 공격 쿨타임 (공격 후)
+        else if(mCurrState == State.AttackCooltime)
+        {
+            mAttackTime += Time.deltaTime;
+            if(mAttackInterval <= mAttackTime)
+            {
+                mAttackTime = 0.0F;
+                this.SetState(State.Attack);
             }
         }
         // 사망 상태 

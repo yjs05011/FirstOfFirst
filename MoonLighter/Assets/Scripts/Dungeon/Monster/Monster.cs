@@ -19,6 +19,7 @@ public class Monster : MonoBehaviour
         Idle, // 대기
         Wander, // 배회
         Attack, // 추적+공격
+        AttackCooltime, //공격 이후 쿨타임
         Die, // 사망 -> 비활성화
     }
 
@@ -27,27 +28,31 @@ public class Monster : MonoBehaviour
     // 다른 몬스터들도 데미지를 입힘
 
     // 컴포넌트
+    [Header("Componenet")]
     public Rigidbody2D mRigidBody = null;
 
+    [Header("Preset")]
+    public GameObject mProjectilePreset = null;
 
-    // 이동 가능한 영역
-    public Rect mMovableArea;
-
-    // 몬스터 정보
-    [Range(1.2f, 500.0f)]
+    [Header("Monster Info")]
+    public Rect mMovableArea; // 이동 가능한 영역
+    [Range(1.2f, 20.0f)]
     public float mAttackDistance = 1.0f; // 자신의 위치를 기준으로 플레이어를 공격 가능한 거리
-    [Range(1.2f, 500.0f)]
+    [Range(1.2f, 20.0f)]
     public float mTraceScope = 3.0f; // 자신의 위치를 기준으로 플레이어를 추적(이동) 가능한 거리
-    [Range(0.0f, 100.0f)]
-    public float mSpeed = 1.0f; // 몬스터의 이동 속도
+    [Range(0.0f, 20.0f)]
+    public float mSpeed = 1.0f; // 몬스터의 이동 속도 (추적)
     [Range(0.0f, 2.0f)]
     public float mWanderDistance = 1.0f; // 몬스터가 배회할때 랜덤하게 선택될 위치의 최대 거리
 
+    [Header("Monster Hp")]
     public float mHp = 100.0f;
     public float mMaxHP = 100.0f;
+    [Header("Monster Damage")]
     public float mDamage = 10.0f;
+    public float mAttackInterval = 1.0f;
+    public float mAttackTime = 0.0f;
 
-    // 몬스터 상태에 관련된 값
     public State mPrevState = State.Idle;
     public State mCurrState = State.Idle;
     protected Vector3 mWanderPosition = Vector3.zero;
@@ -74,10 +79,13 @@ public class Monster : MonoBehaviour
     {
         if(mTarget == null)
         {
-            this.mTarget = GameObject.FindAnyObjectByType<PlayerAct>();
+            this.mTarget = GameObject.FindObjectOfType<PlayerAct>();
         }
 
-        mRigidBody.velocity = Vector2.zero;
+        if(mRigidBody.bodyType != RigidbodyType2D.Static)
+        {
+            mRigidBody.velocity = Vector2.zero;
+        }
     }
 
     public void SetState(State state)
@@ -114,17 +122,15 @@ public class Monster : MonoBehaviour
     // 현재 좌표가 이동 가능한 영역인지 체크
     public bool IsMovablePosition(Vector3 position)
     {
-        if (mMovableArea.Contains(position))
+        if(mMovableArea.Contains(position))
         {
+            int layerMask = LayerMask.GetMask("Default");
             Vector3 direction = (position - this.transform.position).normalized;
 
-            RaycastHit2D[] hits = Physics2D.RaycastAll(this.transform.position, direction, 1.0f);
-            if (hits.Length == 1/*Own*/)
+            RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction, 1.0f, layerMask);
+            if (hit.collider == null)
             {
-                if (hits[0].collider.gameObject == this.gameObject)
-                {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
@@ -180,7 +186,6 @@ public class Monster : MonoBehaviour
     // 실제 게임에는 표기되지 않고 에디터상에서 거리 디버깅을 위한 기즈모 표기
     public void OnDrawGizmos()
     {
-
         Gizmos.color = Color.green;
         Gizmos.DrawLine(new Vector3(mMovableArea.xMin, mMovableArea.yMin, 0.0f), new Vector3(mMovableArea.xMin, mMovableArea.yMax));
         Gizmos.DrawLine(new Vector3(mMovableArea.xMin, mMovableArea.yMax, 0.0f), new Vector3(mMovableArea.xMax, mMovableArea.yMax));
@@ -211,5 +216,10 @@ public class Monster : MonoBehaviour
             Gizmos.color = Color.cyan;
             Gizmos.DrawLine(this.transform.position, this.transform.position + new Vector3(mAttackDistance, mAttackDistance, 0));
         }
+    }
+
+    public float GetDamage()
+    {
+        return mDamage;
     }
 }

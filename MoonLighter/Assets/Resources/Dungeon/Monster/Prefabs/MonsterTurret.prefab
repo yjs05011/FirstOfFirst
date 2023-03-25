@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 385828420}
   - component: {fileID: 385828421}
   - component: {fileID: 385828422}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GolemTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &385828422
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,7 +105,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1209188382
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1209188383}
   - component: {fileID: 1209188385}
   - component: {fileID: 1209188384}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: imgFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 1583058759}
   - component: {fileID: 1583058758}
   - component: {fileID: 1583058757}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 1616642786}
   - component: {fileID: 1616642788}
   - component: {fileID: 1616642787}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: imgBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,9 +372,7 @@ GameObject:
   - component: {fileID: 644908221494713035}
   - component: {fileID: 644908221494713037}
   - component: {fileID: 3440693678224017772}
-  - component: {fileID: 2391956255709567860}
-  - component: {fileID: 7538052000178804914}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MonsterTurret
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -446,84 +444,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042fd5b3bf844b44baa39d28efb636a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mRigidBody: {fileID: 0}
+  mRigidBody: {fileID: 644908221494713035}
+  mProjectilePreset: {fileID: 2505417995873964685, guid: b4bed31b18d0a2b45b7fbfdfbe2681a9, type: 3}
   mMovableArea:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  mAttackDistance: 1
-  mTraceScope: 3
-  mSpeed: 1
-  mWanderDistance: 1
+    x: -9
+    y: -5
+    width: 18
+    height: 10
+  mAttackDistance: 4
+  mTraceScope: 5
+  mSpeed: 0
+  mWanderDistance: 0
   mHp: 100
   mMaxHP: 100
   mDamage: 10
+  mAttackInterval: 1
+  mAttackTime: 0
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
   mImgHp: {fileID: 0}
-  mAnimator: {fileID: 0}
---- !u!114 &2391956255709567860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644908221494713036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042fd5b3bf844b44baa39d28efb636a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mRigidBody: {fileID: 0}
-  mMovableArea:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  mAttackDistance: 1
-  mTraceScope: 3
-  mSpeed: 1
-  mWanderDistance: 1
-  mHp: 100
-  mMaxHP: 100
-  mDamage: 10
-  mPrevState: 1
-  mCurrState: 1
-  mTarget: {fileID: 0}
-  mImgHp: {fileID: 0}
-  mAnimator: {fileID: 0}
---- !u!114 &7538052000178804914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644908221494713036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042fd5b3bf844b44baa39d28efb636a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mRigidBody: {fileID: 0}
-  mMovableArea:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  mAttackDistance: 1
-  mTraceScope: 3
-  mSpeed: 1
-  mWanderDistance: 1
-  mHp: 100
-  mMaxHP: 100
-  mDamage: 10
-  mPrevState: 1
-  mCurrState: 1
-  mTarget: {fileID: 0}
-  mImgHp: {fileID: 1209188384}
   mAnimator: {fileID: 385828422}

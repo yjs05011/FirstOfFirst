@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2921542246519097256}
   - component: {fileID: 3869725566256288121}
   - component: {fileID: 8663228262970672122}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MiniBoss_Floor1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2921542246519097256
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,7 +107,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &3869725566256288121
 Rigidbody2D:
   serializedVersion: 4
@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8615113648407742063}
   - component: {fileID: 5786539890257366556}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SwordAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

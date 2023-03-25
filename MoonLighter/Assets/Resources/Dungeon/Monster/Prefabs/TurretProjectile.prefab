@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2710972642372459302}
   - component: {fileID: 2710972642372459304}
   - component: {fileID: 2710972642372459303}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TurretProjectile
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2710972642372459304
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,7 +105,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!70 &2710972642372459303
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

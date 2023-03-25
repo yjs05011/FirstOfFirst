@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7820446597726027551}
   - component: {fileID: 7820446597726027549}
   - component: {fileID: 7820446597726027550}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: imgBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7820446598396533572}
   - component: {fileID: 7820446598396533573}
   - component: {fileID: 7820446598396533574}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MonsterFlying
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,19 +161,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 0}
+  mProjectilePreset: {fileID: 0}
   mMovableArea:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  mAttackDistance: 1
-  mTraceScope: 3
-  mSpeed: 1
+    x: -9
+    y: -5
+    width: 18
+    height: 10
+  mAttackDistance: 2.2
+  mTraceScope: 3.1
+  mSpeed: 0.5
   mWanderDistance: 1
   mHp: 100
   mMaxHP: 100
   mDamage: 10
+  mAttackInterval: 1
+  mAttackTime: 0
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
@@ -190,7 +193,7 @@ GameObject:
   - component: {fileID: 7820446598725225776}
   - component: {fileID: 7820446598725225782}
   - component: {fileID: 7820446598725225783}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: imgFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +270,7 @@ GameObject:
   - component: {fileID: 7820446599557869470}
   - component: {fileID: 7820446599557869471}
   - component: {fileID: 7820446599557869464}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +371,7 @@ GameObject:
   - component: {fileID: 7820446599646055260}
   - component: {fileID: 7820446599646055234}
   - component: {fileID: 7820446599646055235}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FlyingGolem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +448,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &7820446599646055235
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -462,4 +465,4 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0

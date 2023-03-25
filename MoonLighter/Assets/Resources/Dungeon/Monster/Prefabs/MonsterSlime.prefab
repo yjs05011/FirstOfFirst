@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2552959306023619172}
   - component: {fileID: 2552959306023619170}
   - component: {fileID: 2552959306023619173}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MonsterSlime
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -85,19 +85,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 2552959306023619172}
+  mProjectilePreset: {fileID: 0}
   mMovableArea:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 100
-    height: 100
+    x: -9
+    y: -5
+    width: 18
+    height: 10
   mAttackDistance: 1.2
-  mTraceScope: 5
-  mSpeed: 2
-  mWanderDistance: 0.6
+  mTraceScope: 2.3
+  mSpeed: 0.7
+  mWanderDistance: 0.25
   mHp: 100
   mMaxHP: 100
   mDamage: 10
+  mAttackInterval: 1
+  mAttackTime: 0
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
@@ -115,7 +118,7 @@ GameObject:
   - component: {fileID: 6028543529687258029}
   - component: {fileID: 482172336644695621}
   - component: {fileID: 6921614146186876083}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +219,7 @@ GameObject:
   - component: {fileID: 8284877706393199232}
   - component: {fileID: 5420929954174330811}
   - component: {fileID: 5977328722845699761}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: imgBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +295,7 @@ GameObject:
   - component: {fileID: 4879275633051477271}
   - component: {fileID: 6145896735380590340}
   - component: {fileID: 5516116913703703424}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: imgFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +371,7 @@ GameObject:
   - component: {fileID: 7507642746917467506}
   - component: {fileID: 6708879462701437376}
   - component: {fileID: 7140011712225531495}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BabySlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +449,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &7140011712225531495
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -463,7 +466,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9077653911033172342
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6683707675326172659}
   - component: {fileID: 2736668792117782252}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ColliderBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
