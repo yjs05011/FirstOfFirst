@@ -91,7 +91,7 @@ public class MonsterBabySlime : Monster
             }
         }
         // 사망 상태 
-       
+
         else if (mCurrState == State.Die)
         {
             // die 연출 없는데 투명하게 되면서 사라지는거 넣자.

@@ -13,77 +13,39 @@ public class MonsterGolemMine : Monster
         // 대기 상태
         if (mCurrState == State.Idle)
         {
-            mAnimator.SetBool("IsMove", false);
-
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())
             {
+                mAnimator.SetTrigger("Wake");
                 this.SetState(State.Attack);
                 return;
             }
 
-            // 20% 확률로 배회를 한다.
-            if (Random.Range(0, 1000) < 200)
-            {
-                mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                this.SetState(State.Wander);
-            }
         }
-        // 배회 상태 ( 할게 없는 경우 )
-        else if (mCurrState == State.Wander)
-        {
-            mAnimator.SetBool("IsMove", true);
 
-            // 배회 목적지에 도착했는지 체크한다.
-            if (Vector3.Distance(transform.position, mWanderPosition) < Mathf.Epsilon)
-            {
-                this.SetState(State.Idle);
-                return;
-            }
-
-            // 배회 한다.
-            Vector3 nextPosition = Vector3.MoveTowards(transform.position, mWanderPosition, mSpeed * Time.deltaTime);
-            // 만약 자신이 움직일 수 있는 영역을 넘어가려는 경우 중단한다.
-            if (!IsMovablePosition(nextPosition))
-            {
-                mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                this.SetState(State.Wander);
-                return;
-            }
-            transform.position = nextPosition;
-        }
         // 공격 상태
         else if (mCurrState == State.Attack)
         {
-            mAnimator.SetBool("IsMove", true);
-            // 추적 영역을 벗어난 경우 대기 상태로 바꾼다.
-            if (!IsInTraceScope())
-            {
-                this.SetState(State.Idle);
-                return;
-            }
 
             // 공격 영역 안에 있는 경우 공격 한다.
             if (IsInAttackRange())
             {
                 if (mTarget)
                 {
-                    mTarget.OnDamage(this.mDamage);
+                    mAnimator.SetTrigger("Jump");
+
                 }
-                else
-                {
-                    this.SetState(State.Idle);
-                    return;
-                }
+
             }
             // 공격 역역이 아닌 경우 추적 한다.
             else
             {
+                mAnimator.SetTrigger("Move");
                 Vector3 nextPosition = Vector3.MoveTowards(transform.position, mTarget.transform.position, mSpeed * Time.deltaTime);
                 if (!IsMovablePosition(nextPosition))
                 {
                     mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                    this.SetState(State.Wander);
+                    this.SetState(State.Attack);
                     return;
                 }
 
@@ -94,12 +56,29 @@ public class MonsterGolemMine : Monster
 
         else if (mCurrState == State.Die)
         {
-            // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
+            // die 연출 끝남 (die 애니메이션이 따로 없고, 자폭 하면서 사라지는 애니메이션출력 후 die 로 상태 전환됨)
+            GameObject.Destroy(this.gameObject);
 
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
             // 잡은 몬스터 관리 주최에다가 add 필요.
+        }
+    }
+
+    public override void OnAnimationEvent(string name)
+    {
+        if ("Explosion".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            // 타겟 한테 데미지 입히고
+            mTarget.OnDamage(this.mDamage);
+            // 주변 몬스터 데미지 주기...
+
+        }
+        if ("FinishExplosion".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            this.SetState(State.Die);
+
         }
     }
 }

@@ -466,8 +466,8 @@ MonoBehaviour:
     y: -5
     width: 18
     height: 10
-  mAttackDistance: 4
-  mTraceScope: 5
+  mAttackDistance: 20
+  mTraceScope: 20
   mSpeed: 0
   mWanderDistance: 0
   mHp: 100
@@ -475,8 +475,10 @@ MonoBehaviour:
   mDamage: 10
   mAttackInterval: 1
   mAttackTime: 0
+  mIsAttackBlock: 0
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
+  mStage: {fileID: 0}
   mImgHp: {fileID: 0}
   mAnimator: {fileID: 385828422}

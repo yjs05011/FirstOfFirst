@@ -18,8 +18,8 @@ public class DungeonCameraController : MonoBehaviour
 
     public Vector2 mCameraBoundaryMax;
 
-    private float mStageWidth = 26.0f;
-    private float mStageHeight = 15.0f;
+    private float mBoundaryAddValueX = 10.8f;
+    private float mBoundaryAddValueY = 8.8f;
 
     private bool mIsMove = false;
     public Vector3 mMovePos = Vector3.zero;
@@ -110,10 +110,10 @@ public class DungeonCameraController : MonoBehaviour
 
     public void SetCameraBoundary(DungeonStage bossStage)
     {
-        mCameraBoundaryMin.x = bossStage.transform.position.x - 10.8f;
-        mCameraBoundaryMin.y = bossStage.transform.position.y - 8.8f;
-        mCameraBoundaryMax.x = bossStage.transform.position.x + 10.8f;
-        mCameraBoundaryMax.y = bossStage.transform.position.y + 8.8f;
+        mCameraBoundaryMin.x = bossStage.transform.position.x - mBoundaryAddValueX;
+        mCameraBoundaryMin.y = bossStage.transform.position.y - mBoundaryAddValueY;
+        mCameraBoundaryMax.x = bossStage.transform.position.x + mBoundaryAddValueX;
+        mCameraBoundaryMax.y = bossStage.transform.position.y + mBoundaryAddValueY;
     }
  
     public void SetIsBossRoom(bool value)

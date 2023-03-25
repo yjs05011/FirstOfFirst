@@ -13,7 +13,6 @@ public class MonsterGolemTurret : Monster
         // 대기 상태
         if (mCurrState == State.Idle)
         {
-            mAnimator.SetBool("IsShot", false);
 
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())
@@ -31,7 +30,7 @@ public class MonsterGolemTurret : Monster
             // 추적 영역을 벗어난 경우 대기 상태로 바꾼다.
             if (!IsInTraceScope())
             {
-                mAnimator.SetBool("IsShot", false);
+             
                 this.SetState(State.Idle);
                 return;
             }
@@ -41,7 +40,7 @@ public class MonsterGolemTurret : Monster
             {
                 if (mTarget)
                 {
-                    mAnimator.SetBool("IsShot", true);
+                   
                 }
                 else
                 {
@@ -49,21 +48,7 @@ public class MonsterGolemTurret : Monster
                     return;
                 }
             }
-            // 공격 역역이 아닌 경우 추적 한다.
-            else
-            {
-                mAnimator.SetBool("IsShot", false);
-
-                Vector3 nextPosition = Vector3.MoveTowards(transform.position, mTarget.transform.position, mSpeed * Time.deltaTime);
-                if (!IsMovablePosition(nextPosition))
-                {
-                    mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                    this.SetState(State.Wander);
-                    return;
-                }
-
-                transform.position = nextPosition;
-            }
+           
         }
         // 공격 쿨타임 (공격 후)
         else if(mCurrState == State.AttackCooltime)
@@ -109,8 +94,7 @@ public class MonsterGolemTurret : Monster
             {
                 if (mTarget)
                 {
-                    mAnimator.SetBool("IsShot", true);
-
+                   
                     if (mProjectilePreset)
                     {
                         GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
