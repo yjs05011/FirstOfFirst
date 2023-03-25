@@ -213,6 +213,7 @@ public class DungeonStage : MonoBehaviour
                 mBoard = boards[index];
 
                 mBoard.SetHoleToStage(this);
+                mBoard.SetMonster();
                 mBoard.gameObject.SetActive(true);
                 if(mBoradStyle == DungeonBoard.BoardType.Pool)
                 {
@@ -223,6 +224,8 @@ public class DungeonStage : MonoBehaviour
             }
         }
     }
+
+
 
     public void SetBoadStyle(DungeonBoard.BoardType type)
     {
