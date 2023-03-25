@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class AnimationEvent : MonoBehaviour
 {
-    public void OnAnimationEvent(string func)
+    public delegate void AnimationEventDelegate(string name);
+
+    private AnimationEventDelegate mAnimationEvent = null;
+
+    public void SetDelegate(AnimationEventDelegate eventDelegate)
     {
-        Debug.Log(func);
+        mAnimationEvent = eventDelegate;
+    }
+
+    public void OnAnimationEvent(string name)
+    {
+        if(mAnimationEvent != null)
+        {
+            mAnimationEvent(name);
+        }
     }
 }

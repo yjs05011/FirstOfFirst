@@ -13,6 +13,8 @@ public class MonsterGolemTurret : Monster
         // 대기 상태
         if (mCurrState == State.Idle)
         {
+            mAnimator.SetBool("IsShot", false);
+
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())
             {
@@ -25,7 +27,7 @@ public class MonsterGolemTurret : Monster
         // 공격 상태
         else if (mCurrState == State.Attack)
         {
-            mAnimator.SetBool("IsShot", true);
+            
             // 추적 영역을 벗어난 경우 대기 상태로 바꾼다.
             if (!IsInTraceScope())
             {
@@ -39,24 +41,7 @@ public class MonsterGolemTurret : Monster
             {
                 if (mTarget)
                 {
-                    if (mProjectilePreset)
-                    {
-                        GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
-                        instance.transform.position = this.transform.position;
-                        if (instance)
-                        {
-                            Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;
-
-                            Projectile projectile = instance.GetComponent<Projectile>();
-                            projectile.SetData(this, DungeonUtils.Convert2CardinalDirections(direction));
-                        }
-                        this.SetState(State.AttackCooltime);
-                    }
-                    else
-                    {
-                        mTarget.OnDamage(this.mDamage);
-                        this.SetState(State.AttackCooltime);
-                    }
+                    mAnimator.SetBool("IsShot", true);
                 }
                 else
                 {
@@ -67,6 +52,8 @@ public class MonsterGolemTurret : Monster
             // 공격 역역이 아닌 경우 추적 한다.
             else
             {
+                mAnimator.SetBool("IsShot", false);
+
                 Vector3 nextPosition = Vector3.MoveTowards(transform.position, mTarget.transform.position, mSpeed * Time.deltaTime);
                 if (!IsMovablePosition(nextPosition))
                 {
@@ -98,6 +85,62 @@ public class MonsterGolemTurret : Monster
             this.SetState(State.None);
 
             // 잡은 몬스터 관리 주최에다가 add 필요.
+        }
+    }
+
+    public override void OnAnimationEvent(string name)
+    {
+        if ("OnGolemTurretShotDown".Equals(name, System.StringComparison.OrdinalIgnoreCase)
+            || "OnGolemTurretShotUp".Equals(name, System.StringComparison.OrdinalIgnoreCase)
+            || "OnGolemTurretShotLeft".Equals(name, System.StringComparison.OrdinalIgnoreCase)
+            || "OnGolemTurretShotRight".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+
+            // 추적 영역을 벗어난 경우 대기 상태로 바꾼다.
+            if (!IsInTraceScope())
+            {
+                mAnimator.SetBool("IsShot", false);
+                this.SetState(State.Idle);
+                return;
+            }
+
+            // 공격 영역 안에 있는 경우 공격 한다.
+            if (IsInAttackRange())
+            {
+                if (mTarget)
+                {
+                    mAnimator.SetBool("IsShot", true);
+
+                    if (mProjectilePreset)
+                    {
+                        GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
+                        instance.transform.position = this.transform.position;
+                        if (instance)
+                        {
+                            Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;
+
+                            Projectile projectile = instance.GetComponent<Projectile>();
+                            projectile.SetData(this, DungeonUtils.Convert2CardinalDirections(direction));
+                        }
+                        this.SetState(State.AttackCooltime);
+                    }
+                    else
+                    {
+                        Debug.LogErrorFormat("mProjectilePreset is Null");
+                    }
+                }
+                else
+                {
+                    this.SetState(State.Idle);
+                    return;
+                }
+
+                return;
+            }
+            else
+            {
+                Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+            }
         }
     }
 }

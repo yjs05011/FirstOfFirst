@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 385828420}
   - component: {fileID: 385828421}
   - component: {fileID: 385828422}
+  - component: {fileID: 942591823}
   m_Layer: 2
   m_Name: GolemTurret
   m_TagString: Untagged
@@ -106,6 +107,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &942591823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385828419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca15aa3e2eebe1469ec936f60b81904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209188382
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 644908221494713035}
+  mAnimationEvent: {fileID: 942591823}
   mProjectilePreset: {fileID: 2505417995873964685, guid: b4bed31b18d0a2b45b7fbfdfbe2681a9, type: 3}
   mMovableArea:
     serializedVersion: 2

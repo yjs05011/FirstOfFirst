@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
+    
     public enum Type
     {
         NORMAL,
@@ -30,6 +31,9 @@ public class Monster : MonoBehaviour
     // 컴포넌트
     [Header("Componenet")]
     public Rigidbody2D mRigidBody = null;
+
+    [Header("Animation")]
+    public AnimationEvent mAnimationEvent = null;
 
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
@@ -62,6 +66,19 @@ public class Monster : MonoBehaviour
 
     // UI > hp바 
     public Image mImgHp = null;
+
+    public void Start()
+    {
+        if(mAnimationEvent)
+        {
+            mAnimationEvent.SetDelegate(OnAnimationEvent);
+        }
+    }
+
+    public virtual void OnAnimationEvent(string name)
+    {
+        
+    }
 
     // 몬스터를 초기화 할때 사용
     public void Init(float attackDistance, float traceScope, float speed, float wanderDistance, float maxHp, float damage)
