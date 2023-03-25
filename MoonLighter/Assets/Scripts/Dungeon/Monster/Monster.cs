@@ -41,7 +41,7 @@ public class Monster : MonoBehaviour
 
     [Header("Monster Info")]
     public Rect mMovableArea; // 이동 가능한 영역
-    [Range(1.2f, 20.0f)]
+    [Range(0.1f, 20.0f)]
     public float mAttackDistance = 1.0f; // 자신의 위치를 기준으로 플레이어를 공격 가능한 거리
     [Range(1.2f, 20.0f)]
     public float mTraceScope = 3.0f; // 자신의 위치를 기준으로 플레이어를 추적(이동) 가능한 거리
@@ -59,6 +59,14 @@ public class Monster : MonoBehaviour
     public float mAttackTime = 0.0f;
     public bool mIsAttackBlock = false;
 
+    [Header("Monster Dash")]
+    public bool mIsDash = false;
+    [Range(0.0f, 20.0f)]
+    public float mDashSpeed = 5.0f;
+    [Range(1.2f, 20.0f)]
+    public float mDashDistance = 1.0f;
+
+    [Header("Monster State")]
     public State mPrevState = State.Idle;
     public State mCurrState = State.Idle;
     protected Vector3 mWanderPosition = Vector3.zero;
@@ -116,6 +124,11 @@ public class Monster : MonoBehaviour
 
     public virtual void OnDamage(float damage)
     {
+        if(mIsAttackBlock)
+        {
+            return;
+        }
+
         mHp -= damage;
         if (mImgHp != null)
         {
@@ -170,6 +183,19 @@ public class Monster : MonoBehaviour
         return false;
     }
 
+    public bool IsInDashRange()
+    {
+        float distance = 0.0f;
+        if(mIsDash && GetTargetDistance(ref distance))
+        {
+            if(distance <= mDashDistance)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // 타겟을 공격 할 수 있는 거리 안에 들어왔는지 체크한다.
     public bool IsInAttackRange()
     {
@@ -214,6 +240,9 @@ public class Monster : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, mTraceScope);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(this.transform.position, mDashDistance);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, mAttackDistance);
