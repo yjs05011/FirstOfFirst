@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mItemType: 3
   mItemName: RuneTool
+  mItemHp: 0
+  mItemDamage: 0
+  mItemDefense: 0
+  mItemMoveSpeed: 0
+  mItemPrice: 1875
   mItemSprite: {fileID: 48181480, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
   mItemPrefab: {fileID: 8687169094089065422, guid: 8f8646bf02f25f04fbaba92b8be49198, type: 3}

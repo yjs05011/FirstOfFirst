@@ -6,7 +6,7 @@ using TMPro;
 
 public class Slot : MonoBehaviour
 {
-    public int mItemCount;
+    private int mItemCount;
     public Item mItem;
     public Sprite mItemSprite;
     public SpriteRenderer slotRender = default;
@@ -19,8 +19,11 @@ public class Slot : MonoBehaviour
     private void Start()
     {
         
+        
         mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
-        slotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();
+        slotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();  
+
+        
         
     }
 
@@ -43,7 +46,7 @@ public class Slot : MonoBehaviour
         }
     }
 
-    //알파값 조절
+    //인벤토리에 들어올 스프라이트의 알파값 조절
     private void SetColor(float alpha)
     {
         transform.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
@@ -65,13 +68,17 @@ public class Slot : MonoBehaviour
 
             //mChangeImage.FindChildObj("ItemImage").transform.GetComponent<SpriteRenderer>();
             // mChangeImage.SetActive(true);
-             mTextCount.text = mItemCount.ToString();
+            mTextCount.text = mItemCount.ToString();
+            if(mItemCount == 0 )
+            {
+
+            }
             SetColor(1);
         }
         else
-        {
+        {            
+            mTextCount.text = " ";
             SetColor(1);
-             mTextCount.text = " ";
             // mChangeImage.SetActive(false);
         }
         //SetColor(1);
@@ -98,6 +105,6 @@ public class Slot : MonoBehaviour
         SetColor(0);
 
         mTextCount.text = "";
-        mChangeImage.SetActive(false);
+        //mChangeImage.SetActive(false);
     }
 }

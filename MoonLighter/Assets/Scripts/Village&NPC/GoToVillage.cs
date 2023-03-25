@@ -9,6 +9,8 @@ public class GoToVillage : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            PlayerManager.Instance.mPlayerBeforPos = SetPosition.Instance.mSettingPosition;
+            SetPosition.Instance.mSettingPosition = default;
             LoadingManager.LoadScene("VillageScene");
             //GFunc.LoadScene("VillageScene");
         }

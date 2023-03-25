@@ -42,6 +42,10 @@ public class Portal : MonoBehaviour
 
         }
     }
+    public void EnterTheDungeon()
+    {
+        LoadingManager.LoadScene("Dungeon");
+    }
 
     private void OnTriggerEnter2D(Collider2D mCollision)
     {

@@ -10,6 +10,8 @@ public class TestPlayer : MonoBehaviour
     private Inventory mInventoryTest;
     public Rigidbody2D mPlayerRigid = default;
 
+    public int mPlayerDamage = 5;
+
     void Start()
     {
         mPlayerRigid = gameObject.GetComponent<Rigidbody2D>();

@@ -10,6 +10,7 @@ public class GoToDungoenEntrance : MonoBehaviour
         if(other.tag == "Player")
         {
             SetPosition.Instance.mSettingPosition= mPosition;
+            PlayerManager.Instance.mPlayerBeforPos= default;
             LoadingManager.LoadScene("DungeonEntrance");
             //GFunc.LoadScene("DungeonEntrance");
             

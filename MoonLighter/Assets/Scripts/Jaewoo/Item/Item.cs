@@ -18,7 +18,15 @@ public class Item : ScriptableObject
         //재료
         Ingredient
     }
-
+    
+    public enum EquimentEnumType
+    {
+        None = 0,
+        Weapon,
+        Helmet,
+        Armor,
+        Boots
+    } 
     
     #region 저주 아이템 구현시 활성화 시킬 함수
     // public enum ItemCurseEnum
@@ -33,18 +41,20 @@ public class Item : ScriptableObject
     public ItemEnumType mItemType;    
     //아이템 이름
     public string mItemName;
+    //아이템 아이디
+    public int mItemId;
 
     //아이템 체력
-    public int mItemHp {get;set;}
+    public int mItemHp;
     //아이템 공격력
-    public int mItemDamage{get;set;}
+    public int mItemDamage;
     //아이템 방어력
-    public int mItemDefense{get;set;}
+    public int mItemDefense;
     //아이템 이속
-    public int mItemMoveSpeed{get;set;}
+    public int mItemMoveSpeed;
 
     //아이템 가격
-    public int mItemPrice{get;set;}
+    public int mItemPrice;
     //아이템 이미지
     public Sprite mItemSprite;
     //아이템 프리팹
