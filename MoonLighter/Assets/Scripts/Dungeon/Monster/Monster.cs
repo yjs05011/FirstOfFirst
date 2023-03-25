@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour
         Idle, // 대기
         Wander, // 배회
         Attack, // 추적+공격
+        Wait, //무한 대기(코드로 제어)
         AttackCooltime, //공격 이후 쿨타임
         Die, // 사망 -> 비활성화
     }
@@ -56,6 +57,7 @@ public class Monster : MonoBehaviour
     public float mDamage = 10.0f;
     public float mAttackInterval = 1.0f;
     public float mAttackTime = 0.0f;
+    public bool mIsAttackBlock = false;
 
     public State mPrevState = State.Idle;
     public State mCurrState = State.Idle;
@@ -63,6 +65,7 @@ public class Monster : MonoBehaviour
 
     // 값이 바뀔 수 있는 정보
     public PlayerAct mTarget = null;
+    public DungeonStage mStage = null;
 
     // UI > hp바 
     public Image mImgHp = null;

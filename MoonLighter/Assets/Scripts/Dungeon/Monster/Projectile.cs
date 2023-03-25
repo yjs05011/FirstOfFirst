@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public GameObject mExplosionPreset = null;
+    public enum State { None, Move, Explosion }
+    public State mState = State.None;
 
     public Monster mOwner = null;
     public Vector3 mDirection = Vector3.zero;
@@ -17,22 +18,31 @@ public class Projectile : MonoBehaviour
     [Range(1.0f, 1000.0f)]
     public float mEffectiveRange = 10.0f;
 
+    public Animator mAnimator = null;
+
+    public AnimationEvent mAnimationEvent = null;   
+
     public void SetData(Monster owner, Vector3 direction)
     {
         mOwner = owner;
         mDirection = direction;
 
         mStartPosition = this.transform.position;
+        mAnimationEvent.SetDelegate(OnAnimationEvent);
+        mState = State.Move;
     }
 
     public void Update()
     {
-        Vector3 movement = mDirection * mSpeed * Time.deltaTime;
-        this.transform.Translate(movement, Space.World);
-        if(!IsEffectiveRange())
+        if (mState == State.Move)
         {
-            // Pool(Push)
-            GameObject.Destroy(this.gameObject);
+            Vector3 movement = mDirection * mSpeed * Time.deltaTime;
+            this.transform.Translate(movement, Space.World);
+            if (!IsEffectiveRange())
+            {
+                // Pool(Push)
+                GameObject.Destroy(this.gameObject);
+            }
         }
     }
 
@@ -43,7 +53,7 @@ public class Projectile : MonoBehaviour
 
         Vector3 distance = from - to; //°Å¸®
 
-        if(distance.magnitude <= mEffectiveRange)
+        if (distance.magnitude <= mEffectiveRange)
         {
             return true;
         }
@@ -52,17 +62,29 @@ public class Projectile : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        mState = State.Explosion;
+        //¾îµò°¡ ºÎµúÈù °æ¿ì, Æø¹ß ¾Ö´Ï¸ÞÀÌ¼Ç Ãâ·Â
+        mAnimator.SetTrigger("Explosion");
+
         Debug.Log("OnTriggerEnter2D");
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             PlayerAct player = collision.GetComponent<PlayerAct>();
-            if(player)
+            if (player)
             {
                 player.OnDamage(mOwner.GetDamage());
 
-                // Pool(Push)
-                GameObject.Destroy(this.gameObject);
             }
+        }
+        
+    }
+
+
+    public void OnAnimationEvent(string name)
+    {
+        if("destroy".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            GameObject.Destroy(this.gameObject);
         }
     }
 }

@@ -65,17 +65,10 @@ public class MonsterFlyingGolem : Monster
             // 공격 영역 안에 있는 경우 공격 한다.
             if (IsInAttackRange())
             {
-                if (mTarget)
-                {
-                    mAnimator.SetBool("IsAttack", true);
-                    mTarget.OnDamage(this.mDamage);
-                }
-                else
-                {
-                    mAnimator.SetBool("IsAttack", false);
-                    this.SetState(State.Idle);
-                    return;
-                }
+
+                mAnimator.SetBool("IsAttack", true);
+                this.SetState(State.Wait);
+
             }
             // 공격 역역이 아닌 경우 추적 한다.
             else
@@ -103,5 +96,42 @@ public class MonsterFlyingGolem : Monster
 
             // 잡은 몬스터 관리 주최에다가 add 필요.
         }
+    }
+
+    public override void OnAnimationEvent(string name)
+    {
+        if ("Attack".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+
+            if (IsInAttackRange())
+            {
+                if (mTarget)
+                {
+                    mAnimator.SetBool("IsAttack", true);
+                    mTarget.OnDamage(this.mDamage);
+                }
+
+            }
+        }
+        else if ("AttackBlockOff".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            mIsAttackBlock = false;
+        }
+        else if ("AttackBlockOn".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            mIsAttackBlock = true;
+
+        }
+        else if ("FinishAttack".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            mIsAttackBlock = true;
+            this.SetState(State.Idle);
+            mAnimator.SetBool("IsAttack", false);
+        }
+        else
+        {
+            Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+        }
+
     }
 }

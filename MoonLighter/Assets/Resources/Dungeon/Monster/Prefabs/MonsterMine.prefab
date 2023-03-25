@@ -252,7 +252,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: d663fa27131b294438a6a08c00a0afac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -266,7 +266,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &5833161416417911657
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -283,7 +283,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &5833161416822212023
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c50f9ad1791b14dbef02dbde221eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mRigidBody: {fileID: 0}
+  mRigidBody: {fileID: 5833161417025967223}
+  mAnimationEvent: {fileID: 0}
   mProjectilePreset: {fileID: 0}
   mMovableArea:
     serializedVersion: 2
