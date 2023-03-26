@@ -8,26 +8,26 @@ using static DungeonStage;
 public class DungeonStage : MonoBehaviour
 {
 
-    // ½ºÅ×ÀÌÁö ¹Ù´Ú ÇüÅÂ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½
     public DungeonBoard mBoard = null;
 
-    // ¹Ù´Ú ÇüÅÂ ¸®½ºÆ®
+    // ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
     public List<DungeonBoard> mBoards = new List<DungeonBoard>();
-    // ¹® 4¹æÇâ ¿ÀºêÁ§Æ®
+    // ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     public DungeonDoor mDoorTop = null;
     public DungeonDoor mDoorRight = null;
     public DungeonDoor mDoorBottom = null;
     public DungeonDoor mDoorLeft = null;
   
-    // ½ºÅ×ÀÌÁöÀÇ Ãþ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     public int mFloor;
-    // ½ºÅ×ÀÌÁö°¡ °¡Áø ¹®ÀÇ ¹æÇâ º¯¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int mDoorDirections = 0;
-    // ´øÀü º¸µå»ó ½ºÅ×ÀÌÁöÀÇ x,y °ª
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ x,y ï¿½ï¿½
     public int mBoardX = 0;
     public int mBoardY = 0;
 
-    // ½ºÅ×ÀÌÁö¿¡ ¿¬°áµÈ »ó/ÇÏ/ÁÂ/¿ì ¹æÇâÀÇ ½ºÅ×ÀÌÁö ¼³Á¤ º¯¼ö 
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½/ï¿½ï¿½/ï¿½ï¿½/ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
     [SerializeField]
     private DungeonStage mConnectedStageTop = null;
     [SerializeField]
@@ -37,24 +37,26 @@ public class DungeonStage : MonoBehaviour
     [SerializeField]
     private DungeonStage mConnectedStageLeft= null;
 
-    // ½ºÅ×ÀÌÁö ¹Ù´Ú(º¸µå)ÀÇ Å¸ÀÔ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù´ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ Å¸ï¿½ï¿½
     public DungeonBoard.BoardType mBoradStyle = DungeonBoard.BoardType.Start;
 
-    // ½ºÅ×ÀÌÁö 4¹æÇâ ½ºÅ¸Æ® Æ÷ÀÎÆ® 
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸Æ® ï¿½ï¿½ï¿½ï¿½Æ® 
     public GameObject mStartPointTop = null;
     public GameObject mStartPointRight = null;
     public GameObject mStartPointBottom = null;
     public GameObject mStartPointLeft = null;
 
-    // ÀÔÀå Æ÷Áö¼Ç
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public Vector3 mEntryPosition = Vector3.zero;
-    // 
+
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int mBackwardDirection = DungeonGenerator.DIRECTION_NONE;
 
-    // ÇÃ·¹ÀÌ¾î°¡ ½ºÅ×ÀÌÁö¿¡ ¿ÂÀû ÀÖ´ÂÁö Ã¼Å© ¿ë º¯¼ö
+    // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å© ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public bool mIsPlayerEntered = false;
 
-
+    // Ã³Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    public int mMonsterDieCount = 0;
 
     public void Awake()
     {
@@ -64,13 +66,25 @@ public class DungeonStage : MonoBehaviour
         mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ ½ºÅ×ÀÌÁö¿¡ ÁøÀÔÇÔÀ» ¾Ë¸²
+
+    public void AddDieMonsterCount(int count = 1)
+    {
+        mMonsterDieCount += count;
+        if(mBoard.GetBoardMonsterCount() == mMonsterDieCount)
+        {
+            // ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            SetDoorsOpen();
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        }
+    }
+    
+        // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {
         Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ ½ºÅ×ÀÌÁö¸¦ ³ª°¨À» ¾Ë¸²
+    // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
     public void OnStageExit(DungeonDoor.TansferInfo transferInfo)
     {
         Debug.LogFormat("The player is exit the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
@@ -208,14 +222,14 @@ public class DungeonStage : MonoBehaviour
   
     }
 
-    // ¹® ¹æÇâ¿¡ ¸Â´Â º¸µå ¼³Á¤
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void SetStageBoard()
     {
 
         List<DungeonBoard> boards = new List<DungeonBoard>();
         GetFilteredBoards(mDoorDirections, mBoradStyle, ref boards);
 
-        // ÇÊÅÍ¸µµÈ º¸µå Áß¿¡ ÇÏ³ª¸¦ ¼±ÅÃÇÏ±â À§ÇÑ ·£´ý ¼ö »Ì±â
+        // ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì±ï¿½
         int random = UnityEngine.Random.Range(0, boards.Count);  
 
         for(int index=0; index < boards.Count; ++index)
@@ -227,7 +241,8 @@ public class DungeonStage : MonoBehaviour
                 mBoard = boards[index];
 
                 mBoard.SetHoleToStage(this);
-                mBoard.SetMonster();
+                mBoard.SetMonster(this);
+                
                 mBoard.gameObject.SetActive(true);
                 if(mBoradStyle == DungeonBoard.BoardType.Pool)
                 {
@@ -238,12 +253,13 @@ public class DungeonStage : MonoBehaviour
             }
         }
     }
+    
 
 
 
     public void SetBoadStyle(DungeonBoard.BoardType type)
     {
-        // 3Ãþ ¸¶Áö¸· ¹æ ¿¹¿ÜÃ³¸® (3ÃþÀÇ ¸¶Áö¸· ¹æÀº ·£´ý Å¸ÀÔ º¸µå°¡ ³ª¿Í¾ßÇØ¼­) 
+        // 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ (3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½Í¾ï¿½ï¿½Ø¼ï¿½) 
         if (GetFloor() == 3 && type == DungeonBoard.BoardType.Boss)
         {
             mBoradStyle = DungeonBoard.BoardType.Random;
@@ -266,7 +282,7 @@ public class DungeonStage : MonoBehaviour
     }
 
 
-    // ¹® ¹æÇâ¿¡ ¸Â´Â º¸µå ¸®½ºÆ® ÇÊÅÍ¸µ
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Í¸ï¿½
     public void GetFilteredBoards(int directions, DungeonBoard.BoardType type, ref List<DungeonBoard> output)
     {
         
@@ -289,7 +305,7 @@ public class DungeonStage : MonoBehaviour
     }
 
 
-    //¹® ¹æÇâ ¼³Á¤
+    //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void SetDoors(int doorDirections)
     {
         mDoorDirections = doorDirections;
@@ -310,7 +326,6 @@ public class DungeonStage : MonoBehaviour
             {
                     mDoorRight.SetDoors();
             }
-        
     }
 
     public DungeonDoor GetDoorByDirection(int doorDirections)
@@ -354,13 +369,13 @@ public class DungeonStage : MonoBehaviour
         mDoorRight.DoorClose();
     }
 
-    //¹® Ãß°¡ (Ãþ º¸½º stage : ´ÙÀ½ Ãþ ¿¬°á ¹® Ãß°¡ | ½ÃÀÛ stage : ´øÀü ÀÔÀå or ÇØ´ç Ãþ ÀÔÀå ¹® Ãß°¡)
+    //ï¿½ï¿½ ï¿½ß°ï¿½ (ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ stage : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ | ï¿½ï¿½ï¿½ï¿½ stage : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½Ø´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½)
     public void SetAddDoor(DungeonBoard.BoardType type)
     {
-        // ½ÃÀÛ¹æÀÇ ¹®À» ¼³Á¤ÇÏ´Â ºÎºÐ
+        // ï¿½ï¿½ï¿½Û¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½
         if(type == DungeonBoard.BoardType.Start)
         {
-            // ÀÌÀü Ãþ¿¡¼­ ³»·Á¿Â °æ¿ì (ÃþÀÌµ¿ ¹® ¼³Á¤)
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             if(mBackwardDirection != DungeonGenerator.DIRECTION_NONE)
             {
                 if(mBackwardDirection == DungeonGenerator.DIRECTION_TOP)
@@ -385,7 +400,7 @@ public class DungeonStage : MonoBehaviour
                 }
 
             }
-            // Ã³À½ 1Ãþ¿¡ ÁøÀÔÇÑ °æ¿ì (È²Åä»ö¹®)
+            // Ã³ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (È²ï¿½ï¿½ï¿½ï¿½ï¿½)
             else
             {
                 mDoorBottom.SetCurrStage(this);

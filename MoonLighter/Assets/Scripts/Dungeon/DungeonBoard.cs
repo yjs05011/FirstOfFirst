@@ -22,6 +22,7 @@ public class DungeonBoard : MonoBehaviour
     // ������Ʈ ����Ʈ (�ӽ�)
     public List<GameObject> mObjects = new List<GameObject>();
 
+    // 몬스터 
     public Transform mMonstersObject = null;
     private List<Monster> mMonsters = new List<Monster>();
 
@@ -36,6 +37,11 @@ public class DungeonBoard : MonoBehaviour
     public BoardType GetBoardType() 
     { 
         return mType; 
+    }
+
+    public int GetBoardMonsterCount()
+    {
+        return mMonsters.Count;
     }
 
     public void SetHoleToStage(DungeonStage stage)
@@ -94,7 +100,7 @@ public class DungeonBoard : MonoBehaviour
         return false;
     }
 
-    public void SetMonster()
+    public void SetMonster(DungeonStage stage)
     {
         if (mMonstersObject != null)
         {
@@ -108,6 +114,10 @@ public class DungeonBoard : MonoBehaviour
         Vector3 position = this.transform.position;
         for (int i = 0; i < mMonsters.Count; ++i)
         {
+            // 몬스터에 스테이지 설정.
+            mMonsters[i].SetStage(stage);
+            
+            // 몬스터 이동 범위 스테이지(보드)위치에 맞춰서 조정.
             float x = position.x - 10.0f;
             float y = position.y - 5.5f;
             mMonsters[i].mMovableArea.x = x;
@@ -115,7 +125,6 @@ public class DungeonBoard : MonoBehaviour
             mMonsters[i].mMovableArea.width = 20;
             mMonsters[i].mMovableArea.height = 11;
             mMonsters[i].gameObject.SetActive(true);
-
 
         }
     }
