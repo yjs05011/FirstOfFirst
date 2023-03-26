@@ -7,6 +7,7 @@ using static DungeonStage;
 
 public class DungeonStage : MonoBehaviour
 {
+
     // 스테이지 바닥 형태
     public DungeonBoard mBoard = null;
 
@@ -62,6 +63,19 @@ public class DungeonStage : MonoBehaviour
         mDoorBottom.SetDoorDirection(DungeonGenerator.DIRECTION_BOTTOM);
         mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
     }
+
+    // 플레이어가 스테이지에 진입함을 알림
+    public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
+    {
+        Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
+    }
+
+    // 플레이어가 스테이지를 나감을 알림
+    public void OnStageExit(DungeonDoor.TansferInfo transferInfo)
+    {
+        Debug.LogFormat("The player is exit the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
+    }
+
     public void SetFloor(int floor)
     {
         mFloor = floor;

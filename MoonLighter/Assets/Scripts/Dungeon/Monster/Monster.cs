@@ -248,7 +248,7 @@ public class Monster : MonoBehaviour
         Gizmos.DrawWireSphere(this.transform.position, mAttackDistance);
 
         // 플레이어가 타겟인 경우
-        if (mTarget)
+        if (mTarget && IsInTraceScope())
         {
             if (IsInAttackRange())
             {
