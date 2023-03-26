@@ -459,6 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 644908221494713035}
   mSpriteRenderer: {fileID: 385828421}
+  mAnimator: {fileID: 385828422}
   mAnimationEvent: {fileID: 942591823}
   mProjectilePreset: {fileID: 2710972642372459300, guid: 170510f49bf6e6147a1a1580738315c5, type: 3}
   mMovableArea:
@@ -474,7 +475,7 @@ MonoBehaviour:
   mHp: 100
   mMaxHP: 100
   mDamage: 10
-  mAttackInterval: 1
+  mAttackInterval: 0.3
   mAttackTime: 0
   mIsAttackBlock: 0
   mIsDash: 0
@@ -485,4 +486,4 @@ MonoBehaviour:
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
   mImgHp: {fileID: 1209188384}
-  mAnimator: {fileID: 385828422}
+  mShotCount: 3

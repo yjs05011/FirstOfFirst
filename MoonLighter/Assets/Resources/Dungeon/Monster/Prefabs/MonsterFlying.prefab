@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 7820446598396533574}
   m_Layer: 2
   m_Name: MonsterFlying
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 7820446598396533572}
   mSpriteRenderer: {fileID: 7820446599646055234}
+  mAnimator: {fileID: 7820446599646055235}
   mAnimationEvent: {fileID: 1872164662}
   mProjectilePreset: {fileID: 0}
   mMovableArea:
@@ -170,9 +171,9 @@ MonoBehaviour:
     y: -5
     width: 18
     height: 10
-  mAttackDistance: 1.2
-  mTraceScope: 3.3
-  mSpeed: 0.5
+  mAttackDistance: 1.26
+  mTraceScope: 6.23
+  mSpeed: 2
   mWanderDistance: 0
   mHp: 100
   mMaxHP: 100
@@ -180,15 +181,15 @@ MonoBehaviour:
   mAttackInterval: 1
   mAttackTime: 0
   mIsAttackBlock: 0
-  mIsDash: 0
-  mDashSpeed: 5
-  mDashDistance: 1
+  mIsDash: 1
+  mDashSpeed: 3
+  mDashDistance: 2.91
+  mDashDestination: {x: 0, y: 0, z: 0}
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
   mImgHp: {fileID: 7820446598725225783}
-  mAnimator: {fileID: 7820446599646055235}
 --- !u!1 &7820446598725225777
 GameObject:
   m_ObjectHideFlags: 0

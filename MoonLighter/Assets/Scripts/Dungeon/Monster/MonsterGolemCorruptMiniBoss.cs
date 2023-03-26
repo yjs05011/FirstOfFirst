@@ -36,16 +36,8 @@ public class MonsterGolemCorruptMiniBoss : Monster
             }
 
             // 배회 한다.
-            Vector3 nextPosition = Vector3.MoveTowards(transform.position, mWanderPosition, mSpeed * Time.deltaTime);
-            // 만약 자신이 움직일 수 있는 영역을 넘어가려는 경우 중단한다.
-            if (!IsMovablePosition(nextPosition))
-            {
-                mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                this.SetState(State.Wander);
-                return;
-            }
-            UpdateAnimationDirection(this.transform.position, mTarget.transform.position);
-            transform.position = nextPosition;
+            this.Movement(mWanderPosition, mSpeed, true);
+            this.UpdateAnimationDirection(this.transform.position, mTarget.transform.position);
         }
         // 공격 상태
         else if (mCurrState == State.Attack)
@@ -81,15 +73,9 @@ public class MonsterGolemCorruptMiniBoss : Monster
             // 공격 역역이 아닌 경우 추적 한다.
             else
             {
-                Vector3 nextPosition = Vector3.MoveTowards(transform.position, mTarget.transform.position, mSpeed * Time.deltaTime);
-                if (!IsMovablePosition(nextPosition))
-                {
-                    mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                    this.SetState(State.Wander);
-                    return;
-                }
-                UpdateAnimationDirection(this.transform.position, mTarget.transform.position);
-                transform.position = nextPosition;
+                // 이동 한다. (이동 불가시 배회)
+                this.Movement(mTarget.transform.position, mSpeed, true);
+                this.UpdateAnimationDirection(this.transform.position, mTarget.transform.position);
             }
         }
         // 공격 쿨타임 (공격 후)
