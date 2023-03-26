@@ -84,6 +84,10 @@ public class Projectile : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Hole"))
+        {
+            return;
+        }
         this.Explosion();
 
         Debug.Log("OnTriggerEnter2D");

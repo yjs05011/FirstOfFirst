@@ -6,6 +6,9 @@ public class MonsterGolemTurret : Monster
 {
     public Animator mAnimator;
 
+    public enum Direction { Up, Right, Down, Left };
+    public Direction mDirection = Direction.Down;
+
     public override void Update()
     {
         base.Update();
@@ -20,17 +23,17 @@ public class MonsterGolemTurret : Monster
                 this.SetState(State.Attack);
                 return;
             }
-       
+
         }
-       
+
         // 공격 상태
         else if (mCurrState == State.Attack)
         {
-            
+
             // 추적 영역을 벗어난 경우 대기 상태로 바꾼다.
             if (!IsInTraceScope())
             {
-             
+
                 this.SetState(State.Idle);
                 return;
             }
@@ -40,7 +43,7 @@ public class MonsterGolemTurret : Monster
             {
                 if (mTarget)
                 {
-                   
+
                 }
                 else
                 {
@@ -48,13 +51,13 @@ public class MonsterGolemTurret : Monster
                     return;
                 }
             }
-           
+
         }
         // 공격 쿨타임 (공격 후)
-        else if(mCurrState == State.AttackCooltime)
+        else if (mCurrState == State.AttackCooltime)
         {
             mAttackTime += Time.deltaTime;
-            if(mAttackInterval <= mAttackTime)
+            if (mAttackInterval <= mAttackTime)
             {
                 mAttackTime = 0.0F;
                 this.SetState(State.Attack);
@@ -65,13 +68,14 @@ public class MonsterGolemTurret : Monster
         else if (mCurrState == State.Die)
         {
             // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
-
+            // 애니메이션 다이 
+            mAnimator.SetTrigger("Dead");
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
             mStage.AddDieMonsterCount();
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
-          
+
         }
     }
 
@@ -96,7 +100,10 @@ public class MonsterGolemTurret : Monster
             {
                 if (mTarget)
                 {
-                   
+                    // 타겟위치와 비교해서 방향 찾고
+                    Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;
+                    // 터렛 몸통 방향 변경
+                    this.SetRotation(DungeonUtils.Convert2CardinalDirectionsEnum(direction));
                     if (mProjectilePreset)
                     {
                         GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
@@ -104,10 +111,9 @@ public class MonsterGolemTurret : Monster
                         instance.transform.parent = this.mStage.transform;
                         if (instance)
                         {
-                            Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;
-
                             Projectile projectile = instance.GetComponent<Projectile>();
                             projectile.SetData(this, DungeonUtils.Convert2CardinalDirections(direction));
+                            // 터렛 발사체 방향 변경
                             projectile.SetRotation(DungeonUtils.Convert2CardinalDirectionsEnum(direction));
                         }
                         this.SetState(State.AttackCooltime);
@@ -131,4 +137,36 @@ public class MonsterGolemTurret : Monster
             }
         }
     }
+    public void SetRotation(DungeonUtils.Direction direction)
+    {
+        if (mCurrState == State.Die|| mCurrState == State.None)
+        {
+            return;
+        }
+
+        switch (direction)
+        {
+            case DungeonUtils.Direction.Down:
+                mAnimator.SetFloat("Y", -1.0f);
+                mAnimator.SetFloat("X", 0.0f);
+                break;
+            case DungeonUtils.Direction.Up:
+                mAnimator.SetFloat("Y", 1.0f);
+                mAnimator.SetFloat("X", 0.0f);
+                break;
+            case DungeonUtils.Direction.Left:
+                mAnimator.SetFloat("X", -1.0f);
+                mAnimator.SetFloat("Y", 0.0f);
+                break;
+            case DungeonUtils.Direction.Right:
+                mAnimator.SetFloat("X", 1.0f);
+                mAnimator.SetFloat("Y", 0.0f);
+                break;
+        }
+        
+    }
+
+    
+
+
 }

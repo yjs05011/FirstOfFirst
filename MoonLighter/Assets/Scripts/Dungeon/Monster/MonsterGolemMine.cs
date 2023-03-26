@@ -56,11 +56,14 @@ public class MonsterGolemMine : Monster
 
         else if (mCurrState == State.Die)
         {
+            // 애니메이션 다이 
+            mAnimator.SetTrigger("Dead");
+
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
             mStage.AddDieMonsterCount();
 
             // die 연출 끝남 (die 애니메이션이 따로 없고, 자폭 하면서 사라지는 애니메이션출력 후 die 로 상태 전환됨)
-            GameObject.Destroy(this.gameObject);
+            //GameObject.Destroy(this.gameObject);
 
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);

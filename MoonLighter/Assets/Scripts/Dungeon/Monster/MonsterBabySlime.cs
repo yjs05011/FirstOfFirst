@@ -94,6 +94,10 @@ public class MonsterBabySlime : Monster
 
         else if (mCurrState == State.Die)
         {
+
+            // 애니메이션 다이 
+            mAnimator.SetTrigger("Dead");
+
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
             mStage.AddDieMonsterCount();
 
