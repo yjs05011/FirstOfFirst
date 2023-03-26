@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MonsterGolemTurret : Monster
 {
-    public Animator mAnimator;
-
     public enum Direction { Up, Right, Down, Left };
     public Direction mDirection = Direction.Down;
 

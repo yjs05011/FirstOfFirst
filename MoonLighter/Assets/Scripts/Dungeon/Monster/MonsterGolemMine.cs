@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MonsterGolemMine : Monster
 {
-    public Animator mAnimator;
-
     public override void Update()
     {
         base.Update();

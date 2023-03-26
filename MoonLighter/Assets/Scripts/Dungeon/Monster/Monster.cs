@@ -34,6 +34,7 @@ public class Monster : MonoBehaviour
     [Header("Componenet")]
     public Rigidbody2D mRigidBody = null;
     public SpriteRenderer mSpriteRenderer = null;
+    public Animator mAnimator = null;
 
     [Header("Animation")]
     public AnimationEvent mAnimationEvent = null;

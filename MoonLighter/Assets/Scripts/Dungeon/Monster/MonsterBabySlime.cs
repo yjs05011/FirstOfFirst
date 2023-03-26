@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MonsterBabySlime : Monster
 {
-    public Animator mAnimator;
-
     public override void Update()
     {
         base.Update();
