@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterGolemMiniBoss : Monster
 {
+    public DungeonUtils.Direction mCurrDirection = DungeonUtils.Direction.Down;
+
     public override void Update()
     {
         base.Update();
@@ -110,30 +112,34 @@ public class MonsterGolemMiniBoss : Monster
         Vector3 distance = (destination - origin).normalized;
 
         DungeonUtils.Direction direction = DungeonUtils.Convert2CardinalDirectionsEnum(distance);
-        switch(direction)
+        switch (direction)
         {
-            case DungeonUtils.Direction.Up: 
-                { 
+            case DungeonUtils.Direction.Up:
+                {
                     mAnimator.SetFloat("X", 0);
                     mAnimator.SetFloat("Y", 1);
-                    break; 
+                    mCurrDirection = DungeonUtils.Direction.Up;
+                    break;
                 }
             case DungeonUtils.Direction.Down:
                 {
                     mAnimator.SetFloat("X", 0);
                     mAnimator.SetFloat("Y", -1);
+                    mCurrDirection = DungeonUtils.Direction.Down;
                     break;
                 }
             case DungeonUtils.Direction.Left:
                 {
                     mAnimator.SetFloat("X", -1);
                     mAnimator.SetFloat("Y", 0);
+                    mCurrDirection = DungeonUtils.Direction.Left;
                     break;
                 }
             case DungeonUtils.Direction.Right:
                 {
                     mAnimator.SetFloat("X", 1);
                     mAnimator.SetFloat("Y", 0);
+                    mCurrDirection = DungeonUtils.Direction.Right;
                     break;
                 }
         }
@@ -171,7 +177,22 @@ public class MonsterGolemMiniBoss : Monster
         }
         else if (isSmashAttackDamage)
         {
-            
+            GameObject preset = this.FindSkillPreset("SmashAttackSkill");
+            if(preset)
+            {
+                GameObject clone = GameObject.Instantiate<GameObject>(preset);
+                SmashAttackSkill skill = clone.GetComponent<SmashAttackSkill>();
+                skill.SetData(this, new Vector3(5, 5, 0), new Vector3(60, 60, 0), 5, 15);
+                skill.transform.parent = this.mStage.mBoard.transform;
+
+                switch (mCurrDirection)
+                {
+                    case DungeonUtils.Direction.Up: { skill.transform.position += new Vector3(0, 2, 0); break; }
+                    case DungeonUtils.Direction.Down: { skill.transform.position += new Vector3(0, -2, 0); break; }
+                    case DungeonUtils.Direction.Left: { skill.transform.position += new Vector3(-2, 0, 0); break; }
+                    case DungeonUtils.Direction.Right: { skill.transform.position += new Vector3(2, 0, 0); break; }
+                }
+            }
         }
         else if(isFinish)
         {

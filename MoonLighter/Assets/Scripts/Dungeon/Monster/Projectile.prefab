@@ -114,9 +114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da60b39c98c831449ac9dc1223c0aae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mExplosionPreset: {fileID: 0}
+  mAnimator: {fileID: 0}
+  mAnimationEvent: {fileID: 0}
+  mSpeed: 1.5
+  mEffectiveRange: 6
+  mState: 0
   mOwner: {fileID: 0}
   mDirection: {x: 0, y: 0, z: 0}
   mStartPosition: {x: 0, y: 0, z: 0}
-  mSpeed: 1.5
-  mEffectiveRange: 6
+  mProjectile: {fileID: 0}

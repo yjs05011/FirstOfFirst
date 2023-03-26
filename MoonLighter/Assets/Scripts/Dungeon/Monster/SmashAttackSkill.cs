@@ -37,6 +37,7 @@ public class SmashAttackSkill : MonoBehaviour
         if(mTime > mDuration)
         {
             this.transform.localScale = mMaxScale;
+            GameObject.Destroy(this.gameObject);
         }
         else
         {

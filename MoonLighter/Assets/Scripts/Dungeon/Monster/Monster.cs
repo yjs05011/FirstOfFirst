@@ -49,7 +49,7 @@ public class Monster : MonoBehaviour
 
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
-    public List<SkillPreset> mSkillPresets = new List<SkillPreset>();
+    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); //딕셔너리 직렬화가 안되서 리스트 사용(추후 변경)
 
     [Header("Monster Info")]
     public Rect mMovableArea; // 이동 가능한 영역
@@ -67,8 +67,8 @@ public class Monster : MonoBehaviour
     public float mMaxHP = 100.0f;
     [Header("Monster Damage")]
     public float mDamage = 10.0f;
-    public float mAttackInterval = 1.0f;
-    public float mAttackTime = 0.0f;
+    public float mAttackInterval = 1.0f; // 어택 쿨타임
+    public float mAttackTime = 0.0f;    // 어택 쿨타임 (바뀌는값)
     public bool mIsAttackBlock = false;
 
     [Header("Monster Dash")]
@@ -225,6 +225,28 @@ public class Monster : MonoBehaviour
         Vector3 destination = transform.position + (Vector3)direction * length;
 
         return destination;
+    }
+
+    public Vector3 GenerateRandomRectPosition(Rect rect)
+    {
+        return new Vector3(
+            Random.Range(rect.xMin, rect.xMax),
+            Random.Range(rect.yMin, rect.yMax),
+            0
+        );
+    }
+
+    public GameObject FindSkillPreset(string key)
+    {
+        int count = mSkillPresets.Count;
+        for(int idx=0; idx<count; ++idx)
+        {
+            if(mSkillPresets[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return mSkillPresets[idx].preset;
+            }
+        }
+        return null;
     }
 
     // 현재 좌표가 이동 가능한 영역인지 체크

@@ -112,11 +112,13 @@ MonoBehaviour:
   mIsDash: 0
   mDashSpeed: 5
   mDashDistance: 1
+  mDashDestination: {x: 0, y: 0, z: 0}
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
   mImgHp: {fileID: 1906330226638164457}
+  mCurrDirection: 3
 --- !u!1 &5046454774131163764
 GameObject:
   m_ObjectHideFlags: 0

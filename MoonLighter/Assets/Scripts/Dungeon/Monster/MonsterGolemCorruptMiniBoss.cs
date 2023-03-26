@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterGolemCorruptMiniBoss : Monster
 {
+    public DungeonUtils.Direction mCurrDirection = DungeonUtils.Direction.Down;
+
     public override void Update()
     {
         base.Update();
@@ -61,7 +63,15 @@ public class MonsterGolemCorruptMiniBoss : Monster
                     }
                     else
                     {
-                        SwardAttack();
+                        if(Random.Range(0, 1000) < 500)
+                        {
+                            Teleporation();
+                        }
+                        else
+                        {
+                            SwardAttack();
+                        }
+                        
                     }
                 }
                 else
@@ -115,27 +125,47 @@ public class MonsterGolemCorruptMiniBoss : Monster
                 {
                     mAnimator.SetFloat("X", 0);
                     mAnimator.SetFloat("Y", 1);
+                    mCurrDirection = DungeonUtils.Direction.Up;
                     break;
                 }
             case DungeonUtils.Direction.Down:
                 {
                     mAnimator.SetFloat("X", 0);
                     mAnimator.SetFloat("Y", -1);
+                    mCurrDirection = DungeonUtils.Direction.Down;
                     break;
                 }
             case DungeonUtils.Direction.Left:
                 {
                     mAnimator.SetFloat("X", -1);
                     mAnimator.SetFloat("Y", 0);
+                    mCurrDirection = DungeonUtils.Direction.Left;
                     break;
                 }
             case DungeonUtils.Direction.Right:
                 {
                     mAnimator.SetFloat("X", 1);
                     mAnimator.SetFloat("Y", 0);
+                    mCurrDirection = DungeonUtils.Direction.Right;
                     break;
                 }
         }
+    }
+
+    public void Teleporation()
+    {
+        this.gameObject.SetActive(false);
+        this.mStage.StartCoroutine(TeleporationCoroutine(this, 3.0f));
+    }
+
+    public IEnumerator TeleporationCoroutine(MonsterGolemCorruptMiniBoss owner, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Vector3 position = owner.GenerateRandomRectPosition(owner.mMovableArea);
+
+        owner.gameObject.SetActive(true);
+        owner.transform.position = position;
+        owner.SetState(State.Idle);
     }
 
     public void SmashAttack()
@@ -155,10 +185,11 @@ public class MonsterGolemCorruptMiniBoss : Monster
 
     public override void OnAnimationEvent(string name)
     {
-        bool isDamage = "Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
+        bool isSmashAttackDamage = "SmashAttack@Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
+        bool isSwordAttackDamage = "SwordAttack@Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
         bool isFinish = "Finish".Equals(name, System.StringComparison.OrdinalIgnoreCase);
 
-        if (isDamage)
+        if (isSwordAttackDamage)
         {
             if (IsInAttackRange())
             {
@@ -167,6 +198,26 @@ public class MonsterGolemCorruptMiniBoss : Monster
                     mTarget.OnDamage(this.GetDamage());
                     return;
                 }
+            }
+        }
+        else if(isSmashAttackDamage)
+        {
+            GameObject preset = this.FindSkillPreset("SmashAttackSkill");
+            if (preset)
+            {
+                GameObject clone = GameObject.Instantiate<GameObject>(preset);
+                SmashAttackSkill skill = clone.GetComponent<SmashAttackSkill>();
+                skill.SetData(this, new Vector3(5, 5, 0), new Vector3(60, 60, 0), 5, 15);
+                skill.transform.parent = this.mStage.mBoard.transform;
+
+                switch(mCurrDirection)
+                {
+                    case DungeonUtils.Direction.Up: { skill.transform.position += new Vector3(0, 2, 0); break; }
+                    case DungeonUtils.Direction.Down: { skill.transform.position += new Vector3(0, -2, 0); break; }
+                    case DungeonUtils.Direction.Left: { skill.transform.position += new Vector3(-2, 0, 0); break; }
+                    case DungeonUtils.Direction.Right: { skill.transform.position += new Vector3(2, 0, 0); break; }
+                }
+                
             }
         }
         else if (isFinish)
