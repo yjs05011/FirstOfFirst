@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MonsterGolemTurret : Monster
 {
-    public enum Direction { Up, Right, Down, Left };
-    public Direction mDirection = Direction.Down;
+    
+    public int mShotCount = 3;
 
     public override void Update()
     {
@@ -14,11 +14,12 @@ public class MonsterGolemTurret : Monster
         // 대기 상태
         if (mCurrState == State.Idle)
         {
-
+           
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())
             {
-                this.SetState(State.Attack);
+                StartCoroutine(ShotDelayCoroutine());
+                
                 return;
             }
 
@@ -41,10 +42,20 @@ public class MonsterGolemTurret : Monster
             {
                 if (mTarget)
                 {
-
+                    if (mShotCount > 0)
+                    {
+                        mAnimator.SetBool("IsShot", true);
+                        --mShotCount;
+                    }
+                    else
+                    {
+                        mAnimator.SetBool("IsShot", false);
+                        this.SetState(State.Idle);
+                    }
                 }
                 else
                 {
+                    mAnimator.SetBool("IsShot", false);
                     this.SetState(State.Idle);
                     return;
                 }
@@ -69,7 +80,10 @@ public class MonsterGolemTurret : Monster
             // 애니메이션 다이 
             mAnimator.SetTrigger("Dead");
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
-            mStage.AddDieMonsterCount();
+            if (mStage)
+            {
+                mStage.AddDieMonsterCount();
+            }
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
@@ -85,41 +99,37 @@ public class MonsterGolemTurret : Monster
             || "OnGolemTurretShotRight".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
 
-            // 추적 영역을 벗어난 경우 대기 상태로 바꾼다.
-            if (!IsInTraceScope())
-            {
-                mAnimator.SetBool("IsShot", false);
-                this.SetState(State.Idle);
-                return;
-            }
-
+        
             // 공격 영역 안에 있는 경우 공격 한다.
             if (IsInAttackRange())
             {
                 if (mTarget)
                 {
-                    // 타겟위치와 비교해서 방향 찾고
-                    Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;
-                    // 터렛 몸통 방향 변경
-                    this.SetRotation(DungeonUtils.Convert2CardinalDirectionsEnum(direction));
-                    if (mProjectilePreset)
-                    {
-                        GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
-                        instance.transform.position = this.transform.position;
-                        instance.transform.parent = this.mStage.transform;
-                        if (instance)
+                    
+                        // 타겟위치와 비교해서 방향 찾고
+                        Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;
+                        // 터렛 몸통 방향 변경
+                        this.SetRotation(DungeonUtils.Convert2CardinalDirectionsEnum(direction));
+                        if (mProjectilePreset)
                         {
-                            Projectile projectile = instance.GetComponent<Projectile>();
-                            projectile.SetData(this, DungeonUtils.Convert2CardinalDirections(direction));
-                            // 터렛 발사체 방향 변경
-                            projectile.SetRotation(DungeonUtils.Convert2CardinalDirectionsEnum(direction));
+                            GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
+                            instance.transform.position = this.transform.position;
+                            instance.transform.parent = this.mStage.transform;
+                            if (instance)
+                            {
+                                Projectile projectile = instance.GetComponent<Projectile>();
+                                projectile.SetData(this, DungeonUtils.Convert2CardinalDirections(direction));
+                                // 터렛 발사체 방향 변경
+                                projectile.SetRotation(DungeonUtils.Convert2CardinalDirectionsEnum(direction));
+                            }
+                           
+                            this.SetState(State.AttackCooltime);
                         }
-                        this.SetState(State.AttackCooltime);
-                    }
-                    else
-                    {
-                        Debug.LogErrorFormat("mProjectilePreset is Null");
-                    }
+                        else
+                        {
+                            Debug.LogErrorFormat("mProjectilePreset is Null");
+                        }
+                    
                 }
                 else
                 {
@@ -131,7 +141,7 @@ public class MonsterGolemTurret : Monster
             }
             else
             {
-                Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+                //Debug.LogErrorFormat("Unknown Event Name:{0}", name);
             }
         }
     }
@@ -164,7 +174,13 @@ public class MonsterGolemTurret : Monster
         
     }
 
-    
+    protected IEnumerator ShotDelayCoroutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+        mShotCount = 3;
+        this.SetState(State.Attack);
+
+    }
 
 
 }

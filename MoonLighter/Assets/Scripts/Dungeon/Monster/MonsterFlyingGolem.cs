@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MonsterFlyingGolem : Monster
 {
-    public Animator mAnimator;
-
+   
     public override void Update()
     {
         base.Update();
@@ -13,7 +12,6 @@ public class MonsterFlyingGolem : Monster
         // 대기 상태
         if (mCurrState == State.Idle)
         {
-
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())
             {
@@ -31,7 +29,6 @@ public class MonsterFlyingGolem : Monster
         // 배회 상태 ( 할게 없는 경우 )
         else if (mCurrState == State.Wander)
         {
-           
             // 배회 목적지에 도착했는지 체크한다.
             if (Vector3.Distance(transform.position, mWanderPosition) < Mathf.Epsilon)
             {
@@ -40,15 +37,7 @@ public class MonsterFlyingGolem : Monster
             }
 
             // 배회 한다.
-            Vector3 nextPosition = Vector3.MoveTowards(transform.position, mWanderPosition, mSpeed * Time.deltaTime);
-            // 만약 자신이 움직일 수 있는 영역을 넘어가려는 경우 중단한다.
-            if (!IsMovablePosition(nextPosition))
-            {
-                mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                this.SetState(State.Wander);
-                return;
-            }
-            transform.position = nextPosition;
+            this.Movement(mWanderPosition, mSpeed, true);
         }
         // 공격 상태
         else if (mCurrState == State.Attack)
@@ -57,33 +46,31 @@ public class MonsterFlyingGolem : Monster
             // 추적 영역을 벗어난 경우 대기 상태로 바꾼다.
             if (!IsInTraceScope())
             {
-                mAnimator.SetBool("IsAttack", false);
                 this.SetState(State.Idle);
                 return;
             }
 
-            // 공격 영역 안에 있는 경우 공격 한다.
-            if (IsInAttackRange())
+            if(IsInAttackRange())
             {
-
-                mAnimator.SetBool("IsAttack", true);
-                this.SetState(State.Wait);
-
+                mAnimator.SetTrigger("Attack");
+                return;
             }
-            // 공격 역역이 아닌 경우 추적 한다.
-            else
+
+            // 대쉬 영역 안에 타겟이있는 경우 공격모션을 시작한다.
+            if (IsInDashRange())
             {
-                mAnimator.SetBool("IsAttack", false);
-                Vector3 nextPosition = Vector3.MoveTowards(transform.position, mTarget.transform.position, mSpeed * Time.deltaTime);
-                if (!IsMovablePosition(nextPosition))
-                {
-                    mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                    this.SetState(State.Wander);
-                    return;
-                }
-
-                transform.position = nextPosition;
+                mAnimator.SetTrigger("Attack");
+                this.SetDashState(mTarget.transform.position);
+                return;
             }
+
+            // 이동 한다. (이동 불가시 배회)
+            this.Movement(mTarget.transform.position, mSpeed, true);
+        }
+        // 대시 발동
+        else if(mCurrState == State.Dash)
+        {
+            this.Movement(mDashDestination, mDashSpeed, false);
         }
         // 사망 상태 
 
@@ -94,7 +81,10 @@ public class MonsterFlyingGolem : Monster
             // 애니메이션 다이 
             mAnimator.SetTrigger("Dead");
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
-            mStage.AddDieMonsterCount();
+            if (mStage)
+            {
+                mStage.AddDieMonsterCount();
+            }
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
@@ -104,6 +94,8 @@ public class MonsterFlyingGolem : Monster
 
     public override void OnAnimationEvent(string name)
     {
+        Debug.LogFormat("MonsterFlyingGolem : {0}", name);
+
         if ("Attack".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
 
@@ -111,7 +103,6 @@ public class MonsterFlyingGolem : Monster
             {
                 if (mTarget)
                 {
-                    mAnimator.SetBool("IsAttack", true);
                     mTarget.OnDamage(this.mDamage);
                 }
 
@@ -130,7 +121,6 @@ public class MonsterFlyingGolem : Monster
         {
             mIsAttackBlock = true;
             this.SetState(State.Idle);
-            mAnimator.SetBool("IsAttack", false);
         }
         else
         {

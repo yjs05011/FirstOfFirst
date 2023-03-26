@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour
         Idle, // 대기
         Wander, // 배회
         Attack, // 추적+공격
+        Dash, // 
         Wait, //무한 대기(코드로 제어)
         AttackCooltime, //공격 이후 쿨타임
         Die, // 사망 -> 비활성화
@@ -68,6 +69,7 @@ public class Monster : MonoBehaviour
     public float mDashSpeed = 5.0f;
     [Range(1.2f, 20.0f)]
     public float mDashDistance = 1.0f;
+    public Vector3 mDashDestination = Vector3.zero; // 대시는 정해진 위치로만 달린다 ( 추적 불가능 )
 
     [Header("Monster State")]
     public State mPrevState = State.Idle;
@@ -117,6 +119,12 @@ public class Monster : MonoBehaviour
         {
             mRigidBody.velocity = Vector2.zero;
         }
+
+        // 개발용
+        if(mStage == null)
+        {
+            mStage = DungeonGenerator.Instance.mStages[0];
+        }
     }
 
 
@@ -129,6 +137,26 @@ public class Monster : MonoBehaviour
     {
         mPrevState = mCurrState;
         mCurrState = state;
+    }
+
+    public void SetDashState(Vector3 destination)
+    {
+        this.SetState(State.Dash);
+        mDashDestination = destination;
+    }
+
+    public void Movement(Vector3 destination, float speed, bool changeWanderWhenBlocked)
+    {
+        // 일반 속도 이동
+        Vector3 nextPosition = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+        if (changeWanderWhenBlocked && !IsMovablePosition(nextPosition))
+        {
+            mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
+            this.SetState(State.Wander);
+            return;
+        }
+
+        transform.position = nextPosition;
     }
 
     public virtual void OnDamage(float damage)

@@ -11,7 +11,7 @@ public class MonsterGolemMine : Monster
         // 대기 상태
         if (mCurrState == State.Idle)
         {
-            // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
+            // 추적 가능한지 체크하고 추적가능하면 wake 후, 공격 상태로 바꾼다.
             if (IsInTraceScope())
             {
                 mAnimator.SetTrigger("Wake");
@@ -30,8 +30,10 @@ public class MonsterGolemMine : Monster
             {
                 if (mTarget)
                 {
+                    // 점프 모션 시작
                     mAnimator.SetTrigger("Jump");
-
+                    // 대시 상태로 전환
+                    this.SetDashState(mTarget.transform.position);
                 }
 
             }
@@ -39,34 +41,27 @@ public class MonsterGolemMine : Monster
             else
             {
                 mAnimator.SetTrigger("Move");
-                Vector3 nextPosition = Vector3.MoveTowards(transform.position, mTarget.transform.position, mSpeed * Time.deltaTime);
-                if (!IsMovablePosition(nextPosition))
-                {
-                    mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                    this.SetState(State.Attack);
-                    return;
-                }
-
-                transform.position = nextPosition;
+                // 이동 한다. (이동 불가시 배회)
+                this.Movement(mTarget.transform.position, mSpeed, true);
             }
         }
+        // 대시 발동
+        else if (mCurrState == State.Dash)
+        {
+            //대시 속도로 이동.
+            this.Movement(mDashDestination, mDashSpeed, false);
+        }
         // 사망 상태 
-
         else if (mCurrState == State.Die)
         {
-            // 애니메이션 다이 
-            mAnimator.SetTrigger("Dead");
+            if (mStage)
+            {
+                // 몬스터가 위치한 스테이지에 다이 정보 갱신
+                mStage.AddDieMonsterCount();
 
-            // 몬스터가 위치한 스테이지에 다이 정보 갱신
-            mStage.AddDieMonsterCount();
-
-            // die 연출 끝남 (die 애니메이션이 따로 없고, 자폭 하면서 사라지는 애니메이션출력 후 die 로 상태 전환됨)
-            //GameObject.Destroy(this.gameObject);
-
+            }
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
-
-            
         }
     }
 
@@ -81,8 +76,9 @@ public class MonsterGolemMine : Monster
         }
         if ("FinishExplosion".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
+            // 점프 --> 자폭 끝난 시점에 die 로 상태 전환됨)
             this.SetState(State.Die);
-
+            mAnimator.SetTrigger("Dead");
         }
     }
 }
