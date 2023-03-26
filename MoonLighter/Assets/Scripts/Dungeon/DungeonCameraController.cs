@@ -70,7 +70,7 @@ public class DungeonCameraController : MonoBehaviour
             }
             if(mType == CameraMoveType.Follow)
             {
-                Vector3 targetPos = new Vector3(mTarget.position.x, mTarget.position.y, this.transform.position.z);
+                Vector3 targetPos = new Vector3(mTarget.position.x, mTarget.position.y, -10);
 
                 targetPos.x = Mathf.Clamp(targetPos.x, mCameraBoundaryMin.x, mCameraBoundaryMax.x);
                 targetPos.y = Mathf.Clamp(targetPos.y, mCameraBoundaryMin.y, mCameraBoundaryMax.y);

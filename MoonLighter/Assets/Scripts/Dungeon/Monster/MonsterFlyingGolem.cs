@@ -37,7 +37,7 @@ public class MonsterFlyingGolem : Monster
             }
 
             // 배회 한다.
-            this.Movement(mWanderPosition, mSpeed, true);
+            this.Movement(mWanderPosition, mSpeed, false);
         }
         // 공격 상태
         else if (mCurrState == State.Attack)
@@ -65,7 +65,7 @@ public class MonsterFlyingGolem : Monster
             }
 
             // 이동 한다. (이동 불가시 배회)
-            this.Movement(mTarget.transform.position, mSpeed, true);
+            this.Movement(mTarget.transform.position, mSpeed, false);
         }
         // 대시 발동
         else if(mCurrState == State.Dash)

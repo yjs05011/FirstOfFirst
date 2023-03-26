@@ -142,7 +142,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -165,6 +165,7 @@ MonoBehaviour:
   mAnimator: {fileID: 7820446599646055235}
   mAnimationEvent: {fileID: 1872164662}
   mProjectilePreset: {fileID: 0}
+  mSkillPresets: []
   mMovableArea:
     serializedVersion: 2
     x: -9

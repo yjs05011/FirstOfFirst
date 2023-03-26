@@ -329,7 +329,7 @@ public class DungeonDoor : MonoBehaviour
         mPlayerCollider.transform.position = bossStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM);
 
         // 보스방 이전 스테이지 (3층 라스트 룸)의 포지션에 y 축만 증가한 좌표
-        Vector3 bossRoomCameraPos = new Vector3(this.GetCurrStage().transform.position.x, this.GetCurrStage().transform.position.x + 15.0f, 0);
+        Vector3 bossRoomCameraPos = new Vector3(this.GetCurrStage().transform.position.x, this.GetCurrStage().transform.position.y + 15.0f, 0);
         // 카메라 보스방여부 true 설정
         DungeonManager.Instance.GetDungeonCamera().SetIsBossRoom(true);
         // 카메라 이동 타입 변경 (보스 스테이지 입장시 즉시 카메라 이동을위해)
