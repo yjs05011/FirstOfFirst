@@ -108,6 +108,7 @@ public class MonsterGolemTurret : Monster
 
                             Projectile projectile = instance.GetComponent<Projectile>();
                             projectile.SetData(this, DungeonUtils.Convert2CardinalDirections(direction));
+                            projectile.SetRotation(DungeonUtils.Convert2CardinalDirectionsEnum(direction));
                         }
                         this.SetState(State.AttackCooltime);
                     }

@@ -5,6 +5,19 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public enum State { None, Move, Explosion }
+
+    [Header("Componenet")]
+    public Animator mAnimator = null;
+    public AnimationEvent mAnimationEvent = null;
+
+    [Header("Projectile Table")]
+    [Range(0.1f, 100.0f)]
+    public float mSpeed = 1.5f;
+
+    [Range(1.0f, 1000.0f)]
+    public float mEffectiveRange = 10.0f;
+
+    [Header("Projectile Data")]
     public State mState = State.None;
 
     public Monster mOwner = null;
@@ -12,15 +25,8 @@ public class Projectile : MonoBehaviour
 
     public Vector3 mStartPosition = Vector3.zero;
 
-    [Range(0.1f, 100.0f)]
-    public float mSpeed = 1.5f;
+    public Transform mProjectile = null;
 
-    [Range(1.0f, 1000.0f)]
-    public float mEffectiveRange = 10.0f;
-
-    public Animator mAnimator = null;
-
-    public AnimationEvent mAnimationEvent = null;
 
     public void SetData(Monster owner, Vector3 direction)
     {
@@ -30,6 +36,22 @@ public class Projectile : MonoBehaviour
         mStartPosition = this.transform.position;
         mAnimationEvent.SetDelegate(OnAnimationEvent);
         mState = State.Move;
+    }
+
+    public void SetRotation(DungeonUtils.Direction direction)
+    {
+        if(!mProjectile)
+        {
+            return;
+        }
+
+        switch(direction)
+        {
+            case DungeonUtils.Direction.Up: { mProjectile.transform.Rotate(new Vector3(0.0f, 0.0f, 180.0f)); break; }
+            case DungeonUtils.Direction.Down: { mProjectile.transform.Rotate(new Vector3(0.0f, 0.0f, 0.0f)); break; }
+            case DungeonUtils.Direction.Left: { mProjectile.transform.Rotate(new Vector3(0.0f, 0.0f, -90.0f)); break; }
+            case DungeonUtils.Direction.Right: { mProjectile.transform.Rotate(new Vector3(0.0f, 0.0f, 90.0f)); break; }
+        }
     }
 
     public void Update()
