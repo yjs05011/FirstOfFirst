@@ -90,7 +90,6 @@ public class Projectile : MonoBehaviour
         }
         this.Explosion();
 
-        Debug.Log("OnTriggerEnter2D");
         if (collision.CompareTag("Player"))
         {
             PlayerAct player = collision.GetComponent<PlayerAct>();

@@ -167,10 +167,11 @@ public class MonsterGolemMiniBoss : Monster
 
     public override void OnAnimationEvent(string name)
     {
-        bool isDamage = "Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
+        bool isSmashAttackDamage = "SmashAttack@Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
+        bool isSwordAttackDamage = "SwordAttack@Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
         bool isFinish = "Finish".Equals(name, System.StringComparison.OrdinalIgnoreCase);
 
-        if (isDamage)
+        if (isSwordAttackDamage)
         {
             if (IsInAttackRange())
             {
@@ -180,6 +181,10 @@ public class MonsterGolemMiniBoss : Monster
                     return;
                 }
             }
+        }
+        else if (isSmashAttackDamage)
+        {
+            
         }
         else if(isFinish)
         {

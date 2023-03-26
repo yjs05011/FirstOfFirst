@@ -6,6 +6,13 @@ using UnityEngine.UI;
 public class Monster : MonoBehaviour
 {
     
+    [System.Serializable]
+    public class SkillPreset
+    {
+        public string key;
+        public GameObject preset;
+    }
+
     public enum Type
     {
         NORMAL,
@@ -41,6 +48,7 @@ public class Monster : MonoBehaviour
 
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
+    public List<SkillPreset> mSkillPresets = new List<SkillPreset>();
 
     [Header("Monster Info")]
     public Rect mMovableArea; // 이동 가능한 영역

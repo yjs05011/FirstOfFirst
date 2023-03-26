@@ -386,6 +386,9 @@ MonoBehaviour:
   mAnimator: {fileID: 7042242004433035031}
   mAnimationEvent: {fileID: 221173763}
   mProjectilePreset: {fileID: 0}
+  mSkillPresets:
+  - key: SmashAttackSkill
+    preset: {fileID: 3835791503331179313, guid: 494948418c251c8479d60f3b34df96f5, type: 3}
   mMovableArea:
     serializedVersion: 2
     x: -11
