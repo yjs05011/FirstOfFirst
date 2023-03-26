@@ -25,6 +25,7 @@ public class Monster : MonoBehaviour
         Die, // 사망 -> 비활성화
     }
 
+
     // 보스
     // 골렘 마인 (자폭 몬스터)
     // 다른 몬스터들도 데미지를 입힘
@@ -72,8 +73,8 @@ public class Monster : MonoBehaviour
     protected Vector3 mWanderPosition = Vector3.zero;
 
     // 값이 바뀔 수 있는 정보
-    public PlayerAct mTarget = null;
-    public DungeonStage mStage = null;
+    public PlayerAct mTarget = null; // 타겟
+    public DungeonStage mStage = null; // 스테이지
 
     // UI > hp바 
     public Image mImgHp = null;
@@ -114,6 +115,12 @@ public class Monster : MonoBehaviour
         {
             mRigidBody.velocity = Vector2.zero;
         }
+    }
+
+
+    public void SetStage(DungeonStage stage)
+    {
+        mStage= stage;
     }
 
     public void SetState(State state)

@@ -47,13 +47,15 @@ public class DungeonStage : MonoBehaviour
 
     // 입장 포지션
     public Vector3 mEntryPosition = Vector3.zero;
-    // 
+
+    // 이전 방 방향
     public int mBackwardDirection = DungeonGenerator.DIRECTION_NONE;
 
     // 플레이어가 스테이지에 온적 있는지 체크 용 변수
     public bool mIsPlayerEntered = false;
 
-
+    // 처치된 몬스터 수
+    public int mMonsterDieCount = 0;
 
     public void Awake()
     {
@@ -62,6 +64,19 @@ public class DungeonStage : MonoBehaviour
         mDoorBottom.SetDoorDirection(DungeonGenerator.DIRECTION_BOTTOM);
         mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
     }
+
+
+    public void AddDieMonsterCount(int count = 1)
+    {
+        mMonsterDieCount += count;
+        if(mBoard.GetBoardMonsterCount() == mMonsterDieCount)
+        {
+            // 문 모두 열기
+            SetDoorsOpen();
+            // 상자 있으면 상자 열기
+        }
+    }
+
     public void SetFloor(int floor)
     {
         mFloor = floor;
@@ -213,7 +228,8 @@ public class DungeonStage : MonoBehaviour
                 mBoard = boards[index];
 
                 mBoard.SetHoleToStage(this);
-                mBoard.SetMonster();
+                mBoard.SetMonster(this);
+                
                 mBoard.gameObject.SetActive(true);
                 if(mBoradStyle == DungeonBoard.BoardType.Pool)
                 {
@@ -224,6 +240,7 @@ public class DungeonStage : MonoBehaviour
             }
         }
     }
+    
 
 
 
@@ -296,7 +313,6 @@ public class DungeonStage : MonoBehaviour
             {
                     mDoorRight.SetDoors();
             }
-        
     }
 
     public DungeonDoor GetDoorByDirection(int doorDirections)

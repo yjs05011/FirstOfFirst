@@ -94,12 +94,15 @@ public class MonsterBabySlime : Monster
 
         else if (mCurrState == State.Die)
         {
+            // 몬스터가 위치한 스테이지에 다이 정보 갱신
+            mStage.AddDieMonsterCount();
+
             // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
 
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
-            // 잡은 몬스터 관리 주최에다가 add 필요.
+           
         }
     }
 }
