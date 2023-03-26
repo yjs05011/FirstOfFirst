@@ -144,7 +144,7 @@ public class Monster : MonoBehaviour
         }
 
         mHp -= damage;
-        this.Flash(0.5f);
+        this.Flash();
         if (mImgHp != null)
         {
             mImgHp.fillAmount = mHp / mMaxHP;
@@ -155,11 +155,11 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void Flash(float delay)
+    public void Flash()
     {
         if (mSpriteRenderer)
         {
-            this.StartCoroutine(FlashCoroutine(delay));
+            this.StartCoroutine(FlashCoroutine());
         }
         else
         {
@@ -167,10 +167,14 @@ public class Monster : MonoBehaviour
         }
     }
 
-    protected IEnumerator FlashCoroutine(float delay)
+    protected IEnumerator FlashCoroutine()
     {
         mSpriteRenderer.material.SetFloat("_FlashAmount", 1.0f);
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(0.05f);
+        mSpriteRenderer.material.SetColor("_FlashColor", Color.white);
+        yield return new WaitForSeconds(0.05f);
+        mSpriteRenderer.material.SetColor("_FlashColor", Color.red);
+        yield return new WaitForSeconds(0.05f);
         mSpriteRenderer.material.SetFloat("_FlashAmount", 0.0f);
     }
 
