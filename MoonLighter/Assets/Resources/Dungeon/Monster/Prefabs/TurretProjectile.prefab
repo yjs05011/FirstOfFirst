@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -677492479486194758}
   m_Layer: 2
   m_Name: TurretProjectile
-  m_TagString: Monster
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da60b39c98c831449ac9dc1223c0aae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mState: 0
   mOwner: {fileID: 0}
   mDirection: {x: 0, y: 0, z: 0}
   mStartPosition: {x: 0, y: 0, z: 0}

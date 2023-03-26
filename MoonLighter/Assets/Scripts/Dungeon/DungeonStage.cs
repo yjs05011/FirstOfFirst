@@ -70,17 +70,27 @@ public class DungeonStage : MonoBehaviour
     public void AddDieMonsterCount(int count = 1)
     {
         mMonsterDieCount += count;
+
+        // 보드의 몬스터수와 처치 몬스터수가 같을때 (모두 처치한경우)
         if(mBoard.GetBoardMonsterCount() == mMonsterDieCount)
         {
-            // �� ��� ����
+            // 문 오픈
             SetDoorsOpen();
-            // ���� ������ ���� ����
+            // 상자 있을경우 상자 오픈.
+            // 코드 넣어야하고.
         }
     }
     
         // �÷��̾ ���������� �������� �˸�
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {
+        // 스테이지의 플레이어 입장 여부 갱신
+        SetIsEnterd(true);
+        // 보드의 몬스터 수와 처치한 몬스터 수가 다를경우 (몬스터를 처치하지않은 방)
+        if (mBoard.GetBoardMonsterCount() != mMonsterDieCount)
+        {
+            SetDoorsClose();
+        }
         Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
     }
 

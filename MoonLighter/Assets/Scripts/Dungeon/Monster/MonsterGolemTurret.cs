@@ -66,10 +66,12 @@ public class MonsterGolemTurret : Monster
         {
             // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
 
+            // 몬스터가 위치한 스테이지에 다이 정보 갱신
+            mStage.AddDieMonsterCount();
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
-            // 잡은 몬스터 관리 주최에다가 add 필요.
+          
         }
     }
 
@@ -99,6 +101,7 @@ public class MonsterGolemTurret : Monster
                     {
                         GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
                         instance.transform.position = this.transform.position;
+                        instance.transform.parent = this.mStage.transform;
                         if (instance)
                         {
                             Vector3 direction = (mTarget.transform.position - this.transform.position).normalized;

@@ -85,6 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 2552959306023619172}
+  mSpriteRenderer: {fileID: 6708879462701437376}
+  mAnimationEvent: {fileID: 0}
   mProjectilePreset: {fileID: 0}
   mMovableArea:
     serializedVersion: 2
@@ -101,9 +103,14 @@ MonoBehaviour:
   mDamage: 10
   mAttackInterval: 1
   mAttackTime: 0
+  mIsAttackBlock: 0
+  mIsDash: 0
+  mDashSpeed: 5
+  mDashDistance: 1
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
+  mStage: {fileID: 0}
   mImgHp: {fileID: 5516116913703703424}
   mAnimator: {fileID: 7140011712225531495}
 --- !u!1 &3428410279342512479
@@ -415,7 +422,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 58a5840863f006845b174d8515bb70d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -449,7 +456,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &7140011712225531495
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -466,7 +473,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &9077653911033172342
 GameObject:
   m_ObjectHideFlags: 0

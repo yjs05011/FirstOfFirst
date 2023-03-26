@@ -233,7 +233,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 58a5840863f006845b174d8515bb70d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 5833161417025967223}
+  mSpriteRenderer: {fileID: 5833161416417911658}
   mAnimationEvent: {fileID: 948349391}
   mProjectilePreset: {fileID: 0}
   mMovableArea:
@@ -466,8 +467,8 @@ MonoBehaviour:
     y: -5
     width: 18
     height: 10
-  mAttackDistance: 1
-  mTraceScope: 2.8
+  mAttackDistance: 2.2
+  mTraceScope: 4
   mSpeed: 4.3
   mWanderDistance: 0
   mHp: 100
@@ -476,6 +477,9 @@ MonoBehaviour:
   mAttackInterval: 1
   mAttackTime: 0
   mIsAttackBlock: 0
+  mIsDash: 0
+  mDashSpeed: 5
+  mDashDistance: 1
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}

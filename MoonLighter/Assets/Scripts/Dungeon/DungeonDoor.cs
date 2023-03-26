@@ -84,6 +84,11 @@ public class DungeonDoor : MonoBehaviour
         {
             mFloorDoorAnim.SetTrigger("DoorOpen");
         }
+        if (mBossRoomDoor != null && mBossRoomDoor.activeSelf)
+        {
+            SetDoorStatus(DoorStatus.OPEN);
+            mBossRoomDoorAnim.SetTrigger("DoorOpen");
+        }
     }
  
     public void DoorClose()
@@ -98,27 +103,32 @@ public class DungeonDoor : MonoBehaviour
         {
             mFloorDoorAnim.SetTrigger("DoorClose");
         }
-    }
-
-    public void BossRoomDoorOpen()
-    {
-        Init();
-        if (mBossRoomDoor != null)
-        {
-            SetDoorStatus(DoorStatus.OPEN);
-            mBossRoomDoorAnim.SetTrigger("DoorOpen");
-        }
-    }
-    
-    public void BossRoomDoorClose()
-    {
-        Init();
         if (mBossRoomDoor != null)
         {
             SetDoorStatus(DoorStatus.CLOSE);
             mBossRoomDoorAnim.SetTrigger("DoorClose");
         }
     }
+
+    //public void BossRoomDoorOpen()
+    //{
+    //    Init();
+    //    if (mBossRoomDoor != null)
+    //    {
+    //        SetDoorStatus(DoorStatus.OPEN);
+    //        mBossRoomDoorAnim.SetTrigger("DoorOpen");
+    //    }
+    //}
+    
+    //public void BossRoomDoorClose()
+    //{
+    //    Init();
+    //    if (mBossRoomDoor != null)
+    //    {
+    //        SetDoorStatus(DoorStatus.CLOSE);
+    //        mBossRoomDoorAnim.SetTrigger("DoorClose");
+    //    }
+    //}
 
 
     public void SetCurrStage(DungeonStage stage)
@@ -224,9 +234,7 @@ public class DungeonDoor : MonoBehaviour
                         {
                             break;
                         }
-                        /*---------------------------------------------------------------------------------------
-                         * [Notify] Exit Stage
-                         ---------------------------------------------------------------------------------------*/
+                         // Exit Stage
                         mCurrStage.OnStageExit(TansferInfo.Normal);
 
                         // 캐릭터 다음 스테이지로 이동
@@ -265,12 +273,8 @@ public class DungeonDoor : MonoBehaviour
                         DungeonManager.Instance.CameraMoveByPos(mNextStage.transform.position);
                         // 플레이어가 위치한 스테이지 정보 갱신
                         DungeonManager.Instance.SetPlayerCurrStage(mNextStage);
-                        // 스테이지의 플레이어 입장 여부 갱신
-                        mNextStage.SetIsEnterd(true);
 
-                        /*---------------------------------------------------------------------------------------
-                         * [Notify] Enter Stage
-                         ---------------------------------------------------------------------------------------*/
+                        //Enter Stage
                         mNextStage.OnStageEnter(TansferInfo.Normal);
                         break;
 
@@ -291,7 +295,7 @@ public class DungeonDoor : MonoBehaviour
                             {
                                 // 문 닫히는 애니메이션 출력하고.
                                 mBossRoomDoorAnim.SetTrigger("DoorClose");
-                                // 문 닫히는 연출 끝날떄 EnterBossRoom() 호출
+                                // 문 닫히는 연출 끝날때 에니메이션 이벤트로 EnterBossRoom() 호출
 
                             }
                             else
@@ -317,9 +321,7 @@ public class DungeonDoor : MonoBehaviour
 
     public void EnterBossRoom()
     {
-        /*---------------------------------------------------------------------------------------
-         * [Notify] Exit Stage
-         ---------------------------------------------------------------------------------------*/
+        // Exit Stage
         mCurrStage.OnStageExit(TansferInfo.Normal);
 
         Debug.Log("player 보스방으로 이동");
@@ -339,9 +341,7 @@ public class DungeonDoor : MonoBehaviour
         // 스테이지의 플레이어 입장 여부 갱신
         bossStage.SetIsEnterd(true);
 
-        /*---------------------------------------------------------------------------------------
-         * [Notify] Enter Stage
-         ---------------------------------------------------------------------------------------*/
+        // [Notify] Enter Stage
         mNextStage.OnStageEnter(TansferInfo.Boss);
 
     }
@@ -349,7 +349,7 @@ public class DungeonDoor : MonoBehaviour
 
     public IEnumerator FloorChange()
     {
-
+        
         // 층이동 로딩 씬 fade in
         DungeonUIFadeInOutTransition transition = DungeonManager.Instance.GetTransitionUI();
 
@@ -382,8 +382,7 @@ public class DungeonDoor : MonoBehaviour
             DungeonStage nextFloor = DungeonGenerator.Instance.InitDungeonBorad(0, 0, currFloor + 1, nextFloorBackwardDirection);
             // 플레이어가 위치한 스테이지 정보 갱신 (다음 층 시작 스테이지)
             DungeonManager.Instance.SetPlayerCurrStage(nextFloor);
-            // 스테이지의 플레이어 입장 여부 갱신
-            nextFloor.SetIsEnterd(true);
+           
 
             if ((mDirection & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
             {
@@ -421,9 +420,7 @@ public class DungeonDoor : MonoBehaviour
             // 층이동 로딩 씬 fade out
             yield return transition.TransitionFadeIn();
 
-            /*---------------------------------------------------------------------------------------
-             * [Notify] Enter Stage
-             ---------------------------------------------------------------------------------------*/
+            // [Notify] Enter Stage
             mNextStage.OnStageEnter(TansferInfo.FirstRoom);
         }
     }

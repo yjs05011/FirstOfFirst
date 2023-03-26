@@ -26,6 +26,8 @@ public class DungeonBoard : MonoBehaviour
     public Transform mMonstersObject = null;
     private List<Monster> mMonsters = new List<Monster>();
 
+    // 상자
+    public DungeonChest mChest = null;
 
 
     public void SetBoardType(BoardType type)

@@ -33,6 +33,7 @@ public class Monster : MonoBehaviour
     // ÄÄÆ÷³ÍÆ®
     [Header("Componenet")]
     public Rigidbody2D mRigidBody = null;
+    public SpriteRenderer mSpriteRenderer = null;
 
     [Header("Animation")]
     public AnimationEvent mAnimationEvent = null;
@@ -131,12 +132,18 @@ public class Monster : MonoBehaviour
 
     public virtual void OnDamage(float damage)
     {
+        if (mHp <= 0) 
+        {
+            return;
+        }
         if(mIsAttackBlock)
         {
+            Debug.Log("attack block");
             return;
         }
 
         mHp -= damage;
+        this.Flash(0.5f);
         if (mImgHp != null)
         {
             mImgHp.fillAmount = mHp / mMaxHP;
@@ -146,6 +153,26 @@ public class Monster : MonoBehaviour
             this.SetState(State.Die);
         }
     }
+
+    public void Flash(float delay)
+    {
+        if (mSpriteRenderer)
+        {
+            this.StartCoroutine(FlashCoroutine(delay));
+        }
+        else
+        {
+            Debug.LogErrorFormat("SpriteRenderer is Null.");
+        }
+    }
+
+    protected IEnumerator FlashCoroutine(float delay)
+    {
+        mSpriteRenderer.material.SetFloat("_FlashAmount", 1.0f);
+        yield return new WaitForSeconds(delay);
+        mSpriteRenderer.material.SetFloat("_FlashAmount", 0.0f);
+    }
+
 
     public Vector3 GenerateRandomAroundPosition(float distance=1.0f)
     {

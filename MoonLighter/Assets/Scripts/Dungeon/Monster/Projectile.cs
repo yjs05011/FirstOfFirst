@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
 
     public Animator mAnimator = null;
 
-    public AnimationEvent mAnimationEvent = null;   
+    public AnimationEvent mAnimationEvent = null;
 
     public void SetData(Monster owner, Vector3 direction)
     {
@@ -38,10 +38,10 @@ public class Projectile : MonoBehaviour
         {
             Vector3 movement = mDirection * mSpeed * Time.deltaTime;
             this.transform.Translate(movement, Space.World);
-            if (!IsEffectiveRange())
+            if (!IsEffectiveRange() || !mOwner.IsMovablePosition(this.transform.position))
             {
                 // Pool(Push)
-                GameObject.Destroy(this.gameObject);
+                this.Explosion();
             }
         }
     }
@@ -62,9 +62,7 @@ public class Projectile : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        mState = State.Explosion;
-        //¾îµò°¡ ºÎµúÈù °æ¿ì, Æø¹ß ¾Ö´Ï¸ÞÀÌ¼Ç Ãâ·Â
-        mAnimator.SetTrigger("Explosion");
+        this.Explosion();
 
         Debug.Log("OnTriggerEnter2D");
         if (collision.CompareTag("Player"))
@@ -73,16 +71,21 @@ public class Projectile : MonoBehaviour
             if (player)
             {
                 player.OnDamage(mOwner.GetDamage());
-
             }
         }
-        
+    }
+
+    public void Explosion()
+    {
+        //¾îµò°¡ ºÎµúÈù °æ¿ì, Æø¹ß ¾Ö´Ï¸ÞÀÌ¼Ç Ãâ·Â
+        mState = State.Explosion;
+        mAnimator.SetTrigger("Explosion");
     }
 
 
     public void OnAnimationEvent(string name)
     {
-        if("destroy".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        if ("destroy".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             GameObject.Destroy(this.gameObject);
         }
