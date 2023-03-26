@@ -10,12 +10,8 @@ public class InitManager : MonoBehaviour
         PlayerManager.Instance.Create();
         ShopManager.Instance.Create();
         TalkManager.Instance.Create();
-<<<<<<< HEAD
-        SetPosition.Instance.Create();
-=======
         GameManager.Instance.Create();
         DataManager.Instance.Create();
->>>>>>> 0df387b2af46bf52a383692706ec7c5414da0129
         //GFunc.LoadScene("VillageScene");
     }
     // Start is called before the first frame update
