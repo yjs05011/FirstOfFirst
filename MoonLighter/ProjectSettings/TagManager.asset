@@ -11,6 +11,7 @@ TagManager:
   - Trap
   - Pool
   - ItemTable
+  - Wall
   layers:
   - Default
   - TransparentFX
