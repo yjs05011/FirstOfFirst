@@ -6,7 +6,7 @@ public class InventoryManager : GSingleton<InventoryManager>
 {
     public Transform[] mItemValue = new Transform[20];
     //2차원배열
-    public GameObject[,] mSlotArray = new GameObject[5, 5];
+    public GameObject[,] mSlotArray = new GameObject[4, 5];
 
     public Dictionary<int,Item> mItemExpain = new Dictionary<int, Item>();
 
@@ -27,8 +27,9 @@ public class InventoryManager : GSingleton<InventoryManager>
 
     //1차원 배열로 아이템 자리값
 
-    public Slot[] mSlot;
-    [SerializeField]
+    public Slot[,] mSlot = new Slot[4,5];
+    public EquipmentSlot[,] mEquipmentSlot = new EquipmentSlot[4,2];
+    //[SerializeField]
     //슬롯 5x5 배열 
    // public GameObject[] mSlotArray = new GameObject[20];   
    //  [SerializeField]
@@ -58,19 +59,13 @@ public class InventoryManager : GSingleton<InventoryManager>
    //      }
    //  }
 
-    public void InventorySlotArray()
-    {      
-       for(int indexY = 0; indexY < mSlotArray.Length ; indexY ++)
-       {
-          for(int indexX = 0; indexX < mSlotArray.Length; indexX ++)
-          {
-            // mSlotArray[indexY,indexX]
-          }
-       }
-    }
    
    //서왑 temp 말고 C#의 기능이용
    //("선택한 아이템", "바꿔야할 아이템") = ("바꿔야할 아이템", "선택한 아이템");
+
+    
+
+   
 
 
    

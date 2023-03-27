@@ -62,6 +62,11 @@ public class TestPlayer : MonoBehaviour
         {
             misMove = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ItemManager.Instance.DropItem();
+        }
     }
 
    
