@@ -9,7 +9,7 @@ public class Rock : MonoBehaviour
     { 
         None, // none
         Fall, // 떨어지는 상태
-        Wait, // 대기 상태 (2.5초정도 있다가 터지면서 사라짐)
+        Wait, // 대기 상태 (5초정도 있다가 터지면서 사라짐)
         Explosion // 폭발? 사라지는 
     }
 
@@ -17,34 +17,30 @@ public class Rock : MonoBehaviour
     public Animator mAnimator = null;
     public AnimationEvent mAnimationEvent = null;
 
-    [Header("Projectile Table")]
+    [Header("Falling Object Table")]
     [Range(0.1f, 100.0f)]
     public float mSpeed = 1.5f;
 
     [Range(1.0f, 1000.0f)]
     public float mEffectiveRange = 10.0f;
 
-    [Header("Projectile Data")]
+    [Header("Rock Data")]
     public State mState = State.None;
 
     public Monster mOwner = null;
-    public Vector3 mDirection = Vector3.zero;
-
-    public Vector3 mStartPosition = Vector3.zero;
-
-    public Transform mProjectile = null;
+    public Vector3 mDropPosition = Vector3.zero;
+   
+    public Transform mRock = null;
 
     public float mWaitTime = 2.5f;
 
-    public void SetData(Monster owner, Vector3 direction)
+    public void SetData(Monster owner, Vector3 dropPos)
     {
         mOwner = owner;
-        mDirection = direction;
-
-        mStartPosition = this.transform.position;
+        mDropPosition = dropPos;
         mAnimationEvent.SetDelegate(OnAnimationEvent);
         mState = State.Fall;
-        mAnimator.SetTrigger("Rock");
+       
     }
 
  
@@ -53,9 +49,9 @@ public class Rock : MonoBehaviour
     {
         if (mState == State.Fall)
         {
-            Vector3 movement = mDirection * mSpeed * Time.deltaTime;
-            this.transform.Translate(movement, Space.World);
-            if (!IsEffectiveRange() || !mOwner.IsMovablePosition(this.transform.position))
+            mAnimator.SetTrigger("Rock");
+            this.transform.Translate(mDropPosition, Space.World);
+            if (!mOwner.IsMovablePosition(this.transform.position))
             {
                 SetState(State.Wait);
             }
@@ -69,7 +65,7 @@ public class Rock : MonoBehaviour
             else
             {
                 SetState(State.Explosion);
-                mWaitTime = 2.5f;
+                mWaitTime = 5.0f;
             }
         }
         if(mState == State.Explosion)
@@ -78,19 +74,7 @@ public class Rock : MonoBehaviour
         }
     }
 
-    public bool IsEffectiveRange()
-    {
-        Vector3 from = mStartPosition; //시작위치
-        Vector3 to = this.transform.position; //현재위치
-
-        Vector3 distance = from - to; //거리
-
-        if (distance.magnitude <= mEffectiveRange)
-        {
-            return true;
-        }
-        return false;
-    }
+   
 
     public void OnTriggerEnter2D(Collider2D collision)
     {

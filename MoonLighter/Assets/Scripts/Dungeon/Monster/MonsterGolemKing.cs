@@ -1,24 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class MonsterGolemKing : Monster
 {
-    public int mPunchCount = 0;
+    private int mPunchCount = 0;
     public const int PUNCH_COUNT = 5;
+    public Transform mWaveStartPosition = null;
+    public float mWaveCoolTime = 20.0f;
+    private float mTimer = 0.0f;
 
     public override void Update()
     {
         base.Update();
 
         // 대기 상태
-        if (mCurrState == State.None)
+        if (mCurrState == State.Ready)
         {
 
             // 범위 안에 들어왔는지 체크하고, 범위안이면, wake up 애니메이션 출력 후 idle 로 상태 변경
             if (IsInTraceScope())
             {
-                mAnimator.SetTrigger("WakeUp"); 
+                mAnimator.SetTrigger("WakeUp");
                 this.SetState(State.Idle);
                 return;
             }
@@ -27,7 +33,8 @@ public class MonsterGolemKing : Monster
 
         else if (mCurrState == State.Idle)
         {
-            mAnimator.SetTrigger("WakeUp");
+            this.SetState(State.Attack);
+
         }
         // 공격 상태
         else if (mCurrState == State.Attack)
@@ -44,31 +51,41 @@ public class MonsterGolemKing : Monster
             {
                 if (mTarget)
                 {
-                    // 발동 스킬 선택 
-                    if (Random.Range(0, 1000) < 500)
-                    {
-                        if (Random.Range(0, 1000) < 500)
-                        {
-                            PunchAttack();
-                        }
-                        else
-                        {
-                            WaveAttack();
-                        }
+                    mTimer += Time.deltaTime;
 
-                    }
-                    else
+                    if(mTimer >= mWaveCoolTime )
                     {
-                        if (Random.Range(0, 1000) < 500)
-                        {
-                            RockSpawnAttack();
-                        }
-                        else
-                        {
-                            StickyAttack();
-                        }
-
+                        mTimer = 0.0f;
+                        WaveAttack();
                     }
+                    //PunchAttack();
+                  
+
+                    //// 발동 스킬 선택 
+                    //if (Random.Range(0, 1000) < 500)
+                    //{
+                    //    if (Random.Range(0, 1000) < 500)
+                    //    {
+                    //        PunchAttack();
+                    //    }
+                    //    else
+                    //    {
+                    //        RockSpawnAttack();
+                    //    }
+                    //
+                    //}
+                    //else
+                    //{
+                    //    if (Random.Range(0, 1000) < 500)
+                    //    {
+                    //        WaveAttack();
+                    //    }
+                    //    else
+                    //    {
+                    //        StickyAttack();
+                    //    }
+                    //
+                    //}
                 }
                 else
                 {
@@ -76,7 +93,7 @@ public class MonsterGolemKing : Monster
                     return;
                 }
             }
-            
+
         }
         // 공격 쿨타임 (공격 후)
         else if (mCurrState == State.AttackCooltime)
@@ -92,7 +109,7 @@ public class MonsterGolemKing : Monster
 
         else if (mCurrState == State.Die)
         {
-            
+
             // 애니메이션 다이 
             mAnimator.SetTrigger("Dead");
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
@@ -118,9 +135,11 @@ public class MonsterGolemKing : Monster
 
     public void WaveAttack()
     {
-        // wave 포지션에 wave 오브젝트 출력??
-        this.SetState(State.Wait);
-        // -> OnAnimation:Finish 로 Attack 상태로 다시 변경
+        // wave 포지션에 wave 오브젝트 출력
+        WaveSkill();
+        // wave 는 시전 하고 골렘킹은 다시 idle 상태로 변경
+        this.SetState(State.Idle);
+
     }
 
     public void StickyAttack()
@@ -136,7 +155,7 @@ public class MonsterGolemKing : Monster
         // 락스폰 스킬 시전 애니메이션 시작 트리거 
         mAnimator.SetTrigger("RockSpawn");
         this.SetState(State.Wait);
-        // -> OnAnimation:Finish 로 Attack 상태로 다시 변경
+        // -> OnAnimation:OnGolemKingRockSpwan 로 Rock 생성 
     }
 
     public override void OnAnimationEvent(string name)
@@ -144,54 +163,78 @@ public class MonsterGolemKing : Monster
         // 펀치 공격 시전 애니메이션 - punch arm 하늘에 날린 시점에 호출. 
         if ("OnGolemKingPunchStart".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
-
-            // 공격 영역 안에 있는 경우 공격 한다.
-            if (IsInAttackRange())
+            RepeatPunchAttack();
+        }
+        // 락 스폰 시전 애니메이션 - 바닥 찍는 시점에 호출 
+        else if ("OnGolemKingRockSpwan".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            for (int i = 0; i < 40; i++)
             {
-                if (mTarget)
+                GameObject instance = GameObject.Instantiate<GameObject>(FindSkillPreset("RockSpwanPreset"));
+                instance.transform.parent = this.mStage.transform;
+
+                if (instance)
                 {
-
-                    // 타겟위치 잡고.
-                    Vector3 targetPosition = (mTarget.transform.position).normalized;
-                   
-                    if (mProjectilePreset)
-                    {
-                        GameObject instance = GameObject.Instantiate<GameObject>(mProjectilePreset);
-                        instance.transform.position = targetPosition;
-                        instance.transform.parent = this.mStage.transform;
-                        if (instance)
-                        {
-                            // PunchAttackSkill punch = instance.GetComponent<PunchAttackSkill>();
-                            // punch.SetData(this, DungeonUtils.Convert2CardinalDirections(targetPosition));
-
-                        }
-
-                        this.SetState(State.AttackCooltime);
-                    }
-                    else
-                    {
-                        Debug.LogErrorFormat("mProjectilePreset is Null");
-                    }
+                    Rock rock = instance.GetComponent<Rock>();
+                    rock.SetData(this, this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea")));
 
                 }
-                else
-                {
-                    this.SetState(State.Idle);
-                    return;
-                }
+            }
+        }
+        else
+        {
+            Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+        }
+    }
 
-                return;
+    public void WaveSkill()
+    {
+        GameObject preset = this.FindSkillPreset("WavePreset");
+        if (preset)
+        {
+            GameObject clone = GameObject.Instantiate<GameObject>(preset);
+            WaveAttackSkill skill = clone.GetComponent<WaveAttackSkill>();
+            skill.SetData(this, mWaveStartPosition, 20.0f);
+            skill.transform.parent = this.mStage.mBoard.transform;
+        }
+    }
+
+
+
+    public void RepeatPunchAttack()
+    {
+        if(mPunchCount >= PUNCH_COUNT)
+        {
+            mPunchCount = 0;
+
+            mAnimator.SetTrigger("RecoverArm");
+            SetState(State.Idle);
+            return;
+        }
+        ++mPunchCount;
+
+
+        // 공격 영역 안에 있는 경우 공격 한다.
+        if (IsInAttackRange())
+        {
+            if (mTarget)
+            {
+
+                // 타겟위치 잡고.
+                GameObject instance = GameObject.Instantiate<GameObject>(this.FindSkillPreset("PunchSpawnPreset"));
+                instance.transform.position = mTarget.transform.position;
+                instance.transform.parent = this.mStage.transform;
+                PunchAttackSkill skill = instance.GetComponent<PunchAttackSkill>();
+                skill.SetData(this, 100.0f);
+
             }
             else
             {
-               Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+                this.SetState(State.Idle);
+                return;
             }
-        }
 
-        // 락 스폰 시전 애니메이션 - 바닥 찍는 시점에 호출 
-        if ("OnGolemKingRockSpwan".Equals(name, System.StringComparison.OrdinalIgnoreCase))
-        {
-
+            return;
         }
     }
 
@@ -201,7 +244,6 @@ public class MonsterGolemKing : Monster
         yield return new WaitForSeconds(1.0f);
         mPunchCount = 0;
         this.SetState(State.Attack);
-
     }
 
 }

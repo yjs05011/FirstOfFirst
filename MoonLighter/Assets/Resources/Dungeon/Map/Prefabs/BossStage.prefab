@@ -2302,11 +2302,28 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 788cda74c932a084b98f5456c97d618f, type: 3}
+    - target: {fileID: 7583216246369621985, guid: b69e5b3d2095b29469fa112ee79142d7, type: 3}
+      propertyPath: mColliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583216246369621985, guid: b69e5b3d2095b29469fa112ee79142d7, type: 3}
+      propertyPath: mColliders.Array.data[0].key
+      value: RockSpwanArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 7583216246369621985, guid: b69e5b3d2095b29469fa112ee79142d7, type: 3}
+      propertyPath: mColliders.Array.data[0].collider
+      value: 
+      objectReference: {fileID: 8518025415359942071}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b69e5b3d2095b29469fa112ee79142d7, type: 3}
 --- !u!4 &2617984799001286747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2240886404397634517, guid: b69e5b3d2095b29469fa112ee79142d7, type: 3}
+  m_PrefabInstance: {fileID: 4273292632807410574}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &8518025415359942071 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5583289251627320889, guid: b69e5b3d2095b29469fa112ee79142d7, type: 3}
   m_PrefabInstance: {fileID: 4273292632807410574}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5903282464056109894

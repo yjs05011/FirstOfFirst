@@ -13,6 +13,13 @@ public class Monster : MonoBehaviour
         public GameObject preset;
     }
 
+    [System.Serializable]
+    public class Collider2DLink
+    {
+        public string key;
+        public Collider2D collider;
+    }
+
     public enum Type
     {
         NORMAL,
@@ -31,6 +38,7 @@ public class Monster : MonoBehaviour
         Wait, //무한 대기(코드로 제어)
         AttackCooltime, //공격 이후 쿨타임
         Die, // 사망 -> 비활성화
+        Ready, // 준비 (Wake 이전 상태)
     }
 
 
@@ -50,6 +58,9 @@ public class Monster : MonoBehaviour
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
     public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); //딕셔너리 직렬화가 안되서 리스트 사용(추후 변경)
+
+    [Header("Collider")]
+    public List<Collider2DLink> mColliders = new List<Collider2DLink>();
 
     [Header("Monster Info")]
     public Rect mMovableArea; // 이동 가능한 영역
@@ -249,6 +260,19 @@ public class Monster : MonoBehaviour
         return null;
     }
 
+    public Collider2D FindCollider2D(string key)
+    {
+        int count = mColliders.Count;
+        for (int idx = 0; idx < count; ++idx)
+        {
+            if (mColliders[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return mColliders[idx].collider;
+            }
+        }
+        return null;
+    }
+
     // 현재 좌표가 이동 가능한 영역인지 체크
     public bool IsMovablePosition(Vector3 position)
     {
@@ -264,6 +288,48 @@ public class Monster : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Vector3 IsRandomPositionInsidePolygonCollider(PolygonCollider2D collider)
+    {
+        float minX = Mathf.Infinity;
+        float maxX = Mathf.NegativeInfinity;
+        float minY = Mathf.Infinity;
+        float maxY = Mathf.NegativeInfinity;
+
+        Vector2[] points = collider.points;
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (points[i].x < minX)
+            {
+                minX = points[i].x;
+            }
+            if (points[i].x > maxX)
+            {
+                maxX = points[i].x;
+            }
+            if (points[i].y < minY)
+            {
+                minY = points[i].y;
+            }
+            if (points[i].y > maxY)
+            {
+                maxY = points[i].y;
+            }
+        }
+
+        Vector2 position = new Vector2();
+        while (true)
+        {
+            position.x = Random.Range(minX, maxX);
+            position.y = Random.Range(minY, maxY);
+
+            if (collider.OverlapPoint(position))
+            {
+                break;
+            }
+        }
+        return position;
     }
 
     // 추적 가능한 거리 안에 들어왔는지 체크한다.

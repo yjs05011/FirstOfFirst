@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3421677367322767584}
   - component: {fileID: 3421677367322767615}
   - component: {fileID: 3421677367322767614}
+  - component: {fileID: 8445406598730326408}
+  - component: {fileID: 2453926416052347375}
   m_Layer: 0
   m_Name: GolemKing_Punch
   m_TagString: Untagged
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: e4afe335146cf5747ba43155f69ddf41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -84,7 +86,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &3421677367322767614
 Animator:
   serializedVersion: 5
@@ -105,3 +107,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &8445406598730326408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421677367322767613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca15aa3e2eebe1469ec936f60b81904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2453926416052347375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421677367322767613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aed9ca1c61b72d45a31e43bfa264ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mOwner: {fileID: 0}
+  mAnimationEvent: {fileID: 0}
+  mAnimator: {fileID: 3421677367322767614}
+  mDamage: 10
