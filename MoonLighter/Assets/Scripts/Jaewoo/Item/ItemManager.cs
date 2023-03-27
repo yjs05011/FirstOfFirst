@@ -8,11 +8,7 @@ public class ItemManager : GSingleton<ItemManager>
     public GameObject[] mItemPrefab = new GameObject[6];
     public int mDropCount = 3;
     
-    void Start()
-    {
-        
-    }
-
+    
     //ItemManager.DropItem(아이템 떨굴 오브젝트, 생성할 아이템 넘버, 위치)
     public void DropItem()
     {
@@ -20,9 +16,7 @@ public class ItemManager : GSingleton<ItemManager>
         GameObject dropItem = mItemPrefab[itemRandom];
         GameObject item = Instantiate(dropItem);
         
-        
-        //item.transform.position = itemPosition;
-       
+        //item.transform.position = itemPosition;       
     }
 
     public struct DropItemPositon

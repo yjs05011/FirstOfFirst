@@ -43,21 +43,7 @@ public class InventoryManager : GSingleton<InventoryManager>
     public int[,] mInventoryArray = new int[4,5];
     public Transform[] mArray = new Transform[20];
 
-   //  void Start()
-   //  {
-   //      for (int index = 0; index < mSlotArray.Length; index++)
-   //      {
-   //          mArray[index] = mSlotArray[index];
-   //      }
-   //      //배열 초기화 및 선언
-   //      for (int indexArrayY = 0; indexArrayY < 4; indexArrayY++)
-   //      {
-   //          for (int indexArrayX = 0; indexArrayX < 5; indexArrayX++)
-   //          {
-   //              mSlotArray[indexArrayY, indexArrayX] =
-   //          }
-   //      }
-   //  }
+   
 
    
    //서왑 temp 말고 C#의 기능이용
