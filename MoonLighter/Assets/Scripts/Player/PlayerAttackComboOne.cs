@@ -24,6 +24,12 @@ public class PlayerAttackComboOne : PlayerState
                 }
                 break;
             case 2:
+                if (!mIsAttack)
+                {
+                    mIsAttack = true;
+                    player.mPlayerAnimator.SetFloat("WeaponType", 2f);
+                    StartCoroutine(SpearCombo1(player.mPlayerDirection, player));
+                }
                 break;
             case 3:
                 break;
@@ -62,6 +68,52 @@ public class PlayerAttackComboOne : PlayerState
                 break;
         }
         yield return new WaitForSeconds(player.mPlayerAnimation[0].length);
+        player.mWeaponeHitBox.gameObject.SetActive(false);
+        if (player.mAttackRoll > 1)
+        {
+            player.mPlayerAnimator.SetBool("IsAttackComboOne", false);
+            player.mAttackRoll = 0;
+            player.mIsCombo = true;
+        }
+        else
+        {
+            player.mAttackRoll = 0;
+            player.mPlayerAnimator.SetBool("IsAttack", false);
+            player.mPlayerAnimator.SetBool("IsAttackComboOne", false);
+            player.SetActionType(ActState.State_Move);
+        }
+
+
+
+
+    }
+    IEnumerator SpearCombo1(int direct, PlayerAct player)
+    {
+        player.mPlayerRigid.velocity = Vector2.zero;
+        player.mPlayerAnimator.SetBool("IsAttackComboOne", true);
+        player.mPlayerAnimator.SetBool("IsAttack", true);
+        player.mWeaponeHitBox.gameObject.SetActive(true);
+        switch (direct)
+        {
+
+            case 0:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, -1.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 2f);
+                break;
+            case 1:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, 1.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 1.5f);
+                break;
+            case 2:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(-1.25f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2f, 1f);
+                break;
+            case 3:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(1.25f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2f, 1f);
+                break;
+        }
+        yield return new WaitForSeconds(player.mPlayerAnimation[3].length);
         player.mWeaponeHitBox.gameObject.SetActive(false);
         if (player.mAttackRoll > 1)
         {
