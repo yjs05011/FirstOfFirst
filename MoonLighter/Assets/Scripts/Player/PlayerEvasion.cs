@@ -32,7 +32,10 @@ public class PlayerEvasion : PlayerState
             Vector2 Evasion = player.mPlayerRigid.velocity;
             Debug.Log(Evasion);
             player.mPlayerRigid.velocity = Evasion;
-            yield return new WaitForSeconds(0.5f);
+            player.mPlayerHitBox.isTrigger = true;
+            yield return new WaitForSeconds(0.2f);
+            player.mPlayerHitBox.isTrigger = false;
+            yield return new WaitForSeconds(0.3f);
 
             player.mIsEvasion = false;
             player.mPlayerAnimator.SetBool("IsEvasion", false);
