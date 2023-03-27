@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8588587018369024630}
   m_Layer: 0
   m_Name: Merchant_female_01
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mID: 0
   mTalkIndex: 0
-  mTalkManager: {fileID: 0}
   mText: {fileID: 0}
 --- !u!1001 &8304910960625738298
 PrefabInstance:

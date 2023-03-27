@@ -9,7 +9,10 @@ public class GoToVillage : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GFunc.LoadScene("VillageScene");
+            PlayerManager.Instance.mPlayerBeforPos = SetPosition.Instance.mSettingPosition;
+            SetPosition.Instance.mSettingPosition = default;
+            LoadingManager.LoadScene("VillageScene");
+            //GFunc.LoadScene("VillageScene");
         }
     }
 }

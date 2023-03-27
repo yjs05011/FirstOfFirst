@@ -5,23 +5,30 @@ using UnityEngine.Tilemaps;
 
 public class DungeonBoard : MonoBehaviour
 {
-    //º¸µå Å¸ÀÔ enum
-    public enum BoardType { RANDOM, POOL, CAMP, BOSS , Start}
-    // º¸µåÀÇ Å¸ÀÔ
-    public BoardType mType = BoardType.RANDOM;
+    //ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ enum
+    public enum BoardType { Random, Pool, Camp, Boss , Start, DungeonBoss}
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
+    public BoardType mType = BoardType.Random;
 
-    // ÇØ´ç º¸µåÀÇ ¹®ÀÇ ¹æÇâÀ¸·Î ÀÌµ¿ °¡´É ¿©ºÎ
+    // ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public bool mIsMovableTop = false;
     public bool mIsMovableBottom = false;
     public bool mIsMovableLeft = false;
     public bool mIsMovableRight = false;
 
     public DungeonHole mHole = null;
-    // Àå¾Ö¹° ¸®½ºÆ® (ÀÓ½Ã)
+    // ï¿½ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½Ó½ï¿½)
     public List<GameObject> mObstacles= new List<GameObject>();
-    // ¿ÀºêÁ§Æ® ¸®½ºÆ® (ÀÓ½Ã)
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½Ó½ï¿½)
     public List<GameObject> mObjects = new List<GameObject>();
- 
+
+    // ëª¬ìŠ¤í„° 
+    public Transform mMonstersObject = null;
+    private List<Monster> mMonsters = new List<Monster>();
+
+    // ìƒì
+    public DungeonChest mChest = null;
+
 
     public void SetBoardType(BoardType type)
     {
@@ -34,6 +41,11 @@ public class DungeonBoard : MonoBehaviour
         return mType; 
     }
 
+    public int GetBoardMonsterCount()
+    {
+        return mMonsters.Count;
+    }
+
     public void SetHoleToStage(DungeonStage stage)
     {
         if (mHole != null)
@@ -42,7 +54,7 @@ public class DungeonBoard : MonoBehaviour
         }
     }
 
-    // ÀÌµ¿ °¡´ÉÇÑ ¹® ¹æÇâ Ã¼Å© 
+    // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© 
     public bool IsMovableDirection(int directions)
     {
         if ((directions & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
@@ -88,5 +100,34 @@ public class DungeonBoard : MonoBehaviour
             return mHole.IsHole(worldPosition);
         }
         return false;
+    }
+
+    public void SetMonster(DungeonStage stage)
+    {
+        if (mMonstersObject != null)
+        {
+            mMonsters.Clear();
+            for (int i = 0; i < mMonstersObject.childCount; ++i)
+            {
+                mMonsters.Add(mMonstersObject.GetChild(i).gameObject.GetComponent<Monster>());
+            }
+        }
+
+        Vector3 position = this.transform.position;
+        for (int i = 0; i < mMonsters.Count; ++i)
+        {
+            // ëª¬ìŠ¤í„°ì— ìŠ¤í…Œì´ì§€ ì„¤ì •.
+            mMonsters[i].SetStage(stage);
+            
+            // ëª¬ìŠ¤í„° ì´ë™ ë²”ìœ„ ìŠ¤í…Œì´ì§€(ë³´ë“œ)ìœ„ì¹˜ì— ë§ì¶°ì„œ ì¡°ì •.
+            float x = position.x - 10.0f;
+            float y = position.y - 5.5f;
+            mMonsters[i].mMovableArea.x = x;
+            mMonsters[i].mMovableArea.y = y;
+            mMonsters[i].mMovableArea.width = 20;
+            mMonsters[i].mMovableArea.height = 11;
+            mMonsters[i].gameObject.SetActive(true);
+
+        }
     }
 }

@@ -1,6 +1,4 @@
-using System.Threading;
 using UnityEngine;
-using static GameKeyManger;
 
 public class DoorController : MonoBehaviour
 {
@@ -26,19 +24,24 @@ public class DoorController : MonoBehaviour
     {
         if (mOpen.activeSelf)
         {
-            if(Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))     // 상점 시작
+
+            if (Input.GetKey(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))     // 상점 시작
             {
                 mTimer += Time.deltaTime;
-                if (mTimer > 2)
+                if (!SetPosition.Instance.mIsNight)
                 {
-                    Shop.mIsShopStart= true;
-                    mNPCSpawner.SetActive(true);
-                    mOpen.SetActive(false);
-                    mStartShop.SetActive(false);
-                    mTimer = 0;
+                   
+                    if (mTimer > 2)
+                    {
+                        Shop.mIsShopStart = true;
+                        mNPCSpawner.SetActive(true);
+                        mOpen.SetActive(false);
+                        mStartShop.SetActive(false);
+                        mTimer = 0;
+                    }
                 }
             }
-            if(Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))       // 상점 나가기
+            if (Input.GetKeyUp(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))       // 상점 나가기
             {
                 if (mTimer <= 2)
                 {
@@ -46,10 +49,15 @@ public class DoorController : MonoBehaviour
                     mStartShop.SetActive(false);
                     mDoorAni.SetBool("OpenTheDoor", true);
                     mDoorAni.SetBool("OpenTheDoor", false);
-                    GFunc.LoadScene("VillageScene");
+                    PlayerManager.Instance.mPlayerBeforPos = SetPosition.Instance.mSettingPosition;
+                    SetPosition.Instance.mSettingPosition = default;
+                    LoadingManager.LoadScene("VillageScene");
+                    //GFunc.LoadScene("VillageScene");
                 }
                 mTimer = 0;
             }
+
+
         }
     }
 
@@ -60,7 +68,7 @@ public class DoorController : MonoBehaviour
             mStartShop.SetActive(true);
             mOpen.SetActive(true);
         }
-        if(other.tag  == "Npc")
+        if (other.tag == "Npc")
         {
             mDoorAni.SetBool("OpenTheDoor", true);
         }
