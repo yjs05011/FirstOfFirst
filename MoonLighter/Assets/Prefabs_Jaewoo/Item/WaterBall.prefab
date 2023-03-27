@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6761646263258052089}
   - component: {fileID: 1765564577530093058}
   - component: {fileID: 1405251926557565594}
+  - component: {fileID: 1801113006522018825}
   m_Layer: 0
   m_Name: WaterBall
   m_TagString: Untagged
@@ -27,8 +28,8 @@ RectTransform:
   m_GameObject: {fileID: 1681433741531369586}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.16029225, y: 0.16029225, z: 0.16029225}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.012, y: 0.012, z: 0.012}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1928646191
+  m_SortingLayer: 13
   m_SortingOrder: 0
   m_Sprite: {fileID: 1904700284, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,5 +103,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccdad763e80a804eaaf88723567e07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mItem: {fileID: 0}
+  mSlot: []
+  mInventory: {fileID: 0}
+  mItem: {fileID: 11400000, guid: ec85f2d92fb1f75428c09f16e103872a, type: 2}
   mPlayerBagDistance: {fileID: 0}
+--- !u!58 &1801113006522018825
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681433741531369586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 19

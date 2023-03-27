@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GolemTurretShotUp
+  serializedVersion: 6
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves:
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: abc529e46cd190d49a9d3bfbad27735f, type: 3}
+    - time: 0.1
+      value: {fileID: 21300000, guid: 4fe533e4a40d1304ab1723f8c38a0dc8, type: 3}
+    - time: 0.2
+      value: {fileID: 21300000, guid: 2c8f9e025eec8864daf6dc4cdcc0b199, type: 3}
+    - time: 0.3
+      value: {fileID: 21300000, guid: efc4ddfbad208c6479e69edd47c73c3c, type: 3}
+    - time: 0.4
+      value: {fileID: 21300000, guid: 931f7955f75e9b84986c7724eca1f958, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: 542e9ec3d3a98764b9f1752d3f21b041, type: 3}
+    - time: 0.6
+      value: {fileID: 21300000, guid: 95d220cf50a23d74cb786d351641b06f, type: 3}
+    - time: 0.7
+      value: {fileID: 21300000, guid: 4e62d6fa52c4332429c52fc1595da4f5, type: 3}
+    - time: 0.8
+      value: {fileID: 21300000, guid: 184db10cf2e841f469ff199bcfea7d02, type: 3}
+    - time: 0.9
+      value: {fileID: 21300000, guid: 581ef7a169731ca498c1ee508c19a1b6, type: 3}
+    - time: 1
+      value: {fileID: 21300000, guid: 4ea0f759699febc44b1f474c80336024, type: 3}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+  m_SampleRate: 10
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: abc529e46cd190d49a9d3bfbad27735f, type: 3}
+    - {fileID: 21300000, guid: 4fe533e4a40d1304ab1723f8c38a0dc8, type: 3}
+    - {fileID: 21300000, guid: 2c8f9e025eec8864daf6dc4cdcc0b199, type: 3}
+    - {fileID: 21300000, guid: efc4ddfbad208c6479e69edd47c73c3c, type: 3}
+    - {fileID: 21300000, guid: 931f7955f75e9b84986c7724eca1f958, type: 3}
+    - {fileID: 21300000, guid: 542e9ec3d3a98764b9f1752d3f21b041, type: 3}
+    - {fileID: 21300000, guid: 95d220cf50a23d74cb786d351641b06f, type: 3}
+    - {fileID: 21300000, guid: 4e62d6fa52c4332429c52fc1595da4f5, type: 3}
+    - {fileID: 21300000, guid: 184db10cf2e841f469ff199bcfea7d02, type: 3}
+    - {fileID: 21300000, guid: 581ef7a169731ca498c1ee508c19a1b6, type: 3}
+    - {fileID: 21300000, guid: 4ea0f759699febc44b1f474c80336024, type: 3}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 1.1
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 1
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_Events:
+  - time: 0.8
+    functionName: OnAnimationEvent
+    data: OnGolemTurretShotUp
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
