@@ -18,8 +18,8 @@ public class DungeonCameraController : MonoBehaviour
 
     public Vector2 mCameraBoundaryMax;
 
-    private float mStageWidth = 26.0f;
-    private float mStageHeight = 15.0f;
+    private float mBoundaryAddValueX = 10.8f;
+    private float mBoundaryAddValueY = 8.8f;
 
     private bool mIsMove = false;
     public Vector3 mMovePos = Vector3.zero;
@@ -27,10 +27,14 @@ public class DungeonCameraController : MonoBehaviour
     public enum CameraMoveType { Default, Immediately , Follow};
     public CameraMoveType mType = CameraMoveType.Default;
 
+    public bool mIsBossRoom = false;
+
+
     public void Awake()
     {
         this.transform.position = mInitCameraPos;
         SetCameraType(CameraMoveType.Default);
+        SetIsBossRoom(false);
     }
 
     public void Update()
@@ -52,13 +56,21 @@ public class DungeonCameraController : MonoBehaviour
 
                 if (this.transform.position == mMovePos)
                 {
-                    Debug.Log("카메라 즉시 이동 완료, 무브 타입 변경");
-                    SetCameraType(CameraMoveType.Follow);
+                    if (mIsBossRoom)
+                    {
+                        Debug.Log("카메라 즉시 이동 완료, 무브 타입 fllow 모드로 변경");
+                        SetCameraType(CameraMoveType.Follow);
+                    }
+                    else
+                    {
+                        Debug.Log("카메라 즉시 이동 완료, 무브 타입 Default 모드로 변경");
+                        SetCameraType(CameraMoveType.Default);
+                    }
                 }
             }
             if(mType == CameraMoveType.Follow)
             {
-                Vector3 targetPos = new Vector3(mTarget.position.x, mTarget.position.y, this.transform.position.z);
+                Vector3 targetPos = new Vector3(mTarget.position.x, mTarget.position.y, -10);
 
                 targetPos.x = Mathf.Clamp(targetPos.x, mCameraBoundaryMin.x, mCameraBoundaryMax.x);
                 targetPos.y = Mathf.Clamp(targetPos.y, mCameraBoundaryMin.y, mCameraBoundaryMax.y);
@@ -86,8 +98,11 @@ public class DungeonCameraController : MonoBehaviour
         
         if(mType == CameraMoveType.Immediately)
         {
-            DungeonStage bossStage = DungeonManager.Instance.GetDungeonBossRoom();
-            SetCameraBoundary(bossStage);
+            if (mIsBossRoom)
+            {
+                DungeonStage bossStage = DungeonManager.Instance.GetDungeonBossRoom();
+                SetCameraBoundary(bossStage);
+            }
         }
         mMovePos = MovePos;
         mIsMove = true;
@@ -95,12 +110,15 @@ public class DungeonCameraController : MonoBehaviour
 
     public void SetCameraBoundary(DungeonStage bossStage)
     {
-        mCameraBoundaryMin.x = bossStage.transform.position.x - 10.8f;
-        mCameraBoundaryMin.y = bossStage.transform.position.y - 8.8f;
-        mCameraBoundaryMax.x = bossStage.transform.position.x + 10.8f;
-        mCameraBoundaryMax.y = bossStage.transform.position.y + 8.8f;
+        mCameraBoundaryMin.x = bossStage.transform.position.x - mBoundaryAddValueX;
+        mCameraBoundaryMin.y = bossStage.transform.position.y - mBoundaryAddValueY;
+        mCameraBoundaryMax.x = bossStage.transform.position.x + mBoundaryAddValueX;
+        mCameraBoundaryMax.y = bossStage.transform.position.y + mBoundaryAddValueY;
     }
  
-
+    public void SetIsBossRoom(bool value)
+    {
+        mIsBossRoom = value;
+    }
 
 }
