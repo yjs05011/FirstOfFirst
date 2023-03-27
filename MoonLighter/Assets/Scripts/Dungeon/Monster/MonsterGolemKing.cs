@@ -58,21 +58,18 @@ public class MonsterGolemKing : Monster
                         mTimer = 0.0f;
                         WaveAttack();
                     }
-                    //PunchAttack();
-                  
-
-                    //// 발동 스킬 선택 
+                    
                     //if (Random.Range(0, 1000) < 500)
                     //{
-                    //    if (Random.Range(0, 1000) < 500)
-                    //    {
-                    //        PunchAttack();
-                    //    }
-                    //    else
-                    //    {
-                    //        RockSpawnAttack();
-                    //    }
-                    //
+                        if (Random.Range(0, 1000) < 500)
+                        {
+                            PunchAttack();
+                        }
+                        else
+                        {
+                            RockSpawnAttack();
+                        }
+                   // 
                     //}
                     //else
                     //{

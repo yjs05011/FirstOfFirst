@@ -41,10 +41,7 @@ public class Monster : MonoBehaviour
         Ready, // 준비 (Wake 이전 상태)
     }
 
-
-    // 보스
-    // 골렘 마인 (자폭 몬스터)
-    // 다른 몬스터들도 데미지를 입힘
+      
 
     // 컴포넌트
     [Header("Componenet")]
@@ -57,7 +54,7 @@ public class Monster : MonoBehaviour
 
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
-    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); //딕셔너리 직렬화가 안되서 리스트 사용(추후 변경)
+    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); 
 
     [Header("Collider")]
     public List<Collider2DLink> mColliders = new List<Collider2DLink>();
