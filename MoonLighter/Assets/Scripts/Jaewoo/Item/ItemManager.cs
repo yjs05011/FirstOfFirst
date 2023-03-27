@@ -6,33 +6,34 @@ public class ItemManager : GSingleton<ItemManager>
 {
     
     public GameObject[] mItemPrefab = new GameObject[6];
+    public Object[] mListTest = new Object[6];
+   
     public int mDropCount = 3;
     
-    
-    //ItemManager.DropItem(아이템 떨굴 오브젝트, 생성할 아이템 넘버, 위치)
-    public void DropItem()
+    //프리팹 로드
+    public override void Awake()
     {
-        int itemRandom = Random.Range(0, mItemPrefab.Length);
-        GameObject dropItem = mItemPrefab[itemRandom];
-        GameObject item = Instantiate(dropItem);
-        
-        //item.transform.position = itemPosition;       
+        mListTest = Resources.LoadAll("Prefabs_Jaewoo/Item");
+        mItemPrefab[0] =Resources.Load("Prefabs_Jaewoo/Item/CastingWreckage") as GameObject;
+        mItemPrefab[1] =Resources.Load("Prefabs_Jaewoo/Item/Cloth") as GameObject;
+        mItemPrefab[2] =Resources.Load("Prefabs_Jaewoo/Item/HardenedSteel") as GameObject;
+        mItemPrefab[3] =Resources.Load("Prefabs_Jaewoo/Item/IronRod") as GameObject;
+        mItemPrefab[4] =Resources.Load("Prefabs_Jaewoo/Item/RuneTool") as GameObject;
+        mItemPrefab[5] =Resources.Load("Prefabs_Jaewoo/Item/WaterBall") as GameObject;
+        base.Awake();
+    }
+    //ItemManager.Instance.DropItem( 위치)
+    public void DropItem(Vector3 position)
+    {
+        for(int index = 0; index <Random.Range(1, 4) ; index ++)
+        {
+            float RandomX = Random.Range(0, 1f);
+            float RandomY = Random.Range(0, 1f);
+            int itemRandom = Random.Range(0, mItemPrefab.Length);
+            GameObject dropItem = mItemPrefab[itemRandom];
+            GameObject item = Instantiate(dropItem);
+            item.gameObject.transform.position = new Vector3(position.x + RandomX,position.y + RandomY,0);
+        }              
     }
 
-    public struct DropItemPositon
-    {
-        public int x;
-        public int y;
-
-        public DropItemPositon(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        public Vector2 DropPosition()
-        {
-            return new Vector2(x, y);
-        }
-    }
 }

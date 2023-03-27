@@ -57,9 +57,7 @@ public class Item : ScriptableObject
     public int mItemPrice;
     //아이템 이미지
     public Sprite mItemSprite;
-
-    //아이템 드랍아이템 프리팹
-    public GameObject mItemDropPrefab;
+    
 
     //저주 아이템 구현시 활성화 시킬 함수
     //아이템 저주 체크
