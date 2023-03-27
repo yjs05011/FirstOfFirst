@@ -11,12 +11,18 @@ public class InitManager : MonoBehaviour
         ShopManager.Instance.Create();
         TalkManager.Instance.Create();
 <<<<<<< HEAD
+
         SetPosition.Instance.Create();
+
+        GameManager.Instance.Create();
+        DataManager.Instance.Create();
+
+        GFunc.LoadScene("VillageScene");
 =======
         GameManager.Instance.Create();
         DataManager.Instance.Create();
->>>>>>> 0df387b2af46bf52a383692706ec7c5414da0129
         //GFunc.LoadScene("VillageScene");
+>>>>>>> de76c5c24b466cf605e893e886147b2febaa16ab
     }
     // Start is called before the first frame update
     void Start()

@@ -13,6 +13,11 @@ public class DungeonManager : MonoBehaviour
     // 던전 카메라 제어 스크립트
     public DungeonCameraController mCamera = null;
 
+    // 던전 층 이동 로딩 씬 
+    public DungeonUIFadeInOutTransition mTransitionUI = null;
+
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -27,6 +32,11 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    public DungeonUIFadeInOutTransition GetTransitionUI()
+    {
+        return mTransitionUI;
+    }
+ 
     public DungeonCameraController GetDungeonCamera()
     {
         return mCamera;
