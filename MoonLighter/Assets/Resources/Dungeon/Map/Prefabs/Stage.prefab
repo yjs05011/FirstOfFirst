@@ -5646,8 +5646,8 @@ PolygonCollider2D:
       - {x: -1.6608567, y: -1.1585608}
       - {x: -1.2424765, y: -2.133715}
       - {x: -0.68, y: -2.16}
-      - {x: -0.68, y: -1.07}
-      - {x: 0.73715067, y: -1.07}
+      - {x: -0.7213139, y: 0.03170407}
+      - {x: 0.75092196, y: 0.004161477}
       - {x: 0.71086574, y: -2.1862853}
       - {x: 1.2462845, y: -2.133715}
 --- !u!95 &4828177154515349509
@@ -27296,9 +27296,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1884138138484176703}
-  - {fileID: 6769935825139065093}
   - {fileID: 9116592279902799044}
   - {fileID: 5052160320909430812}
+  - {fileID: 6769935825139065093}
   m_Father: {fileID: 1825903896575049851}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29714,10 +29714,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2075766559017378637}
     m_Modifications:
-    - target: {fileID: 2342775966417494733, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 2603299128788627534, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -29770,10 +29766,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3520993919832938134, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
 --- !u!95 &129586917477074825 stripped
@@ -29798,10 +29790,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2075766559017378637}
     m_Modifications:
-    - target: {fileID: 122977870741735111, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_Name
       value: PortalDoorUp
@@ -29809,10 +29797,6 @@ PrefabInstance:
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5422861324874488359, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_RootOrder
@@ -30081,7 +30065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422861324874488359, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5422861324874488359, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30815,6 +30799,10 @@ PrefabInstance:
       value: FloorDoorRight
       objectReference: {fileID: 0}
     - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
@@ -30892,6 +30880,10 @@ PrefabInstance:
     - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: m_Name
       value: FloorDoorLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: m_TagString
@@ -32217,7 +32209,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1392002965528605714, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1392002965528605714, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32262,6 +32254,10 @@ PrefabInstance:
     - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: m_Name
       value: FloorDoorDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: m_TagString
@@ -32343,12 +32339,8 @@ PrefabInstance:
       value: FloorDoorUp
       objectReference: {fileID: 0}
     - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1723842260249806391, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6971038015935283686, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
       propertyPath: mDoor
@@ -32503,7 +32495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2603299128788627534, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2603299128788627534, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
       propertyPath: m_LocalPosition.x

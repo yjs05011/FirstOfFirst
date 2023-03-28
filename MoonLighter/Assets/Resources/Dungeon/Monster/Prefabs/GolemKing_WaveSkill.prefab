@@ -124,7 +124,7 @@ MonoBehaviour:
   mAnimationEvent: {fileID: 1439872957033050460}
   mAnimator: {fileID: 8769600420992419340}
   mStartPosition: {fileID: 0}
-  mDamage: 10
+  mDamage: 30
 --- !u!60 &4888481852815740376
 PolygonCollider2D:
   m_ObjectHideFlags: 0

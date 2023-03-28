@@ -22,7 +22,7 @@ public class PunchAttackSkill : MonoBehaviour
             PlayerAct player = collision.GetComponent<PlayerAct>();
             if(player)
             {
-                player.OnDamage(mDamage);
+                player.OnDamage(mOwner.GetMonsterId(),mDamage);
             }
         }
     }

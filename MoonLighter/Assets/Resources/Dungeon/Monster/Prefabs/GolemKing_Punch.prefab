@@ -134,4 +134,4 @@ MonoBehaviour:
   mOwner: {fileID: 0}
   mAnimationEvent: {fileID: 0}
   mAnimator: {fileID: 3421677367322767614}
-  mDamage: 10
+  mDamage: 50

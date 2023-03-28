@@ -26,8 +26,6 @@ public class Monster : MonoBehaviour
         BOSS
     }
 
-    // 터렛 (리지드바디 스테틱)
-
     public enum State
     {
         None, // 비활성화
@@ -41,7 +39,19 @@ public class Monster : MonoBehaviour
         Ready, // 준비 (Wake 이전 상태)
     }
 
-      
+    // 몬스터 id 
+    public enum MonsterID
+    {
+        None = 0,
+        BabySlime = 1,
+        GolemTurret = 2,
+        FlyingGolem = 3,
+        GolemMine  =4,
+        GolemMiniBoss = 5,
+        GolemCorruptMiniBoss = 6,
+        GolemKing = 10
+    }
+
 
     // 컴포넌트
     [Header("Componenet")]
@@ -60,6 +70,7 @@ public class Monster : MonoBehaviour
     public List<Collider2DLink> mColliders = new List<Collider2DLink>();
 
     [Header("Monster Info")]
+    public MonsterID mMonsterId = MonsterID.None; // 몬스터 id
     public Rect mMovableArea; // 이동 가능한 영역
     [Range(0.1f, 20.0f)]
     public float mAttackDistance = 1.0f; // 자신의 위치를 기준으로 플레이어를 공격 가능한 거리
@@ -96,7 +107,9 @@ public class Monster : MonoBehaviour
     public PlayerAct mTarget = null; // 타겟
     public DungeonStage mStage = null; // 스테이지
 
-    // UI > hp바 
+    // UI : hp bar 오브젝트
+    public GameObject mHpBar = null;
+    // UI : HP fill image 
     public Image mImgHp = null;
 
     public void Start()
@@ -141,6 +154,13 @@ public class Monster : MonoBehaviour
         {
             mStage = DungeonGenerator.Instance.mStages[0];
         }
+    }
+
+
+
+    public MonsterID GetMonsterId()
+    {
+        return mMonsterId;
     }
 
 

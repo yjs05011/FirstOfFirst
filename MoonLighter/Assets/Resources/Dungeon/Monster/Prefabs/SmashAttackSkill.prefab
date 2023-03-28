@@ -118,5 +118,5 @@ MonoBehaviour:
   mMinScale: {x: 5, y: 5, z: 0}
   mMaxScale: {x: 50, y: 50, z: 0}
   mDuration: 10
-  mDamage: 10
+  mDamage: 25
   mTime: 0

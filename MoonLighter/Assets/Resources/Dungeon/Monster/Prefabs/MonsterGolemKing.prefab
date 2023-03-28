@@ -215,6 +215,7 @@ MonoBehaviour:
   mColliders:
   - key: RockSpawnArea
     collider: {fileID: 5583289251627320889}
+  mMonsterId: 10
   mMovableArea:
     serializedVersion: 2
     x: -13
@@ -227,7 +228,7 @@ MonoBehaviour:
   mWanderDistance: 1
   mHp: 1000
   mMaxHP: 1000
-  mDamage: 10
+  mDamage: 70
   mAttackInterval: 1
   mAttackTime: 0
   mIsAttackBlock: 0
@@ -239,6 +240,7 @@ MonoBehaviour:
   mCurrState: 8
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
+  mHpBar: {fileID: 0}
   mImgHp: {fileID: 0}
   mWaveStartPosition: {fileID: 2376592848234812721}
   mWaveCoolTime: 20

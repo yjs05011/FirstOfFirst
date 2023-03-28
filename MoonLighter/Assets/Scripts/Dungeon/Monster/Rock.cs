@@ -84,7 +84,7 @@ public class Rock : MonoBehaviour
             PlayerAct player = collision.GetComponent<PlayerAct>();
             if (player)
             {
-                player.OnDamage(mOwner.GetDamage());
+                player.OnDamage(mOwner.GetMonsterId(),mOwner.GetDamage());
             }
         }
     }

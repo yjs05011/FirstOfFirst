@@ -103,7 +103,7 @@ public class MonsterFlyingGolem : Monster
             {
                 if (mTarget)
                 {
-                    mTarget.OnDamage(this.mDamage);
+                    mTarget.OnDamage(mMonsterId,this.mDamage);
                 }
 
             }
