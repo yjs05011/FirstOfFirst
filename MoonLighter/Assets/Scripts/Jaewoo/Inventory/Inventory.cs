@@ -120,16 +120,24 @@ public class Inventory : MonoBehaviour
                 SelectSlot();
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D) )
             {
                 mSelectX++;
-                if (4 < mSelectX)
+                if (4 < mSelectX )
                 {
                     mSelectX = 0;
+                    mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
+                }   
+                if(Input.GetkeyDown(KeyCode.D) && 4 < mSelectX)
+                {
+                    if(4 < mSelectX || mIsChestCheck == true)
+                {
+                    mSelectPoint.transform.localPosition = mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].transform.localPosition;
+                }   
                 }
-                //Debug.Log(mInventoryArray[mSelectY, mSelectX]);
-                mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
+                          
             }
+            
             if (Input.GetKeyDown(KeyCode.A))
             {
                 mSelectX--;
