@@ -11,14 +11,14 @@ public class EquipmentSlot : MonoBehaviour
     public Item mEquipmentItem;
     public Sprite mEquipmentItemSprite;
     public SpriteRenderer mEquipmentSlotRender = default;
-    public EquipmentTypeController mEquipmentSlotParent;
+    //public EquipmentTypeController mEquipmentSlotParent;
 
     [SerializeField]
     private TMP_Text mTextCount = default;
 
 void Awake()
 {
-    mEquipmentSlotParent = transform.parent.GetComponent<EquipmentTypeController>();
+   // mEquipmentSlotParent = transform.parent.GetComponent<EquipmentTypeController>();
 }
 
    private void Start()
@@ -26,14 +26,27 @@ void Awake()
         // for(int index = 0; index < gameObject.transform.parent.transform.childCount; index ++)
         // {
         //     gameObject.transform.parent.transform.GetChild(index);
-        //     if( gameObject.transform.parent.transform.GetChild(0)|| gameObject.transform.parent.transform.GetChild(1))
+
+        //     //무기타입만 들어갈 칸
+        //     if( gameObject.transform.parent.transform.GetChild(0)|| 
+        //         gameObject.transform.parent.transform.GetChild(1))
         //     {               
         //         mEquipmentItem.mItemType = Item.ItemEnumType.Equiment;
 
         //     }
-        //     if(gameObject.transform.parent.transform.GetChild(2)||gameObject.transform.parent.transform.GetChild(3)||gameObject.transform.parent.transform.GetChild(4))
+        //     //방어구 타입만 들어갈 칸
+        //     if(gameObject.transform.parent.transform.GetChild(2)||
+        //        gameObject.transform.parent.transform.GetChild(4)||
+        //        gameObject.transform.parent.transform.GetChild(6))
+        //     {
 
-        // }{}
+        //     }
+        //     if(gameObject.transfom.parent.transform.GetChild())
+
+        // }
+        // {
+
+        // }
        
         
         

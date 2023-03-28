@@ -6,10 +6,11 @@ public class InventoryManager : GSingleton<InventoryManager>
 {   
     //2차원 배열판
     public GameObject[] mInventoryArray;
-    //2차원 배열을 담는
-    public List<GameObject> mSlots = new List<GameObject>();
-
     
+    //인벤토리아이템 List에 저장
+    public List<GameObject> mSlots = new List<GameObject>();
+    //장비창아이템 List에 저장
+    public List<GameObject> mEquipmentSlots = new List<GameObject>();  
  
 
    
