@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 1083792171}
   - component: {fileID: 1083792173}
   - component: {fileID: 1083792174}
+  - component: {fileID: 1083792175}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Pool
@@ -486,7 +487,7 @@ Transform:
   m_Children:
   - {fileID: 1183897859}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1083792173
 Rigidbody2D:
@@ -525,6 +526,82 @@ MonoBehaviour:
   bgm: {fileID: 0}
   sfx: 3
   music: 3
+--- !u!114 &1083792175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083792170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05664069ffd6467409d634b824382e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mStagePrefab: {fileID: 1825903895776075302, guid: f1b393ec7e989e24b9975ef1d1505487, type: 3}
+  mHiddenStagePrefab: {fileID: 5281725784613452881, guid: a82e8112d70ba044db8e049d3e2c094c, type: 3}
+  mBossStagePrefab: {fileID: 2041081504382214607, guid: b16e7d608b79a554ebae3f25bf7da66b, type: 3}
+  mStages: []
+  IsCreatedCampRoom: 0
+  mDepth: 0
+  mLastRoom: {fileID: 0}
+--- !u!1001 &1126822882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.038729
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.06371212
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552959306023619171, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
+      propertyPath: m_Name
+      value: MonsterSlime
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
 --- !u!1 &1183897858
 GameObject:
   m_ObjectHideFlags: 0
