@@ -9,7 +9,7 @@ public class ForbiddenControl : MonoBehaviour
     public int mCurrentMiniInventoryText;
     public GameObject mForbidden;
 
-    public bool mIsInventoryLock = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class ForbiddenControl : MonoBehaviour
     void Update()
     {
         MiniInventoryTextChange();
-        if (mIsInventoryLock == true)
+        if (UiManager.Instance.mIsInventoryLock == true)
         {
             mForbidden.SetActive(true);
         }
@@ -29,6 +29,7 @@ public class ForbiddenControl : MonoBehaviour
         {
             mForbidden.SetActive(false);
         }
+
     }
 
     void MiniInventoryTextChange()
@@ -44,13 +45,8 @@ public class ForbiddenControl : MonoBehaviour
 
             mForbidden.SetActive(true);
         }
-
     }
 
-    // 인벤토리 
-    public void SetInventoryLock(bool value)
-    {
-        mIsInventoryLock = value;
-    }
+
 }
 
