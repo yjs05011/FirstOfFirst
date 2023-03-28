@@ -58,12 +58,23 @@ public class DungeonStage : MonoBehaviour
     // óġ�� ���� ��
     public int mMonsterDieCount = 0;
 
+    // 미니 보스 보드 배열
+    public DungeonBoard[] mMiniBossBoard = new DungeonBoard[2];
     public void Awake()
     {
         mDoorTop.SetDoorDirection(DungeonGenerator.DIRECTION_TOP);
         mDoorRight.SetDoorDirection(DungeonGenerator.DIRECTION_RIGHT);
         mDoorBottom.SetDoorDirection(DungeonGenerator.DIRECTION_BOTTOM);
         mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
+        DoorInit();
+    }
+
+    public void DoorInit()
+    {
+        mDoorTop.Init();
+        mDoorRight.Init();
+        mDoorBottom.Init();
+        mDoorLeft.Init();
     }
 
 
@@ -306,19 +317,29 @@ public class DungeonStage : MonoBehaviour
     // �� ���⿡ �´� ���� ����Ʈ ���͸�
     public void GetFilteredBoards(int directions, DungeonBoard.BoardType type, ref List<DungeonBoard> output)
     {
-        
-        int count = mBoards.Count;
-        for (int idx = 0; idx < count; ++idx)
+        // 타입이 보스(미니 보스) 인 경우, 층에 해당하는 보드를 넣어서 전달.
+        if (type == DungeonBoard.BoardType.Boss)
         {
-            DungeonBoard board = mBoards[idx];
+            int index = mFloor - 1;
+            DungeonBoard board = mMiniBossBoard[index];
 
-            if (board.GetBoardType() == type)
+            output.Add(board);
+        }
+        else
+        {
+            int count = mBoards.Count;
+            for (int idx = 0; idx < count; ++idx)
             {
-                if (board.IsMovableDirection(directions))
+                DungeonBoard board = mBoards[idx];
+
+                if (board.GetBoardType() == type)
                 {
-                    if (!output.Contains(board))
+                    if (board.IsMovableDirection(directions))
                     {
-                        output.Add(board);
+                        if (!output.Contains(board))
+                        {
+                            output.Add(board);
+                        }
                     }
                 }
             }

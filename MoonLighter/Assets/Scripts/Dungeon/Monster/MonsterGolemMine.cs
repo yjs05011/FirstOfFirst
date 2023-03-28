@@ -93,7 +93,7 @@ public class MonsterGolemMine : Monster
             }
 
             // 처치 몬스터 리스트에 추가
-            DungeonManager.Instance.KillMonsterAdd(this);
+            DungeonManager.Instance.KillMonsterAdd(mMonsterId);
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
         }
@@ -101,7 +101,15 @@ public class MonsterGolemMine : Monster
 
     public override void OnAnimationEvent(string name)
     {
-        if("JumpStart".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        if (mCurrState == State.Die || mCurrState == State.None)
+        {
+            if (mAnimator)
+            {
+                mAnimator.StopPlayback();
+            }
+            return;
+        }
+        if ("JumpStart".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             // 점프 모션 시작 하면 피격 블락 처리 
             mIsAttackBlock = true;
@@ -111,9 +119,33 @@ public class MonsterGolemMine : Monster
             //폭발 시작 시점이니 블락 해제
             mIsAttackBlock = false;
             // 타겟 한테 데미지 입히고
-            mTarget.OnDamage(mMonsterId, this.mDamage);
-            // 주변 몬스터 데미지 주기...
-            // 자기 자신에게도 데미지 입히고.
+            //mTarget.OnDamage(mMonsterId, this.mDamage);
+            if (mStage)
+            {
+                // 플레이어 범위 안에 있는지 체크 
+                if (this.IsInSplashDamageRange(mTarget.transform.position))
+                {
+                    // 플레이어에게 데미지 입힌다.
+                    mTarget.OnDamage(this.mDamage);
+                }
+
+                // 몬스터 범위 안에 있는지 체크
+                List<Monster> monsters = this.mStage.mBoard.GetMonsters();
+                for (int idx = 0; idx < monsters.Count; ++idx)
+                {
+                    Monster monster = monsters[idx];
+                    if (monsters[idx].mCurrState != State.None && monsters[idx].mCurrState != State.Die)
+                    {
+                        if (this.IsInSplashDamageRange(monster.transform.position))
+                        {
+                            // 주변 몬스터 데미지 입힌다.
+                            monster.OnDamage(this.mDamage);
+                        }
+                    }
+                }
+            }
+            
+            // 자기 자신에게도 데미지 입힌다.
             this.OnDamage(mMaxHP);
 
         }

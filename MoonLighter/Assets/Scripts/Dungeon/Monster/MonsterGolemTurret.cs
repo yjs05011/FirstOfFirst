@@ -90,7 +90,7 @@ public class MonsterGolemTurret : Monster
             //hp bar hide
             mHpBar.SetActive(false);
             // 처치 몬스터 리스트에 추가
-            DungeonManager.Instance.KillMonsterAdd(this);
+            DungeonManager.Instance.KillMonsterAdd(mMonsterId);
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
@@ -100,6 +100,14 @@ public class MonsterGolemTurret : Monster
 
     public override void OnAnimationEvent(string name)
     {
+        if (mCurrState == State.Die || mCurrState == State.None)
+        {
+            if (mAnimator)
+            {
+                mAnimator.StopPlayback();
+            }
+            return;
+        }
         if ("OnGolemTurretShotDown".Equals(name, System.StringComparison.OrdinalIgnoreCase)
             || "OnGolemTurretShotUp".Equals(name, System.StringComparison.OrdinalIgnoreCase)
             || "OnGolemTurretShotLeft".Equals(name, System.StringComparison.OrdinalIgnoreCase)

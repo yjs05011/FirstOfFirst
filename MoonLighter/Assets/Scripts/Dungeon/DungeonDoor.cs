@@ -74,7 +74,7 @@ public class DungeonDoor : MonoBehaviour
 
     public void DoorOpen()
     {
-        Init();
+        //Init();
         SetDoorStatus(DoorStatus.OPEN);
         if (mBasicDoor != null && mBasicDoor.activeSelf)
         {
@@ -93,7 +93,7 @@ public class DungeonDoor : MonoBehaviour
  
     public void DoorClose()
     {
-        Init();
+        //Init();
         SetDoorStatus(DoorStatus.CLOSE);
         if (mBasicDoor != null)
         {

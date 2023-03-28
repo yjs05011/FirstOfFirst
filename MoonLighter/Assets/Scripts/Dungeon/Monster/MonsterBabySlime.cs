@@ -93,7 +93,7 @@ public class MonsterBabySlime : Monster
             }
 
             // 처치 몬스터 리스트에 추가
-            DungeonManager.Instance.KillMonsterAdd(this);
+            DungeonManager.Instance.KillMonsterAdd(mMonsterId);
 
             // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
 

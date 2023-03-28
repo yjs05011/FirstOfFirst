@@ -67,31 +67,31 @@ public class MonsterGolemKing : Monster
             {
                 if (mTarget)
                 {
-                    mTimer += Time.deltaTime;
-
-                    if (mTimer >= mWaveCoolTime)
-                    {
-                        mTimer = 0.0f;
-                        WaveAttack();
-                    }
-
-
-                    if (Random.Range(0, 1000) < 500)
-                    {
-                        PunchAttack();
-                    }
-                    else
-                    {
-                        if (Random.Range(0, 1000) < 500)
-                        {
-                            RockSpawnAttack();
-                        }
-                        else
-                        {
-                            // StickyAttack();
-                        }
-
-                    }
+                    
+                   mTimer += Time.deltaTime;
+                   
+                   if (mTimer >= mWaveCoolTime)
+                   {
+                       mTimer = 0.0f;
+                       WaveAttack();
+                   }
+                                      
+                   if (Random.Range(0, 1000) < 500)
+                   {
+                       PunchAttack();
+                   }
+                   else
+                   {
+                       if (Random.Range(0, 1000) < 500)
+                       {
+                           RockSpawnAttack();
+                       }
+                       else
+                       {
+                           StickyAttack();
+                       }
+                   
+                   }
 
                 }
                 else
@@ -133,7 +133,7 @@ public class MonsterGolemKing : Monster
             }
 
             // 처치 몬스터 리스트에 추가
-            DungeonManager.Instance.KillMonsterAdd(this);
+            DungeonManager.Instance.KillMonsterAdd(mMonsterId);
 
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
@@ -180,6 +180,14 @@ public class MonsterGolemKing : Monster
 
     public override void OnAnimationEvent(string name)
     {
+        if (mCurrState == State.Die || mCurrState == State.None)
+        {
+            if (mAnimator)
+            {
+                mAnimator.StopPlayback();
+            }
+            return;
+        }
         // 펀치 공격 시전 애니메이션 - punch arm 하늘에 날린 시점에 호출. 
         if ("OnGolemKingPunchStart".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
@@ -206,10 +214,15 @@ public class MonsterGolemKing : Monster
 
                 }
             }
-            this.SetState(State.Attack);
+            
         }
         // 락 스폰 애니메이션 끝난 시점.
         else if ("OnGolemKingRockSpwanFinish".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            this.SetState(State.Attack);
+        }
+        // 스티키 암 스킬 종료.
+        else if("StickyArmAttackFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             this.SetState(State.Attack);
         }

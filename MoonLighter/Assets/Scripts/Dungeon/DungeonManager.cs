@@ -17,7 +17,7 @@ public class DungeonManager : MonoBehaviour
     public DungeonUIFadeInOutTransition mTransitionUI = null;
 
     // 처치한 몬스터 리스트 
-    public List<Monster> mKillMonsterList = new List<Monster>();
+    public List<Monster.MonsterID> mKillMonsterList = new List<Monster.MonsterID>();
 
     private void Awake()
     {
@@ -25,7 +25,6 @@ public class DungeonManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
-
         }
         else
         {
@@ -38,9 +37,9 @@ public class DungeonManager : MonoBehaviour
         mKillMonsterList.Clear();
     }
 
-    public void KillMonsterAdd(Monster monster)
+    public void KillMonsterAdd(Monster.MonsterID monsterID)
     {
-        mKillMonsterList.Add(monster);
+        mKillMonsterList.Add(monsterID);
     }
 
     
