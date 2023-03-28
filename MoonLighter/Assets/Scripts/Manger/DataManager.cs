@@ -82,4 +82,6 @@ public class DataManager : GSingleton<DataManager>
 
         File.WriteAllText(path, json);
     }
+    
+     
 }

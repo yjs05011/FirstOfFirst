@@ -13,19 +13,23 @@ public class PlayerAttackHitBox : MonoBehaviour
     }
     public void OnEnable()
     {
-        mDamage = PlayerManager.Instance.mPlayerStat.Str;
-        if (player.mPlayerNowWeapone == 1 && player.mState == ActState.State_Attack_Combo_Three)
+        mDamage = player.mPlayerStr;
+        if (player.mState == ActState.State_Attack_Combo_Three)
         {
-            mDamage = PlayerManager.Instance.mPlayerStat.Str * 2;
+            mDamage = player.mPlayerStr * 2;
 
         }
         else if (player.mPlayerNowWeapone == 1 && player.mState == ActState.State_Attack_Skill)
         {
-            mDamage = PlayerManager.Instance.mPlayerStat.Str * 3;
+            mDamage = player.mPlayerStr * 3;
+        }
+        else if (player.mPlayerNowWeapone == 2 && player.mState == ActState.State_Attack_Skill)
+        {
+            mDamage = player.mPlayerStr * 2;
         }
         else
         {
-            mDamage = PlayerManager.Instance.mPlayerStat.Str;
+            mDamage = player.mPlayerStr;
         }
     }
     // Start is called before the first frame update
@@ -34,7 +38,7 @@ public class PlayerAttackHitBox : MonoBehaviour
         if (other.CompareTag("Monster"))
         {
             Debug.Log(mDamage);
-            other.GetComponent<Monster>().OnDamage(mDamage);
+            //            other.GetComponent<Monster>().OnDamage(mDamage);
         }
     }
 }

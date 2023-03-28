@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6962648959598433870}
   m_Layer: 0
   m_Name: CloseCollider
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 8094709537579189764}
   m_Layer: 0
   m_Name: BasicDoor
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3520993919832938134}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -197,8 +197,8 @@ PolygonCollider2D:
       - {x: -1.25, y: -2.125}
       - {x: -1.0833334, y: -2.1666667}
       - {x: -0.6997715, y: -2.1488461}
-      - {x: -0.71582156, y: -0.88123894}
-      - {x: 0.6270634, y: -0.8628793}
+      - {x: -0.70205027, y: -0.027418137}
+      - {x: 0.6132921, y: -0.02283001}
       - {x: 0.62848777, y: -2.166667}
       - {x: 1.0833334, y: -2.1666667}
       - {x: 1.1666667, y: -2.0416667}

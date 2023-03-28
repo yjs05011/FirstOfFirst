@@ -22,6 +22,11 @@ public class PlayerAttackComboThree : PlayerState
                 }
                 break;
             case 2:
+                if (!mIsAttack)
+                {
+                    mIsAttack = true;
+                    StartCoroutine(SpearCombo3(player.mPlayerDirection, player));
+                }
                 break;
             case 3:
                 break;
@@ -59,6 +64,40 @@ public class PlayerAttackComboThree : PlayerState
         }
         // Time.timeScale = 1f / 24f;
         yield return new WaitForSeconds(player.mPlayerAnimation[2].length);
+        player.mWeaponeHitBox.gameObject.SetActive(false);
+        player.mAttackRoll = 0;
+        player.mPlayerAnimator.SetBool("IsAttack", false);
+        player.mPlayerAnimator.SetBool("IsAttackComboThree", false);
+        player.SetActionType(ActState.State_Move);
+        player.mIsCombo = false;
+
+    }
+    IEnumerator SpearCombo3(int direct, PlayerAct player)
+    {
+        player.mPlayerAnimator.SetBool("IsAttackComboThree", true);
+        player.mWeaponeHitBox.gameObject.SetActive(true);
+        switch (direct)
+        {
+
+            case 0:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, -1.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 2f);
+                break;
+            case 1:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, 1.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 1.5f);
+                break;
+            case 2:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(-1.25f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2f, 1f);
+                break;
+            case 3:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(1.25f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2f, 1f);
+                break;
+        }
+        // Time.timeScale = 1f / 24f;
+        yield return new WaitForSeconds(player.mPlayerAnimation[5].length);
         player.mWeaponeHitBox.gameObject.SetActive(false);
         player.mAttackRoll = 0;
         player.mPlayerAnimator.SetBool("IsAttack", false);

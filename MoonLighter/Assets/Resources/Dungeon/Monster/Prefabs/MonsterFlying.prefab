@@ -166,6 +166,8 @@ MonoBehaviour:
   mAnimationEvent: {fileID: 1872164662}
   mProjectilePreset: {fileID: 0}
   mSkillPresets: []
+  mColliders: []
+  mMonsterId: 3
   mMovableArea:
     serializedVersion: 2
     x: -9
@@ -178,7 +180,7 @@ MonoBehaviour:
   mWanderDistance: 0
   mHp: 100
   mMaxHP: 100
-  mDamage: 10
+  mDamage: 30
   mAttackInterval: 1
   mAttackTime: 0
   mIsAttackBlock: 0
@@ -190,6 +192,7 @@ MonoBehaviour:
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
+  mHpBar: {fileID: 0}
   mImgHp: {fileID: 7820446598725225783}
 --- !u!1 &7820446598725225777
 GameObject:

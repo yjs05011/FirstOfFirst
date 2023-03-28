@@ -170,7 +170,7 @@ public class MonsterGolemMiniBoss : Monster
             {
                 if (mTarget)
                 {
-                    mTarget.OnDamage(this.GetDamage());
+                    mTarget.OnDamage(mMonsterId, this.GetDamage());
                     return;
                 }
             }

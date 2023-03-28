@@ -34,8 +34,7 @@ void Awake()
         //     if(gameObject.transform.parent.transform.GetChild(2)||gameObject.transform.parent.transform.GetChild(3)||gameObject.transform.parent.transform.GetChild(4))
 
         // }{}
-       if(mEquipmentSlotParent.transform.GetChild(0) || mEquipmentSlotParent.transform.GetChild(1))
-       {}
+       
         
         
         mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
@@ -80,12 +79,14 @@ void Awake()
         // Debug.Log(mItem.mItemType != Item.ItemEnumType.Equiment);
         //아이템 타입 구분
        // if(gameObject.transform.parent.transform.GetChild(0) == Item.ItemEnumType.Equiment)
-        if (mEquipmentItem.mItemType != Item.ItemEnumType.Equiment)
+        //재료아이템일경우
+        if (mEquipmentItem.mItemType != Item.ItemEnumType.Equiment )
         {    
             mTextCount.text = mEquipmentItemCount.ToString();
+            
             if(mEquipmentItemCount == 0 )
             {
-
+                ClearSlot();
             }
             SetColor(1);
         }
