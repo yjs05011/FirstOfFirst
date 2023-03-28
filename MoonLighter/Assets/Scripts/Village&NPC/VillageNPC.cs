@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VillageNPC : MonoBehaviour
 {
-
+    
     private Animator mNpcAni;
     private float mSpeed = 1f;
     private Vector3 mPosition;
@@ -19,7 +19,7 @@ public class VillageNPC : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        
+
         Vector3 direction = mPosition - transform.position;
         transform.Translate(direction.normalized * mSpeed * Time.deltaTime);
         mNpcAni.SetBool("IsWalking",true);

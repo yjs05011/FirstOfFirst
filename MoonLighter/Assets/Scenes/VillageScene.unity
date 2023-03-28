@@ -205,6 +205,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Tree_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1731937786956490234, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 8512865175390912381, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
       propertyPath: m_Size.x
       value: 1.125
@@ -309,6 +313,10 @@ PrefabInstance:
     - target: {fileID: 505171965515811463, guid: a3add1335d5ad004b877cbabcffeb7b2, type: 3}
       propertyPath: m_Name
       value: Village_Bench_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 505171965515811463, guid: a3add1335d5ad004b877cbabcffeb7b2, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8147023079073046050, guid: a3add1335d5ad004b877cbabcffeb7b2, type: 3}
       propertyPath: m_Size.x
@@ -549,11 +557,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 717795527396746527, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -13
+      value: 8.03
       objectReference: {fileID: 0}
     - target: {fileID: 717795527396746527, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 18
+      value: 9.78
       objectReference: {fileID: 0}
     - target: {fileID: 717795527396746527, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -656,9 +664,33 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1095704345
       objectReference: {fileID: 0}
+    - target: {fileID: 2417079002332945198, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 2972927896617921503, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
       propertyPath: m_Name
       value: RivalHouse_old
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972927896617921503, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167043281551507237, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650769786283634540, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756498494034172609, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099020379954211057, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 6751409737396250828, guid: 4eaca9b921c5b0142ba163d902de37cd, type: 3}
       propertyPath: m_SortingLayer
@@ -768,6 +800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: woodboxStrong
       objectReference: {fileID: 0}
+    - target: {fileID: 7675107998023367439, guid: 226e2cbefeffab94cab76b1bcbe5219a, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 226e2cbefeffab94cab76b1bcbe5219a, type: 3}
 --- !u!4 &708567238 stripped
@@ -845,6 +881,10 @@ PrefabInstance:
     - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_Name
       value: Village_Tree_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3689525694921702054, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_SortingLayer
@@ -932,6 +972,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'woodboxStrong '
       objectReference: {fileID: 0}
+    - target: {fileID: 7675107998023367439, guid: 226e2cbefeffab94cab76b1bcbe5219a, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 226e2cbefeffab94cab76b1bcbe5219a, type: 3}
 --- !u!4 &741625940 stripped
@@ -993,6 +1037,10 @@ PrefabInstance:
     - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_Name
       value: Village_Tree_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3689525694921702054, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_SortingLayer
@@ -1062,6 +1110,10 @@ PrefabInstance:
     - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_Name
       value: Village_Tree_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3689525694921702054, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_SortingLayer
@@ -1143,6 +1195,10 @@ PrefabInstance:
     - target: {fileID: 1731937786956490234, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
       propertyPath: m_Name
       value: Village_Tree_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731937786956490234, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
@@ -1596,6 +1652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: woodbox
       objectReference: {fileID: 0}
+    - target: {fileID: 7382023216753363644, guid: b0fe82793ede1534a9bb2f2b0a347dc5, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 7382023216753363645, guid: b0fe82793ede1534a9bb2f2b0a347dc5, type: 3}
       propertyPath: m_RootOrder
       value: 36
@@ -1679,6 +1739,10 @@ PrefabInstance:
     - target: {fileID: 1351132874816034866, guid: c42f429569c1fed479eac90b5f2ea47e, type: 3}
       propertyPath: m_Name
       value: Village_Bench_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1351132874816034866, guid: c42f429569c1fed479eac90b5f2ea47e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1351132874816034867, guid: c42f429569c1fed479eac90b5f2ea47e, type: 3}
       propertyPath: m_RootOrder
@@ -2370,6 +2434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Tree_01
       objectReference: {fileID: 0}
+    - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 3689525694921702054, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -2610,6 +2678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Tree_01
       objectReference: {fileID: 0}
+    - target: {fileID: 3689525694921702051, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 3689525694921702054, guid: 5f218caa91c806e4f8210ad096467020, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -2781,6 +2853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Tree_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1731937786956490234, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 8512865175390912381, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
       propertyPath: m_Size.x
       value: 1.125
@@ -2899,7 +2975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1149271769279675448, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1540987294780313237, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_TagString
@@ -2940,6 +3016,10 @@ PrefabInstance:
     - target: {fileID: 1852005835897902739, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_SortingLayerID
       value: -1095704345
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903479643798560182, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3618781714445247757, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2984,6 +3064,10 @@ PrefabInstance:
     - target: {fileID: 3760178784447842879, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_SortingLayerID
       value: -1095704345
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760178784672168981, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3760178784672168983, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_SortingLayer
@@ -3037,6 +3121,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4805721166369092813, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 5467045102919492988, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: mID
       value: 300
@@ -3048,6 +3136,10 @@ PrefabInstance:
     - target: {fileID: 5467045102919492988, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: mTalkManager
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487512991437420500, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5581098556732719189, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3089,6 +3181,10 @@ PrefabInstance:
       propertyPath: mTalkManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6393696421451758863, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 6933291779935886688, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -3128,6 +3224,14 @@ PrefabInstance:
     - target: {fileID: 7413524989525989054, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_Name
       value: Village_Blacksmith_House
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413524989525989054, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964952211706999968, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8512099704394237428, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3171,6 +3275,10 @@ PrefabInstance:
     - target: {fileID: 7601599491488369994, guid: 47fe772c51dfbc84ea7a7cd1d3451e80, type: 3}
       propertyPath: m_Name
       value: 'Village_OilLamps_1 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601599491488369994, guid: 47fe772c51dfbc84ea7a7cd1d3451e80, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 7601599491488369996, guid: 47fe772c51dfbc84ea7a7cd1d3451e80, type: 3}
       propertyPath: m_SortingLayer
@@ -3801,6 +3909,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Bench_01
       objectReference: {fileID: 0}
+    - target: {fileID: 505171965515811463, guid: a3add1335d5ad004b877cbabcffeb7b2, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3add1335d5ad004b877cbabcffeb7b2, type: 3}
 --- !u!1001 &507074325085346334
@@ -3886,6 +3998,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_BigTree
       objectReference: {fileID: 0}
+    - target: {fileID: 507074323544497849, guid: 0a8a0d420d318754799a40437eb94c32, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a8a0d420d318754799a40437eb94c32, type: 3}
 --- !u!1001 &1265167506686429304
@@ -3931,6 +4047,10 @@ PrefabInstance:
       propertyPath: mTalkManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 206999500937044947, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 342769774101842268, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -3943,6 +4063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Witch_Table
       objectReference: {fileID: 0}
+    - target: {fileID: 693212598977603386, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 880695935045840016, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
       value: 8
@@ -3954,6 +4078,14 @@ PrefabInstance:
     - target: {fileID: 880695935045840016, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayerID
       value: 446191501
+      objectReference: {fileID: 0}
+    - target: {fileID: 880695935045840022, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261954920799813114, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1261954920799813116, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
@@ -3985,7 +4117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846129166825051852, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 2029077364389334316, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
@@ -4119,6 +4251,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Witch_House
       objectReference: {fileID: 0}
+    - target: {fileID: 3803730341613803936, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 4202154600395579283, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -4139,6 +4275,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.29166666
       objectReference: {fileID: 0}
+    - target: {fileID: 5097446597253350820, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 5602422154063679993, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -4154,6 +4294,10 @@ PrefabInstance:
     - target: {fileID: 5684684782855421148, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_Name
       value: Village_Witch_Roof
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684684782855421148, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5998527557748173790, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: mID
@@ -4215,6 +4359,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 446191501
       objectReference: {fileID: 0}
+    - target: {fileID: 6363210920819561349, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 6649140064044912966, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -4234,6 +4382,10 @@ PrefabInstance:
     - target: {fileID: 7157164834811091900, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_Name
       value: Village_Witch_Storage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157164834811091900, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 7737258355408161834, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4275,6 +4427,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8632685398162237681, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 8632685398162237687, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
       value: 8
@@ -4313,6 +4469,10 @@ PrefabInstance:
     - target: {fileID: 1351132874816034866, guid: c42f429569c1fed479eac90b5f2ea47e, type: 3}
       propertyPath: m_Name
       value: Village_Bench_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1351132874816034866, guid: c42f429569c1fed479eac90b5f2ea47e, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1351132874816034867, guid: c42f429569c1fed479eac90b5f2ea47e, type: 3}
       propertyPath: m_RootOrder
@@ -4439,6 +4599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Tree_02
       objectReference: {fileID: 0}
+    - target: {fileID: 1731937786956490234, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 8512865175390912381, guid: 14482980e107da04fa549a52ca1df50c, type: 3}
       propertyPath: m_Size.x
       value: 1.125
@@ -4520,7 +4684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4334357405517961106, guid: 4978bf9c7327169438849abb6850f7d0, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 4334357405517961107, guid: 4978bf9c7327169438849abb6850f7d0, type: 3}
       propertyPath: m_RootOrder
@@ -4623,6 +4787,10 @@ PrefabInstance:
     - target: {fileID: 658463247687776374, guid: 739530ba793135c4cb4a139bb49e51ac, type: 3}
       propertyPath: m_Name
       value: Village_Well
+      objectReference: {fileID: 0}
+    - target: {fileID: 658463247687776374, guid: 739530ba793135c4cb4a139bb49e51ac, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 6414304507080678802, guid: 739530ba793135c4cb4a139bb49e51ac, type: 3}
       propertyPath: m_RootOrder
@@ -4758,6 +4926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_House_02
       objectReference: {fileID: 0}
+    - target: {fileID: 5355260061849909413, guid: b4128c61d19abec4daa3eb8f683a58df, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 5355260061849909414, guid: b4128c61d19abec4daa3eb8f683a58df, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -4813,6 +4985,10 @@ PrefabInstance:
     - target: {fileID: 5355260061849909415, guid: b4128c61d19abec4daa3eb8f683a58df, type: 3}
       propertyPath: m_SortingLayerID
       value: -1095704345
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355260062789954876, guid: b4128c61d19abec4daa3eb8f683a58df, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5355260062789954877, guid: b4128c61d19abec4daa3eb8f683a58df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4917,7 +5093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3914108514104479590, guid: 4f9ffb59076e54246bdcfd388624983c, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5448541463643172207, guid: 4f9ffb59076e54246bdcfd388624983c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5022,6 +5198,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1095704345
       objectReference: {fileID: 0}
+    - target: {fileID: 6702054545614749168, guid: d739a033a5016cb40a42cfa9e173dde5, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 6702054546652978681, guid: d739a033a5016cb40a42cfa9e173dde5, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -5037,6 +5217,10 @@ PrefabInstance:
     - target: {fileID: 6702054546652978682, guid: d739a033a5016cb40a42cfa9e173dde5, type: 3}
       propertyPath: m_Name
       value: Village_House_05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702054546652978682, guid: d739a033a5016cb40a42cfa9e173dde5, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 6702054546652978683, guid: d739a033a5016cb40a42cfa9e173dde5, type: 3}
       propertyPath: m_RootOrder
@@ -5232,6 +5416,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 405996665}
     m_Modifications:
+    - target: {fileID: 1532137024787024042, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 1532137024787024044, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -5244,6 +5432,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1095704345
       objectReference: {fileID: 0}
+    - target: {fileID: 6299061251461843648, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 6299061251461843654, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -5255,6 +5447,10 @@ PrefabInstance:
     - target: {fileID: 7302084508527958808, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
       propertyPath: m_Name
       value: Village_House_06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302084508527958808, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 7302084508527958809, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
       propertyPath: m_RootOrder
@@ -5320,6 +5516,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1095704345
       objectReference: {fileID: 0}
+    - target: {fileID: 8034796071508970406, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d20fa218bc4ea4045a7b297d1011ed0b, type: 3}
 --- !u!1001 &7515082872666698373
@@ -5335,7 +5535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1564611382821598815, guid: b5554446334c4994e884c4dc0439c815, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 2862148784040907376, guid: b5554446334c4994e884c4dc0439c815, type: 3}
       propertyPath: m_SizeDelta.x
@@ -5496,6 +5696,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_OilLamps_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7601599491488369994, guid: 47fe772c51dfbc84ea7a7cd1d3451e80, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 7601599491488369996, guid: 47fe772c51dfbc84ea7a7cd1d3451e80, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -5613,6 +5817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: woodboxStrong
       objectReference: {fileID: 0}
+    - target: {fileID: 7675107998023367439, guid: 226e2cbefeffab94cab76b1bcbe5219a, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 226e2cbefeffab94cab76b1bcbe5219a, type: 3}
 --- !u!1001 &7706425546232970109
@@ -5686,6 +5894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village_Barrel
       objectReference: {fileID: 0}
+    - target: {fileID: 7706425547144197869, guid: 544d737c64f8d214f866d4b7812fe2b7, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 7706425547144197871, guid: 544d737c64f8d214f866d4b7812fe2b7, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -5703,6 +5915,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 405996665}
     m_Modifications:
+    - target: {fileID: 274279231863738192, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 348346501320407350, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
       propertyPath: m_Size.x
       value: 0.20833333
@@ -5738,6 +5954,10 @@ PrefabInstance:
     - target: {fileID: 1165633386741919371, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
       propertyPath: m_Name
       value: Village_House_04
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165633386741919371, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1234361611052784948, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
       propertyPath: m_Offset.x
@@ -5854,6 +6074,10 @@ PrefabInstance:
     - target: {fileID: 4605534909479697369, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
       propertyPath: m_Offset.y
       value: -1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4633503289159690346, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 4863064411424267531, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
       propertyPath: m_SortingLayer
@@ -6007,6 +6231,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1095704345
       objectReference: {fileID: 0}
+    - target: {fileID: 7959760093317079422, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 7959760093317079423, guid: 27c580b1739956a4082f1cf5dcfaf570, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6166667
@@ -6032,7 +6260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 245740714497909665, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 245740714497909665, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingLayerID
@@ -6041,6 +6269,10 @@ PrefabInstance:
     - target: {fileID: 245740714497909666, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.80833334
+      objectReference: {fileID: 0}
+    - target: {fileID: 245740714497909667, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 283423566243519662, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -6164,11 +6396,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3383807083441562612, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3383807083441562612, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingLayerID
       value: -1095704345
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383807083441562614, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3383807083441562615, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6296,7 +6532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6388971645583402005, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 6462325512692316991, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6321,6 +6557,10 @@ PrefabInstance:
     - target: {fileID: 6472463269823818534, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_Offset.y
       value: 0.41666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240840895105730871, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 7547774624673723297, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6382,13 +6622,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.29166666
       objectReference: {fileID: 0}
+    - target: {fileID: 8237071484257975493, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 8237071484257975495, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingLayer
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8237071484257975495, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8237071484257975495, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingLayerID
@@ -6408,7 +6652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8561326710726014280, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_TagString
-      value: Npc
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8561326710726014281, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_RootOrder
@@ -6466,6 +6710,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1095704345
       objectReference: {fileID: 0}
+    - target: {fileID: 8561326710993571267, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 8561326710993571268, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.25
@@ -6485,6 +6733,10 @@ PrefabInstance:
     - target: {fileID: 8561326710993571270, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_SortingLayerID
       value: -1095704345
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561326711678801354, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 8561326711678801355, guid: 9e0768c88cdec8f42907805995f67d9c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6526,6 +6778,10 @@ PrefabInstance:
     - target: {fileID: 3234144022731988765, guid: cd7b1f098ff8f8a48be3358e44d61aaf, type: 3}
       propertyPath: m_Name
       value: Village_OilLamps_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3234144022731988765, guid: cd7b1f098ff8f8a48be3358e44d61aaf, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 4227441160448708457, guid: cd7b1f098ff8f8a48be3358e44d61aaf, type: 3}
       propertyPath: m_SortingLayer

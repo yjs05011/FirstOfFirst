@@ -49,8 +49,8 @@ public class DoorController : MonoBehaviour
                     mStartShop.SetActive(false);
                     mDoorAni.SetBool("OpenTheDoor", true);
                     mDoorAni.SetBool("OpenTheDoor", false);
-                    PlayerManager.Instance.mPlayerBeforPos = SetPosition.Instance.mSettingPosition;
-                    SetPosition.Instance.mSettingPosition = default;
+                    //PlayerManager.Instance.mPlayerBeforPos = SetPosition.Instance.mSettingPosition;
+                    SetPosition.Instance.mSettingPosition = new Vector3(8, 10, 0);
                     LoadingManager.LoadScene("VillageScene");
                     //GFunc.LoadScene("VillageScene");
                 }
