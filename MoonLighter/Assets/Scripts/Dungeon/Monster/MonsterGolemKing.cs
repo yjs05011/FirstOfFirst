@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.UI.GridLayoutGroup;
 
 public class MonsterGolemKing : Monster
@@ -10,8 +11,8 @@ public class MonsterGolemKing : Monster
     private int mPunchCount = 0;
     public const int PUNCH_COUNT = 5;
     public Transform mWaveStartPosition = null;
-    public float mWaveCoolTime = 20.0f;
-    private float mTimer = 0.0f;
+    private float mWaveCoolTime = 10.0f;
+    public float mTimer = 0.0f;
 
     public override void Update()
     {
@@ -30,11 +31,26 @@ public class MonsterGolemKing : Monster
             }
 
         }
-
         else if (mCurrState == State.Idle)
         {
-            this.SetState(State.Attack);
 
+            if (IsInTraceScope())
+            {
+                this.SetState(State.Attack);
+                return;
+            }
+
+        }
+        // wait중에도 타이머는 동작하게 
+        else if(mCurrState == State.Wait)
+        {
+            mTimer += Time.deltaTime;
+
+            if (mTimer >= mWaveCoolTime)
+            {
+                mTimer = 0.0f;
+                WaveAttack();
+            }
         }
         // 공격 상태
         else if (mCurrState == State.Attack)
@@ -53,36 +69,30 @@ public class MonsterGolemKing : Monster
                 {
                     mTimer += Time.deltaTime;
 
-                    if(mTimer >= mWaveCoolTime )
+                    if (mTimer >= mWaveCoolTime)
                     {
                         mTimer = 0.0f;
                         WaveAttack();
                     }
-                    
-                    //if (Random.Range(0, 1000) < 500)
-                    //{
+
+
+                    if (Random.Range(0, 1000) < 500)
+                    {
+                        PunchAttack();
+                    }
+                    else
+                    {
                         if (Random.Range(0, 1000) < 500)
-                        {
-                            PunchAttack();
-                        }
-                        else
                         {
                             RockSpawnAttack();
                         }
-                   // 
-                    //}
-                    //else
-                    //{
-                    //    if (Random.Range(0, 1000) < 500)
-                    //    {
-                    //        WaveAttack();
-                    //    }
-                    //    else
-                    //    {
-                    //        StickyAttack();
-                    //    }
-                    //
-                    //}
+                        else
+                        {
+                            // StickyAttack();
+                        }
+
+                    }
+
                 }
                 else
                 {
@@ -109,14 +119,24 @@ public class MonsterGolemKing : Monster
 
             // 애니메이션 다이 
             mAnimator.SetTrigger("Dead");
+
+            // 컬라이더 off
+            //this.GetComponent<Collider2D>().enabled = false;
+
+            //hp bar 가 없음.
+            //mHpBar.SetActive(false);
+
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
             if (mStage)
             {
                 mStage.AddDieMonsterCount();
             }
+
+            // 처치 몬스터 리스트에 추가
+            DungeonManager.Instance.KillMonsterAdd(this);
+
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
-
 
         }
     }
@@ -127,16 +147,17 @@ public class MonsterGolemKing : Monster
         // 펀치 스킬 시전 애니메이션 시작 트리거 
         mAnimator.SetTrigger("LunchArm");
         this.SetState(State.Wait);
-        // -> OnAnimation:Finish 로 Attack 상태로 다시 변경
+        // -> OnAnimation:OnGolemKingPunchEnd 시점에서 idle 상태로 다시 변경
+        Debug.Log(" PunchAttack()");
     }
 
     public void WaveAttack()
     {
         // wave 포지션에 wave 오브젝트 출력
         WaveSkill();
-        // wave 는 시전 하고 골렘킹은 다시 idle 상태로 변경
-        this.SetState(State.Idle);
-
+        // wave 는 시전 하고 골렘킹은 
+        //this.SetState(State.Attack);
+        Debug.Log(" WaveAttack()");
     }
 
     public void StickyAttack()
@@ -145,6 +166,7 @@ public class MonsterGolemKing : Monster
         mAnimator.SetTrigger("StickyArm");
         this.SetState(State.Wait);
         // -> OnAnimation:Finish 로 Attack 상태로 다시 변경
+        Debug.Log(" StickyAttack()");
     }
 
     public void RockSpawnAttack()
@@ -152,7 +174,8 @@ public class MonsterGolemKing : Monster
         // 락스폰 스킬 시전 애니메이션 시작 트리거 
         mAnimator.SetTrigger("RockSpawn");
         this.SetState(State.Wait);
-        // -> OnAnimation:OnGolemKingRockSpwan 로 Rock 생성 
+        Debug.Log(" RockSpawnAttack()");
+        // -> OnAnimation:OnGolemKingRockSpwan 로 Rock 생성 , 스폰 모션 끝나는 시점(OnGolemKingRockSpwanFinish)에  Attack 상태로 다시 변경
     }
 
     public override void OnAnimationEvent(string name)
@@ -161,6 +184,12 @@ public class MonsterGolemKing : Monster
         if ("OnGolemKingPunchStart".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             RepeatPunchAttack();
+        }
+        // 펀치 공격 종료 후 팔 다시 원위치 recover arm 이 끝난 시점에 호출
+        else if ("OnGolemKingPunchEnd".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            Debug.Log("OnGolemKingPunchEnd");
+            this.SetState(State.Attack);
         }
         // 락 스폰 시전 애니메이션 - 바닥 찍는 시점에 호출 
         else if ("OnGolemKingRockSpwan".Equals(name, System.StringComparison.OrdinalIgnoreCase))
@@ -177,11 +206,22 @@ public class MonsterGolemKing : Monster
 
                 }
             }
+            this.SetState(State.Attack);
+        }
+        // 락 스폰 애니메이션 끝난 시점.
+        else if ("OnGolemKingRockSpwanFinish".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            this.SetState(State.Attack);
+        }
+        // 다이 애니메이션 끝나면 호출
+        else if ("DeadFinish".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
         }
         else
         {
             Debug.LogErrorFormat("Unknown Event Name:{0}", name);
         }
+        
     }
 
     public void WaveSkill()
@@ -205,7 +245,7 @@ public class MonsterGolemKing : Monster
             mPunchCount = 0;
 
             mAnimator.SetTrigger("RecoverArm");
-            SetState(State.Idle);
+            Debug.Log("recoverarm start");
             return;
         }
         ++mPunchCount;
@@ -236,7 +276,7 @@ public class MonsterGolemKing : Monster
     }
 
 
-    protected IEnumerator ShotDelayCoroutine()
+    protected IEnumerator DelayCoroutine()
     {
         yield return new WaitForSeconds(1.0f);
         mPunchCount = 0;

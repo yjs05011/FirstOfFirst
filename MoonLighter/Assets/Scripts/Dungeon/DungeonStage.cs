@@ -77,10 +77,21 @@ public class DungeonStage : MonoBehaviour
             // 문 오픈
             SetDoorsOpen();
             // 상자 있을경우 상자 오픈.
-            // 코드 넣어야하고.
+            SetChestUnlock();
+            
         }
     }
     
+    public void SetChestUnlock()
+    {
+        if(mBoard.GetChest() != null)
+        {
+            mBoard.GetChest().SetChestState(DungeonChest.ChestState.Unlock);
+        }
+       
+        return;
+    }
+
         // �÷��̾ ���������� �������� �˸�
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {

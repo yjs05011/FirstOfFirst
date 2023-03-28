@@ -116,7 +116,7 @@ MonoBehaviour:
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
-  mHpBar: {fileID: 0}
+  mHpBar: {fileID: 3428410279342512479}
   mImgHp: {fileID: 5516116913703703424}
 --- !u!1 &3428410279342512479
 GameObject:
@@ -495,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6683707675326172659
 Transform:
   m_ObjectHideFlags: 0

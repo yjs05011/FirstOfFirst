@@ -130,4 +130,9 @@ public class DungeonBoard : MonoBehaviour
 
         }
     }
+
+    public DungeonChest GetChest() 
+    { 
+        return mChest; 
+    }
 }

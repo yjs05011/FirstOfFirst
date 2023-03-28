@@ -415,7 +415,7 @@ MonoBehaviour:
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
-  mHpBar: {fileID: 0}
+  mHpBar: {fileID: 8700756926572795063}
   mImgHp: {fileID: 6865134106337728131}
   mCurrDirection: 3
 --- !u!1 &9089565562287017502

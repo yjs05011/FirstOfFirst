@@ -78,6 +78,10 @@ public class MonsterBabySlime : Monster
 
         else if (mCurrState == State.Die)
         {
+            //hp bar hide
+            mHpBar.SetActive(false);
+            // 컬라이더 off
+            this.GetComponent<Collider2D>().enabled= false;
 
             // 애니메이션 다이 
             mAnimator.SetTrigger("Dead");
@@ -87,6 +91,9 @@ public class MonsterBabySlime : Monster
             {
                 mStage.AddDieMonsterCount();
             }
+
+            // 처치 몬스터 리스트에 추가
+            DungeonManager.Instance.KillMonsterAdd(this);
 
             // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
 
