@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZButtonControl : MonoBehaviour
+public class MiniInventory : MonoBehaviour
 {
+    public GameObject mMiniInventory;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,9 +15,9 @@ public class ZButtonControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-
+            mMiniInventory.SetActive(true);
         }
     }
 }

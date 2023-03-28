@@ -84,9 +84,6 @@ public class PlayerAct : MonoBehaviour
     }
     void Start()
     {
-        var strFormat1 = "최저임금 : {0:{0}}";
-        var strFormat2 = string.Format(strFormat1, "D6");
-        Debug.Log(strFormat2);
         SetActionType(ActState.State_Move);
         mPlayerNowWeapone = 1;
         PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
