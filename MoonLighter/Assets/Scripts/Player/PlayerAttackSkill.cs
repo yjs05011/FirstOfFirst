@@ -20,6 +20,7 @@ public class PlayerAttackSkill : PlayerState
                 StartCoroutine(BigSwordSkill(player.mPlayerDirection, player));
                 break;
             case 2:
+                StartCoroutine(SpearSkill(player.mPlayerDirection, player));
                 break;
             case 3:
                 break;
@@ -35,6 +36,7 @@ public class PlayerAttackSkill : PlayerState
 
     IEnumerator BigSwordSkill(int direct, PlayerAct player)
     {
+
         player.mPlayerAnimator.SetBool("IsSkill", true);
         player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, 0f);
         player.mWeaponeHitBox.size = new Vector2(4, 4);
@@ -51,6 +53,91 @@ public class PlayerAttackSkill : PlayerState
         player.mPlayerAnimator.SetBool("IsSkill", false);
         player.mPlayerAnimator.SetBool("IsSKillHoling", false);
         player.mPlayerAnimator.SetBool("IsSkillUse", false);
+
+
+    }
+    IEnumerator SpearSkill(int direct, PlayerAct player)
+    {
+        switch (direct)
+        {
+
+            case 0:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, -0.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 3f);
+                player.mPlayerAnimator.SetBool("IsSkill", true);
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.033f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.mPlayerRigid.AddForce(new Vector2(0, -180));
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(1.4f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.SetActionType(ActState.State_Move);
+                player.mPlayerAnimator.SetBool("IsSkill", false);
+                player.mPlayerAnimator.SetBool("IsSKillHoling", false);
+                player.mPlayerAnimator.SetBool("IsSkillUse", false);
+                break;
+            case 1:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, 0.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 3f);
+                player.mPlayerAnimator.SetBool("IsSkill", true);
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.033f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.mPlayerRigid.AddForce(new Vector2(0, 180));
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(1.4f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.SetActionType(ActState.State_Move);
+                player.mPlayerAnimator.SetBool("IsSkill", false);
+                player.mPlayerAnimator.SetBool("IsSKillHoling", false);
+                player.mPlayerAnimator.SetBool("IsSkillUse", false);
+
+                break;
+            case 2:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(-1f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2.5f, 1f);
+                player.mPlayerAnimator.SetBool("IsSkill", true);
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.033f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.mPlayerRigid.AddForce(new Vector2(-180, 0));
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(1.4f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.SetActionType(ActState.State_Move);
+                player.mPlayerAnimator.SetBool("IsSkill", false);
+                player.mPlayerAnimator.SetBool("IsSKillHoling", false);
+                player.mPlayerAnimator.SetBool("IsSkillUse", false);
+                break;
+            case 3:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(1f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2.5f, 1f);
+                player.mPlayerAnimator.SetBool("IsSkill", true);
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.033f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.mPlayerRigid.AddForce(new Vector2(180, 0));
+                yield return new WaitForSeconds(0.1f);
+                player.mWeaponeHitBox.gameObject.SetActive(true);
+                yield return new WaitForSeconds(1.4f);
+                player.mWeaponeHitBox.gameObject.SetActive(false);
+                player.SetActionType(ActState.State_Move);
+                player.mPlayerAnimator.SetBool("IsSkill", false);
+                player.mPlayerAnimator.SetBool("IsSKillHoling", false);
+                player.mPlayerAnimator.SetBool("IsSkillUse", false);
+                break;
+
+        }
+
+
 
 
     }

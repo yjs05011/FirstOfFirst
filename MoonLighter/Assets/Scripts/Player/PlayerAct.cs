@@ -40,7 +40,7 @@ public class PlayerAct : MonoBehaviour
     public int mAttackRoll = 0;
     // 플레이어가 방향을 나타내는 변수 (0:아래, 1:위 , 2:왼쪽,3:오른쪽)
     public int mPlayerDirection = 0;
-    // 플레이어 상태 머신 변수
+    // 플레이어 상태 머신 변수(무기 타입)
     public int mPlayerNowWeapone;
     // 플레이어 애니매이션을 위한 무기 위치 렉트 트랜스폼 변수
     public float mTime = 0;
@@ -68,6 +68,7 @@ public class PlayerAct : MonoBehaviour
     public bool mIsHolding = false;
     // 플레이어 콤보 공격 확인용 bool 변수
     public bool mIsCombo = false;
+
     #endregion
     // 플레이어 상태 머신 타입 변경
     private PlayerState mNowState;
@@ -83,6 +84,9 @@ public class PlayerAct : MonoBehaviour
     }
     void Start()
     {
+        var strFormat1 = "최저임금 : {0:{0}}";
+        var strFormat2 = string.Format(strFormat1, "D6");
+        Debug.Log(strFormat2);
         SetActionType(ActState.State_Move);
         mPlayerNowWeapone = 1;
         PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
@@ -160,6 +164,9 @@ public class PlayerAct : MonoBehaviour
                     {
                         mTime = 0;
                         mIsCombo = true;
+                        mPlayerAnimator.SetFloat("WeaponType", mPlayerNowWeapone);
+
+
                         SetActionType(ActState.State_Attack_Combo_One);
 
                     }
@@ -167,9 +174,21 @@ public class PlayerAct : MonoBehaviour
                     {
                         mPlayerRigid.velocity = Vector2.zero;
                         mTime = 0;
+                        mPlayerAnimator.SetFloat("WeaponType", mPlayerNowWeapone);
                         mPlayerAnimator.SetBool("IsSkill", true);
                         mPlayerAnimator.SetTrigger("IsSkillTrigger");
                         SetActionType(ActState.State_Attack_Skill);
+                    }
+                    if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.WEAPONCHANGE]))
+                    {
+                        if (mPlayerNowWeapone == 1)
+                        {
+                            mPlayerNowWeapone = 2;
+                        }
+                        else
+                        {
+                            mPlayerNowWeapone = 1;
+                        }
                     }
                     break;
                 case ActState.State_Attack_Combo_One:
@@ -227,7 +246,6 @@ public class PlayerAct : MonoBehaviour
                     }
                     break;
                 case ActState.State_Evasion:
-                    mPlayerHitBox.isTrigger = true;
                     break;
                 case ActState.State_Enter_Pool:
                     mPlayerHitBox.isTrigger = false;
@@ -278,16 +296,12 @@ public class PlayerAct : MonoBehaviour
             }
 
         }
-        if (other.CompareTag("Untagged"))
-        {
-            mPlayerHitBox.isTrigger = false;
-            mPlayerRigid.position = mPlayerPosCheck;
-        }
+
 
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Untagged"))
+        if (other.CompareTag("Wall"))
         {
             mPlayerHitBox.isTrigger = false;
             mPlayerRigid.position = mPlayerPosCheck;
