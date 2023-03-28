@@ -58,7 +58,8 @@ public class MonsterBabySlime : Monster
             {
                 if (mTarget)
                 {
-                    mTarget.OnDamage(this.mDamage);
+                    mTarget.OnDamage(mMonsterId,this.mDamage);
+                    //mTarget.OnDamage(this.mDamage);
                 }
                 else
                 {

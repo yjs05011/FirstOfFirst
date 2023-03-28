@@ -462,6 +462,9 @@ MonoBehaviour:
   mAnimator: {fileID: 385828422}
   mAnimationEvent: {fileID: 942591823}
   mProjectilePreset: {fileID: 2710972642372459300, guid: 170510f49bf6e6147a1a1580738315c5, type: 3}
+  mSkillPresets: []
+  mColliders: []
+  mMonsterId: 2
   mMovableArea:
     serializedVersion: 2
     x: -9
@@ -474,16 +477,18 @@ MonoBehaviour:
   mWanderDistance: 0
   mHp: 100
   mMaxHP: 100
-  mDamage: 10
+  mDamage: 25
   mAttackInterval: 0.3
   mAttackTime: 0
   mIsAttackBlock: 0
   mIsDash: 0
   mDashSpeed: 5
   mDashDistance: 1
+  mDashDestination: {x: 0, y: 0, z: 0}
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
+  mHpBar: {fileID: 0}
   mImgHp: {fileID: 1209188384}
   mShotCount: 3

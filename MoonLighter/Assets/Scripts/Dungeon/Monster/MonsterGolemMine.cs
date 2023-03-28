@@ -70,7 +70,7 @@ public class MonsterGolemMine : Monster
         if ("Explosion".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             // 타겟 한테 데미지 입히고
-            mTarget.OnDamage(this.mDamage);
+            mTarget.OnDamage(mMonsterId, this.mDamage);
             // 주변 몬스터 데미지 주기...
 
         }

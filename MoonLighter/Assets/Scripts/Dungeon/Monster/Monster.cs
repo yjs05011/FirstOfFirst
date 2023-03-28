@@ -13,13 +13,18 @@ public class Monster : MonoBehaviour
         public GameObject preset;
     }
 
+    [System.Serializable]
+    public class Collider2DLink
+    {
+        public string key;
+        public Collider2D collider;
+    }
+
     public enum Type
     {
         NORMAL,
         BOSS
     }
-
-    // 터렛 (리지드바디 스테틱)
 
     public enum State
     {
@@ -31,12 +36,22 @@ public class Monster : MonoBehaviour
         Wait, //무한 대기(코드로 제어)
         AttackCooltime, //공격 이후 쿨타임
         Die, // 사망 -> 비활성화
+        Ready, // 준비 (Wake 이전 상태)
     }
 
+    // 몬스터 id 
+    public enum MonsterID
+    {
+        None = 0,
+        BabySlime = 1,
+        GolemTurret = 2,
+        FlyingGolem = 3,
+        GolemMine  =4,
+        GolemMiniBoss = 5,
+        GolemCorruptMiniBoss = 6,
+        GolemKing = 10
+    }
 
-    // 보스
-    // 골렘 마인 (자폭 몬스터)
-    // 다른 몬스터들도 데미지를 입힘
 
     // 컴포넌트
     [Header("Componenet")]
@@ -49,9 +64,13 @@ public class Monster : MonoBehaviour
 
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
-    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); //딕셔너리 직렬화가 안되서 리스트 사용(추후 변경)
+    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); 
+
+    [Header("Collider")]
+    public List<Collider2DLink> mColliders = new List<Collider2DLink>();
 
     [Header("Monster Info")]
+    public MonsterID mMonsterId = MonsterID.None; // 몬스터 id
     public Rect mMovableArea; // 이동 가능한 영역
     [Range(0.1f, 20.0f)]
     public float mAttackDistance = 1.0f; // 자신의 위치를 기준으로 플레이어를 공격 가능한 거리
@@ -88,7 +107,9 @@ public class Monster : MonoBehaviour
     public PlayerAct mTarget = null; // 타겟
     public DungeonStage mStage = null; // 스테이지
 
-    // UI > hp바 
+    // UI : hp bar 오브젝트
+    public GameObject mHpBar = null;
+    // UI : HP fill image 
     public Image mImgHp = null;
 
     public void Start()
@@ -133,6 +154,13 @@ public class Monster : MonoBehaviour
         {
             mStage = DungeonGenerator.Instance.mStages[0];
         }
+    }
+
+
+
+    public MonsterID GetMonsterId()
+    {
+        return mMonsterId;
     }
 
 
@@ -249,6 +277,19 @@ public class Monster : MonoBehaviour
         return null;
     }
 
+    public Collider2D FindCollider2D(string key)
+    {
+        int count = mColliders.Count;
+        for (int idx = 0; idx < count; ++idx)
+        {
+            if (mColliders[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return mColliders[idx].collider;
+            }
+        }
+        return null;
+    }
+
     // 현재 좌표가 이동 가능한 영역인지 체크
     public bool IsMovablePosition(Vector3 position)
     {
@@ -264,6 +305,48 @@ public class Monster : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public Vector3 IsRandomPositionInsidePolygonCollider(PolygonCollider2D collider)
+    {
+        float minX = Mathf.Infinity;
+        float maxX = Mathf.NegativeInfinity;
+        float minY = Mathf.Infinity;
+        float maxY = Mathf.NegativeInfinity;
+
+        Vector2[] points = collider.points;
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (points[i].x < minX)
+            {
+                minX = points[i].x;
+            }
+            if (points[i].x > maxX)
+            {
+                maxX = points[i].x;
+            }
+            if (points[i].y < minY)
+            {
+                minY = points[i].y;
+            }
+            if (points[i].y > maxY)
+            {
+                maxY = points[i].y;
+            }
+        }
+
+        Vector2 position = new Vector2();
+        while (true)
+        {
+            position.x = Random.Range(minX, maxX);
+            position.y = Random.Range(minY, maxY);
+
+            if (collider.OverlapPoint(position))
+            {
+                break;
+            }
+        }
+        return position;
     }
 
     // 추적 가능한 거리 안에 들어왔는지 체크한다.

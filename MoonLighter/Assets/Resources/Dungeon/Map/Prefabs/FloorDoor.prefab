@@ -15,11 +15,11 @@ GameObject:
   - component: {fileID: 6971038015935283686}
   m_Layer: 0
   m_Name: FloorDoor
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1392002965528605714
 Transform:
   m_ObjectHideFlags: 0
@@ -120,8 +120,8 @@ PolygonCollider2D:
       - {x: -1.25, y: -2.125}
       - {x: -1.0833334, y: -2.1666667}
       - {x: -0.72524685, y: -2.1666675}
-      - {x: -0.7405622, y: -0.9137883}
-      - {x: 0.54340935, y: -0.9341631}
+      - {x: -0.76810485, y: -0.01865387}
+      - {x: 0.54340935, y: -0.039028645}
       - {x: 0.5370252, y: -2.166667}
       - {x: 0.93693876, y: -2.1457536}
       - {x: 1.1039262, y: -1.8952725}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 2652447666705424109}
   m_Layer: 0
   m_Name: CloseCollider
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
