@@ -69,8 +69,9 @@ public class Slot : MonoBehaviour
             SetColor(1);
         }
         else
-        {            
+        {  
             mTextCount.text = " ";
+            //mTextCount.gameObject.SetActive(true);
             SetColor(1);
             // mChangeImage.SetActive(false);
         }

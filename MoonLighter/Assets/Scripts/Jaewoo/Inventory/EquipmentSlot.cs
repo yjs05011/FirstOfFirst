@@ -51,10 +51,8 @@ void Awake()
         
         
         mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
-        mEquipmentSlotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();  
-        
-    }
-    
+        mEquipmentSlotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();          
+    }    
 
     //아이템 값 저장
     public Item mInventoryItemVaule

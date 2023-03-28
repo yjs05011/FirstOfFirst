@@ -56,12 +56,10 @@ public class Item : ScriptableObject
     //아이템 가격
     public int mItemPrice;
     //아이템 이미지
-    public Sprite mItemSprite;
-    
+    public Sprite mItemSprite;    
 
     //저주 아이템 구현시 활성화 시킬 함수
     //아이템 저주 체크
-    //public bool mIsCureCheck = false;
-    
+    //public bool mIsCureCheck = false;    
 
 }
