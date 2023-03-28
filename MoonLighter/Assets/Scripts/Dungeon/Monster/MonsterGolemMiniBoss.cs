@@ -99,20 +99,22 @@ public class MonsterGolemMiniBoss : Monster
             {
                 mStage.AddDieMonsterCount();
             }
+            // 아이템 드랍 추가 필요.
 
-            
             
             // 컬라이더 off
             this.GetComponent<Collider2D>().enabled = false;
             //hp bar hide
             mHpBar.SetActive(false);
-            // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
 
             // 처치 몬스터 리스트에 추가
             DungeonManager.Instance.KillMonsterAdd(mMonsterId);
 
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
+            
+            // 사망 연출없음. destroy.
+            GameObject.Destroy(this.gameObject);
         }
     }
 

@@ -232,7 +232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.4}
+  m_AnchoredPosition: {x: 0, y: -0.82}
   m_SizeDelta: {x: 4, y: 0.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5778072262916944130
@@ -401,6 +401,7 @@ MonoBehaviour:
   mTraceScope: 17
   mSpeed: 3
   mWanderDistance: 0.3
+  mSplashAttackDistance: 0
   mHp: 100
   mMaxHP: 100
   mDamage: 50
