@@ -413,6 +413,34 @@ public class PlayerAct : MonoBehaviour
 
     }
     //플레이어 몬스터 히트 구현
+    public void OnDamage(Monster.MonsterID id, float MonsterDamage)
+    {
+        Debug.Log(MonsterDamage);
+        if (mIsDelay || mState == ActState.State_Die)
+        {
+        }
+        else
+        {
+            mIsDelay = true;
+            StartCoroutine(HitDelay(0.5f));
+            float calculateDamage = MonsterDamage - mPlayerDef;
+            if (calculateDamage < 0)
+            {
+            }
+            else
+            {
+                mPlayerHp -= calculateDamage;
+            }
+            if (mPlayerHp < 0)
+            {
+
+                SetActionType(ActState.State_Die);
+                PlayerManager.Instance.mPlayerStat.isDie = true;
+            }
+        }
+
+
+    }
     public void OnDamage(float MonsterDamage)
     {
         Debug.Log(MonsterDamage);

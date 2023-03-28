@@ -195,7 +195,7 @@ public class MonsterGolemCorruptMiniBoss : Monster
             {
                 if (mTarget)
                 {
-                    mTarget.OnDamage(this.GetDamage());
+                    mTarget.OnDamage(mMonsterId,this.GetDamage());
                     return;
                 }
             }

@@ -44,9 +44,9 @@ public class DungeonDoor : MonoBehaviour
 
     public Collider2D mPlayerCollider = null;
 
-    public void Awake()
+    public void Start()
     {
-        mBlockDoor.SetActive(true);
+       // mBlockDoor.SetActive(true);
        
 
     }
