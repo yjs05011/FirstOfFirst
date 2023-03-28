@@ -38,7 +38,7 @@ public class PlayerAttackHitBox : MonoBehaviour
         if (other.CompareTag("Monster"))
         {
             Debug.Log(mDamage);
-            //            other.GetComponent<Monster>().OnDamage(mDamage);
+            other.GetComponent<Monster>().OnDamage(mDamage);
         }
     }
 }

@@ -12,7 +12,8 @@ public enum ActState
     State_Evasion,
     State_Enter_Pool,
     State_Attack_Skill,
-    State_Die
+    State_Die,
+    State_Fall
 }
 public class PlayerAct : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class PlayerAct : MonoBehaviour
     public bool mIsHolding = false;
     // 플레이어 콤보 공격 확인용 bool 변수
     public bool mIsCombo = false;
+    public bool mIsFall = false;
 
     #endregion
     // 플레이어 상태 머신 타입 변경
@@ -125,6 +127,7 @@ public class PlayerAct : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
+            mPlayerHitBox.isTrigger = true;
             DataManager.Instance.JsonLoad();
         }
         if (PlayerManager.Instance.mIsUiActive)
@@ -144,10 +147,14 @@ public class PlayerAct : MonoBehaviour
             switch (mState)
             {
                 case ActState.State_Move:
+                    if (mIsFall)
+                    {
+                        SetActionType(ActState.State_Fall);
+                    }
                     mPlayerAnimator.SetBool("IsAttack", false);
                     mPlayerAnimator.SetBool("IsPool", false);
                     transform.GetChild(0).gameObject.SetActive(false);
-                    mPlayerHitBox.isTrigger = false;
+                    // mPlayerHitBox.isTrigger = false;
                     mNowState.Action(ActState.State_Move);
                     mPlayerAnimator.SetBool("IsSkill", false);
                     mPlayerAnimator.SetBool("IsSKillHoling", false);
@@ -261,6 +268,10 @@ public class PlayerAct : MonoBehaviour
                     }
                     break;
                 case ActState.State_Die:
+                    mPlayerRigid.velocity = Vector2.zero;
+                    break;
+                case ActState.State_Fall:
+
                     break;
             }
         }
@@ -282,15 +293,8 @@ public class PlayerAct : MonoBehaviour
         }
         if (other.CompareTag("Hole"))
         {
-            if (mIsEvasion)
-            {
+            mIsFall = true;
 
-            }
-            else
-            {
-
-                mIsEvasion = false;
-            }
 
         }
 
@@ -305,6 +309,9 @@ public class PlayerAct : MonoBehaviour
         }
         if (other.CompareTag("Hole"))
         {
+
+            Debug.Log("!!!");
+            mIsFall = true;
 
         }
     }
@@ -363,16 +370,14 @@ public class PlayerAct : MonoBehaviour
             case global::ActState.State_Attack_Skill:
                 mNowState = gameObject.AddComponent<PlayerAttackSkill>();
                 break;
+            case global::ActState.State_Fall:
+                mNowState = gameObject.AddComponent<PlayerFall>();
+                break;
             default:
                 break;
         }
     }
     //키입력에 딜레이를 주기 위한 변수
-    IEnumerator HitDelay(float Delay)
-    {
-        yield return new WaitForSeconds(Delay);
-        mIsDelay = false;
-    }
 
     public float GetPlayerMaxHp()
     {
@@ -394,24 +399,7 @@ public class PlayerAct : MonoBehaviour
         }
 
     }
-    //플레이어 낭떨어지 떨어졌을 경우 데미지 구현
-    public void OnFalling(float number)
-    {
-        mPlayerHp -= Mathf.Floor(number);
-        if (mPlayerHp < 0)
-        {
-            SetActionType(ActState.State_Die);
-            PlayerManager.Instance.mPlayerStat.isDie = true;
-        }
-        else
-        {
-            mPlayerAnimator.SetTrigger("IsFalling");
-            mPlayerRigid.velocity *= 0.1f;
-            transform.position = DungeonManager.Instance.GetPlayerCurrStage().GetEntryPosition();
-        }
 
-
-    }
     //플레이어 몬스터 히트 구현
     public void OnDamage(Monster.MonsterID id, float MonsterDamage)
     {
@@ -431,10 +419,11 @@ public class PlayerAct : MonoBehaviour
             {
                 mPlayerHp -= calculateDamage;
             }
-            if (mPlayerHp < 0)
+            if (mPlayerHp <= 0)
             {
 
                 SetActionType(ActState.State_Die);
+                mPlayerAnimator.SetTrigger("IsDie");
                 PlayerManager.Instance.mPlayerStat.isDie = true;
             }
         }
@@ -502,4 +491,11 @@ public class PlayerAct : MonoBehaviour
     {
         mPlayerAnimator.SetBool("IsSKillHoling", true);
     }
+    IEnumerator HitDelay(float Delay)
+    {
+        yield return new WaitForSeconds(Delay);
+        mIsDelay = false;
+    }
+
+
 }
