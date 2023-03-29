@@ -16,7 +16,8 @@ public class DungeonManager : MonoBehaviour
     // 던전 층 이동 로딩 씬 
     public DungeonUIFadeInOutTransition mTransitionUI = null;
 
-
+    // 처치한 몬스터 리스트 
+    public List<Monster.MonsterID> mKillMonsterList = new List<Monster.MonsterID>();
 
     private void Awake()
     {
@@ -24,13 +25,24 @@ public class DungeonManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
-
         }
         else
         {
             Destroy(this.gameObject);
         }
     }
+
+    public void Start()
+    {
+        mKillMonsterList.Clear();
+    }
+
+    public void KillMonsterAdd(Monster.MonsterID monsterID)
+    {
+        mKillMonsterList.Add(monsterID);
+    }
+
+    
 
     public DungeonUIFadeInOutTransition GetTransitionUI()
     {

@@ -130,4 +130,14 @@ public class DungeonBoard : MonoBehaviour
 
         }
     }
+
+    public List<Monster> GetMonsters()
+    {
+        return mMonsters;
+    }
+
+    public DungeonChest GetChest() 
+    { 
+        return mChest; 
+    }
 }

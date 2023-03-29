@@ -20,63 +20,66 @@ public class TestPlayer : MonoBehaviour
 
     void Update()
     {
+        if (Inventory.mIsInventoryActiveCheck == false)
+        {
+            if (!misMove)
+            {
+                mPlayerRigid.velocity = Vector2.zero;
+            }
 
-        if(!misMove)
-        {
-            mPlayerRigid.velocity =  Vector2.zero;
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                misMove = true;
+                mPlayerRigid.velocity = Vector2.right * mMoveSpeed;
+            }
+            if (Input.GetKeyUp(KeyCode.D))
+            {
+                misMove = false;
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                misMove = true;
+                mPlayerRigid.velocity = Vector2.left * mMoveSpeed;
+            }
+            if (Input.GetKeyUp(KeyCode.A))
+            {
+                misMove = false;
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                misMove = true;
+                mPlayerRigid.velocity = Vector2.up * mMoveSpeed;
+            }
+            if (Input.GetKeyUp(KeyCode.W))
+            {
+                misMove = false;
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                misMove = true;
+                mPlayerRigid.velocity = Vector2.down * mMoveSpeed;
+            }
+            if (Input.GetKeyUp(KeyCode.S))
+            {
+                misMove = false;
+            }
+
         }
 
-        if(Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            misMove = true;
-            mPlayerRigid.velocity = Vector2.right * mMoveSpeed;
-        }
-        if(Input.GetKeyUp(KeyCode.D))
-        {
-            misMove = false;
-        }
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            misMove = true;
-            mPlayerRigid.velocity = Vector2.left * mMoveSpeed;
-        }
-        if(Input.GetKeyUp(KeyCode.A))
-        {
-            misMove = false;
-        }
-         if(Input.GetKeyDown(KeyCode.W))
-        {
-            misMove = true;
-            mPlayerRigid.velocity = Vector2.up * mMoveSpeed;
-        }
-        if(Input.GetKeyUp(KeyCode.W))
-        {
-            misMove = false;
-        }
-         if(Input.GetKeyDown(KeyCode.S))
-        {
-            misMove = true;
-            mPlayerRigid.velocity = Vector2.down * mMoveSpeed;
-        }
-        if(Input.GetKeyUp(KeyCode.S))
-        {
-            misMove = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            ItemManager.Instance.DropItem();
+            ItemManager.Instance.DropItem(Vector3.zero);
         }
     }
 
-   
-    
-   
 
-   
 
-    
-       
 
-    
+
+
+
+
+
+
+
 }

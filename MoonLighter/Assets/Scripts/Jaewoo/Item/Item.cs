@@ -38,11 +38,27 @@ public class Item : ScriptableObject
 
 
     //아이템 타입
-    public ItemEnumType mItemType;    
+    public ItemEnumType mItemType;   
+    public EquimentEnumType mEquipmentType; 
     //아이템 이름
     public string mItemName;
     //아이템 아이디
     public int mItemId;
+    // 0 빗자루
+    // 1 훈련형 대검
+    // 2 훈련형 창
+    // 3 헬멧
+    // 4 아머
+    // 5 신발
+    // 6 포션
+    // 7~8 악세사리 안씀
+    // 9 CastingWreckage
+    // 10 Cloth
+    // 11 HardenedSteel
+    // 12 IronRod
+    // 13 RuneTool
+    // 14 WaterBll
+    
 
     //아이템 체력
     public int mItemHp;
@@ -56,14 +72,10 @@ public class Item : ScriptableObject
     //아이템 가격
     public int mItemPrice;
     //아이템 이미지
-    public Sprite mItemSprite;
-
-    //아이템 드랍아이템 프리팹
-    public GameObject mItemDropPrefab;
+    public Sprite mItemSprite;    
 
     //저주 아이템 구현시 활성화 시킬 함수
     //아이템 저주 체크
-    //public bool mIsCureCheck = false;
-    
+    //public bool mIsCureCheck = false;    
 
 }

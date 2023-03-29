@@ -152,9 +152,7 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
 
-        /*---------------------------------------------------------------------------------------
-         * [Notify] Enter Stage (First)
-         ---------------------------------------------------------------------------------------*/
+         // [Notify] Enter Stage (First)
         startStage.OnStageEnter(DungeonDoor.TansferInfo.FirstRoom);
 
         return startStage;

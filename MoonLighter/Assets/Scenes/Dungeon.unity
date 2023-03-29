@@ -341,63 +341,6 @@ MonoBehaviour:
   IsCreatedCampRoom: 0
   mDepth: 0
   mLastRoom: {fileID: 0}
---- !u!1001 &1263167136
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3178029135782607216, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_Name
-      value: InitObj
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178029135782607218, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 384a97fe25106b0419497e1d91245d25, type: 3}
 --- !u!1 &1409357664
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 717795527396746526, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 717795527396746527, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -535,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 717795527396746527, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 717795527396746527, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: m_AnchorMax.x
@@ -663,6 +610,7 @@ MonoBehaviour:
   mDungeonBossStage: {fileID: 0}
   mCamera: {fileID: 1409357668}
   mTransitionUI: {fileID: 1911155540}
+  mKillMonsterList: 
 --- !u!114 &1911155540 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5530126606261389744, guid: 74e1ce11b2fbc914eaed39401deae25c, type: 3}

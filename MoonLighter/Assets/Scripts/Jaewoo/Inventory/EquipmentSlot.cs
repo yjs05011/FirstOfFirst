@@ -11,37 +11,23 @@ public class EquipmentSlot : MonoBehaviour
     public Item mEquipmentItem;
     public Sprite mEquipmentItemSprite;
     public SpriteRenderer mEquipmentSlotRender = default;
-    public EquipmentTypeController mEquipmentSlotParent;
+    
+    //public EquipmentTypeController mEquipmentSlotParent;
 
     [SerializeField]
     private TMP_Text mTextCount = default;
 
 void Awake()
 {
-    mEquipmentSlotParent = transform.parent.GetComponent<EquipmentTypeController>();
+   // mEquipmentSlotParent = transform.parent.GetComponent<EquipmentTypeController>();
 }
 
    private void Start()
     {
-        // for(int index = 0; index < gameObject.transform.parent.transform.childCount; index ++)
-        // {
-        //     gameObject.transform.parent.transform.GetChild(index);
-        //     if( gameObject.transform.parent.transform.GetChild(0)|| gameObject.transform.parent.transform.GetChild(1))
-        //     {               
-        //         mEquipmentItem.mItemType = Item.ItemEnumType.Equiment;
-
-        //     }
-        //     if(gameObject.transform.parent.transform.GetChild(2)||gameObject.transform.parent.transform.GetChild(3)||gameObject.transform.parent.transform.GetChild(4))
-
-        // }{}
-       
-        
         
         mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
-        mEquipmentSlotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();  
-        
-    }
-    
+        mEquipmentSlotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();          
+    }    
 
     //아이템 값 저장
     public Item mInventoryItemVaule

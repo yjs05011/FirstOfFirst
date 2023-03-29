@@ -6,7 +6,7 @@ using TMPro;
 
 public class Slot : MonoBehaviour
 {
-    private int mItemCount;
+    public int mItemCount;
     public Item mItem;
     public Sprite mItemSprite;
     public SpriteRenderer slotRender = default;
@@ -17,14 +17,11 @@ public class Slot : MonoBehaviour
     
 
     private void Start()
-    {
-        
-        
-        mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
-        slotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();  
-
-        
-        
+    {            
+          
+        mTextCount = gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+        slotRender = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();     
+           
     }
 
     //아이템 값 저장
@@ -52,20 +49,18 @@ public class Slot : MonoBehaviour
         transform.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, alpha);
     }
 
-
     public void AddItem(Item item, int itemCount)
     {
         mItem = item;
         mItemCount = itemCount;
         mItemSprite = mItem.mItemSprite;
 
-        slotRender.sprite = item.mItemSprite;
+        slotRender.sprite = mItemSprite;
         // Debug.Log(mItem.mItemType);
         // Debug.Log(mItem.mItemType != Item.ItemEnumType.Equiment);
         //아이템 타입 구분
-        if (mItem.mItemType != Item.ItemEnumType.Equiment)
+        if (mItem.mItemType != Item.ItemEnumType.Equiment )
         {
-
             //mChangeImage.FindChildObj("ItemImage").transform.GetComponent<SpriteRenderer>();
             // mChangeImage.SetActive(true);
             mTextCount.text = mItemCount.ToString();
@@ -76,8 +71,9 @@ public class Slot : MonoBehaviour
             SetColor(1);
         }
         else
-        {            
+        {  
             mTextCount.text = " ";
+            //mTextCount.gameObject.SetActive(true);
             SetColor(1);
             // mChangeImage.SetActive(false);
         }
@@ -86,7 +82,8 @@ public class Slot : MonoBehaviour
 
     //슬롯에 대한 아이템 갯수 업데이트
     public void SetSlotCount(int slotItemCount)
-    {
+    {        
+        Debug.Log(mItem);
         mItemCount += slotItemCount;
         mTextCount.text = mItemCount.ToString();
 
@@ -97,7 +94,7 @@ public class Slot : MonoBehaviour
     }
 
     //해당 슬롯 하나 삭제
-    private void ClearSlot()
+    public void ClearSlot()
     {
         mItem = null;
         mItemCount = 0;

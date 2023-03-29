@@ -192,7 +192,7 @@ MonoBehaviour:
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
-  mHpBar: {fileID: 0}
+  mHpBar: {fileID: 7820446599557869466}
   mImgHp: {fileID: 7820446598725225783}
 --- !u!1 &7820446598725225777
 GameObject:

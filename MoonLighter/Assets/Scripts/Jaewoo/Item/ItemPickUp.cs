@@ -35,8 +35,13 @@ public class ItemPickUp : MonoBehaviour
                 GetItemMove();
                 return;
             }                       
+        }        
+        if(other.CompareTag("Hole"))
+        {
+            
         }
     }
+   
 
     public void GetItemMove()
     {
