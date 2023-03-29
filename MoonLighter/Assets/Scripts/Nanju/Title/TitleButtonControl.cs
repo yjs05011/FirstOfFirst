@@ -22,6 +22,10 @@ public class TitleButtonControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            EnterGame();
+        }
         if (Input.GetKeyDown(KeyCode.S))
         {
             if (mTextCheck == 2)
@@ -84,5 +88,9 @@ public class TitleButtonControl : MonoBehaviour
                 mOptionCursorImage.SetActive(false);
                 break;
         }
+    }
+    public void EnterGame()
+    {
+        GFunc.LoadScene("VillageScene");
     }
 }
