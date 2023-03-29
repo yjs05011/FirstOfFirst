@@ -18065,7 +18065,7 @@ MonoBehaviour:
   mFloorDoor: {fileID: 9021748821517031407}
   mEntryDoor: {fileID: 4925879826733397135}
   mBossRoomDoor: {fileID: 230573462952518465}
-  mBasicDoorAnim: {fileID: 129586917477074825}
+  mBasicDoorAnim: {fileID: 0}
   mFloorDoorAnim: {fileID: 0}
   mEntryDoorAnim: {fileID: 0}
   mBossRoomDoorAnim: {fileID: 0}
@@ -30058,11 +30058,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
---- !u!95 &129586917477074825 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 272359780480016827, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
-  m_PrefabInstance: {fileID: 147492181699929650}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2750355324028884604 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2603299128788627534, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
@@ -30083,6 +30078,10 @@ PrefabInstance:
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_Name
       value: PortalDoorUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5422861324874488359, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_RootOrder
@@ -30333,10 +30332,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8906581613406640053}
     m_Modifications:
-    - target: {fileID: 122977870741735111, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_Name
       value: PortalDoorDown
@@ -30344,10 +30339,6 @@ PrefabInstance:
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5422861324874488359, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_RootOrder
@@ -31223,18 +31214,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1723842260249806391, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971038015935283686, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: mDoor
-      value: 
-      objectReference: {fileID: 8071836332368973760}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
 --- !u!1 &3572607279137902362 stripped
@@ -31306,18 +31285,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1723842260249806391, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971038015935283686, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: mDoor
-      value: 
-      objectReference: {fileID: 4943450145319962598}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
 --- !u!1 &3911889308877302626 stripped
@@ -31461,10 +31428,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 34365390889574585}
     m_Modifications:
-    - target: {fileID: 122977870741735111, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_Name
       value: PortalDoorRight
@@ -31472,10 +31435,6 @@ PrefabInstance:
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5422861324874488359, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_RootOrder
@@ -31912,10 +31871,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8356010531062355932}
     m_Modifications:
-    - target: {fileID: 2342775966417494733, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 2603299128788627534, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -31967,10 +31922,6 @@ PrefabInstance:
     - target: {fileID: 3520993919832938134, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3520993919832938134, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
@@ -32447,10 +32398,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8356010531062355932}
     m_Modifications:
-    - target: {fileID: 122977870741735111, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_Name
       value: PortalDoorLeft
@@ -32458,10 +32405,6 @@ PrefabInstance:
     - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5087496426886369211, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
-      propertyPath: m_TagString
-      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 5422861324874488359, guid: 9041318f84d7b844bafdb3b375707521, type: 3}
       propertyPath: m_RootOrder
@@ -32826,18 +32769,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 1723842260249806391, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 6971038015935283686, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: mDoor
-      value: 
-      objectReference: {fileID: 3809215809679327685}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
 --- !u!4 &9116592279902799044 stripped
@@ -32905,10 +32836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorDoorUp
       objectReference: {fileID: 0}
-    - target: {fileID: 6971038015935283686, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
-      propertyPath: mDoor
-      value: 
-      objectReference: {fileID: 2371972053470059265}
+    - target: {fileID: 1392002965528605715, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ecc6de51f9dcfd48a4b89bc6aa78197, type: 3}
 --- !u!4 &9021748821517031406 stripped
@@ -33052,10 +32983,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8906581613406640053}
     m_Modifications:
-    - target: {fileID: 2342775966417494733, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
-      objectReference: {fileID: 0}
     - target: {fileID: 2603299128788627534, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -33107,10 +33034,6 @@ PrefabInstance:
     - target: {fileID: 3520993919832938134, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3520993919832938134, guid: c604e87027363ee42bcf44c540f153f8, type: 3}
-      propertyPath: m_TagString
-      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c604e87027363ee42bcf44c540f153f8, type: 3}

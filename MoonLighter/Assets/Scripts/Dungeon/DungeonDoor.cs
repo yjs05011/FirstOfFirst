@@ -44,28 +44,23 @@ public class DungeonDoor : MonoBehaviour
 
     public Collider2D mPlayerCollider = null;
 
-    public void Awake()
-    {
-        // mBlockDoor.SetActive(true);
-        Init();
-
-    }
+  
     public void Init()
     {
-        if (mBasicDoor != null && mBasicDoor.activeSelf)
+        if (mBasicDoor != null )
         {
             mBasicDoorAnim = mBasicDoor.GetComponent<Animator>();
         }
-        if (mEntryDoor != null && mEntryDoor.activeSelf)
+        if (mEntryDoor != null )
         {
             mEntryDoorAnim = mEntryDoor.GetComponent<Animator>();
         }
-        if (mFloorDoor != null && mFloorDoor.activeSelf)
+        if (mFloorDoor != null )
         {
             mFloorDoorAnim = mFloorDoor.GetComponent<Animator>();
         }
 
-        if (mBossRoomDoor != null && mBossRoomDoor.activeSelf)
+        if (mBossRoomDoor != null )
         {
             mBossRoomDoorAnim = mBossRoomDoor.GetComponent<Animator>();
         }
