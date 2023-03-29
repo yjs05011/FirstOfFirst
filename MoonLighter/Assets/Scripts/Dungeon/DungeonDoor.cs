@@ -44,28 +44,28 @@ public class DungeonDoor : MonoBehaviour
 
     public Collider2D mPlayerCollider = null;
 
-    public void Start()
+    public void Awake()
     {
-       // mBlockDoor.SetActive(true);
-       
+        // mBlockDoor.SetActive(true);
+        Init();
 
     }
     public void Init()
     {
-        if (mBasicDoor != null)
+        if (mBasicDoor != null && mBasicDoor.activeSelf)
         {
             mBasicDoorAnim = mBasicDoor.GetComponent<Animator>();
         }
-        if (mEntryDoor != null)
+        if (mEntryDoor != null && mEntryDoor.activeSelf)
         {
             mEntryDoorAnim = mEntryDoor.GetComponent<Animator>();
         }
-        if (mFloorDoor != null)
+        if (mFloorDoor != null && mFloorDoor.activeSelf)
         {
             mFloorDoorAnim = mFloorDoor.GetComponent<Animator>();
         }
 
-        if (mBossRoomDoor != null)
+        if (mBossRoomDoor != null && mBossRoomDoor.activeSelf)
         {
             mBossRoomDoorAnim = mBossRoomDoor.GetComponent<Animator>();
         }
@@ -76,17 +76,16 @@ public class DungeonDoor : MonoBehaviour
     {
         //Init();
         SetDoorStatus(DoorStatus.OPEN);
-        if (mBasicDoor != null && mBasicDoor.activeSelf)
+        if (mBasicDoorAnim != null && mBasicDoor.activeSelf)
         {
             mBasicDoorAnim.SetTrigger("DoorOpen");
         }
-        if (mFloorDoor != null && mFloorDoor.activeSelf)
+        if (mFloorDoorAnim != null && mFloorDoor.activeSelf)
         {
             mFloorDoorAnim.SetTrigger("DoorOpen");
         }
-        if (mBossRoomDoor != null && mBossRoomDoor.activeSelf)
+        if (mBossRoomDoorAnim != null && mBossRoomDoor.activeSelf)
         {
-            SetDoorStatus(DoorStatus.OPEN);
             mBossRoomDoorAnim.SetTrigger("DoorOpen");
         }
     }
@@ -95,17 +94,17 @@ public class DungeonDoor : MonoBehaviour
     {
         //Init();
         SetDoorStatus(DoorStatus.CLOSE);
-        if (mBasicDoor != null)
+        if (mBasicDoorAnim != null && mBasicDoor.activeSelf)
         {
             mBasicDoorAnim.SetTrigger("DoorClose");
         }
-        if (mFloorDoor != null)
+        if (mFloorDoorAnim != null && mFloorDoor.activeSelf)
         {
             mFloorDoorAnim.SetTrigger("DoorClose");
         }
-        if (mBossRoomDoor != null)
+        if (mBossRoomDoorAnim != null && mBossRoomDoor.activeSelf)
         {
-            SetDoorStatus(DoorStatus.CLOSE);
+          
             mBossRoomDoorAnim.SetTrigger("DoorClose");
         }
     }
@@ -213,13 +212,11 @@ public class DungeonDoor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // 플레이어에게 문 지날때 해당 스테이지 정보 넣어주기 (플레이어가 자신이있는 스테이지를 가지고있어야함)
-            //PlayerAct playerAct = other.gameObject.GetComponent<PlayerAct>();
-            //playerAct.OnChangeDungeonStage(this.mNextStage);
 
             // 문닫히는 연출이 끝나는시점에 층이동 함수 호출을 하기위해, other를 다른 함수에서도 사용할수있게 맴버 변수에 넣어둠.
             SetPlayerCollider(other);
 
+            // close 상태의 door에 들어온경우 
             if (GetDoorStatus() == DoorStatus.CLOSE)
             {
                 return;
@@ -280,6 +277,8 @@ public class DungeonDoor : MonoBehaviour
 
                     case DoorType.FLOOR:
                         {
+                            // player hide 처리
+                            other.gameObject.GetComponent<SpriteRenderer>().enabled = false;    
                             // 스테이지 나감을 알림
                             mCurrStage.OnStageExit(TansferInfo.LastRoom);
 
@@ -293,6 +292,9 @@ public class DungeonDoor : MonoBehaviour
 
                             if (this.GetCurrStage().GetFloor() == 3)
                             {
+                                // player hide 처리
+                                other.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
                                 // 문 닫히는 애니메이션 출력하고.
                                 mBossRoomDoorAnim.SetTrigger("DoorClose");
                                 // 문 닫히는 연출 끝날때 에니메이션 이벤트로 EnterBossRoom() 호출
@@ -326,6 +328,10 @@ public class DungeonDoor : MonoBehaviour
 
         Debug.Log("player 보스방으로 이동");
         DungeonStage bossStage = DungeonManager.Instance.GetDungeonBossRoom();
+
+        // 플레이어 hide off 
+        mPlayerCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        // 플레이어 포지션 설정.
         mPlayerCollider.transform.position = bossStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM);
 
         // 보스방 이전 스테이지 (3층 라스트 룸)의 포지션에 y 축만 증가한 좌표
@@ -382,8 +388,9 @@ public class DungeonDoor : MonoBehaviour
             DungeonStage nextFloor = DungeonGenerator.Instance.InitDungeonBorad(0, 0, currFloor + 1, nextFloorBackwardDirection);
             // 플레이어가 위치한 스테이지 정보 갱신 (다음 층 시작 스테이지)
             DungeonManager.Instance.SetPlayerCurrStage(nextFloor);
-           
-
+            // 플레이어 hide off 
+            mPlayerCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            // 플레이어 방향에 맞춰 포지션 설정. 
             if ((mDirection & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
             {
                 Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).y);

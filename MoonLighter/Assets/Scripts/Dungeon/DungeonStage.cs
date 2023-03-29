@@ -106,6 +106,14 @@ public class DungeonStage : MonoBehaviour
         // �÷��̾ ���������� �������� �˸�
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {
+        // 층 이동 후 입장 floor door close 
+        if(transferInfo == DungeonDoor.TansferInfo.FirstRoom)
+        {
+            if(GetEntryFloorDoorDirection() != null)
+            {
+                GetEntryFloorDoorDirection().DoorClose();
+            }
+        }
         // 스테이지의 플레이어 입장 여부 갱신
         SetIsEnterd(true);
         // 보드의 몬스터 수와 처치한 몬스터 수가 다를경우 (몬스터를 처치하지않은 방)
@@ -114,6 +122,32 @@ public class DungeonStage : MonoBehaviour
             SetDoorsClose();
         }
         Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
+    }
+
+    // 층 이동으로 입장한 방향의 문 찾아 반환하는 함수. 
+    public DungeonDoor GetEntryFloorDoorDirection()
+    {
+        if(mDoorTop.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorTop;
+        }
+        if (mDoorRight.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorRight;
+        }
+        if (mDoorBottom.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorBottom;
+        }
+        if (mDoorLeft.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorLeft;
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
     // �÷��̾ ���������� ������ �˸�
