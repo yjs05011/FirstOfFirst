@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class MonsterGolemCorruptMiniBoss : Monster
 {
@@ -65,7 +66,8 @@ public class MonsterGolemCorruptMiniBoss : Monster
                     {
                         if(Random.Range(0, 1000) < 500)
                         {
-                            Teleporation();
+                            //Teleporation();
+                            TeleportStart();
                         }
                         else
                         {
@@ -107,10 +109,20 @@ public class MonsterGolemCorruptMiniBoss : Monster
                 mStage.AddDieMonsterCount();
             }
 
-            // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
+            //hp bar hide
+            mHpBar.SetActive(false);
+            // 컬라이더 off
+            this.GetComponent<Collider2D>().enabled = false;
+       
+            
+            // 처치 몬스터 리스트에 추가
+            DungeonManager.Instance.KillMonsterAdd(mMonsterId);
 
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
+
+            // 사망 연출없음. destroy.
+            GameObject.Destroy(this.gameObject);
         }
     }
 
@@ -151,22 +163,37 @@ public class MonsterGolemCorruptMiniBoss : Monster
                 }
         }
     }
+    public void TeleportStart()
+    {
+        mAnimator.SetTrigger("TeleportStart");
+        // 컬라이더 off
+        this.GetComponent<Collider2D>().enabled = false;
+        this.SetState(State.Wait);
+    }
 
     public void Teleporation()
     {
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+        mSpriteRenderer.color = new Color(1, 1, 1, 0);
+        mHpBar.SetActive(false);
+
         this.mStage.StartCoroutine(TeleporationCoroutine(this, 3.0f));
     }
 
     public IEnumerator TeleporationCoroutine(MonsterGolemCorruptMiniBoss owner, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Vector3 position = owner.GenerateRandomRectPosition(owner.mMovableArea);
-
-        owner.gameObject.SetActive(true);
-        owner.transform.position = position;
-        owner.SetState(State.Idle);
+        //Vector3 position = owner.GenerateRandomRectPosition(owner.mMovableArea);
+        mSpriteRenderer.color = new Color(1, 1, 1, 1);
+        mAnimator.SetTrigger("TeleportEnd");
+        //owner.mAnimator.SetTrigger("TeleportEnd");
+        //owner.gameObject.SetActive(true);
+        //owner.transform.position = position;
+        
     }
+
+
+
 
     public void SmashAttack()
     {
@@ -185,6 +212,14 @@ public class MonsterGolemCorruptMiniBoss : Monster
 
     public override void OnAnimationEvent(string name)
     {
+        if (mCurrState == State.Die || mCurrState == State.None)
+        {
+            if (mAnimator)
+            {
+                mAnimator.StopPlayback();
+            }
+            return;
+        }
         bool isSmashAttackDamage = "SmashAttack@Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
         bool isSwordAttackDamage = "SwordAttack@Damage".Equals(name, System.StringComparison.OrdinalIgnoreCase);
         bool isFinish = "Finish".Equals(name, System.StringComparison.OrdinalIgnoreCase);
@@ -195,12 +230,12 @@ public class MonsterGolemCorruptMiniBoss : Monster
             {
                 if (mTarget)
                 {
-                    mTarget.OnDamage(mMonsterId,this.GetDamage());
+                    mTarget.OnDamage(mMonsterId, this.GetDamage());
                     return;
                 }
             }
         }
-        else if(isSmashAttackDamage)
+        else if (isSmashAttackDamage)
         {
             GameObject preset = this.FindSkillPreset("SmashAttackSkill");
             if (preset)
@@ -210,19 +245,33 @@ public class MonsterGolemCorruptMiniBoss : Monster
                 skill.SetData(this, new Vector3(5, 5, 0), new Vector3(60, 60, 0), 5, 15);
                 skill.transform.parent = this.mStage.mBoard.transform;
 
-                switch(mCurrDirection)
+                switch (mCurrDirection)
                 {
                     case DungeonUtils.Direction.Up: { skill.transform.position += new Vector3(0, 2, 0); break; }
                     case DungeonUtils.Direction.Down: { skill.transform.position += new Vector3(0, -2, 0); break; }
                     case DungeonUtils.Direction.Left: { skill.transform.position += new Vector3(-2, 0, 0); break; }
                     case DungeonUtils.Direction.Right: { skill.transform.position += new Vector3(2, 0, 0); break; }
                 }
-                
+
             }
         }
         else if (isFinish)
         {
             this.SetState(State.AttackCooltime);
+        }
+        else if ("TeleportStartFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            Teleporation();
+        }
+        else if ("TeleportEndFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+            Vector3 position = GenerateRandomRectPosition(mMovableArea);
+            
+            // 컬라이더 on
+            this.GetComponent<Collider2D>().enabled = true;
+            mHpBar.SetActive(true);
+            this.transform.position = position;
+            this.SetState(State.Idle);
         }
         else
         {

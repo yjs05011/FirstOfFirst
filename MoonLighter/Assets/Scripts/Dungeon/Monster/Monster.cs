@@ -80,6 +80,8 @@ public class Monster : MonoBehaviour
     public float mSpeed = 1.0f; // 몬스터의 이동 속도 (추적)
     [Range(0.0f, 2.0f)]
     public float mWanderDistance = 1.0f; // 몬스터가 배회할때 랜덤하게 선택될 위치의 최대 거리
+    [Range(0.0f, 3.0f)]
+    public float mSplashAttackDistance = 0.0f; // 스플래시 공격 범위.
 
     [Header("Monster Hp")]
     public float mHp = 100.0f;
@@ -111,6 +113,7 @@ public class Monster : MonoBehaviour
     public GameObject mHpBar = null;
     // UI : HP fill image 
     public Image mImgHp = null;
+
 
     public void Start()
     {
@@ -153,6 +156,7 @@ public class Monster : MonoBehaviour
         if(mStage == null)
         {
             mStage = DungeonGenerator.Instance.mStages[0];
+            mStage.mBoard.GetMonsters().Add(this);
         }
     }
 
@@ -338,6 +342,7 @@ public class Monster : MonoBehaviour
         Vector2 position = new Vector2();
         while (true)
         {
+            Debug.Log("IsRandomPositionInsidePolygonCollider");
             position.x = Random.Range(minX, maxX);
             position.y = Random.Range(minY, maxY);
 
@@ -353,7 +358,7 @@ public class Monster : MonoBehaviour
     public bool IsInTraceScope()
     {
         float distance = 0.0f;
-        if (GetTargetDistance(ref distance))
+        if (GetTargetDistance(mTarget.transform.position, ref distance))
         {
             if (distance <= mTraceScope)
             {
@@ -366,7 +371,7 @@ public class Monster : MonoBehaviour
     public bool IsInDashRange()
     {
         float distance = 0.0f;
-        if(mIsDash && GetTargetDistance(ref distance))
+        if(mIsDash && GetTargetDistance(mTarget.transform.position, ref distance))
         {
             if(distance <= mDashDistance)
             {
@@ -380,7 +385,7 @@ public class Monster : MonoBehaviour
     public bool IsInAttackRange()
     {
         float distance = 0.0f;
-        if(GetTargetDistance(ref distance))
+        if(GetTargetDistance(mTarget.transform.position, ref distance))
         {
             if (distance <= mAttackDistance)
             {
@@ -392,12 +397,11 @@ public class Monster : MonoBehaviour
 
     // 타겟과의 거리를 측정한다
     // 타겟이 이 함수를 사용할 수 없는 경우 False 를 반환한다.
-    public bool GetTargetDistance(ref float output)
+    public bool GetTargetDistance(Vector3 to, ref float output)
     {
         if(mTarget)
         {
             Vector3 from = this.transform.position; //몬스터
-            Vector3 to = mTarget.transform.position; //플레이어
 
             Vector3 distance = from - to; //거리
             
@@ -408,6 +412,21 @@ public class Monster : MonoBehaviour
         output = 0.0f;
         return false; // 이 함수의 값을 사용 할 수 없음
     }
+
+    // 스플래시 범위안에 포지션 포함여부 체크 함수
+    public bool IsInSplashDamageRange(Vector3 position)
+    {
+        float distance = 0.0f;
+        if (GetTargetDistance(position, ref distance))
+        {
+            if (distance <= mSplashAttackDistance)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     // 실제 게임에는 표기되지 않고 에디터상에서 거리 디버깅을 위한 기즈모 표기
     public void OnDrawGizmos()
@@ -426,6 +445,9 @@ public class Monster : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, mAttackDistance);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(this.transform.position, mSplashAttackDistance);
 
         // 플레이어가 타겟인 경우
         if (mTarget && IsInTraceScope())

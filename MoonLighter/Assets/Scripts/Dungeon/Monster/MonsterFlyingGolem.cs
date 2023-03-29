@@ -77,7 +77,10 @@ public class MonsterFlyingGolem : Monster
         else if (mCurrState == State.Die)
         {
             // die 연출 없는데 투명하게 되면서 사라지는거 넣자.
-
+            // 컬라이더 off
+            this.GetComponent<Collider2D>().enabled = false;
+            //hp bar hide
+            mHpBar.SetActive(false);
             // 애니메이션 다이 
             mAnimator.SetTrigger("Dead");
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
@@ -85,6 +88,9 @@ public class MonsterFlyingGolem : Monster
             {
                 mStage.AddDieMonsterCount();
             }
+
+            // 처치 몬스터 리스트에 추가
+            DungeonManager.Instance.KillMonsterAdd(mMonsterId);
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
@@ -94,6 +100,14 @@ public class MonsterFlyingGolem : Monster
 
     public override void OnAnimationEvent(string name)
     {
+        if (mCurrState == State.Die || mCurrState == State.None)
+        {
+            if (mAnimator)
+            {
+                mAnimator.StopPlayback();
+            }
+            return;
+        }
         Debug.LogFormat("MonsterFlyingGolem : {0}", name);
 
         if ("Attack".Equals(name, System.StringComparison.OrdinalIgnoreCase))

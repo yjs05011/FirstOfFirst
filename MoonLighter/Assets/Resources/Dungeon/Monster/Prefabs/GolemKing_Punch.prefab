@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3421677367322767614}
   - component: {fileID: 8445406598730326408}
   - component: {fileID: 2453926416052347375}
+  - component: {fileID: 4499599324228429424}
   m_Layer: 0
   m_Name: GolemKing_Punch
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,3 +136,19 @@ MonoBehaviour:
   mAnimationEvent: {fileID: 0}
   mAnimator: {fileID: 3421677367322767614}
   mDamage: 50
+--- !u!70 &4499599324228429424
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421677367322767613}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.1466666}
+  m_Size: {x: 2.125, y: 3.5833333}
+  m_Direction: 0
