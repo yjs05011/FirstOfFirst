@@ -11,10 +11,11 @@ public class VillageStatus : MonoBehaviour
     public GameObject mWitchHouse;
     public GameObject mWitchHouseNew;
 
-    private void Update()
+    private void Start()
     {
         if(VillageManager.Instance.IsBlackSmithBuild)
         {
+            //mBlackSmith.SetActive(false);
             mBlackSmithNew.SetActive(true);
         }
         else
@@ -23,6 +24,7 @@ public class VillageStatus : MonoBehaviour
         }
         if (VillageManager.Instance.IsWitchHouseBuild)
         {
+            //mWitchHouse.SetActive(false);
             mWitchHouseNew.SetActive(true);
         }
         else
