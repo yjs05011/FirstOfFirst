@@ -32,9 +32,15 @@ public class DungeonCameraController : MonoBehaviour
 
     public void Awake()
     {
+      
         this.transform.position = mInitCameraPos;
         SetCameraType(CameraMoveType.Default);
         SetIsBossRoom(false);
+    }
+
+    public void Start()
+    {
+       DungeonManager.Instance.mCamera = this;
     }
 
     public void Update()
