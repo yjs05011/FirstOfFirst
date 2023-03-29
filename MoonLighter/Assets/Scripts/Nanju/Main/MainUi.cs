@@ -22,7 +22,7 @@ public class MainUi : MonoBehaviour
     void Update()
     {
         BossHp();
-        // Pendont();
+        Pendont();
         PendantUseCheck(mTimer);
         ExitDungeon();
 
@@ -88,7 +88,7 @@ public class MainUi : MonoBehaviour
             mExitDungeon.SetActive(true);
             mReplayKeyboard.SetActive(false);
         }
-        if (UiManager.Instance.mIsPlayerDie == true)
+        if (PlayerManager.Instance.mPlayerStat.isDie == true)    // UiManager.Instance.mIsPlayerDie
         {
             mExitDungeon.SetActive(true);
             PlayerManager.Instance.mIsUiActive = true;
