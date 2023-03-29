@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static DungeonStage;
 
 public class DungeonStage : MonoBehaviour
 {
@@ -60,6 +59,7 @@ public class DungeonStage : MonoBehaviour
 
     // 미니 보스 보드 배열
     public DungeonBoard[] mMiniBossBoard = new DungeonBoard[2];
+
     public void Awake()
     {
         mDoorTop.SetDoorDirection(DungeonGenerator.DIRECTION_TOP);
@@ -89,7 +89,9 @@ public class DungeonStage : MonoBehaviour
             SetDoorsOpen();
             // 상자 있을경우 상자 오픈.
             SetChestUnlock();
-            
+            // 던전 메니저에 언락 상자 갱신.
+            DungeonManager.Instance.UnlockChestAdd(mBoard.mChest);
+
         }
     }
     
@@ -106,6 +108,7 @@ public class DungeonStage : MonoBehaviour
         // �÷��̾ ���������� �������� �˸�
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {
+        // 미니 보스 스테이지 , 던전 보스 스테이지 진입 시 main ui HP bar 활성화.
         if(mBoard.GetBoardType()==DungeonBoard.BoardType.Boss || mBoard.GetBoardType() == DungeonBoard.BoardType.DungeonBoss)
         {
             UiManager.Instance.mIsBossHpVisible = true;
