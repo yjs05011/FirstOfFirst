@@ -67,7 +67,7 @@ public class ShowTextBox : MonoBehaviour
                             }
                             //DataManager.Instance.JsonSave();
 
-                            LoadingManager.LoadScene("ShopLv1");
+                            LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
 
                         }
                     }
@@ -83,12 +83,18 @@ public class ShowTextBox : MonoBehaviour
                     if (mID == 600)
                     {
                         //SetPosition.Instance.mSettingPosition = new Vector3(8, 10, 0);
-                        LoadingManager.LoadScene("ShopLv1");
+                        LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
                     }
                     else if (mID == 120)
                     {
                         mShopUI.SetActive(true);
+                        mShopUI.GetComponent<ShopUI>().mTableNumber = 0;
                         // 상점의 테이블
+                    }
+                    else if(mID == 130)
+                    {
+                        mShopUI.SetActive(true);
+                        mShopUI.GetComponent<ShopUI>().mTableNumber = 1;
                     }
                     else if (mID == 700)
                     {

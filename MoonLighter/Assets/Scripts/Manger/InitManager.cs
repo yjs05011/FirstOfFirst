@@ -14,8 +14,8 @@ public class InitManager : MonoBehaviour
         SetPosition.Instance.Create();
         GameManager.Instance.Create();
         DataManager.Instance.Create();
-
-        //GFunc.LoadScene("VillageScene");
+        VillageManager.Instance.Create();
+        GFunc.LoadScene("VillageScene");
 
         
 

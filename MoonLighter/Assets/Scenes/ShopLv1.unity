@@ -6259,7 +6259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1105718004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6986,7 +6986,7 @@ GameObject:
   - component: {fileID: 1177801314}
   m_Layer: 0
   m_Name: Table
-  m_TagString: Wall
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12674,7 +12674,7 @@ PrefabInstance:
     - target: {fileID: 6652297119273467857, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -245468101, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6652297119273467857, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_DrawMode
       value: 0
@@ -12689,7 +12689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6652297119273467857, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7579394644426558642, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_SizeDelta.x
@@ -12782,7 +12782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1511609726016008618, guid: 737e55375122478468f54160e4edbe10, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Npc
       objectReference: {fileID: 0}
     - target: {fileID: 1511609726016008631, guid: 737e55375122478468f54160e4edbe10, type: 3}
       propertyPath: m_SortingLayer
@@ -13163,7 +13163,7 @@ PrefabInstance:
     - target: {fileID: 6652297119273467857, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -411344548, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6652297119273467857, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_DrawMode
       value: 0
@@ -13178,7 +13178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6652297119273467857, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7579394644426558642, guid: dde6897427ac7be45bd5835cf2355da6, type: 3}
       propertyPath: m_SizeDelta.x

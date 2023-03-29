@@ -28,7 +28,8 @@ public class TalkManager : GSingleton<TalkManager>
         mTalkData.Add(210, new string[] { "읽기", "숲 던전", "영웅만 입장할 수 있는 던전.\n상인에게는 추천하지 않음" });       // 숲 던전
         mTalkData.Add(310, new string[] { "읽기", "사막 던전", "영웅 전용" });                                                // 사막 던전
         mTalkData.Add(410, new string[] { "읽기", "기술 던전", "입장 불가" });                                                // 기술 던전
-        mTalkData.Add(120, new string[] { "배치" });                                                                          // 상점 테이블
+        mTalkData.Add(120, new string[] { "배치" });                                                                          // 상점 테이블(Lv1,Lv2)
+        mTalkData.Add(130, new string[] { "배치" });                                                                          // 상점 테이블(Lv2)
         mTalkData.Add(220, new string[] { "길게 눌러 잠자기" });                                                              // 상점 침대Lv1
         mTalkData.Add(320, new string[] { "열기" });                                                                          // 상점 침대 상자
         mTalkData.Add(420, new string[] { "판매" });                                                                          // 계산대

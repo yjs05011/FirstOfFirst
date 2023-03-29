@@ -17,7 +17,8 @@ public class ShopUI : MonoBehaviour
     private int mInventoryY;
     private int mTableX;
     private int mTableY;
-
+    public int mTableNumber;
+    
     private Vector3 mSelectPosition;
     private bool mIsInventory;
     private bool mIsGetPrice;
@@ -91,6 +92,7 @@ public class ShopUI : MonoBehaviour
 
             }
         }
+        mTableNumber = 0;
         mInventoryX = 0;
         mInventoryY = 0;
         mTableX = 0;
@@ -345,7 +347,7 @@ public class ShopUI : MonoBehaviour
                             GFunc.SetTmpText(mSelectItem.transform.GetChild(0).GetChild(0).GetChild(0).gameObject, mSelectItemNumber.ToString());
                            
                             mTableItem[mTableX, mTableY].SetActive(false);
-                            GameObject.Find("Shop").GetComponent<Shop>().SetOutItem(mTableX + mTableY);
+                            GameObject.Find("Shop").GetComponent<Shop>().SetOutItem((mTableNumber*4) + mTableX + mTableY);
                         }
                         //transform.Find("Shop").GetComponent<Shop>().SetOnItem(mTableX + mTableY,들고 있던 아이템의 스프라이트,들고 있던 아이템의 갯수);
                     }
@@ -366,7 +368,7 @@ public class ShopUI : MonoBehaviour
                                 mTableItemNumber[1, mTableY] = mSelectItemNumber;
                                 GFunc.SetTmpText(mTableItem[mTableX, mTableY].transform.GetChild(0).gameObject, mTableItemNumber[1, mTableY].ToString());
                             }
-                            GameObject.Find("Shop").GetComponent<Shop>().SetOnItem(mTableX + mTableY, mSelectItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite, mSelectItemNumber);
+                            GameObject.Find("Shop").GetComponent<Shop>().SetOnItem((mTableNumber * 4) + mTableX + mTableY, mSelectItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite, mSelectItemNumber);
                             mSelectItem.SetActive(false);
                         }
                     }
