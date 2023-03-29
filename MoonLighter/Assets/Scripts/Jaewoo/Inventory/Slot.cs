@@ -8,6 +8,7 @@ public class Slot : MonoBehaviour
 {
     public int mItemCount;
     public Item mItem;
+    
     public Sprite mItemSprite;
     public SpriteRenderer slotRender = default;
     [SerializeField]
@@ -59,6 +60,7 @@ public class Slot : MonoBehaviour
         // Debug.Log(mItem.mItemType);
         // Debug.Log(mItem.mItemType != Item.ItemEnumType.Equiment);
         //아이템 타입 구분
+        //아이템 타입이 장비가 아닐때
         if (mItem.mItemType != Item.ItemEnumType.Equiment )
         {
             //mChangeImage.FindChildObj("ItemImage").transform.GetComponent<SpriteRenderer>();
@@ -70,14 +72,16 @@ public class Slot : MonoBehaviour
             }
             SetColor(1);
         }
-        else
-        {  
+        //아이템 타입이 장비일때
+        else 
+        {
             mTextCount.text = " ";
             //mTextCount.gameObject.SetActive(true);
             SetColor(1);
             // mChangeImage.SetActive(false);
         }
         //SetColor(1);
+        
     }
 
     //슬롯에 대한 아이템 갯수 업데이트
