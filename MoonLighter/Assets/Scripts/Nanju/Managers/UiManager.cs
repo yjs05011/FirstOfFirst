@@ -10,16 +10,19 @@ public class UiManager : MonoBehaviour
     // 보스 hp 표시
     public bool mIsBossHpVisible = false;
 
-    // [던전] 보스 HP
+    // [던전]
+    // 보스 Hp
     public float mBossMaxHp;
     public float mBossCurrentHp;
 
-    // [던전] scroll(레벨 지도) 언제 켜질지 확인
-    //스테이지 1만 하는 건지 물어보기
-    // [던전] 레벨 Text change
+    public bool mIsHpChange = false;
+    // 던전 확인
+    public bool mIsDungeonCheck = false;
 
-
-
+    // [플레이어]
+    public bool mIsPlayerDie = false;
+    public bool mIsPlayerUseAnimation = false;
+    public bool mIsResultUi = false;
 
 
     private void Awake()
@@ -35,12 +38,61 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    // [던전] 인벤토리 Lock 나타내기 유무
+    // [던전] 인벤토리 Lock 나타내기
     public void SetInventoryLock(bool value)
     {
         mIsInventoryLock = value;
     }
 
+    // [던전] 보스  hp on off
+    public void SetBossHpVisible(bool value)
+    {
+        mIsBossHpVisible = value;
+    }
+
+    // [던전] 보스 현재 hp 설정 함수
+    public void BossCurrentHp(float value)
+    {
+        mBossCurrentHp = value;
+        mIsHpChange = true;
+
+    }
+    // [던전] 보스 maxHp 설정 함수
+    public void BossMaxHp(float value)
+    {
+        mBossMaxHp = value;
+        mBossCurrentHp = mBossMaxHp;
+    }
+
+
+    // [던전] 던전인지 확인 요청 함수
+    public void DungeonCheck(bool value)
+    {
+        mIsDungeonCheck = value;
+    }
+
+    // [플레이어] 플레이어가 죽었는지 확인 요청
+    public void PlayerDie(bool value)
+    {
+        mIsPlayerDie = value;
+    }
+
+    // [플레이어] 팬던트를 사용하였을때 애니메이션 실행 요청 함수
+    public void PlayerUsePendant(bool value)
+    {
+        mIsPlayerUseAnimation = value;
+    }
+
+    // [Ui] 플레이어 특정(탈출)애니메이션이 끝났을 지 확인 요청
+    public void PlayerFinishAnimation(bool value)
+    {
+        mIsPlayerUseAnimation = value;
+    }
+
+
+    // [던전] 몇개 몬스터 잡았는지 확인 요청
+    // [던전] 어떤 몬스터 잡았는지 확인 요청
+    // [플레이어] 어떤 몬스터에게 플레이어가 죽었는지 확인 [보류]
 
 
 
@@ -53,16 +105,5 @@ public class UiManager : MonoBehaviour
 
 
 
-    // MainUi가 켰졌는지 확인하기
-    // 던전에서 인벤토리 Ui 켰는지 확인하는 변수
-    // QuickInventory 켰는지 확인하기
-
-    //플레이어 스텟 스크립트 변수
-    // [SerializeField]
-    // public bool mQuickInventory = default;
-    // protected override void Init()
-    // {
-    //     base.Init();
-    // }
 
 }

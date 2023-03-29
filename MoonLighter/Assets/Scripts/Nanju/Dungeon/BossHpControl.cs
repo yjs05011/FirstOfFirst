@@ -7,10 +7,11 @@ public class BossHpControl : MonoBehaviour
 {
     public Image mBossHpBar;
 
+
     // public float mBossHpChange;
 
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         mBossHpBar.fillAmount = UiManager.Instance.mBossCurrentHp / UiManager.Instance.mBossMaxHp;
 
@@ -19,15 +20,15 @@ public class BossHpControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BossHpDamage();
-    }
-
-
-    // 보스 체력 데미지
-    public void BossHpDamage()
-    {
-        mBossHpBar.fillAmount = UiManager.Instance.mBossCurrentHp / UiManager.Instance.mBossMaxHp;
-
+        // 보스 체력 데미지 (보스 hp가 바뀌면 fillAmount 변경하기)
+        if (UiManager.Instance.mIsHpChange == true)
+        {
+            mBossHpBar.fillAmount = UiManager.Instance.mBossCurrentHp / UiManager.Instance.mBossMaxHp;
+        }
 
     }
+
+
+
+
 }

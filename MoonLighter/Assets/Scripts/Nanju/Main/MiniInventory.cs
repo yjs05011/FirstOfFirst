@@ -19,12 +19,7 @@ public class MiniInventory : MonoBehaviour
         {
             mMiniInventory.SetActive(true);
         }
-        // 던전에 들어가 몬스터를 다 잡지않으면 인벤토리 열리지 않음
-        if (DungeonManager.Instance.mDungeonBossStage)
-        {
 
-        }
-        // 다른 던전 맵으로 들어가면 인벤토리 열리지 않음
     }
 
 
