@@ -33,6 +33,8 @@ public class TalkManager : GSingleton<TalkManager>
         mTalkData.Add(220, new string[] { "길게 눌러 잠자기" });                                                              // 상점 침대Lv1
         mTalkData.Add(320, new string[] { "열기" });                                                                          // 상점 침대 상자
         mTalkData.Add(420, new string[] { "판매" });                                                                          // 계산대
+        mTalkData.Add(900, new string[] { "열기" });                                                                          // 상점 창고 Lv1,Lv2
+        mTalkData.Add(910, new string[] { "열기" });                                                                          // 상점 창고 Lv2                                                                      
         
     }
 

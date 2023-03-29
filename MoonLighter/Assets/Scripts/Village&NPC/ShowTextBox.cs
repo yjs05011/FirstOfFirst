@@ -117,6 +117,14 @@ public class ShowTextBox : MonoBehaviour
                             ShopManager.Instance.mWaitShopNPC.RemoveAt(0);
                         }
                     }
+                    else if(mID == 900)
+                    {
+
+                    }
+                    else if(mID == 910)
+                    {
+
+                    }
                     else
                     {
                         Talk(mID);
