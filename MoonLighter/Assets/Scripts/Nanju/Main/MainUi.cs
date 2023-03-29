@@ -22,7 +22,7 @@ public class MainUi : MonoBehaviour
     void Update()
     {
         BossHp();
-        Pendont();
+        // Pendont();
         PendantUseCheck(mTimer);
         ExitDungeon();
 
@@ -84,7 +84,7 @@ public class MainUi : MonoBehaviour
     // ExitDungeon UI 활성화 시키기
     public void ExitDungeon()
     {
-        if (UiManager.Instance.mIsPlayerUseAnimation == false)
+        if (UiManager.Instance.mIsPlayerUseAnimation == true)
         {
             mExitDungeon.SetActive(true);
             mReplayKeyboard.SetActive(false);

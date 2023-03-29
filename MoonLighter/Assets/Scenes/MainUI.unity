@@ -46576,7 +46576,7 @@ MonoBehaviour:
   mBossHp: {fileID: 559977209}
   mBagPendont: {fileID: 455384342}
   mExitDungeon: {fileID: 1791463774}
-  mReplayKeyboard: {fileID: 0}
+  mReplayKeyboard: {fileID: 841979875}
   mTimer: 0
 --- !u!1 &2075359639
 GameObject:
