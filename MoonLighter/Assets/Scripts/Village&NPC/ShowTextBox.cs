@@ -7,9 +7,10 @@ public class ShowTextBox : MonoBehaviour
     public int mTalkIndex = default;
     public GameObject mText;
     public static Vector3 mBedPosition = new Vector3(3, 3, 0);
-
+    public GameObject mShopUI;
     private float mTimer;
     private GameObject talk = default;
+    private bool IsTalking = false;
     private bool IsPlayerNearby = false;
     private bool IsPlayerGoToBed = false;
     // Start is called before the first frame update
@@ -34,6 +35,7 @@ public class ShowTextBox : MonoBehaviour
             if (talk.activeSelf)
             {
                 mTalkIndex = 0;
+                IsTalking = false;
                 string talkData = TalkManager.Instance.GetTalk(mID, mTalkIndex);
                 GFunc.SetText(mText, talkData);
                 talk.SetActive(false);
@@ -53,7 +55,7 @@ public class ShowTextBox : MonoBehaviour
                         {
                             IsPlayerGoToBed = true;
                             talk.SetActive(false);
-                            PlayerManager.Instance.mPlayerBeforPos = mBedPosition;
+                            SetPosition.Instance.mSettingPosition = mBedPosition;
 
                             if (SetPosition.Instance.mIsNight)
                             {
@@ -65,7 +67,7 @@ public class ShowTextBox : MonoBehaviour
                             }
                             //DataManager.Instance.JsonSave();
 
-                            LoadingManager.LoadScene("ShopLv1");
+                            LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
 
                         }
                     }
@@ -77,16 +79,22 @@ public class ShowTextBox : MonoBehaviour
             {
                 if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
                 {
+
                     if (mID == 600)
                     {
-                        //GFunc.LoadScene("ShopLv2");
-                        SetPosition.Instance.mSettingPosition = new Vector3(8, 10, 0);
-                        PlayerManager.Instance.mPlayerBeforPos = default;
-                        LoadingManager.LoadScene("ShopLv1");
+                        //SetPosition.Instance.mSettingPosition = new Vector3(8, 10, 0);
+                        LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
                     }
                     else if (mID == 120)
                     {
+                        mShopUI.SetActive(true);
+                        mShopUI.GetComponent<ShopUI>().mTableNumber = 0;
                         // 상점의 테이블
+                    }
+                    else if(mID == 130)
+                    {
+                        mShopUI.SetActive(true);
+                        mShopUI.GetComponent<ShopUI>().mTableNumber = 1;
                     }
                     else if (mID == 700)
                     {
@@ -99,6 +107,15 @@ public class ShowTextBox : MonoBehaviour
                     else if (mID == 3000 && mTalkIndex == 1)
                     {
                         // 마녀 UI
+                    }
+                    else if(mID == 420)
+                    {
+                        //계산대
+                        if(ShopManager.Instance.mWaitShopNPC != null)
+                        {
+                            ShopManager.Instance.mWaitShopNPC[0].GetComponent<ShopNPC>().IsCalculate = false;
+                            ShopManager.Instance.mWaitShopNPC.RemoveAt(0);
+                        }
                     }
                     else
                     {

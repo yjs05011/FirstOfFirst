@@ -58,12 +58,23 @@ public class DungeonStage : MonoBehaviour
     // óġ�� ���� ��
     public int mMonsterDieCount = 0;
 
+    // 미니 보스 보드 배열
+    public DungeonBoard[] mMiniBossBoard = new DungeonBoard[2];
     public void Awake()
     {
         mDoorTop.SetDoorDirection(DungeonGenerator.DIRECTION_TOP);
         mDoorRight.SetDoorDirection(DungeonGenerator.DIRECTION_RIGHT);
         mDoorBottom.SetDoorDirection(DungeonGenerator.DIRECTION_BOTTOM);
         mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
+        DoorInit();
+    }
+
+    public void DoorInit()
+    {
+        mDoorTop.Init();
+        mDoorRight.Init();
+        mDoorBottom.Init();
+        mDoorLeft.Init();
     }
 
 
@@ -77,13 +88,32 @@ public class DungeonStage : MonoBehaviour
             // 문 오픈
             SetDoorsOpen();
             // 상자 있을경우 상자 오픈.
-            // 코드 넣어야하고.
+            SetChestUnlock();
+            
         }
     }
     
+    public void SetChestUnlock()
+    {
+        if(mBoard.GetChest() != null)
+        {
+            mBoard.GetChest().SetChestState(DungeonChest.ChestState.Unlock);
+        }
+       
+        return;
+    }
+
         // �÷��̾ ���������� �������� �˸�
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {
+        // 층 이동 후 입장 floor door close 
+        if(transferInfo == DungeonDoor.TansferInfo.FirstRoom)
+        {
+            if(GetEntryFloorDoorDirection() != null)
+            {
+                GetEntryFloorDoorDirection().DoorClose();
+            }
+        }
         // 스테이지의 플레이어 입장 여부 갱신
         SetIsEnterd(true);
         // 보드의 몬스터 수와 처치한 몬스터 수가 다를경우 (몬스터를 처치하지않은 방)
@@ -92,6 +122,32 @@ public class DungeonStage : MonoBehaviour
             SetDoorsClose();
         }
         Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
+    }
+
+    // 층 이동으로 입장한 방향의 문 찾아 반환하는 함수. 
+    public DungeonDoor GetEntryFloorDoorDirection()
+    {
+        if(mDoorTop.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorTop;
+        }
+        if (mDoorRight.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorRight;
+        }
+        if (mDoorBottom.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorBottom;
+        }
+        if (mDoorLeft.GetDoorDirection() == mBackwardDirection)
+        {
+            return mDoorLeft;
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
     // �÷��̾ ���������� ������ �˸�
@@ -295,19 +351,29 @@ public class DungeonStage : MonoBehaviour
     // �� ���⿡ �´� ���� ����Ʈ ���͸�
     public void GetFilteredBoards(int directions, DungeonBoard.BoardType type, ref List<DungeonBoard> output)
     {
-        
-        int count = mBoards.Count;
-        for (int idx = 0; idx < count; ++idx)
+        // 타입이 보스(미니 보스) 인 경우, 층에 해당하는 보드를 넣어서 전달.
+        if (type == DungeonBoard.BoardType.Boss)
         {
-            DungeonBoard board = mBoards[idx];
+            int index = mFloor - 1;
+            DungeonBoard board = mMiniBossBoard[index];
 
-            if (board.GetBoardType() == type)
+            output.Add(board);
+        }
+        else
+        {
+            int count = mBoards.Count;
+            for (int idx = 0; idx < count; ++idx)
             {
-                if (board.IsMovableDirection(directions))
+                DungeonBoard board = mBoards[idx];
+
+                if (board.GetBoardType() == type)
                 {
-                    if (!output.Contains(board))
+                    if (board.IsMovableDirection(directions))
                     {
-                        output.Add(board);
+                        if (!output.Contains(board))
+                        {
+                            output.Add(board);
+                        }
                     }
                 }
             }

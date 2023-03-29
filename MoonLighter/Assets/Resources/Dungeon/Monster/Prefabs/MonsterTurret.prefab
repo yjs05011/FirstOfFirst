@@ -489,6 +489,6 @@ MonoBehaviour:
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
-  mHpBar: {fileID: 0}
+  mHpBar: {fileID: 1583058755}
   mImgHp: {fileID: 1209188384}
   mShotCount: 3

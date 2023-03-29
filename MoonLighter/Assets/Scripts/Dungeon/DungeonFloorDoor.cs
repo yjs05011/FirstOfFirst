@@ -6,7 +6,10 @@ public class DungeonFloorDoor : MonoBehaviour
 {
     public DungeonDoor mDoor = null;
 
-
+    public void Start()
+    {
+        mDoor = transform.GetComponentInParent<DungeonDoor>();
+    }
     public void StartFloorChange()
     {
 
