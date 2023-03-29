@@ -33,7 +33,7 @@ public class OptionUi : MonoBehaviour
         CorsetSetGameObject();
         corser.transform.localPosition = CorsorSetPos(0);
         SetActiveOption();
-        ColorChange(selectOptionIdx, yellow);
+        ColorChange(selectOptionIdx, green);
 
 
 
@@ -95,8 +95,8 @@ public class OptionUi : MonoBehaviour
                 beforeOptionIdx = selectOptionIdx;
                 selectOptionIdx--;
                 CorsetSetGameObject();
-                ColorChange(beforeOptionIdx, green);
-                ColorChange(selectOptionIdx, yellow);
+                ColorChange(beforeOptionIdx, yellow);
+                ColorChange(selectOptionIdx, green);
                 corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
             }
         }
@@ -112,8 +112,8 @@ public class OptionUi : MonoBehaviour
                 beforeOptionIdx = selectOptionIdx;
                 selectOptionIdx++;
                 CorsetSetGameObject();
-                ColorChange(beforeOptionIdx, green);
-                ColorChange(selectOptionIdx, yellow);
+                ColorChange(beforeOptionIdx, yellow);
+                ColorChange(selectOptionIdx, green);
                 corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
             }
         }

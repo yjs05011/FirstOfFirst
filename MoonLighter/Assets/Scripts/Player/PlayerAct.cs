@@ -392,6 +392,7 @@ public class PlayerAct : MonoBehaviour
         if (mPlayerMaxHp > mPlayerHp)
         {
             mPlayerHp += number;
+            PlayerManager.Instance.mPlayerStat.Hp += number;
             if (mPlayerHp <= mPlayerMaxHp)
             {
                 mPlayerHp = mPlayerMaxHp;
@@ -418,6 +419,7 @@ public class PlayerAct : MonoBehaviour
             else
             {
                 mPlayerHp -= calculateDamage;
+                PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;
             }
             if (mPlayerHp <= 0)
             {
@@ -447,6 +449,7 @@ public class PlayerAct : MonoBehaviour
             else
             {
                 mPlayerHp -= calculateDamage;
+                PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;
             }
             if (mPlayerHp < 0)
             {
