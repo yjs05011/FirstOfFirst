@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class DungeonUIFadeInOutTransition : MonoBehaviour
 {
+    private void Start()
+    {
+        DungeonManager.Instance.mTransitionUI = this;
+    }
+
     [SerializeField] protected CanvasGroup m_canvasGroup = null;
 
     public IEnumerator TransitionFadeIn(float fadeDuration = 1.0f)
