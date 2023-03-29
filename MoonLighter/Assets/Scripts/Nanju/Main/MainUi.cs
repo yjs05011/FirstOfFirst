@@ -14,6 +14,15 @@ public class MainUi : MonoBehaviour
     public float mTimer;
 
     public Text mKillMonsterCount;
+    public Text mChestCount;
+
+    // 던전 층 
+    public GameObject mFirstFloor;
+    public GameObject mFirstFloorClear;
+    public GameObject mScendFloor;
+    public GameObject mScendFloorClear;
+    public GameObject mThreeFloor;
+    public GameObject mThreeFloorClear;
 
     // Start is called before the first frame update
     void Start()
@@ -84,7 +93,8 @@ public class MainUi : MonoBehaviour
     // ExitDungeon UI 활성화 시키기
     public void ExitDungeon()
     {
-        // SetKillMonsterCount();
+        SetKillMonsterCount();
+        // SetDungeonChestCount();
 
         if (UiManager.Instance.mIsPlayerUseAnimation == true)
         {
@@ -126,13 +136,50 @@ public class MainUi : MonoBehaviour
 
 
     // [던전] 몇개 몬스터 잡았는지 확인
-    // public void SetKillMonsterCount()
+    public void SetKillMonsterCount()
+    {
+        int killMonster = DungeonManager.Instance.mKillMonsterList.Count;
+        mKillMonsterCount.text = killMonster.ToString();
+        // 몬스터 이미지 enum 타입 언니랑 상의하기 (프리팹으로 이용)
+
+
+    }
+
+    // [던전] 몇개 상자를 열었는지 확인
+    // public void SetDungeonChestCount()
     // {
-    //     int KillMonster = DungeonManager.Instance.mKillMonsterList.Count();
-    //     mKillMonsterCount.text = KillMonster.ToString();
-
-
+    //     int chestCount = DungeonManager.Instance.mUnlockChestList.Count;
+    //     mChestCount.text = chestCount.ToString();
     // }
+
+    // [던전] 몇 층인지 확인하여 오브젝트 활성화
+    public void FloorCheck()
+    {
+        // 현재 층 위치 표시
+        // 완료시 지금 현재 층까지만 켜지게 하기
+        switch (DungeonMenager.Instance.mPlayerCurrStage)
+        {
+            case 0:
+                mFirstFloor.SetActive(true);
+                break;
+            case 1:
+                mFirstFloor.SetActive(false);
+                mFirstFloorClear.SetActive(true);
+                mScendFloor.SetActive(true);
+                break;
+            case 2:
+                mScendFloor.SetActive(false);
+                mScendFloorClear.SetActive(true);
+                mThreeFloor.SetActive(true);
+                break;
+            case 3:
+                mThreeFloor.SetActive(false);
+                mThreeFloorClear.SetActive(true);
+                break;
+
+        }
+
+    }
 
 
 
