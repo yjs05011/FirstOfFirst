@@ -255,9 +255,7 @@ public class Inventory : MonoBehaviour
                 mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
                 mIsEquipmentCheck = false;
             }
-
         }
-
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (0 < mSelectEquipmentX)
@@ -509,37 +507,56 @@ public class Inventory : MonoBehaviour
                 //장비창 배열에 아이템이 없고 포인터에 아이템이 있으면
                 else
                 {
-                    //y축이 0이면 0, 1번이 무기만 들어가야함
+                    //mEquipment[0,0]과  [0, 1]에는 무기
                     if (mSelectEquipmentY == 0 && mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mEquipmentType == Item.EquimentEnumType.Weapon)   
                     {
                         WearEquipment();
                     }
-                    if (mSelectEquipmentX == 0)
+                    //mEquipment[1,0] [2,0] [3,0]자리에는 헬멧 아머 부츠
+                    else if (mSelectEquipmentX == 0)
                     {
                         if (mSelectEquipmentY == 1 && mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mEquipmentType == Item.EquimentEnumType.Helmet)
-                        { WearEquipment(); }
+                        { 
+                            WearEquipment();
+                        }
                         else if (mSelectEquipmentY == 2 && mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mEquipmentType == Item.EquimentEnumType.Armor)
-                        { WearEquipment(); }
+                        { 
+                            WearEquipment(); 
+                        }
                         else if (mSelectEquipmentY == 3 && mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mEquipmentType == Item.EquimentEnumType.Boots)
-                        { WearEquipment(); }
-
+                        { 
+                            WearEquipment(); 
+                        }
+                    }
+                    else if(mSelectEquipmentY == 2 && mSelectEquipmentX == 1 && mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mItemType == Item.ItemEnumType.Potion)
+                    {
+                        WearEquipment();
+                    }
+                    else if(mSelectEquipmentX == 1)
+                    {
+                        if((mSelectEquipmentY ==1 || mSelectEquipmentY == 3 ) && mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mEquipmentType == Item.EquimentEnumType.Ring)
+                        {
+                            WearEquipment();
+                        }
                     }
                 }
 
             }
-            //인벤토리 배열에 아이템이 있고
+
+            //장비창 배열에 아이템이 있을때
             else if (mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem != null)
             {
+                Debug.Log(mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem != null);
                 //포인터에 켜져있고
                 if (mSelectPoint.transform.GetChild(0).gameObject.activeSelf)
                 {
-                    //인벤토리 배열의 아이템과 포인터의 아이템이 같을때
-                    if (mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem == mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem)
+                    //장비창 배열의 아이템과 포인터의 아이템이 같을때
+                    if (mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem ==mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem )
                     {
                         //아이템 타입이 장비면
                         if (mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem.mItemType == Item.ItemEnumType.Equiment)
                         {
-
+                            
                         }
                         //아이템 타입이 장비가 아니면
                         else
@@ -574,12 +591,34 @@ public class Inventory : MonoBehaviour
         //선택된 배열의 아이템의 수를 1씩 빼기
         //선택을 눌렀을때 선택 스프라이트 켜기
         mSelectPoint.transform.GetChild(0).gameObject.SetActive(true);
-
         //카운트
         mSelectCount++;
-        mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem, mSelectCount);
+        if(!mIsEquipmentCheck)
+        {
+            mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem, mSelectCount);
 
-        mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().SetSlotCount(-1);
+            mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().SetSlotCount(-1);
+        }
+        else
+        {
+            Debug.Log(mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mItemType == mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem.mItemType);
+            Debug.Log(mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mEquipmentType == mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem.mEquipmentType);
+
+
+            if(mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mItemType == mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem.mItemType &&
+            mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem.mEquipmentType == mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem.mEquipmentType)
+            {
+                mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem, mSelectCount);
+
+                mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().SetSlotCount(-1);
+            }
+            else 
+            {
+
+            }
+            
+        }
+        
     }
 
     public void Swap()
@@ -589,8 +628,17 @@ public class Inventory : MonoBehaviour
 
         swapTemp = mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem;
         swapCount = mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItemCount;
-        mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem, mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItemCount);
-        mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().AddItem(swapTemp, swapCount);
+        if(!mIsEquipmentCheck)
+        {
+            mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem, mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItemCount);
+            mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().AddItem(swapTemp, swapCount);
+        }
+        else
+        {
+            mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem, mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItemCount);
+            mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().AddItem(swapTemp, swapCount);
+        }
+        
 
     }
 }

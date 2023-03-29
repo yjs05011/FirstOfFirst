@@ -25,7 +25,8 @@ public class Item : ScriptableObject
         Weapon,
         Helmet,
         Armor,
-        Boots
+        Boots,
+        Ring
     } 
     
     #region 저주 아이템 구현시 활성화 시킬 함수
