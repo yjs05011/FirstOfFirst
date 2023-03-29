@@ -17,9 +17,9 @@ public class DungeonBoard : MonoBehaviour
     public bool mIsMovableRight = false;
 
     public DungeonHole mHole = null;
-    // ��ֹ� ����Ʈ (�ӽ�)
+    // 장애물 리스트
     public List<GameObject> mObstacles= new List<GameObject>();
-    // ������Ʈ ����Ʈ (�ӽ�)
+    // 오브젝트 리스트
     public List<GameObject> mObjects = new List<GameObject>();
 
     // 몬스터 
@@ -129,5 +129,15 @@ public class DungeonBoard : MonoBehaviour
             mMonsters[i].gameObject.SetActive(true);
 
         }
+    }
+
+    public List<Monster> GetMonsters()
+    {
+        return mMonsters;
+    }
+
+    public DungeonChest GetChest() 
+    { 
+        return mChest; 
     }
 }

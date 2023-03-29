@@ -93,6 +93,8 @@ MonoBehaviour:
   mSkillPresets:
   - key: SmashAttackSkill
     preset: {fileID: 3835791503331179313, guid: 494948418c251c8479d60f3b34df96f5, type: 3}
+  mColliders: []
+  mMonsterId: 5
   mMovableArea:
     serializedVersion: 2
     x: -11
@@ -105,7 +107,7 @@ MonoBehaviour:
   mWanderDistance: 0.3
   mHp: 100
   mMaxHP: 100
-  mDamage: 10
+  mDamage: 50
   mAttackInterval: 1
   mAttackTime: 0
   mIsAttackBlock: 0
@@ -117,6 +119,7 @@ MonoBehaviour:
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
+  mHpBar: {fileID: 7522792416086468940}
   mImgHp: {fileID: 1906330226638164457}
   mCurrDirection: 3
 --- !u!1 &5046454774131163764
@@ -385,7 +388,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &6490172486573441241
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -402,7 +405,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &434832348664875471
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -86,8 +86,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mRigidBody: {fileID: 2552959306023619172}
   mSpriteRenderer: {fileID: 6708879462701437376}
+  mAnimator: {fileID: 7140011712225531495}
   mAnimationEvent: {fileID: 0}
   mProjectilePreset: {fileID: 0}
+  mSkillPresets: []
+  mColliders: []
+  mMonsterId: 1
   mMovableArea:
     serializedVersion: 2
     x: -9
@@ -100,19 +104,20 @@ MonoBehaviour:
   mWanderDistance: 0.25
   mHp: 100
   mMaxHP: 100
-  mDamage: 10
+  mDamage: 20
   mAttackInterval: 1
   mAttackTime: 0
   mIsAttackBlock: 0
   mIsDash: 0
   mDashSpeed: 5
   mDashDistance: 1
+  mDashDestination: {x: 0, y: 0, z: 0}
   mPrevState: 1
   mCurrState: 1
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
+  mHpBar: {fileID: 3428410279342512479}
   mImgHp: {fileID: 5516116913703703424}
-  mAnimator: {fileID: 7140011712225531495}
 --- !u!1 &3428410279342512479
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6683707675326172659
 Transform:
   m_ObjectHideFlags: 0

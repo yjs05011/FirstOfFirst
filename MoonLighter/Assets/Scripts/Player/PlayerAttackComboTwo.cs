@@ -24,6 +24,11 @@ public class PlayerAttackComboTwo : PlayerState
                 }
                 break;
             case 2:
+                if (!mIsAttack)
+                {
+                    mIsAttack = true;
+                    StartCoroutine(SpearCombo2(player.mPlayerDirection, player));
+                }
                 break;
             case 3:
                 break;
@@ -81,6 +86,49 @@ public class PlayerAttackComboTwo : PlayerState
         }
 
 
+
+    }
+    IEnumerator SpearCombo2(int direct, PlayerAct player)
+    {
+        player.mPlayerAnimator.SetBool("IsAttackComboTwo", true);
+        player.mWeaponeHitBox.gameObject.SetActive(true);
+        switch (direct)
+        {
+
+            case 0:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, -1.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 2f);
+                break;
+            case 1:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(0, 1.5f);
+                player.mWeaponeHitBox.size = new Vector2(1f, 1.5f);
+                break;
+            case 2:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(-1.25f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2f, 1f);
+                break;
+            case 3:
+                player.mWeaponeHitBoxPosition.localPosition = new Vector2(1.25f, 0);
+                player.mWeaponeHitBox.size = new Vector2(2f, 1f);
+                break;
+        }
+        yield return new WaitForSeconds(player.mPlayerAnimation[4].length - FramNumber);
+        player.mWeaponeHitBox.gameObject.SetActive(false);
+        if (player.mAttackRoll > 1)
+        {
+            player.mPlayerAnimator.SetBool("IsAttackComboTwo", false);
+            Debug.Log("Combo");
+            player.mAttackRoll = 0;
+            player.mIsCombo = true;
+
+        }
+        else
+        {
+            player.mPlayerAnimator.SetBool("IsAttackComboTwo", false);
+            player.mAttackRoll = 0;
+            player.mPlayerAnimator.SetBool("IsAttack", false);
+            player.SetActionType(ActState.State_Move);
+        }
     }
     //     IEnumerator BigSwordLeftCombo2()
     //     {

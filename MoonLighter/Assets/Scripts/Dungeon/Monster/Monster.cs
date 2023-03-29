@@ -13,13 +13,18 @@ public class Monster : MonoBehaviour
         public GameObject preset;
     }
 
+    [System.Serializable]
+    public class Collider2DLink
+    {
+        public string key;
+        public Collider2D collider;
+    }
+
     public enum Type
     {
         NORMAL,
         BOSS
     }
-
-    // 터렛 (리지드바디 스테틱)
 
     public enum State
     {
@@ -31,12 +36,22 @@ public class Monster : MonoBehaviour
         Wait, //무한 대기(코드로 제어)
         AttackCooltime, //공격 이후 쿨타임
         Die, // 사망 -> 비활성화
+        Ready, // 준비 (Wake 이전 상태)
     }
 
+    // 몬스터 id 
+    public enum MonsterID
+    {
+        None = 0,
+        BabySlime = 1,
+        GolemTurret = 2,
+        FlyingGolem = 3,
+        GolemMine  =4,
+        GolemMiniBoss = 5,
+        GolemCorruptMiniBoss = 6,
+        GolemKing = 10
+    }
 
-    // 보스
-    // 골렘 마인 (자폭 몬스터)
-    // 다른 몬스터들도 데미지를 입힘
 
     // 컴포넌트
     [Header("Componenet")]
@@ -49,9 +64,13 @@ public class Monster : MonoBehaviour
 
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
-    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); //딕셔너리 직렬화가 안되서 리스트 사용(추후 변경)
+    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); 
+
+    [Header("Collider")]
+    public List<Collider2DLink> mColliders = new List<Collider2DLink>();
 
     [Header("Monster Info")]
+    public MonsterID mMonsterId = MonsterID.None; // 몬스터 id
     public Rect mMovableArea; // 이동 가능한 영역
     [Range(0.1f, 20.0f)]
     public float mAttackDistance = 1.0f; // 자신의 위치를 기준으로 플레이어를 공격 가능한 거리
@@ -61,6 +80,8 @@ public class Monster : MonoBehaviour
     public float mSpeed = 1.0f; // 몬스터의 이동 속도 (추적)
     [Range(0.0f, 2.0f)]
     public float mWanderDistance = 1.0f; // 몬스터가 배회할때 랜덤하게 선택될 위치의 최대 거리
+    [Range(0.0f, 3.0f)]
+    public float mSplashAttackDistance = 0.0f; // 스플래시 공격 범위.
 
     [Header("Monster Hp")]
     public float mHp = 100.0f;
@@ -88,8 +109,11 @@ public class Monster : MonoBehaviour
     public PlayerAct mTarget = null; // 타겟
     public DungeonStage mStage = null; // 스테이지
 
-    // UI > hp바 
+    // UI : hp bar 오브젝트
+    public GameObject mHpBar = null;
+    // UI : HP fill image 
     public Image mImgHp = null;
+
 
     public void Start()
     {
@@ -132,7 +156,15 @@ public class Monster : MonoBehaviour
         if(mStage == null)
         {
             mStage = DungeonGenerator.Instance.mStages[0];
+            mStage.mBoard.GetMonsters().Add(this);
         }
+    }
+
+
+
+    public MonsterID GetMonsterId()
+    {
+        return mMonsterId;
     }
 
 
@@ -249,6 +281,19 @@ public class Monster : MonoBehaviour
         return null;
     }
 
+    public Collider2D FindCollider2D(string key)
+    {
+        int count = mColliders.Count;
+        for (int idx = 0; idx < count; ++idx)
+        {
+            if (mColliders[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return mColliders[idx].collider;
+            }
+        }
+        return null;
+    }
+
     // 현재 좌표가 이동 가능한 영역인지 체크
     public bool IsMovablePosition(Vector3 position)
     {
@@ -266,11 +311,54 @@ public class Monster : MonoBehaviour
         return false;
     }
 
+    public Vector3 IsRandomPositionInsidePolygonCollider(PolygonCollider2D collider)
+    {
+        float minX = Mathf.Infinity;
+        float maxX = Mathf.NegativeInfinity;
+        float minY = Mathf.Infinity;
+        float maxY = Mathf.NegativeInfinity;
+
+        Vector2[] points = collider.points;
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (points[i].x < minX)
+            {
+                minX = points[i].x;
+            }
+            if (points[i].x > maxX)
+            {
+                maxX = points[i].x;
+            }
+            if (points[i].y < minY)
+            {
+                minY = points[i].y;
+            }
+            if (points[i].y > maxY)
+            {
+                maxY = points[i].y;
+            }
+        }
+
+        Vector2 position = new Vector2();
+        while (true)
+        {
+            Debug.Log("IsRandomPositionInsidePolygonCollider");
+            position.x = Random.Range(minX, maxX);
+            position.y = Random.Range(minY, maxY);
+
+            if (collider.OverlapPoint(position))
+            {
+                break;
+            }
+        }
+        return position;
+    }
+
     // 추적 가능한 거리 안에 들어왔는지 체크한다.
     public bool IsInTraceScope()
     {
         float distance = 0.0f;
-        if (GetTargetDistance(ref distance))
+        if (GetTargetDistance(mTarget.transform.position, ref distance))
         {
             if (distance <= mTraceScope)
             {
@@ -283,7 +371,7 @@ public class Monster : MonoBehaviour
     public bool IsInDashRange()
     {
         float distance = 0.0f;
-        if(mIsDash && GetTargetDistance(ref distance))
+        if(mIsDash && GetTargetDistance(mTarget.transform.position, ref distance))
         {
             if(distance <= mDashDistance)
             {
@@ -297,7 +385,7 @@ public class Monster : MonoBehaviour
     public bool IsInAttackRange()
     {
         float distance = 0.0f;
-        if(GetTargetDistance(ref distance))
+        if(GetTargetDistance(mTarget.transform.position, ref distance))
         {
             if (distance <= mAttackDistance)
             {
@@ -309,12 +397,11 @@ public class Monster : MonoBehaviour
 
     // 타겟과의 거리를 측정한다
     // 타겟이 이 함수를 사용할 수 없는 경우 False 를 반환한다.
-    public bool GetTargetDistance(ref float output)
+    public bool GetTargetDistance(Vector3 to, ref float output)
     {
         if(mTarget)
         {
             Vector3 from = this.transform.position; //몬스터
-            Vector3 to = mTarget.transform.position; //플레이어
 
             Vector3 distance = from - to; //거리
             
@@ -325,6 +412,21 @@ public class Monster : MonoBehaviour
         output = 0.0f;
         return false; // 이 함수의 값을 사용 할 수 없음
     }
+
+    // 스플래시 범위안에 포지션 포함여부 체크 함수
+    public bool IsInSplashDamageRange(Vector3 position)
+    {
+        float distance = 0.0f;
+        if (GetTargetDistance(position, ref distance))
+        {
+            if (distance <= mSplashAttackDistance)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     // 실제 게임에는 표기되지 않고 에디터상에서 거리 디버깅을 위한 기즈모 표기
     public void OnDrawGizmos()
@@ -343,6 +445,9 @@ public class Monster : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, mAttackDistance);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(this.transform.position, mSplashAttackDistance);
 
         // 플레이어가 타겟인 경우
         if (mTarget && IsInTraceScope())
