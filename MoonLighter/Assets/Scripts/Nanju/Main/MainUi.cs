@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainUi : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class MainUi : MonoBehaviour
 
 
     public float mTimer;
+
+    public Text mKillMonsterCount;
 
     // Start is called before the first frame update
     void Start()
@@ -69,8 +72,6 @@ public class MainUi : MonoBehaviour
                     mTimer = 0;
                     UiManager.Instance.PlayerUsePendant(true);
                 }
-
-
             }
         }
         else
@@ -83,6 +84,8 @@ public class MainUi : MonoBehaviour
     // ExitDungeon UI 활성화 시키기
     public void ExitDungeon()
     {
+        // SetKillMonsterCount();
+
         if (UiManager.Instance.mIsPlayerUseAnimation == true)
         {
             mExitDungeon.SetActive(true);
@@ -95,11 +98,24 @@ public class MainUi : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.L))
             {
+                PlayerManager.Instance.mPlayerStat.isDie = false;
+
+                mExitDungeon.SetActive(false);
+
                 LoadingManager.LoadScene("VillageScene");
+
             }
             if (Input.GetKeyDown(KeyCode.J))
             {
+                PlayerManager.Instance.mPlayerStat.isDie = false;
+
+                mExitDungeon.SetActive(false);
+
+                // 죽었을 때  다시플레이 버튼 누르면 처음 던전 씬으로 안가고 ExitDungeon ui 켜진채로 감
+                // -> 로딩씬 켰다가 던전씬  다시 불러오게하기 언니와 상의해보기 
+                // 임시로 탈출한거 만들어 논거 확인하기
                 LoadingManager.LoadScene("Dungeon");
+
             }
         }
         else
@@ -108,6 +124,15 @@ public class MainUi : MonoBehaviour
         }
     }
 
+
+    // [던전] 몇개 몬스터 잡았는지 확인
+    // public void SetKillMonsterCount()
+    // {
+    //     int KillMonster = DungeonManager.Instance.mKillMonsterList.Count();
+    //     mKillMonsterCount.text = KillMonster.ToString();
+
+
+    // }
 
 
 
