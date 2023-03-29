@@ -57,7 +57,6 @@ public class MainUi : MonoBehaviour
     // 팬던트 사용 유무 함수
     public void PendantUseCheck(float time)
     {
-        Debug.Log(PlayerManager.Instance.mPlayerStat.Money);
         if (200 <= PlayerManager.Instance.mPlayerStat.Money)
         {
             if (Input.GetKey(KeyCode.L))
