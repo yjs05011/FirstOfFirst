@@ -5,6 +5,10 @@ using UnityEngine;
 public class MonsterGolemMiniBoss : Monster
 {
     public DungeonUtils.Direction mCurrDirection = DungeonUtils.Direction.Down;
+    public void OnEnable()
+    {
+        UiManager.Instance.BossMaxHp(mHp);
+    }
 
     public override void Update()
     {

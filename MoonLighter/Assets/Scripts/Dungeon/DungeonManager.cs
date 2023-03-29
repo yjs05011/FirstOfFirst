@@ -85,4 +85,10 @@ public class DungeonManager : MonoBehaviour
         mCamera.CameraMoveByPos(NextPos);
     }
 
+
+    public int GetKillMonsterCount()
+    {
+         return mKillMonsterList.Count;
+    }
+
 }

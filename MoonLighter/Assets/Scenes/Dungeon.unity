@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 1212525583}
   - component: {fileID: 1212525584}
   m_Layer: 0
-  m_Name: DungeonGenerator
+  m_Name: '[DungeonGenerator]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   mLastRoom: {fileID: 0}
   mStartX: 0
   mStartY: 0
-  mFloor: 1
+  mStartFloor: 1
 --- !u!1 &1409357664
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +455,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4651116307368462002, guid: 4deec34e061e2894984acbe09872b358, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651116307515716811, guid: 4deec34e061e2894984acbe09872b358, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651116307889273636, guid: 4deec34e061e2894984acbe09872b358, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651116308026469747, guid: 4deec34e061e2894984acbe09872b358, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651116308711768143, guid: 4deec34e061e2894984acbe09872b358, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4651116309121655970, guid: 4deec34e061e2894984acbe09872b358, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -659,6 +679,10 @@ PrefabInstance:
     - target: {fileID: 717795527396746527, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 717795527943776012, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6922877848429612347, guid: 506b902fd38a1fd4fae40826e9e98b99, type: 3}
       propertyPath: mDamage

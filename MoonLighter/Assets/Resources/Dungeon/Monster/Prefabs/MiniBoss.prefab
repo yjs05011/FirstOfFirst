@@ -95,6 +95,7 @@ MonoBehaviour:
     preset: {fileID: 3835791503331179313, guid: 494948418c251c8479d60f3b34df96f5, type: 3}
   mColliders: []
   mMonsterId: 5
+  mType: 1
   mMovableArea:
     serializedVersion: 2
     x: -11
@@ -105,6 +106,7 @@ MonoBehaviour:
   mTraceScope: 15.2
   mSpeed: 3
   mWanderDistance: 0.3
+  mSplashAttackDistance: 0
   mHp: 100
   mMaxHP: 100
   mDamage: 50

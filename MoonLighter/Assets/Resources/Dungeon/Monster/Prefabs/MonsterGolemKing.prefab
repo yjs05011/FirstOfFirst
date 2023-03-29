@@ -342,6 +342,7 @@ MonoBehaviour:
   - key: RockSpawnArea
     collider: {fileID: 5583289251627320889}
   mMonsterId: 10
+  mType: 1
   mMovableArea:
     serializedVersion: 2
     x: -13

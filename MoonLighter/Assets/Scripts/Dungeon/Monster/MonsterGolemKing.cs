@@ -25,6 +25,8 @@ public class MonsterGolemKing : Monster
             // 범위 안에 들어왔는지 체크하고, 범위안이면, wake up 애니메이션 출력 후 idle 로 상태 변경
             if (IsInTraceScope())
             {
+                UiManager.Instance.mIsBossHpVisible = true;
+                UiManager.Instance.BossMaxHp(this.mMaxHP);
                 mAnimator.SetTrigger("WakeUp");
                 this.SetState(State.Idle);
                 return;
@@ -148,6 +150,7 @@ public class MonsterGolemKing : Monster
     {
         DungeonGenerator.Instance.Init();
         DungeonGenerator.Instance.OnDestroyMySelf();
+        DungeonManager.Instance.mKillMonsterList.Clear();
         GFunc.LoadScene("VillageScene");
     }
 

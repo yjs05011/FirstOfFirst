@@ -106,8 +106,13 @@ public class DungeonStage : MonoBehaviour
         // �÷��̾ ���������� �������� �˸�
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {
+        if(mBoard.GetBoardType()==DungeonBoard.BoardType.Boss || mBoard.GetBoardType() == DungeonBoard.BoardType.DungeonBoss)
+        {
+            UiManager.Instance.mIsBossHpVisible = true;
+        }
+
         // 층 이동 후 입장 floor door close 
-        if(transferInfo == DungeonDoor.TansferInfo.FirstRoom)
+        if (transferInfo == DungeonDoor.TansferInfo.FirstRoom)
         {
             if(GetEntryFloorDoorDirection() != null)
             {

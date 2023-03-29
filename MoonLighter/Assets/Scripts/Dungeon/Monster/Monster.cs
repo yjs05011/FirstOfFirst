@@ -71,6 +71,7 @@ public class Monster : MonoBehaviour
 
     [Header("Monster Info")]
     public MonsterID mMonsterId = MonsterID.None; // 몬스터 id
+    public Type mType; // 몬스터 타입
     public Rect mMovableArea; // 이동 가능한 영역
     [Range(0.1f, 20.0f)]
     public float mAttackDistance = 1.0f; // 자신의 위치를 기준으로 플레이어를 공격 가능한 거리
@@ -170,7 +171,7 @@ public class Monster : MonoBehaviour
 
     public void SetStage(DungeonStage stage)
     {
-        mStage= stage;
+        mStage = stage;
     }
 
     public void SetState(State state)
@@ -212,14 +213,30 @@ public class Monster : MonoBehaviour
         }
 
         mHp -= damage;
+        //피격 연출
         this.Flash();
-        if (mImgHp != null)
+        //hp 갱신
+        if (mType == Type.NORMAL)
         {
-            mImgHp.fillAmount = mHp / mMaxHP;
+            if (mImgHp != null)
+            {
+                mImgHp.fillAmount = mHp / mMaxHP;
+            }
+            if (mHp <= 0.0f)
+            {
+                this.SetState(State.Die);
+            }
         }
-        if (mHp <= 0.0f)
+        if(mType == Type.BOSS)
         {
-            this.SetState(State.Die);
+            
+            UiManager.Instance.BossCurrentHp(mHp);
+            
+            if (mHp <= 0.0f)
+            {
+                this.SetState(State.Die);
+                UiManager.Instance.mIsBossHpVisible = false;
+            }
         }
     }
 

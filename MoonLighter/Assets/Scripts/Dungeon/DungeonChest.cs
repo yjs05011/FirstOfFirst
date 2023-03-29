@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DungeonChest : MonoBehaviour
@@ -9,7 +10,8 @@ public class DungeonChest : MonoBehaviour
 
     public enum ChestState { Lock , Unlock , WaitInput , Open, Close}
     public ChestState mState = ChestState.Lock;
-
+    public GameObject mInteractionMenu = null;
+    public TMP_Text mInteractionKey = null;
     public Collider2D mTrriger = null;
 
     void Awake()
@@ -34,7 +36,10 @@ public class DungeonChest : MonoBehaviour
         return mState;
     }
 
-    
+    public void SetInteractionKeyValue(string value)
+    {
+        mInteractionKey.text = value;
+    }
 
     public void Update()
     {
@@ -52,7 +57,7 @@ public class DungeonChest : MonoBehaviour
         }
         if (mState == ChestState.WaitInput)
         {
-            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
             {
                 // 상자 오픈 애니메이션 출력
                 mChestAnim.SetTrigger("ChestOpen");
@@ -82,7 +87,7 @@ public class DungeonChest : MonoBehaviour
 
             // 오픈 키 UI 띄우기
             Debug.Log("UI : Chest open guide UI Active true");
-            // UI 만들어져있나 확인 필요. 
+            mInteractionMenu.SetActive(true);
 
         }
     }
@@ -97,7 +102,7 @@ public class DungeonChest : MonoBehaviour
 
             // 오픈 키 UI 띄운거 끄기
             Debug.Log("UI : Chest open guide UI Active false");
-            // UI 만들어져있나 확인 필요. 
+            mInteractionMenu.SetActive(false);
 
         }
     }

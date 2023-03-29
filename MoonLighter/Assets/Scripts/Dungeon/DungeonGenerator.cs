@@ -5,6 +5,7 @@ using System.Drawing;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
 
 public class DungeonGenerator : MonoBehaviour
@@ -66,16 +67,11 @@ public class DungeonGenerator : MonoBehaviour
 
     public int mStartX = 0;
     public int mStartY = 0;
-    public int mFloor = 1;
+    public int mStartFloor = 1;
 
     public void OnEnable()
     {
-        int startX = mStartX;
-        int startY = mStartY;
-        int floor = mFloor;
-
-        InitDungeonBorad(startX, startY, floor, DIRECTION_NONE);
-
+        InitDungeonBorad(mStartX, mStartY, mStartFloor, DIRECTION_NONE);
     }
 
     public void OnDestroyMySelf()
@@ -85,11 +81,8 @@ public class DungeonGenerator : MonoBehaviour
 
     public void Init()
     {
-        mStartX = 0;
-        mStartY = 0;
-        mFloor = 1;
-        StagesDelete();
-        InitDungeonBorad(mStartX, mStartY, mFloor, DIRECTION_NONE);
+        mStages.Clear();
+        InitDungeonBorad(mStartX, mStartY, mStartFloor, DIRECTION_NONE);
     }
 
     public DungeonStage InitDungeonBorad(int startX, int startY, int floor, int backwardDirection)
