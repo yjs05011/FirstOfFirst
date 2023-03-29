@@ -38,11 +38,27 @@ public class Item : ScriptableObject
 
 
     //아이템 타입
-    public ItemEnumType mItemType;    
+    public ItemEnumType mItemType;   
+    public EquimentEnumType mEquipmentType; 
     //아이템 이름
     public string mItemName;
     //아이템 아이디
     public int mItemId;
+    // 0 빗자루
+    // 1 훈련형 대검
+    // 2 훈련형 창
+    // 3 헬멧
+    // 4 아머
+    // 5 신발
+    // 6 포션
+    // 7~8 악세사리 안씀
+    // 9 CastingWreckage
+    // 10 Cloth
+    // 11 HardenedSteel
+    // 12 IronRod
+    // 13 RuneTool
+    // 14 WaterBll
+    
 
     //아이템 체력
     public int mItemHp;

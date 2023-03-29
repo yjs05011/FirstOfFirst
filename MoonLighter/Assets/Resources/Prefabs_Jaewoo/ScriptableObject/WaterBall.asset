@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: WaterBall
   m_EditorClassIdentifier: 
   mItemType: 3
+  mEquipmentType: 0
   mItemName: WaterBall
+  mItemId: 14
   mItemHp: 0
   mItemDamage: 0
   mItemDefense: 0
   mItemMoveSpeed: 0
   mItemPrice: 125
   mItemSprite: {fileID: 1904700284, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
-  mItemPrefab: {fileID: 1681433741531369586, guid: ddbd748992538c246858b17120dcc786, type: 3}

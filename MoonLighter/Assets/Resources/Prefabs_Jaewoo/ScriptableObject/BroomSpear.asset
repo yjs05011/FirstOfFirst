@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: BroomSpear
   m_EditorClassIdentifier: 
   mItemType: 1
+  mEquipmentType: 1
   mItemName: BroomSpear
+  mItemId: 0
   mItemHp: 0
   mItemDamage: 6
   mItemDefense: 0
   mItemMoveSpeed: 0
   mItemPrice: 0
   mItemSprite: {fileID: 21300000, guid: b8d60712cc0b8a34ab073f27a241946a, type: 3}
-  mItemPrefab: {fileID: 2697302450889011035, guid: e2cf1a5e5c6f95d48a22d39a3e429968, type: 3}

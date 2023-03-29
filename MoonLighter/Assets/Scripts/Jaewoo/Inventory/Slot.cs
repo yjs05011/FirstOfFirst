@@ -59,7 +59,7 @@ public class Slot : MonoBehaviour
         // Debug.Log(mItem.mItemType);
         // Debug.Log(mItem.mItemType != Item.ItemEnumType.Equiment);
         //아이템 타입 구분
-        if (mItem.mItemType != Item.ItemEnumType.Equiment)
+        if (mItem.mItemType != Item.ItemEnumType.Equiment )
         {
             //mChangeImage.FindChildObj("ItemImage").transform.GetComponent<SpriteRenderer>();
             // mChangeImage.SetActive(true);

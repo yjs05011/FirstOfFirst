@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: TrainingSpear
   m_EditorClassIdentifier: 
   mItemType: 1
+  mEquipmentType: 1
   mItemName: TrainingSpear
+  mItemId: 2
   mItemHp: 0
   mItemDamage: 20
   mItemDefense: 0
   mItemMoveSpeed: 0
   mItemPrice: 0
   mItemSprite: {fileID: 21300000, guid: 93630bdec01882441b45043b90cc4931, type: 3}
-  mItemPrefab: {fileID: 6591258640133992922, guid: 7da64060854991f439c701581645527b, type: 3}

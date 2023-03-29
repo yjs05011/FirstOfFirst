@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: IronRod
   m_EditorClassIdentifier: 
   mItemType: 3
+  mEquipmentType: 0
   mItemName: IronRod
+  mItemId: 12
   mItemHp: 0
   mItemDamage: 0
   mItemDefense: 0
   mItemMoveSpeed: 0
   mItemPrice: 31
   mItemSprite: {fileID: 533185041, guid: 256b7d6b5e26a114d9dd470009325e09, type: 3}
-  mItemPrefab: {fileID: 4587322328100813770, guid: 112c0b5f8972afc419951fbdacfcfdc0, type: 3}

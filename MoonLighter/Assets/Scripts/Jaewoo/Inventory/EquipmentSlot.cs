@@ -11,6 +11,7 @@ public class EquipmentSlot : MonoBehaviour
     public Item mEquipmentItem;
     public Sprite mEquipmentItemSprite;
     public SpriteRenderer mEquipmentSlotRender = default;
+    
     //public EquipmentTypeController mEquipmentSlotParent;
 
     [SerializeField]
@@ -23,32 +24,6 @@ void Awake()
 
    private void Start()
     {
-        // for(int index = 0; index < gameObject.transform.parent.transform.childCount; index ++)
-        // {
-        //     gameObject.transform.parent.transform.GetChild(index);
-
-        //     //무기타입만 들어갈 칸
-        //     if( gameObject.transform.parent.transform.GetChild(0)|| 
-        //         gameObject.transform.parent.transform.GetChild(1))
-        //     {               
-        //         mEquipmentItem.mItemType = Item.ItemEnumType.Equiment;
-
-        //     }
-        //     //방어구 타입만 들어갈 칸
-        //     if(gameObject.transform.parent.transform.GetChild(2)||
-        //        gameObject.transform.parent.transform.GetChild(4)||
-        //        gameObject.transform.parent.transform.GetChild(6))
-        //     {
-
-        //     }
-        //     if(gameObject.transfom.parent.transform.GetChild())
-
-        // }
-        // {
-
-        // }
-       
-        
         
         mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
         mEquipmentSlotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();          
