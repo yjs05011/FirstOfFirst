@@ -21,7 +21,6 @@ public class Inventory : MonoBehaviour
     public int mSelectEquipmentX = default;
 
     public int mKeyCodeICount = 0;
-
     public int mSelectCount = 0;
 
     //인벤토리 활성화 확인. true면 인벤토리가 열림.이동 막음
@@ -32,15 +31,11 @@ public class Inventory : MonoBehaviour
     public static bool mIsSelectMove = false;
     public static bool mIsChestCheck = false;
     public bool mIsInventoryOpen = false;
-
-
-    [SerializeField]
+    
     //인벤토리 base 이미지
-    private GameObject mChangeInventoryBase;
-    [SerializeField]
-    private GameObject mChangeSlotGrideSetting;
-    [SerializeField]
-    private GameObject mChnageEquipmentSlotGrideSetting;
+    public GameObject mChangeInventoryBase;   
+    public GameObject mChangeSlotGrideSetting;    
+    public GameObject mChnageEquipmentSlotGrideSetting;
 
     //기본상태의 인벤토리배열
     public GameObject[,] mInventoryArray;
@@ -51,12 +46,10 @@ public class Inventory : MonoBehaviour
     public GameObject mInventoryFindSlot;
     public GameObject mEquipmentFindSlot;
     public GameObject mSelectPoint = null;
-
-    public GameObject mSelectItem;
-
+    public GameObject mSelectItem ;
 
 
-   
+
     //public Slot mSlotGet;
     //public Slot[] mSlot;
     public Slot[] mSlotEquip;
@@ -66,6 +59,7 @@ public class Inventory : MonoBehaviour
         mInventoryArray = new GameObject[4, 5];
         mEquipmentArray = new GameObject[4, 2];
         transform.GetChild(0).gameObject.SetActive(true);
+        mSelectPoint.transform.GetChild(0).gameObject.SetActive(true);
     }
     void Start()
     {
@@ -74,14 +68,17 @@ public class Inventory : MonoBehaviour
         mIsChestCheck = false;
 
         //Awake와 Start에서 인벤토리 On/Off를 통해 기능활성화
-        transform.GetChild(0).gameObject.SetActive(false);
 
         //mSlotGet = mChangeSlotGrideSetting.GetComponentInChildren<Slot>();
         //mSlot = mChangeSlotGrideSetting.GetComponentsInChildren<Slot>();
         mSlotEquip = mChnageEquipmentSlotGrideSetting.GetComponentsInChildren<Slot>();
+        
+        
+        transform.GetChild(0).gameObject.SetActive(false);
+        mSelectPoint.transform.GetChild(0).gameObject.SetActive(false);
 
-        mSelectPoint = mInventoryFindSlot.transform.GetChild(1).gameObject;
-       
+        //mSelectItem = mInventoryr
+
         //(4,5) 배열 초기화 및 선언
         for (int indexY = 0; indexY < ARRAY_Y; indexY++)
         {
@@ -91,7 +88,7 @@ public class Inventory : MonoBehaviour
 
                 mInventoryArray[indexY, indexX] = mInventoryFindSlot.transform.Find("InventorySlot").GetChild(indexAdd).gameObject;
                 mInventoryArray[indexY, indexX].SetActive(true);
-                //InventoryManager.Instance.mSlots[indexY,indexX] = (mInventoryArray[indexY, indexX]);
+                InventoryManager.Instance.mSlots[indexY,indexX] = (mInventoryArray[indexY, indexX]);
             }
         }
         mSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
@@ -104,9 +101,11 @@ public class Inventory : MonoBehaviour
 
                 mEquipmentArray[indexY, indexX] = mEquipmentFindSlot.transform.Find("EquipmentSlot").GetChild(indexEquipmentAdd).gameObject;
                 mEquipmentArray[indexY, indexX].SetActive(true);
-                InventoryManager.Instance.mEquipmentSlots[indexY, indexX] =(mEquipmentArray[indexY, indexX]);
+                InventoryManager.Instance.mEquipmentSlots[indexY, indexX] = (mEquipmentArray[indexY, indexX]);
             }
         }
+
+        
     }
 
     void Update()
@@ -120,24 +119,17 @@ public class Inventory : MonoBehaviour
                 SelectSlot();
             }
 
-            if (Input.GetKeyDown(KeyCode.D) )
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 mSelectX++;
-                if (4 < mSelectX )
+                if (4 < mSelectX)
                 {
                     mSelectX = 0;
-                    mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
-                }   
-                if(Input.GetkeyDown(KeyCode.D) && 4 < mSelectX)
-                {
-                    if(4 < mSelectX || mIsChestCheck == true)
-                {
-                    mSelectPoint.transform.localPosition = mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].transform.localPosition;
-                }   
-                }
-                          
+                }          
+
+                mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
             }
-            
+
             if (Input.GetKeyDown(KeyCode.A))
             {
                 mSelectX--;
@@ -169,7 +161,7 @@ public class Inventory : MonoBehaviour
                 //Debug.Log(mInventoryArray[mSelectY, mSelectX]);
                 mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
             }
-       }
+        }
     }
 
     //인벤토리 켰을때
@@ -215,17 +207,17 @@ public class Inventory : MonoBehaviour
         mSelectY = 0;
         mSelectX = 0;
         mIsInventoryOpen = true;
-        mChangeInventoryBase.SetActive(true);       
+        mChangeInventoryBase.SetActive(true);
     }
     //GameObject 인벤토리 베이스 비활성화 
     private void CloseInventory()
     {
         mIsInventoryOpen = false;
 
-            mSelectY = 0;
-            mSelectX = 0;
-            mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
-        mChangeInventoryBase.SetActive(false);        
+        mSelectY = 0;
+        mSelectX = 0;
+        mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
+        mChangeInventoryBase.SetActive(false);
         mIsSelectMove = false;
     }
 
@@ -246,11 +238,11 @@ public class Inventory : MonoBehaviour
                         if (mInventoryArray[indexY, indexX].GetComponent<Slot>().mItem.mItemName == item.mItemName)
                         {
                             //슬롯 개수 올림      
-                            if ( 9 < mInventoryArray[indexY, indexX].GetComponent<Slot>().mItemCount  && Item.ItemEnumType.Ingredient == item.mItemType )
+                            if (9 < mInventoryArray[indexY, indexX].GetComponent<Slot>().mItemCount && Item.ItemEnumType.Ingredient == item.mItemType)
                             {
-                                
+
                             }
-                            else if( 4 <mInventoryArray[indexY, indexX].GetComponent<Slot>().mItemCount && Item.ItemEnumType.Potion == item.mItemType)
+                            else if (4 < mInventoryArray[indexY, indexX].GetComponent<Slot>().mItemCount && Item.ItemEnumType.Potion == item.mItemType)
                             {
 
                             }
@@ -298,27 +290,83 @@ public class Inventory : MonoBehaviour
     }
 
     public void SelectSlot()
-    {        
-        if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem == null)
+    {
+        //인벤토리 배열에 아이템이 없을때
+        if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem == null )
         {
-            //빈칸을 선택하면 아무것도 안함
+            //포인터에 아이템이 없을때
+            if(mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem == null)
+            {
+
+            }
+            //인벤토리 배열에 아이템이 없고 포인터에 아이템이 있으면
+            else
+            {                
+                mSelectCount = 0;
+                
+                mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().AddItem(mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem, mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItemCount);
+                mSelectPoint.transform.GetChild(0).GetComponent<Slot>().ClearSlot();
+                mSelectPoint.transform.GetChild(0).gameObject.SetActive(false);
+            }
+        
         }
-        if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem != null)
+        //인벤토리 배열에 아이템이 있고
+        else if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem != null)
         {
-            SelectSwap();
-            mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().SetSlotCount(-1);
+            //포인터에 켜져있고
+            if(mSelectPoint.transform.GetChild(0).gameObject.activeSelf)
+            {
+                //인벤토리 배열의 아이템과 포인터의 아이템이 같을때
+                if(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem == mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem)
+                {
+                    //아이템 타입이 장비면
+                    if(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem.mItemType == Item.ItemEnumType.Equiment)
+                    {
+                        
+                    }
+                    //아이템 타입이 장비가 아니면
+                    else
+                    {
+                        SelectSwap();
+                    }
+                      
+                }
+                else
+                {
+                    Swap();
+                }
+            }
+            else if(!mSelectPoint.transform.GetChild(0).gameObject.activeSelf)
+            {
+                SelectSwap(); 
+            }
+
+              
         }
     }
 
     public void SelectSwap()
-    {               
-        mSelectCount++;
-        
+    {   
+        //선택된 배열의 아이템의 수를 1씩 빼기
+        //선택을 눌렀을때 선택 스프라이트 켜기
         mSelectPoint.transform.GetChild(0).gameObject.SetActive(true);
+       
+        //카운트
+        mSelectCount++;        
+        mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem,mSelectCount);
+                
+        mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().SetSlotCount(-1);               
+    }
 
-        //mSelectPoint에 현재 인벤토리 배열의 정보를 넣음.
-        //mSelectPoint = mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().gameObject;
-        mSelectPoint.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().sprite = mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem.mItemSprite;
-        mSelectPoint.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = mSelectCount.ToString();
+    public void Swap()
+    {
+        Item swapTemp;
+        int swapCount;
+
+        swapTemp = mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem;
+        swapCount = mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItemCount;
+        mSelectPoint.transform.GetChild(0).GetComponent<Slot>().AddItem(mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem,mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItemCount);
+        mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().AddItem(swapTemp,swapCount);        
+        
     }
 }

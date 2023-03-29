@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3240509841250468679}
   - component: {fileID: 4498512901719429145}
+  - component: {fileID: 4683490282974760089}
   m_Layer: 0
   m_Name: SelectBox
   m_TagString: Untagged
@@ -90,6 +91,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4683490282974760089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238569436787951125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8055c7c9ca648643b99b1795229cbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mItemCount: 0
+  mItem: {fileID: 0}
+  mItemSprite: {fileID: 0}
+  slotRender: {fileID: 0}
+  mTextCount: {fileID: 0}
+  mChangeImage: {fileID: 0}
 --- !u!1 &703551500271509096
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +345,7 @@ GameObject:
   - component: {fileID: 6942959603089941110}
   - component: {fileID: 4211943593787494884}
   m_Layer: 0
-  m_Name: SelectItem
+  m_Name: ItemImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

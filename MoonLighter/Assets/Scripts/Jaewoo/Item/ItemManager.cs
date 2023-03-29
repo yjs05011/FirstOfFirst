@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemManager : GSingleton<ItemManager>
 {
+    public static Inventory mInventory;
     //프리팹 배열
     public GameObject[] mItemPrefab = new GameObject[6];
     public Object[] mListTest = new Object[6];
@@ -21,6 +22,11 @@ public class ItemManager : GSingleton<ItemManager>
         mItemPrefab[4] =Resources.Load("Prefabs_Jaewoo/Item/RuneTool") as GameObject;
         mItemPrefab[5] =Resources.Load("Prefabs_Jaewoo/Item/WaterBall") as GameObject;
         base.Awake();
+    }
+
+    public override void Start()
+    {        
+        base.Start();
     }
     //ItemManager.Instance.DropItem( 위치)
     public void DropItem(Vector3 position)

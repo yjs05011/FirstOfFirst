@@ -17,9 +17,11 @@ public class Slot : MonoBehaviour
     
 
     private void Start()
-    {              
-        mTextCount = gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
-        slotRender = gameObject.FindChildObj("ItemImage").GetComponent<SpriteRenderer>();        
+    {            
+          
+        mTextCount = gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
+        slotRender = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();     
+           
     }
 
     //아이템 값 저장
@@ -53,7 +55,7 @@ public class Slot : MonoBehaviour
         mItemCount = itemCount;
         mItemSprite = mItem.mItemSprite;
 
-        slotRender.sprite = item.mItemSprite;
+        slotRender.sprite = mItemSprite;
         // Debug.Log(mItem.mItemType);
         // Debug.Log(mItem.mItemType != Item.ItemEnumType.Equiment);
         //아이템 타입 구분
@@ -92,7 +94,7 @@ public class Slot : MonoBehaviour
     }
 
     //해당 슬롯 하나 삭제
-    private void ClearSlot()
+    public void ClearSlot()
     {
         mItem = null;
         mItemCount = 0;
