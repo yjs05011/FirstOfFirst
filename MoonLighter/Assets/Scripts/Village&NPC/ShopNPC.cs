@@ -18,7 +18,8 @@ public class ShopNPC : MonoBehaviour
     private int mMoveCount;
     private bool IsGoOut = false;
     private bool IsFirst = true;
-    private bool IsCalculate = true;
+    public bool IsCalculate = true;
+    private bool IsWaitForCalculate = false;
     private Vector3 mPosition;
     // Start is called before the first frame update
     public void Start()
@@ -47,7 +48,7 @@ public class ShopNPC : MonoBehaviour
         {
             if (mTablePosition != Vector3.zero)
             {
-
+                ShopManager.Instance.mShopNPC.Remove(this.gameObject);
                 Vector3 tableDirection = mTablePosition - transform.position;
                 transform.Translate(tableDirection.normalized * mSpeed * Time.deltaTime);
                 if (Vector3.Distance(transform.position, mTablePosition) <= 0.2f)
@@ -62,11 +63,16 @@ public class ShopNPC : MonoBehaviour
 
                         if (!IsCalculate)
                         {
+                            PlayerManager.Instance.mPlayerStat.Money += ShopManager.Instance.mItemPrice[mTableNumber];
                             Invoke("GoOut", 0);
+                        }
+                        else if(IsWaitForCalculate)
+                        {
+                            // 계산대에 왔을때 계산대 대기 리스트에 자신을 추가
+                            ShopManager.Instance.mWaitShopNPC.Add(this.gameObject);
                         }
                         else
                         {
-
                             ShopManager.Instance.mItemTables[mTableNumber].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = null;
                             mGetItem.sprite = mItem;
                             mItem = null;
@@ -85,6 +91,7 @@ public class ShopNPC : MonoBehaviour
                     mNpcAni.SetBool("IsWalking", false);
                     if (IsGoOut)
                     {
+                        ShopManager.Instance.mShopNPC.Remove(this.gameObject);
                         GoOutShop();
                     }
                     if (mMoveCount < 3)
@@ -140,14 +147,16 @@ public class ShopNPC : MonoBehaviour
         mNpcAni.SetBool("IsWalking", false);
         mTablePosition = mCasherPosition;
         MoveDirection();
-        IsCalculate = false;
+        IsWaitForCalculate = true;
+        //IsCalculate = false;
     }
     public void GoOutShop()
     {
-        ShopManager.Instance.mShopNPC.Remove(this.gameObject);
+        
         mMoveCount = 0;
         IsGoOut = false;
         IsCalculate = true;
+        IsWaitForCalculate = false;
         IsFirst = true;
         mTablePosition = Vector3.zero;
         mTableNumber = 0;
