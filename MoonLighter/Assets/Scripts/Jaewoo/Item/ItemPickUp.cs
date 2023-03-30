@@ -5,16 +5,16 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public Slot[] mSlot;
-    [SerializeField]
-    private Inventory mInventory;
-    [SerializeField]
-    private Item mItem;
-    [SerializeField]
-    private GameObject mPlayerBagDistance = default;
-    [SerializeField]
-    private Rigidbody2D mItemRigidBody = default;
+    
+    public Inventory mInventory;
+   
+    public Item mItem;
+    
+    public GameObject mPlayerBagDistance = default;
+    
+    public Rigidbody2D mItemRigidBody = default;
 
-    private void Awake()
+    public void Awake()
     {
         mInventory = GameObject.FindObjectOfType<Inventory>();
     }
