@@ -14,6 +14,7 @@ public class UiManager : MonoBehaviour
     // 보스 Hp
     public float mBossMaxHp;
     public float mBossCurrentHp;
+ 
 
     public bool mIsHpChange = false;
     // 던전 확인
@@ -23,6 +24,7 @@ public class UiManager : MonoBehaviour
     public bool mIsPlayerDie = false;
     public bool mIsPlayerUseAnimation = false;
     public bool mIsResultUi = false;
+
 
     // [Ui]
     public bool mExitDungeonUiOnOffCheck = false;
