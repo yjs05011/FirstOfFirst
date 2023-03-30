@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ItemManager : GSingleton<ItemManager>
 {
-    public static Inventory mInventory;
+    public Inventory mInventory;
     //프리팹 배열
     public GameObject[] mItemPrefab = new GameObject[6];
-    public Object[] mListTest = new Object[6];
+    //public Object[] mListTest = new Object[6];
    
     public int mDropCount = 3;
     
@@ -24,6 +24,9 @@ public class ItemManager : GSingleton<ItemManager>
         base.Awake();
     }
 
+    protected override void Init(){
+        base.Init();
+    }
     public override void Start()
     {        
         base.Start();
@@ -42,9 +45,6 @@ public class ItemManager : GSingleton<ItemManager>
         }              
     }
 
-    public void SelectSwap()
-    {
-        
-    }
+   
 
 }
