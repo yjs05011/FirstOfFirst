@@ -94,7 +94,7 @@ public class MainUi : MonoBehaviour
     public void ExitDungeon()
     {
         SetKillMonsterCount();
-        // SetDungeonChestCount();
+        SetDungeonChestCount();
 
         if (UiManager.Instance.mIsPlayerUseAnimation == true)
         {
@@ -146,33 +146,33 @@ public class MainUi : MonoBehaviour
     }
 
     // [던전] 몇개 상자를 열었는지 확인
-    // public void SetDungeonChestCount()
-    // {
-    //     int chestCount = DungeonManager.Instance.mUnlockChestList.Count;
-    //     mChestCount.text = chestCount.ToString();
-    // }
+    public void SetDungeonChestCount()
+    {
+        int chestCount = DungeonManager.Instance.mUnlockChestList.Count;
+        mChestCount.text = chestCount.ToString();
+    }
 
     // [던전] 몇 층인지 확인하여 오브젝트 활성화
     public void FloorCheck()
     {
         // 현재 층 위치 표시
         // 완료시 지금 현재 층까지만 켜지게 하기
-        switch (DungeonMenager.Instance.mPlayerCurrStage)
+        switch (DungeonManager.Instance.mPlayerCurrStage.GetFloor())
         {
-            case 0:
+            case 1:
                 mFirstFloor.SetActive(true);
                 break;
-            case 1:
+            case 2:
                 mFirstFloor.SetActive(false);
                 mFirstFloorClear.SetActive(true);
                 mScendFloor.SetActive(true);
                 break;
-            case 2:
+            case 3:
                 mScendFloor.SetActive(false);
                 mScendFloorClear.SetActive(true);
                 mThreeFloor.SetActive(true);
                 break;
-            case 3:
+            case 4:
                 mThreeFloor.SetActive(false);
                 mThreeFloorClear.SetActive(true);
                 break;
