@@ -334,7 +334,12 @@ public class PlayerAct : MonoBehaviour
         }
         if (other.CompareTag("Trap"))
         {
-            mPlayerSpeed /= 0.7f;
+            if (mPlayerSpeed >= PlayerManager.Instance.mPlayerStat.Speed * 0.7f)
+            {
+                mPlayerSpeed *= 0.9f;
+            }
+
+
         }
     }
 
@@ -526,6 +531,9 @@ public class PlayerAct : MonoBehaviour
         yield return new WaitForSeconds(Delay);
         mIsDelay = false;
     }
-
+    public void SetDie()
+    {
+        UiManager.Instance.PlayerFinishAnimation(true);
+    }
 
 }
