@@ -8,7 +8,6 @@ public class Slot : MonoBehaviour
 {
     public int mItemCount;
     public Item mItem;
-    
     public Sprite mItemSprite;
     public SpriteRenderer slotRender = default;
     [SerializeField]
@@ -18,8 +17,7 @@ public class Slot : MonoBehaviour
     
 
     private void Start()
-    {            
-          
+    {                      
         mTextCount = gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
         slotRender = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();     
            

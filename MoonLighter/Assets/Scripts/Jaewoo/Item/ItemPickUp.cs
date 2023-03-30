@@ -32,6 +32,8 @@ public class ItemPickUp : MonoBehaviour
             if(this.gameObject.transform.GetComponent<ItemPickUp>().mItem != null)
             {
                 mInventory.AcpuireItem(this.gameObject.transform.GetComponent<ItemPickUp>().mItem, mItemCount);
+
+                InventoryManager.Instance.mIsManagerAddCheck = true;   
                 GetItemMove();
                 return;
             }                       
