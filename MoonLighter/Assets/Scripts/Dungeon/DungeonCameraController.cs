@@ -86,6 +86,10 @@ public class DungeonCameraController : MonoBehaviour
         }
     }
 
+    public void SetCameraInit()
+    {
+        this.transform.position = mInitCameraPos;
+    }
 
     public void SetCameraType(CameraMoveType type)
     {

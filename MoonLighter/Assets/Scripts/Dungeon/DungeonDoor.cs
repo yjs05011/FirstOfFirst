@@ -95,6 +95,11 @@ public class DungeonDoor : MonoBehaviour
         }
         if (mFloorDoorAnim != null && mFloorDoor.activeSelf)
         {
+            if(mCurrStage.GetBoardX() == 0 && mCurrStage.GetBoardY() == 0)
+            {
+                Debug.Log("Door Close");
+            }
+
             mFloorDoorAnim.SetTrigger("DoorClose");
         }
         if (mBossRoomDoorAnim != null && mBossRoomDoor.activeSelf)
