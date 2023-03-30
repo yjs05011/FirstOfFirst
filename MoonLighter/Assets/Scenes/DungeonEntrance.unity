@@ -5765,7 +5765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5576372354319093463, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
       propertyPath: m_Text
-      value: "\uB4E4\uC5B4\uAC00\uAE30"
+      value: "\n\t\t\t\uB4E4\uC5B4\uAC00\uAE30\n"
       objectReference: {fileID: 0}
     - target: {fileID: 5722469584988962830, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -27,9 +27,10 @@ public class ShopUI : MonoBehaviour
     public int mSelectItemNumber;
     public GameObject mSelector;
     public GameObject mSelectItem;
-    void Start()
-    {
 
+    public void OnEnable()
+    {
+        mTableNumber = ShopManager.Instance.mTablesNumber;
         for (int indexX = 0; indexX < 4; indexX++)
         {
             for (int indexY = 0; indexY < 5; indexY++)
@@ -45,17 +46,18 @@ public class ShopUI : MonoBehaviour
                 mTableItem[indexX, indexY] = transform.Find("Tables").GetChild(indexX + (indexY * 4)).gameObject;
                 if (indexX == 0 || indexX == 2)
                 {
-                    if (ShopManager.Instance.mItems[indexX + indexY] != null)
+                    if (ShopManager.Instance.mItems[(mTableNumber*4) + indexX + indexY] != null)
                     {
-                        mTableItem[indexX, indexY].GetComponent<SpriteRenderer>().sprite = ShopManager.Instance.mItems[indexX + indexY];
+                        mTableItem[indexX, indexY].SetActive(true);
+                        mTableItem[indexX, indexY].GetComponent<SpriteRenderer>().sprite = ShopManager.Instance.mItems[(mTableNumber * 4) + indexX + indexY];
                         if (indexX == 0)
                         {
-                            mTableItemNumber[0, indexY] = ShopManager.Instance.mItemsNumber[indexX + indexY];
+                            mTableItemNumber[0, indexY] = ShopManager.Instance.mItemsNumber[(mTableNumber * 4) + indexX + indexY];
                             GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(0).gameObject, mTableItemNumber[0, indexY].ToString());
                         }
                         else
                         {
-                            mTableItemNumber[1, indexY] = ShopManager.Instance.mItemsNumber[indexX + indexY];
+                            mTableItemNumber[1, indexY] = ShopManager.Instance.mItemsNumber[(mTableNumber * 4) + indexX + indexY];
                             GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(0).gameObject, mTableItemNumber[1, indexY].ToString());
                         }
 
@@ -69,30 +71,31 @@ public class ShopUI : MonoBehaviour
                 if (indexX == 1 || indexX == 3)
                 {
                     mTableItem[indexX, indexY].transform.GetChild(0).gameObject.SetActive(false);
-                    if (ShopManager.Instance.mItems[(indexX - 1) + indexY] != null)
+                    if (ShopManager.Instance.mItems[(mTableNumber * 4) + (indexX - 1) + indexY] != null)
                     {
                         if (indexX == 1)
                         {
-                            GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(3).gameObject, ShopManager.Instance.mItemPrice[(indexX - 1) + indexY].ToString());
-                            mTableItemMoney[0, indexY] = ShopManager.Instance.mItemPrice[(indexX - 1) + indexY] / ShopManager.Instance.mItemsNumber[(indexX - 1) + indexY];
+                            GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(3).gameObject, ShopManager.Instance.mItemPrice[(mTableNumber * 4) + (indexX - 1) + indexY].ToString());
+                            mTableItemMoney[0, indexY] = ShopManager.Instance.mItemPrice[(mTableNumber * 4) + (indexX - 1) + indexY] / ShopManager.Instance.mItemsNumber[(mTableNumber * 4) + (indexX - 1) + indexY];
                             GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(1).gameObject, $"{mTableItemMoney[0, indexY]:D7}");
                         }
                         else
                         {
-                            GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(3).gameObject, ShopManager.Instance.mItemPrice[(indexX - 1) + indexY].ToString());
-                            mTableItemMoney[1, indexY] = ShopManager.Instance.mItemPrice[(indexX - 1) + indexY] / ShopManager.Instance.mItemsNumber[(indexX - 1) + indexY];
+                            GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(3).gameObject, ShopManager.Instance.mItemPrice[(mTableNumber * 4) + (indexX - 1) + indexY].ToString());
+                            mTableItemMoney[1, indexY] = ShopManager.Instance.mItemPrice[(mTableNumber * 4) + (indexX - 1) + indexY] / ShopManager.Instance.mItemsNumber[(mTableNumber * 4) + (indexX - 1) + indexY];
                             GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(1).gameObject, $"{mTableItemMoney[1, indexY]:D7}");
                         }
                     }
                     else
                     {
-
+                        GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(1).gameObject, "0000000");
+                        GFunc.SetTmpText(mTableItem[indexX, indexY].transform.GetChild(3).gameObject, "0");
                     }
                 }
 
             }
         }
-        mTableNumber = 0;
+        
         mInventoryX = 0;
         mInventoryY = 0;
         mTableX = 0;
@@ -157,7 +160,14 @@ public class ShopUI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (mInventoryItem[mInventoryX, mInventoryY].GetComponent<SpriteRenderer>().sprite != null) // 인벤토리 아이템이 있으면 (아이템을 들어올려야 한다)
+            {
 
+            }
+            else                                                                                        // 인벤토리 아이템이 없으면 (들어올린 아이템이 있으면 아이템을 인벤토리에 넣는다)
+            {
+
+            }
         }
     }
     public void Table()
@@ -232,11 +242,11 @@ public class ShopUI : MonoBehaviour
                 mTableItem[mTableX, mTableY].transform.GetChild(0).gameObject.SetActive(false);
                 if (mTableX == 1)
                 {
-                    ShopManager.Instance.mItemPrice[0 + mTableY] = mTableItemMoney[0, mTableY] * mTableItemNumber[0, mTableY];
+                    ShopManager.Instance.mItemPrice[(mTableNumber * 4) + 0 + mTableY] = mTableItemMoney[0, mTableY] * mTableItemNumber[0, mTableY];
                 }
                 if (mTableX == 3)
                 {
-                    ShopManager.Instance.mItemPrice[2 + mTableY] = mTableItemMoney[1, mTableY] * mTableItemNumber[1, mTableY];
+                    ShopManager.Instance.mItemPrice[(mTableNumber * 4) + 2 + mTableY] = mTableItemMoney[1, mTableY] * mTableItemNumber[1, mTableY];
                 }
                 Shop.SetPrice();
                 mDontShutDownUI = false;
