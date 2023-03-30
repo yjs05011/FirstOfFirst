@@ -83,7 +83,7 @@ public class Shop : MonoBehaviour
                 ShopManager.Instance.mShopNPC[randomShopNPC].GetComponent<ShopNPC>().mTableNumber = ShopManager.Instance.mTableNumber[randomTable];
 
                 ShopManager.Instance.mShopNPC.RemoveAt(randomShopNPC);
-                ShopManager.Instance.mItems[ShopManager.Instance.mTableNumber[randomTable]] = null;
+                //ShopManager.Instance.mItems[ShopManager.Instance.mTableNumber[randomTable]] = null;
                 ShopManager.Instance.mTableNumber.RemoveAt(randomTable);
             }
         }
