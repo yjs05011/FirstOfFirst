@@ -47,6 +47,8 @@ public class ChestInventory : MonoBehaviour
 
     //기본상태 인벤토리 배열
     //같은 인벤토리라서 이름이 같음
+    public GameObject[,] mInventoryGameObjectArray;
+    public GameObject[,] mChestGameObjectArray;
     public Slot[,] mInventoryArray;
     //상자 인벤토리 배열
     public Slot[,] mChestArray;
@@ -63,6 +65,8 @@ public class ChestInventory : MonoBehaviour
 
         mInventoryArray = new Slot[4, 5];
         mChestArray = new Slot[4, 7];
+        mInventoryGameObjectArray = new GameObject[4,5];
+        mChestGameObjectArray = new GameObject[4,7];
         for (int indexY = 0; indexY < ARRAY_Y; indexY++)
         {
             for (int indexX = 0; indexX < ARRAY_X; indexX++)
