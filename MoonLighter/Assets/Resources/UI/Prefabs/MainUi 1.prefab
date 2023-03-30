@@ -7313,7 +7313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4651116308872771714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7363,7 +7363,6 @@ MonoBehaviour:
   mScendFloorClear: {fileID: 4896461090237593385}
   mThreeFloor: {fileID: 1894301452089549574}
   mThreeFloorClear: {fileID: 6872884262927831876}
-  mBossH: {fileID: 0}
   mChestCount: {fileID: 4651116307757417620}
   mKillMonsterCount: {fileID: 4651116309097842815}
   mPlayerKillMonsterSprites:
