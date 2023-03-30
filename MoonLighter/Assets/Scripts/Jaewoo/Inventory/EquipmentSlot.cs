@@ -5,9 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class EquipmentSlot : MonoBehaviour
-{
-    public bool mIsWeapon;
-    private int mEquipmentItemCount;
+{    
+    public int mEquipmentItemCount;
     public Item mEquipmentItem;
     public Sprite mEquipmentItemSprite;
     public SpriteRenderer mEquipmentSlotRender = default;
@@ -66,6 +65,8 @@ void Awake()
         //아이템 타입 구분
        // if(gameObject.transform.parent.transform.GetChild(0) == Item.ItemEnumType.Equiment)
         //재료아이템일경우
+
+        //아이템 타입이 ItemEnumType.Equipment가 아니면서 장비타입이 EquimentEnumType.None 일땐 
         if (mEquipmentItem.mItemType != Item.ItemEnumType.Equiment )
         {    
             mTextCount.text = mEquipmentItemCount.ToString();
@@ -76,7 +77,7 @@ void Awake()
             }
             SetColor(1);
         }
-        else
+        
         {            
             mTextCount.text = " ";
             SetColor(1);

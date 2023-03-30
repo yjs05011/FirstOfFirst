@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SmallHpProtion
   m_EditorClassIdentifier: 
   mItemType: 2
+  mEquipmentType: 0
   mItemName: SmallHpProtion
+  mItemId: 6
   mItemHp: 35
   mItemDamage: 0
   mItemDefense: 0
   mItemMoveSpeed: 0
   mItemPrice: 0
   mItemSprite: {fileID: 21300000, guid: 4ac2566480b067f48892e8d685faf49b, type: 3}
-  mItemPrefab: {fileID: 5020381721581661612, guid: 7f54163f745696c4f8c872281188ea73, type: 3}

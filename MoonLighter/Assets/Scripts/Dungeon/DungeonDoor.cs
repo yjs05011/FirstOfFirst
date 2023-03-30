@@ -391,6 +391,7 @@ public class DungeonDoor : MonoBehaviour
                 Debug.LogFormat("player [{0}F | x:{1} y:{2}]∑Œ ¿Ãµø", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).y);
                 mPlayerCollider.transform.position = nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM);
                 nextFloor.SetEntryPoint(DungeonGenerator.DIRECTION_BOTTOM);
+                
             }
             if ((mDirection & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
             {

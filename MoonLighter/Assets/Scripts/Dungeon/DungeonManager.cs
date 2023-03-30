@@ -19,6 +19,11 @@ public class DungeonManager : MonoBehaviour
     // 처치한 몬스터 리스트 
     public List<Monster.MonsterID> mKillMonsterList = new List<Monster.MonsterID>();
 
+    // 언락한 상자 리스트
+    public List<DungeonChest.ChestID> mUnlockChestList = new List<DungeonChest.ChestID>();
+
+    
+
     private void Awake()
     {
         if (Instance == null)
@@ -35,14 +40,19 @@ public class DungeonManager : MonoBehaviour
     public void Start()
     {
         mKillMonsterList.Clear();
+        mUnlockChestList.Clear();
     }
+ 
 
     public void KillMonsterAdd(Monster.MonsterID monsterID)
     {
         mKillMonsterList.Add(monsterID);
     }
 
-    
+    public void UnlockChestAdd(DungeonChest.ChestID chestID)
+    {
+        mUnlockChestList.Add(chestID);
+    }
 
     public DungeonUIFadeInOutTransition GetTransitionUI()
     {
@@ -85,4 +95,31 @@ public class DungeonManager : MonoBehaviour
         mCamera.CameraMoveByPos(NextPos);
     }
 
+
+    public int GetKillMonsterCount()
+    {
+         return mKillMonsterList.Count;
+    }
+
+    // 던전 나가기 UI 연결 전 던전 탈출 테스트 함수 
+    public void TestDungeonExitInit()
+    {
+       
+        mKillMonsterList.Clear();
+        mUnlockChestList.Clear();
+        LoadingManager.LoadScene("DungeonEntrance");
+        DungeonGenerator.Instance.OnDestroyMySelf();
+
+
+    }
+
+
+    // 던전 나가기 UI 연결 전 재진입  테스트 함수 
+    public void TestDungeonEnterInit()
+    {
+        
+        mKillMonsterList.Clear();
+        mUnlockChestList.Clear();
+        
+    }
 }

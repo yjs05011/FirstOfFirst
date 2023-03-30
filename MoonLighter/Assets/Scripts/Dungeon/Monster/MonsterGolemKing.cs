@@ -25,6 +25,8 @@ public class MonsterGolemKing : Monster
             // 범위 안에 들어왔는지 체크하고, 범위안이면, wake up 애니메이션 출력 후 idle 로 상태 변경
             if (IsInTraceScope())
             {
+                UiManager.Instance.mIsBossHpVisible = true;
+                UiManager.Instance.BossMaxHp(this.mMaxHP);
                 mAnimator.SetTrigger("WakeUp");
                 this.SetState(State.Idle);
                 return;
@@ -84,7 +86,7 @@ public class MonsterGolemKing : Monster
                    {
                        if (Random.Range(0, 1000) < 500)
                        {
-                           RockSpawnAttack();
+                          // RockSpawnAttack();
                        }
                        else
                        {
@@ -138,8 +140,11 @@ public class MonsterGolemKing : Monster
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
+          
         }
     }
+
+    
 
 
     public void PunchAttack()

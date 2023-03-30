@@ -5,13 +5,28 @@ using UnityEngine;
 public class MonsterGolemMiniBoss : Monster
 {
     public DungeonUtils.Direction mCurrDirection = DungeonUtils.Direction.Down;
+    public void OnEnable()
+    {
+        UiManager.Instance.BossMaxHp(mHp);
+    }
 
     public override void Update()
     {
         base.Update();
 
+        // 플레이어 입장전 대기
+       if(mCurrState == State.Ready)
+        {
+            // 몬스터가 있는 스테이지에 플레이어가 들어온경우.
+            if(mStage == DungeonManager.Instance.GetPlayerCurrStage())
+            {
+                // 상태 idle 로 변경.
+                SetState(State.Idle);
+            }
+        }
+
         // 대기 상태
-        if (mCurrState == State.Idle)
+        else if(mCurrState == State.Idle)
         {
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DungeonChest : MonoBehaviour
@@ -7,9 +8,13 @@ public class DungeonChest : MonoBehaviour
     public GameObject mChest = null;
     private Animator mChestAnim = null;
 
-    public enum ChestState { Lock , Unlock , WaitInput , Open, Close}
+    public enum ChestID { None = 0, WoodChest = 1, BossChest =2 }
+    [SerializeField]
+    private ChestID mChestID = ChestID.None;
+    public enum ChestState { Lock , Unlock , WaitInput , Open, Close }
     public ChestState mState = ChestState.Lock;
-
+    public GameObject mInteractionMenu = null;
+    public TMP_Text mInteractionKey = null;
     public Collider2D mTrriger = null;
 
     void Awake()
@@ -33,15 +38,33 @@ public class DungeonChest : MonoBehaviour
     {
         return mState;
     }
+    public ChestID GetChestID()
+    {
+        return mChestID;
+    }
 
-    
+    public void SetInteractionKeyValue(string value)
+    {
+        mInteractionKey.text = value;
+    }
 
     public void Update()
     {
         // 잠긴 상태이거나, 열린 상태이면 리턴.
-        if(mState == ChestState.Lock || mState == ChestState.Open)
+        if(mState == ChestState.Lock )//|| mState == ChestState.Open)
         {
             return;
+        }
+        if (mState == ChestState.Open)
+        {
+            //if (mChestID == ChestID.BossChest)
+            //{
+                // 임시> 보스방 상자 열면 탈출하게 처리.
+                DungeonManager.Instance.TestDungeonExitInit();
+                
+                return;
+            //}
+           // return;
         }
         if(mState == ChestState.Unlock)
         {
@@ -52,7 +75,7 @@ public class DungeonChest : MonoBehaviour
         }
         if (mState == ChestState.WaitInput)
         {
-            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
             {
                 // 상자 오픈 애니메이션 출력
                 mChestAnim.SetTrigger("ChestOpen");
@@ -79,10 +102,15 @@ public class DungeonChest : MonoBehaviour
         {
             // 키입력 대기 상태로 변경
             SetChestState(ChestState.WaitInput);
+            
+            // 옵션에 설정된 키로 키 변경
+            // 재욱이 코드 올라가면 주석 풀기.
+            // string keyValue = GameKeyManger.keyString[GameKeyManger.KeyAction.INTERRUPT];
+            //SetInteractionKeyValue("keyValue");
 
             // 오픈 키 UI 띄우기
             Debug.Log("UI : Chest open guide UI Active true");
-            // UI 만들어져있나 확인 필요. 
+            mInteractionMenu.SetActive(true);
 
         }
     }
@@ -97,7 +125,7 @@ public class DungeonChest : MonoBehaviour
 
             // 오픈 키 UI 띄운거 끄기
             Debug.Log("UI : Chest open guide UI Active false");
-            // UI 만들어져있나 확인 필요. 
+            mInteractionMenu.SetActive(false);
 
         }
     }

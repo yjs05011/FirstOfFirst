@@ -24,6 +24,9 @@ public class UiManager : MonoBehaviour
     public bool mIsPlayerUseAnimation = false;
     public bool mIsResultUi = false;
 
+    // [Ui]
+    public bool mExitDungeonUiOnOffCheck = false;
+
 
     private void Awake()
     {
@@ -91,6 +94,7 @@ public class UiManager : MonoBehaviour
 
 
     // [던전] 몇개 몬스터 잡았는지 확인 요청
+
     // [던전] 어떤 몬스터 잡았는지 확인 요청
     // [플레이어] 어떤 몬스터에게 플레이어가 죽었는지 확인 [보류]
 
