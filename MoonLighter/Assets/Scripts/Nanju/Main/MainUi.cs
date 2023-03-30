@@ -42,7 +42,7 @@ public class MainUi : MonoBehaviour
             mBossHp.SetActive(false);
         }
     }
-     
+
 
 
     // 팬던트 On, Off 하는 함수
@@ -91,14 +91,14 @@ public class MainUi : MonoBehaviour
         {
             mExitDungeon.SetActive(true);
             mReplayKeyboard.SetActive(false);
-        }
-        if (PlayerManager.Instance.mPlayerStat.isDie == true)    // UiManager.Instance.mIsPlayerDie
-        {
-            mExitDungeon.SetActive(true);
             PlayerManager.Instance.mIsUiActive = true;
-
-           
         }
+        // if (PlayerManager.Instance.mPlayerStat.isDie == true)    // UiManager.Instance.mIsPlayerDie
+        // {
+        //     mExitDungeon.SetActive(true);
+
+
+        // }
 
     }
 
