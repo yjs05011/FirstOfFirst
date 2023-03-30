@@ -25,6 +25,8 @@ public class MonsterGolemKing : Monster
             // 범위 안에 들어왔는지 체크하고, 범위안이면, wake up 애니메이션 출력 후 idle 로 상태 변경
             if (IsInTraceScope())
             {
+                UiManager.Instance.mIsBossHpVisible = true;
+                UiManager.Instance.BossMaxHp(this.mMaxHP);
                 mAnimator.SetTrigger("WakeUp");
                 this.SetState(State.Idle);
                 return;
@@ -84,7 +86,7 @@ public class MonsterGolemKing : Monster
                    {
                        if (Random.Range(0, 1000) < 500)
                        {
-                           RockSpawnAttack();
+                          // RockSpawnAttack();
                        }
                        else
                        {
@@ -138,7 +140,18 @@ public class MonsterGolemKing : Monster
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
+            // 던전 퇴장 UI 연결 전 테스트용 코드
+            TestDungeonExit();
         }
+    }
+
+    // 던전 나가기 UI 연결 전 던전 탈출 테스트 함수 
+    public void TestDungeonExit()
+    {
+        DungeonGenerator.Instance.Init();
+        DungeonGenerator.Instance.OnDestroyMySelf();
+        DungeonManager.Instance.mKillMonsterList.Clear();
+        GFunc.LoadScene("VillageScene");
     }
 
 

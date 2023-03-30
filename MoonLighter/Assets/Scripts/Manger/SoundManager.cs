@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SoundManager : GSingleton<SoundManager>
 {
-    public static SoundManager instance;
+    public bool mIsFullScreen = false;
     public AudioClip[] bgms;
     public AudioSource bgm;
     public int sfx = 3;
@@ -53,5 +53,9 @@ public class SoundManager : GSingleton<SoundManager>
 
         }
 
+    }
+    public void SetFullScreen(bool flag)
+    {
+        Screen.fullScreen = flag;
     }
 }

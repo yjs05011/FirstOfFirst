@@ -1,9 +1,11 @@
 using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using static UnityEditor.VersionControl.Asset;
 
 
 public class DungeonGenerator : MonoBehaviour
@@ -63,16 +65,24 @@ public class DungeonGenerator : MonoBehaviour
     public int mDepth = 0;
     public DungeonStage mLastRoom = null;
 
-    public void Start()
+    public int mStartX = 0;
+    public int mStartY = 0;
+    public int mStartFloor = 1;
+
+    public void OnEnable()
     {
-        int startX = 0;
-        int startY = 0;
-        int floor = 1;
+        InitDungeonBorad(mStartX, mStartY, mStartFloor, DIRECTION_NONE);
+    }
 
-        InitDungeonBorad(startX, startY, floor, DIRECTION_NONE);
+    public void OnDestroyMySelf()
+    {
+        Destroy(this.gameObject);
+    }
 
-        
-
+    public void Init()
+    {
+        mStages.Clear();
+        InitDungeonBorad(mStartX, mStartY, mStartFloor, DIRECTION_NONE);
     }
 
     public DungeonStage InitDungeonBorad(int startX, int startY, int floor, int backwardDirection)
