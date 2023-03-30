@@ -82,6 +82,16 @@ public class DataManager : GSingleton<DataManager>
 
         File.WriteAllText(path, json);
     }
-    
-     
+
+    public bool FileCheck()
+    {
+        if (!File.Exists(path))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

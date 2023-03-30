@@ -14,6 +14,8 @@ public class PlayerManager : GSingleton<PlayerManager>
     public bool mIsPlayerHpChange = default;
     // 현재 플레이어의 위치가 상점인지 체크하는 변수
     public bool mIsShop = default;
+
+    public int mPlayerWasKilled = default;
     protected override void Init()
     {
         base.Init();
