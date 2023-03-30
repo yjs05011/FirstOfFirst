@@ -413,8 +413,8 @@ MonoBehaviour:
   mDashSpeed: 5
   mDashDistance: 1
   mDashDestination: {x: 0, y: 0, z: 0}
-  mPrevState: 1
-  mCurrState: 1
+  mPrevState: 8
+  mCurrState: 8
   mTarget: {fileID: 0}
   mStage: {fileID: 0}
   mHpBar: {fileID: 8700756926572795063}

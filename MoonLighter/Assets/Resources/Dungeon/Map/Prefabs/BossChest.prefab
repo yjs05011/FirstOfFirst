@@ -828,6 +828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mChest: {fileID: 9087050972173669724}
+  mChestID: 2
   mState: 0
   mInteractionMenu: {fileID: 5974480434085446147}
   mInteractionKey: {fileID: 4077587247130694368}
