@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class DungeonStage : MonoBehaviour
 {
-
+   
     // �������� �ٴ� ����
     public DungeonBoard mBoard = null;
 
@@ -53,6 +53,7 @@ public class DungeonStage : MonoBehaviour
 
     // �÷��̾ ���������� ���� �ִ��� üũ �� ����
     public bool mIsPlayerEntered = false;
+    
 
     // óġ�� ���� ��
     public int mMonsterDieCount = 0;
@@ -68,6 +69,8 @@ public class DungeonStage : MonoBehaviour
         mDoorLeft.SetDoorDirection(DungeonGenerator.DIRECTION_LEFT);
         DoorInit();
     }
+
+  
 
     public void DoorInit()
     {
@@ -89,8 +92,6 @@ public class DungeonStage : MonoBehaviour
             SetDoorsOpen();
             // 상자 있을경우 상자 오픈.
             SetChestUnlock();
-            // 던전 메니저에 언락 상자 갱신.
-            DungeonManager.Instance.UnlockChestAdd(mBoard.mChest);
 
         }
     }
@@ -100,6 +101,8 @@ public class DungeonStage : MonoBehaviour
         if(mBoard.GetChest() != null)
         {
             mBoard.GetChest().SetChestState(DungeonChest.ChestState.Unlock);
+            // 던전 메니저에 언락 상자 갱신.
+            DungeonManager.Instance.UnlockChestAdd(mBoard.mChest.GetChestID());
         }
        
         return;
@@ -111,7 +114,7 @@ public class DungeonStage : MonoBehaviour
         // 미니 보스 스테이지 , 던전 보스 스테이지 진입 시 main ui HP bar 활성화.
         if(mBoard.GetBoardType()==DungeonBoard.BoardType.Boss || mBoard.GetBoardType() == DungeonBoard.BoardType.DungeonBoss)
         {
-            UiManager.Instance.mIsBossHpVisible = true;
+            UiManager.Instance.SetBossHpVisible(true);
         }
 
         // 층 이동 후 입장 floor door close 

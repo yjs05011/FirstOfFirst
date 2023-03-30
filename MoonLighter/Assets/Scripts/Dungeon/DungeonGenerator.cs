@@ -69,9 +69,9 @@ public class DungeonGenerator : MonoBehaviour
     public int mStartY = 0;
     public int mStartFloor = 1;
 
-    public void OnEnable()
+    public void Start()
     {
-        InitDungeonBorad(mStartX, mStartY, mStartFloor, DIRECTION_NONE);
+        DungeonGenerate();
     }
 
     public void OnDestroyMySelf()
@@ -79,9 +79,9 @@ public class DungeonGenerator : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void Init()
+ 
+    public void DungeonGenerate()
     {
-        mStages.Clear();
         InitDungeonBorad(mStartX, mStartY, mStartFloor, DIRECTION_NONE);
     }
 
@@ -118,6 +118,7 @@ public class DungeonGenerator : MonoBehaviour
         startStage.SetFloor(floor);
         startStage.SetBoardXY(startX, startY);
         startStage.mBackwardDirection = backwardDirection;
+        
         mStages.Add(startStage);
 
         // prev stage 정보를 기준으로 문을 만들어야하기 때문에 1층인지 구분하기 위한 코드

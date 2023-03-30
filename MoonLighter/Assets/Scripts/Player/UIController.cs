@@ -15,4 +15,12 @@ public class UIController : MonoBehaviour
     {
 
     }
+    public virtual void Runing(int idx)
+    {
+
+    }
+    public virtual void Runing()
+    {
+
+    }
 }
