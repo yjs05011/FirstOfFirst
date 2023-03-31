@@ -165,7 +165,7 @@ public class ExitDungeon : MonoBehaviour
     public void PendantUseExit()
     {
         // �Ҵ�Ʈ ������� Ż�� UI ������ ���� ǥ������.
-        mPlayerKillMonster.sprite = mPendantSprite;
+        //mPlayerKillMonster.sprite = mPendantSprite;
     }
 
     // [����] � ���ڸ� �������� Ȯ��

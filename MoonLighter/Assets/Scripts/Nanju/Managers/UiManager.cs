@@ -23,6 +23,7 @@ public class UiManager : MonoBehaviour
     // [플레이어]
     public bool mIsPlayerDie = false;
     public bool mIsPlayerUseAnimation = false;
+    public bool mIsPlayerFinishAnimation = false;
     public bool mIsResultUi = false;
     //키변경 하기 위한 변수 선언
     public bool mIsKeyChanged = false;
@@ -30,6 +31,7 @@ public class UiManager : MonoBehaviour
 
     // [Ui]
     public bool mExitDungeonUiOnOffCheck = false;
+    public bool mOptionExit = false;
 
     // [마을]
     // 테이블 아이템을 열었을 시 값이 변하는 변수 선언
@@ -103,7 +105,7 @@ public class UiManager : MonoBehaviour
     // [Ui] 플레이어 특정(탈출)애니메이션이 끝났을 지 확인 요청
     public void PlayerFinishAnimation(bool value)
     {
-        mIsPlayerUseAnimation = value;
+        mIsPlayerFinishAnimation = value;
     }
 
  
