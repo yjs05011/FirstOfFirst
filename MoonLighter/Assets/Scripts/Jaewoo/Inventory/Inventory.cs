@@ -441,6 +441,7 @@ public class Inventory : MonoBehaviour
 
             }
         }
+        
 
 
         // for(int indexY = 0; indexY < ARRAY_Y; indexY ++)
@@ -604,24 +605,12 @@ public class Inventory : MonoBehaviour
                         {
                             Swap();
                         }
-                    }
-                    else
-                    {
-
-                    }
-
-
+                    }   
                 }
                 else
                 {
                     SelectSwap();
                 }
-
-
-
-
-
-
                 //     //장비창 배열의 아이템과 포인터의 아이템이 같을때
                 //     if (mSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem == mEquipmentArray[mSelectEquipmentY, mSelectEquipmentX].GetComponent<Slot>().mItem)
                 //     {

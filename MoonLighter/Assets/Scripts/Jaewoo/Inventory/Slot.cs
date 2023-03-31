@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Slot : MonoBehaviour
 {
     public int mItemCount;
     public Item mItem;
+
+    [Space(2)]
+    [Header("Slot Renderer")]
     public Sprite mItemSprite;
     public SpriteRenderer slotRender = default;
+    
+    [Space(2)]
+    [Header(" ")]
     [SerializeField]
     private TMP_Text mTextCount = default;
     [SerializeField]
@@ -20,7 +27,9 @@ public class Slot : MonoBehaviour
     {                      
         mTextCount = gameObject.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>();
         slotRender = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();     
-           
+        
+        // FOR DEBUG:
+        // InventoryManager.Instance.spRendererInitializedTime = System.DateTime.Now;
     }
 
     //아이템 값 저장
@@ -53,7 +62,6 @@ public class Slot : MonoBehaviour
         mItem = item;
         mItemCount = itemCount;
         mItemSprite = mItem.mItemSprite;
-
         slotRender.sprite = mItemSprite;
         // Debug.Log(mItem.mItemType);
         // Debug.Log(mItem.mItemType != Item.ItemEnumType.Equiment);
@@ -98,6 +106,10 @@ public class Slot : MonoBehaviour
     //해당 슬롯 하나 삭제
     public void ClearSlot()
     {
+        if(transform.parent.parent.parent.parent != default || transform.parent.parent.parent.parent != null)
+        {
+        Debug.Log($"Clear slot name: {gameObject.name}, Parent name: {transform.parent.parent.parent.parent.name}");
+        }
         mItem = null;
         mItemCount = 0;
         mItemSprite = null;

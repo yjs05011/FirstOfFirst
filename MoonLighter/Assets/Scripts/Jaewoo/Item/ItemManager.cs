@@ -34,6 +34,7 @@ public class ItemManager : GSingleton<ItemManager>
     //ItemManager.Instance.DropItem( 위치)
     public void DropItem(Vector3 position)
     {
+
         for(int index = 0; index <Random.Range(1, 4) ; index ++)
         {
             float RandomX = Random.Range(0, 1f);
@@ -41,6 +42,7 @@ public class ItemManager : GSingleton<ItemManager>
             int itemRandom = Random.Range(0, mItemPrefab.Length);
             GameObject dropItem = mItemPrefab[itemRandom];
             GameObject item = Instantiate(dropItem);
+            
             item.gameObject.transform.position = new Vector3(position.x + RandomX,position.y + RandomY,0);
         }              
     }
