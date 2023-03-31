@@ -228,7 +228,7 @@ public class Monster : MonoBehaviour
             {
                 this.SetState(State.Die);
                 // �κ� UI����Ǹ� �ּ� Ǯ�� ���� �ַ���
-                ItemManager.Instance.DropItem(this.transform.position);
+                //ItemManager.Instance.DropItem(this.transform.position);
             }
         }
         if (mType == Type.BOSS)
@@ -242,7 +242,7 @@ public class Monster : MonoBehaviour
                 if (mMonsterId != MonsterID.GolemKing)
                 {
                     // �κ� UI����Ǹ� �ּ� Ǯ�� ���� �ַ���
-                    ItemManager.Instance.DropItem(this.transform.position);
+                    //ItemManager.Instance.DropItem(this.transform.position);
                 }
                 UiManager.Instance.SetBossHpVisible(false);
             }

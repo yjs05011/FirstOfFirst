@@ -4635,7 +4635,7 @@ GameObject:
   - component: {fileID: 6479680171369210353}
   m_Layer: 0
   m_Name: HoleTile
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4917,8 +4917,8 @@ Tilemap:
   - first: {x: -1, y: -1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 7
+      m_TileIndex: 0
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -5146,13 +5146,13 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 17
+  - m_RefCount: 18
     m_Data: {fileID: 11400000, guid: 00c47a14a318e3f44a9589f2111a475e, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 6eb1d882de228dc4a92ae99fe448a054, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 34
+  - m_RefCount: 33
     m_Data: {fileID: 11400000, guid: 3bf0808c6c6538842895a7dd66e692c2, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 3b0b82d2dffb4ac43baf43193d7d0e69, type: 2}
@@ -5175,9 +5175,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 14
+  - m_RefCount: 15
     m_Data: {fileID: 21300000, guid: 23fa402df2a67f0458096b597ed8dc79, type: 3}
-  - m_RefCount: 34
+  - m_RefCount: 33
     m_Data: {fileID: 21300000, guid: 0b20ee0183615c745a5e8825bbc511c4, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 48
@@ -6264,7 +6264,7 @@ GameObject:
   - component: {fileID: 6451268915479908812}
   m_Layer: 0
   m_Name: HoleTile
-  m_TagString: Untagged
+  m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28145,7 +28145,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 11
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.14583331, y: 1.625, z: 0}
   m_MaxChunkCount: 16
@@ -31372,11 +31372,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.18
+      value: -5.79
       objectReference: {fileID: 0}
     - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.93
+      value: 2.61
       objectReference: {fileID: 0}
     - target: {fileID: 2552959306023619168, guid: 345dfc01a35bc2647a00e6097022c2ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -32342,11 +32342,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5833161417025967225, guid: 1c6b7f7e1b629494eab0f5760645f500, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.72
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 5833161417025967225, guid: 1c6b7f7e1b629494eab0f5760645f500, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.17
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5833161417025967225, guid: 1c6b7f7e1b629494eab0f5760645f500, type: 3}
       propertyPath: m_LocalPosition.z
