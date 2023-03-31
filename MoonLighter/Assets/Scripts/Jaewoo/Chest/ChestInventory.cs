@@ -64,7 +64,7 @@ public class ChestInventory : MonoBehaviour
     }
     void Start()
     {
-
+        
         mInventoryArray = new Slot[4, 5];
         mChestArray = new Slot[4, 7];
         mInventoryGameObjectArray = new GameObject[4, 5];
@@ -77,6 +77,7 @@ public class ChestInventory : MonoBehaviour
                 int indexAdd = indexY * ARRAY_X + indexX;
 
                 mInventoryArray[indexY, indexX] = mInventoryFindSlot.transform.GetChild(indexAdd).GetComponent<Slot>();
+                //Debug.Log($"mInventoryArray[indexY, indexX] Tag : Y : {indexY} / X : {indexX} / {mInventoryArray[indexY, indexX].tag}");
                 mInventoryArray[indexY, indexX].gameObject.SetActive(true);
                 InventoryManager.Instance.mChestInventorySlots[indexY, indexX] = mInventoryArray[indexY, indexX].GetComponent<Slot>();
             }
@@ -146,7 +147,7 @@ public class ChestInventory : MonoBehaviour
                 if (mKeyCount == 1)
                 {
                     OpenChest();
-                    LoadItem();
+                    
                 }
                 if (mKeyCount == 2)
                 {
@@ -203,17 +204,18 @@ public class ChestInventory : MonoBehaviour
     }
 
     //매니저에서 정보 불러오기
-    void LoadItem()
-    {
-        for (int indexY = 0; indexY < ARRAY_Y; indexY++)
-        {
-            for (int indexX = 0; indexX < ARRAY_X; indexX++)
-            {
+    // void LoadItem()
+    // {
+    //     for (int indexY = 0; indexY < ARRAY_Y; indexY++)
+    //     {
+    //         for (int indexX = 0; indexX < ARRAY_X; indexX++)
+    //         {
+    //             mInventoryArray[indexY, indexX] = InventoryManager.Instance.mInventorySlots[indexY, indexX];
+                
+    //         }
+    //     }        
 
-                mInventoryArray[indexY, indexX] = InventoryManager.Instance.mInventorySlots[indexY, indexX];
-            }
-        }
-    }
+    // }
 
     bool ItemNullCheck()
     {
@@ -241,7 +243,7 @@ public class ChestInventory : MonoBehaviour
                         mInventoryFindSlot.transform.GetChild(indexAdd).GetComponent<Slot>().AddItem(mInventoryArray[indexY, indexX].mItem, mInventoryArray[indexY, indexX].mItemCount);
                         mInventoryArray[indexY, indexX].gameObject.SetActive(true);
                         InventoryManager.Instance.mChestInventorySlots[indexY, indexX] = mInventoryArray[indexY, indexX].GetComponent<Slot>();
-                        Debug.Log(mInventoryArray[0, 0].transform.localPosition);
+                        
                     }
                 }
             }
