@@ -2907,7 +2907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7990409186837756258
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36483,6 +36483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMiniInventory: {fileID: 7990409186837756257}
+  mInventroy: {fileID: 0}
+  mUiInventory: 0
 --- !u!114 &7990409188109697208
 MonoBehaviour:
   m_ObjectHideFlags: 0

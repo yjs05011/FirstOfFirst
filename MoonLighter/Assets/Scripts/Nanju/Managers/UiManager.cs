@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UiManager : MonoBehaviour
@@ -27,11 +28,14 @@ public class UiManager : MonoBehaviour
     public bool mIsResultUi = false;
     //키변경 하기 위한 변수 선언
     public bool mIsKeyChanged = false;
+    // 무기 변경
+    public bool mIsWeaponChange = false;
 
 
     // [Ui]
     public bool mExitDungeonUiOnOffCheck = false;
     public bool mOptionExit = false;
+    public bool mIsInventoryInteraction = false;
 
     // [마을]
     // 테이블 아이템을 열었을 시 값이 변하는 변수 선언
@@ -42,6 +46,8 @@ public class UiManager : MonoBehaviour
     public bool mBlacksmithTalk = false;
     // 마녀랑 말했을때 값이 변하는 변수 선언
     public bool mWitchTalk = false;
+
+  
 
 
     private void Awake()

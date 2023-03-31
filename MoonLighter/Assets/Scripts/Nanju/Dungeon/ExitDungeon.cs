@@ -72,6 +72,8 @@ public class ExitDungeon : MonoBehaviour
             PlayerManager.Instance.mPlayerStat.isDie = false;
             UiManager.Instance.mIsPlayerUseAnimation = false;
             PlayerManager.Instance.mIsUiActive = false;
+            UiManager.Instance.mIsPlayerFinishAnimation = false;
+            UiManager.Instance.mIsDungeonCheck = false; 
             this.gameObject.SetActive(false);
 
             LoadingManager.LoadScene("VillageScene");
