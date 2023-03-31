@@ -124,9 +124,7 @@ public class MonsterGolemCorruptMiniBoss : Monster
             {
                 mStage.AddDieMonsterCount();
             }
-
-            //hp bar hide
-            mHpBar.SetActive(false);
+         
             // 컬라이더 off
             this.GetComponent<Collider2D>().enabled = false;
        
@@ -191,7 +189,6 @@ public class MonsterGolemCorruptMiniBoss : Monster
     {
         //this.gameObject.SetActive(false);
         mSpriteRenderer.color = new Color(1, 1, 1, 0);
-        mHpBar.SetActive(false);
 
         this.mStage.StartCoroutine(TeleporationCoroutine(this, 3.0f));
     }
@@ -285,7 +282,6 @@ public class MonsterGolemCorruptMiniBoss : Monster
             
             // 컬라이더 on
             this.GetComponent<Collider2D>().enabled = true;
-            mHpBar.SetActive(true);
             this.transform.position = position;
             this.SetState(State.Idle);
         }

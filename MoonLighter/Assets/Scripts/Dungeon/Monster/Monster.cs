@@ -112,7 +112,7 @@ public class Monster : MonoBehaviour
 
     // UI : hp bar 오브젝트
     public GameObject mHpBar = null;
-    // UI : HP fill image 
+    // UI : HP fill image (normal monster hp)
     public Image mImgHp = null;
 
 
@@ -225,7 +225,8 @@ public class Monster : MonoBehaviour
             if (mHp <= 0.0f)
             {
                 this.SetState(State.Die);
-              //  ItemManager.Instance.DropItem(this.transform.position);
+                // 인벤 UI연결되면 주석 풀기 현재 애러남
+                // ItemManager.Instance.DropItem(this.transform.position);
             }
         }
         if(mType == Type.BOSS)
@@ -237,8 +238,9 @@ public class Monster : MonoBehaviour
             {
                 this.SetState(State.Die);
                 if (mMonsterId != MonsterID.GolemKing)
-                {
-                  //  ItemManager.Instance.DropItem(this.transform.position);
+                { 
+                    // 인벤 UI연결되면 주석 풀기 현재 애러남
+                    // ItemManager.Instance.DropItem(this.transform.position);
                 }
                 UiManager.Instance.SetBossHpVisible(false);
             }
