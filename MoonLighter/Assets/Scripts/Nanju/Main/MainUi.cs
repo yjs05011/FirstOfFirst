@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainUi : MonoBehaviour
@@ -26,7 +27,10 @@ public class MainUi : MonoBehaviour
         BossHp();
         Pendont();
         PendantUseCheck(mTimer);
-        ExitDungeon();
+        if (SceneManager.GetActiveScene().name == "Dungeon")
+        {
+            ExitDungeon();
+        }
 
     }
 
@@ -86,9 +90,11 @@ public class MainUi : MonoBehaviour
     public void ExitDungeon()
     {
 
-
         if (UiManager.Instance.mIsPlayerUseAnimation == true)
         {
+            // 보스 hp바 끄기
+            UiManager.Instance.SetBossHpVisible(false);
+
             mExitDungeon.SetActive(true);
             mReplayKeyboard.SetActive(false);
             PlayerManager.Instance.mIsUiActive = true;
