@@ -1,8 +1,8 @@
 {
     "mPlayerHp": 100.0,
     "mPlayerSpeed": 5.0,
-    "mPlayerStr": 5.0,
+    "mPlayerStr": 50.0,
     "mPlayerDef": 10.0,
-    "mPlayerMoney": 300.0,
+    "mPlayerMoney": 500.0,
     "mPlayerMaxHp": 100.0
 }

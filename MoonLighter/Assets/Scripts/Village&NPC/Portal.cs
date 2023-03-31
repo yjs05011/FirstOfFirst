@@ -8,12 +8,15 @@ public class Portal : MonoBehaviour
     private bool Isplayernearby = false;
     private GameObject talk = default;
     private GameObject player = default;
+
+    public GameObject Button = default;
     // Start is called before the first frame update
     void Start()
     {
         portalAni= GetComponent<Animator>();
         talk = transform.Find("Talk").gameObject;
         talk.SetActive(false);
+        GFunc.SetTmpText(Button, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
     }
 
 

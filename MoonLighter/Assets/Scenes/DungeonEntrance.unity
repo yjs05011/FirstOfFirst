@@ -5711,6 +5711,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 709322132897260945, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
+      propertyPath: m_Text
+      value: E
+      objectReference: {fileID: 0}
     - target: {fileID: 825065391837971099, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -5879,6 +5883,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6736476615378258360, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
+      propertyPath: Button
+      value: 
+      objectReference: {fileID: 6736476614542050109}
     - target: {fileID: 6736476615378258365, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
       propertyPath: m_SortingLayer
       value: 7
@@ -5889,3 +5897,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
+--- !u!1 &6736476614542050109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2813974355635071318, guid: f5f315aa895d0bb4c8453e58e9520e7e, type: 3}
+  m_PrefabInstance: {fileID: 6736476614542050108}
+  m_PrefabAsset: {fileID: 0}
