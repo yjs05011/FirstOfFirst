@@ -128,25 +128,7 @@ public class PlayerAct : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
 
-            GameManager.Instance.mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
-            GameManager.Instance.mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
-            GameManager.Instance.mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
-            GameManager.Instance.mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
-            GameManager.Instance.mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
-            GameManager.Instance.mPlayerMoney = PlayerManager.Instance.mPlayerStat.Money;
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            mPlayerHitBox.isTrigger = true;
-            DataManager.Instance.JsonLoad();
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-
-        }
         if (PlayerManager.Instance.mIsUiActive)
         {
 
@@ -161,7 +143,10 @@ public class PlayerAct : MonoBehaviour
                     mAttackRoll++;
                 }
             }
-
+            if (UiManager.Instance.mIsPlayerUseAnimation)
+            {
+                mPlayerAnimator.SetTrigger("IsPortal");
+            }
             switch (mState)
             {
                 case ActState.State_Move:
@@ -533,6 +518,7 @@ public class PlayerAct : MonoBehaviour
     }
     public void SetDie()
     {
+        UiManager.Instance.PlayerUsePendant(false);
         UiManager.Instance.PlayerFinishAnimation(true);
     }
 
