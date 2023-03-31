@@ -13,6 +13,7 @@ public class PunchAttackSkill : MonoBehaviour
     {
         mOwner = owner;
         mDamage = damage;
+        mAnimationEvent.SetDelegate(OnAnimationEvent);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -30,6 +31,16 @@ public class PunchAttackSkill : MonoBehaviour
 
     public void OnAnimationEvent(string name)
     {
+        if(mOwner.mCurrState == Monster.State.Die || mOwner.mCurrState == Monster.State.None)
+        {
+            if (mAnimator)
+            {
+                mAnimator.StopPlayback();
+                GameObject.Destroy(this.gameObject);
+            }
+            return;
+        }
+
         bool isPunchDownFinished = "GolemKingPunchDownFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase);
         bool isPunchUpFinished = "GolemKingPunchUpFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase);
 

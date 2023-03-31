@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
+using static DungeonDoor;
 
 public class DungeonStage : MonoBehaviour
 {
@@ -111,8 +113,15 @@ public class DungeonStage : MonoBehaviour
         // �÷��̾ ���������� �������� �˸�
     public void OnStageEnter(DungeonDoor.TansferInfo transferInfo)
     {
+        this.StartCoroutine(OnStageEnterCoroutine(transferInfo));
+    }
+
+    public IEnumerator OnStageEnterCoroutine(DungeonDoor.TansferInfo transferInfo)
+    {
+        yield return new WaitForSeconds(0.5f);
+
         // 미니 보스 스테이지 , 던전 보스 스테이지 진입 시 main ui HP bar 활성화.
-        if(mBoard.GetBoardType()==DungeonBoard.BoardType.Boss || mBoard.GetBoardType() == DungeonBoard.BoardType.DungeonBoss)
+        if (mBoard.GetBoardType() == DungeonBoard.BoardType.Boss || mBoard.GetBoardType() == DungeonBoard.BoardType.DungeonBoss)
         {
             UiManager.Instance.SetBossHpVisible(true);
         }
@@ -120,7 +129,7 @@ public class DungeonStage : MonoBehaviour
         // 층 이동 후 입장 floor door close 
         if (transferInfo == DungeonDoor.TansferInfo.FirstRoom)
         {
-            if(GetEntryFloorDoorDirection() != null)
+            if (GetEntryFloorDoorDirection() != null)
             {
                 GetEntryFloorDoorDirection().DoorClose();
             }
@@ -132,6 +141,8 @@ public class DungeonStage : MonoBehaviour
         {
             SetDoorsClose();
         }
+
+
         Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
     }
 
@@ -164,7 +175,13 @@ public class DungeonStage : MonoBehaviour
     // �÷��̾ ���������� ������ �˸�
     public void OnStageExit(DungeonDoor.TansferInfo transferInfo)
     {
+        this.StartCoroutine(OnStageExitCoroutine(transferInfo));
+    }
+
+    public IEnumerator OnStageExitCoroutine(DungeonDoor.TansferInfo transferInfo)
+    {
         Debug.LogFormat("The player is exit the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
+        yield return true;
     }
 
     public void SetFloor(int floor)
