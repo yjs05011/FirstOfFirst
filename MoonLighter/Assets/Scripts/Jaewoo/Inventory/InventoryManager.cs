@@ -6,16 +6,25 @@ public class InventoryManager : GSingleton<InventoryManager>
 {   
     public Inventory mInventory;
     public int mBagCount = 0;
-    //인벤토리아이템 GameObject에 저장
-    public Slot[,] mInventorySlots = new Slot[4,5];
-    //장비창아이템 GameObject에 저장
-    
-    public Slot[,] mEquipmentSlots = new Slot[4,2];
- 
-     
-   
-   //서왑 temp 말고 C#의 기능이용
-   //("선택한 아이템", "바꿔야할 아이템") = ("바꿔야할 아이템", "선택한 아이템");
-   
+    public bool mIsManagerAddCheck = false;
 
+    //상자 열었을때 와 인벤토리를 열었을때 키입력 서로 안되게.
+    public bool mIsMoveController = false;
+
+    public Dictionary<int,Slot> mDataInventory = new Dictionary<int, Slot>();
+    //인벤토리아이템 Slot 저장
+    //public Slot[,] mInventorySlots = new Slot[4,5];
+    public Slot[,] mInventorySlots = new Slot[4,5];
+
+    //장비창아이템 Slot 저장    
+    public Slot[,] mEquipmentSlots = new Slot[4,2];  
+
+    //체스트 창 인벤토리
+    public Slot[,] mChestInventorySlots = new Slot[4,5];
+
+    //상자 Slot 저장
+    public Slot[,] mChestSlots = new Slot[4,7];
+
+   // public Slot[,] mInventoryChestSlot = new Slot[4,5];   
+   
 }
