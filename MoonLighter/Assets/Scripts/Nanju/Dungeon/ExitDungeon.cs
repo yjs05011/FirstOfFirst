@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ExitDungeon : MonoBehaviour
 {
-    // ´øÀü Ãþ 
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
     public GameObject mFirstFloor;
     public GameObject mFirstFloorClear;
     public GameObject mScendFloor;
@@ -13,19 +13,25 @@ public class ExitDungeon : MonoBehaviour
     public GameObject mThreeFloor;
     public GameObject mThreeFloorClear;
 
-    // ¸î°³ »óÀÚ ¾ò¾ú´ÂÁö
+    // test
+    public GameObject monster;
+    public Transform Parent;
+    public GridLayoutGroup gridGroup;
+
+    // ï¿½î°³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public Text mChestCount;
 
-    // ¸î°³ ¸ó½ºÅÍ Àâ¾Ò´ÂÁö
+    // ï¿½î°³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò´ï¿½ï¿½ï¿½
     // public GameObject[] mMonsterList = new GameObject[11];
     public Text mKillMonsterCount;
 
-    // ¸ó½ºÅÍ ½ºÇÁ¶óÀÌÆ® ¹è¿­
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½è¿­
     public Sprite[] mPlayerKillMonsterSprites;
-    // ÆÒ´øÆ® ½ºÇÁ¶óÀÌÆ®
+    // ï¿½Ò´ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     public Sprite mPendantSprite;
-    // Å»Ãâ ¹æ½Ä Ç¥½Ã ÀÌ¹ÌÁö (¸ó½ºÅÍÇÑÅ× Á×¾ú°Å³ª, ÆÒ´øÆ® »ç¿ëÇß°Å³ª)
+    // Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¾ï¿½ï¿½Å³ï¿½, ï¿½Ò´ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ß°Å³ï¿½)
     public SpriteRenderer mPlayerKillMonster;
+    public int killMonster;
 
 
     // Start is called before the first frame update
@@ -34,16 +40,19 @@ public class ExitDungeon : MonoBehaviour
         mPlayerKillMonster = GetComponent<SpriteRenderer>();
     }
 
-  
-    
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        // test
+        ExitDungeonKillMosterIamge();
+
         SetKillMonsterCount();
         SetDungeonChestCount();
         FloorCheck();
-        // ÅðÀå ÀÌÀ¯ Ã¼Å© ÇÔ¼ö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ô¼ï¿½
         CheckExitReason();
 
     }
@@ -52,7 +61,7 @@ public class ExitDungeon : MonoBehaviour
     void Update()
     {
         UiInputKeyControl();
-       
+
     }
 
 
@@ -73,9 +82,9 @@ public class ExitDungeon : MonoBehaviour
 
             gameObject.SetActive(false);
 
-            // Á×¾úÀ» ¶§  ´Ù½ÃÇÃ·¹ÀÌ ¹öÆ° ´©¸£¸é Ã³À½ ´øÀü ¾ÀÀ¸·Î ¾È°¡°í ExitDungeon ui ÄÑÁøÃ¤·Î °¨
-            // -> ·Îµù¾À Ä×´Ù°¡ ´øÀü¾À  ´Ù½Ã ºÒ·¯¿À°ÔÇÏ±â ¾ð´Ï¿Í »óÀÇÇØº¸±â 
-            // ÀÓ½Ã·Î Å»ÃâÇÑ°Å ¸¸µé¾î ³í°Å È®ÀÎÇÏ±â
+            // ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½  ï¿½Ù½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È°ï¿½ï¿½ï¿½ ExitDungeon ui ï¿½ï¿½ï¿½ï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½
+            // -> ï¿½Îµï¿½ï¿½ï¿½ ï¿½×´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½Ù½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ 
+            // ï¿½Ó½Ã·ï¿½ Å»ï¿½ï¿½ï¿½Ñ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï±ï¿½
             LoadingManager.LoadScene("Dungeon");
 
         }
@@ -87,19 +96,19 @@ public class ExitDungeon : MonoBehaviour
         {
             PlayerKillMonsterCheck();
         }
-        else 
+        else
         {
             PendantUseExit();
         }
-   
+
     }
 
 
-    // [´øÀü] ¸î ÃþÀÎÁö È®ÀÎÇÏ¿© ¿ÀºêÁ§Æ® È°¼ºÈ­
+    // [ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È°ï¿½ï¿½È­
     public void FloorCheck()
     {
-        // ÇöÀç Ãþ À§Ä¡ Ç¥½Ã
-        // ¿Ï·á½Ã Áö±Ý ÇöÀç Ãþ±îÁö¸¸ ÄÑÁö°Ô ÇÏ±â
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ Ç¥ï¿½ï¿½
+        // ï¿½Ï·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½
         switch (DungeonManager.Instance.mPlayerCurrStage.GetFloor())
         {
             case 1:
@@ -120,7 +129,7 @@ public class ExitDungeon : MonoBehaviour
                     mThreeFloor.SetActive(false);
                     mThreeFloorClear.SetActive(true);
 
-                 
+
                 }
                 else
                 {
@@ -134,15 +143,15 @@ public class ExitDungeon : MonoBehaviour
                 break;
 
         }
-        Debug.Log($"¸îÃþÀÌ´Ï : {DungeonManager.Instance.mPlayerCurrStage.GetFloor()}");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ : {DungeonManager.Instance.mPlayerCurrStage.GetFloor()}");
 
     }
 
-    // Å¸ÀÌÆ² ¹Ø¿¡ µ¿±×¶ó¹Ì UI --------------------------
-    // ÇÃ·¹ÀÌ¾î¸¦ Á×ÀÎ ¸ó½ºÅÍ°¡ ¹«¾úÀÎÁö È®ÀÎ(ExitObj)
+    // Å¸ï¿½ï¿½Æ² ï¿½Ø¿ï¿½ ï¿½ï¿½ï¿½×¶ï¿½ï¿½ UI --------------------------
+    // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½(ExitObj)
     public void PlayerKillMonsterCheck()
     {
-        // ÇÃ·¹ÀÌ¾î¸¦ Á×ÀÎ ¸ó½ºÅÍ¸¦ Ã¼Å©ÇØ¼­ Ç¥½ÃÇØÁÜ.
+        // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ Ã¼Å©ï¿½Ø¼ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 
         //if(PlayerManager.Instance.mPlayerWasKilled != 10)
         //{
@@ -153,24 +162,23 @@ public class ExitDungeon : MonoBehaviour
 
     public void PendantUseExit()
     {
-        // ÆÒ´øÆ® »ç¿ëÀ¸·Î Å»Ãâ UI ¿ÀÇÂÇÑ °ÍÀ» Ç¥½ÃÇØÁÜ.
+        // ï¿½Ò´ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
         mPlayerKillMonster.sprite = mPendantSprite;
     }
 
-    // [´øÀü] ¸î°³ »óÀÚ¸¦ ¿­¾ú´ÂÁö È®ÀÎ
+    // [ï¿½ï¿½ï¿½ï¿½] ï¿½î°³ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     public void SetDungeonChestCount()
     {
         int chestCount = DungeonManager.Instance.mUnlockChestList.Count;
         mChestCount.text = chestCount.ToString();
     }
 
-    // [´øÀü] ¸î°³ ¸ó½ºÅÍ Àâ¾Ò´ÂÁö È®ÀÎ
+    // [ï¿½ï¿½ï¿½ï¿½] ï¿½î°³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     public void SetKillMonsterCount()
     {
-        int killMonster = DungeonManager.Instance.mKillMonsterList.Count;
+        killMonster = DungeonManager.Instance.mKillMonsterList.Count;
         mKillMonsterCount.text = killMonster.ToString();
-
-        //// ¸ó½ºÅÍ ÀÌ¹ÌÁö enum Å¸ÀÔ ¾ð´Ï¶û »óÀÇÇÏ±â (ÇÁ¸®ÆÕÀ¸·Î ÀÌ¿ë)
+        //// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ enum Å¸ï¿½ï¿½ ï¿½ï¿½Ï¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½)
         //List<int> killMonsterlist = new List<int>();
         //foreach (var sd in DungeonManager.Instance.mKillMonsterList)
         //{
@@ -213,5 +221,23 @@ public class ExitDungeon : MonoBehaviour
         //        FirstPosition += new Vector3(0, -80, 0);
         //    }
         //}
+    }
+
+    public void ExitDungeonKillMosterIamge()
+    {
+        int MonsterKillCount = (int)(40 * 0.5f);
+        gridGroup = transform.GetChild(6).GetComponent<GridLayoutGroup>();
+        gridGroup.cellSize = new Vector2((float)450 / MonsterKillCount, 70);
+
+        for (int i = 0; i < MonsterKillCount * 2; i++)
+        {
+
+            Instantiate(monster, Parent);
+
+        }
+
+
+        Debug.Log($"í‚¬ ëª¬ìŠ¤í„° ê°œìˆ˜ : {MonsterKillCount}");
+        // ì ˆë°˜ ë‚˜ëˆ ì„œ í•´ì•¼ë˜ë‹ˆê¹Œ ì˜¤ë¸Œì íŠ¸ ì´ë¯¸ì§€ë¥¼ ë§Œë“¤ì–´ì•¼ëœë‹¤.
     }
 }
