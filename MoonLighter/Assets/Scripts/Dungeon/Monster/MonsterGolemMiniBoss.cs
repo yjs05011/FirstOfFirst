@@ -14,15 +14,17 @@ public class MonsterGolemMiniBoss : Monster
     {
         base.Update();
 
-        // 플레이어 입장전 대기
-       if(mCurrState == State.Ready)
+        // 몬스터가 있는 스테이지에 플레이어가 들어온경우.
+        if (mStage != DungeonManager.Instance.GetPlayerCurrStage())
         {
-            // 몬스터가 있는 스테이지에 플레이어가 들어온경우.
-            if(mStage == DungeonManager.Instance.GetPlayerCurrStage())
-            {
-                // 상태 idle 로 변경.
-                SetState(State.Idle);
-            }
+            return;
+        }
+
+        // 플레이어 입장전 대기
+        if (mCurrState == State.Ready)
+        {
+            // 상태 idle 로 변경.
+            SetState(State.Idle);
         }
 
         // 대기 상태
