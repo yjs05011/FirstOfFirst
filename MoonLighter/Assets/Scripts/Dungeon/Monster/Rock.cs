@@ -32,12 +32,13 @@ public class Rock : MonoBehaviour
    
     public Transform mRock = null;
 
-    public float mWaitTime = 2.5f;
+    public float mWaitTime = 3.0f;
 
-    public void SetData(Monster owner, Vector3 dropPos)
+    public void SetData(Monster owner)
     {
         mOwner = owner;
-        mDropPosition = dropPos;
+       
+               
         mAnimationEvent.SetDelegate(OnAnimationEvent);
         mState = State.Fall;
        
@@ -49,8 +50,8 @@ public class Rock : MonoBehaviour
     {
         if (mState == State.Fall)
         {
-            mAnimator.SetTrigger("Rock");
-            this.transform.Translate(mDropPosition, Space.World);
+           // mAnimator.SetTrigger("RockFall");
+            
             if (!mOwner.IsMovablePosition(this.transform.position))
             {
                 SetState(State.Wait);
@@ -65,7 +66,7 @@ public class Rock : MonoBehaviour
             else
             {
                 SetState(State.Explosion);
-                mWaitTime = 5.0f;
+                mWaitTime = 3.0f;
             }
         }
         if(mState == State.Explosion)
