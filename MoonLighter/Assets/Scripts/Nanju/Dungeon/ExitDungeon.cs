@@ -70,7 +70,8 @@ public class ExitDungeon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             PlayerManager.Instance.mPlayerStat.isDie = false;
-
+            UiManager.Instance.mIsPlayerUseAnimation = false;
+            PlayerManager.Instance.mIsUiActive = false;
             this.gameObject.SetActive(false);
 
             LoadingManager.LoadScene("VillageScene");
@@ -79,7 +80,8 @@ public class ExitDungeon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             PlayerManager.Instance.mPlayerStat.isDie = false;
-
+            UiManager.Instance.mIsPlayerUseAnimation = false;
+            PlayerManager.Instance.mIsUiActive = false;
             this.gameObject.SetActive(false);
 
             // �׾��� ��  �ٽ��÷��� ��ư ������ ó�� ���� ������ �Ȱ��� ExitDungeon ui ����ä�� ��
