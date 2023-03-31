@@ -91,7 +91,7 @@ public class ShowTextBox : MonoBehaviour
                             GameManager.Instance.mIsWitchHouseBuild = VillageManager.Instance.IsWitchHouseBuild;
                             //GameManager.Instance.mInventorySlots = InventoryManager.Instance.mInventorySlots;
                             //GameManager.Instance.mEquipmentSlots = InventoryManager.Instance.mEquipmentSlots;
-                            //DataManager.Instance.JsonSave();
+                            DataManager.Instance.JsonSave();
 
                             LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
 
@@ -114,26 +114,31 @@ public class ShowTextBox : MonoBehaviour
                     else if (mID == 120)
                     {
                         ShopManager.Instance.mTablesNumber= 0;
+                        //UiManager.GetItemTableOpen(true);
                         mShopUI.SetActive(true);
                         // 상점의 테이블
                     }
                     else if(mID == 130)
                     {
                         ShopManager.Instance.mTablesNumber = 1;
+                        //UiManager.GetItemTableOpen(true);
                         mShopUI.SetActive(true);
                         
                     }
                     else if (mID == 700)
                     {
+                        //UiManager.GetVillageNoticeBoardOpenn(true);
                         // 게시판 UI
                     }
-                    
+
                     else if (mID == 2000 && mTalkIndex == 1)
                     {
+                        //UiManager.GetBlacksmithTalk(true);
                         // 대장간 UI
                     }
                     else if (mID == 3000 && mTalkIndex == 1)
                     {
+                        //UiManager.GetWitchTalk(true);
                         // 마녀 UI
                     }
                     else if(mID == 420)
