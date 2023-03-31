@@ -93,8 +93,8 @@ public class ShowTextBox : MonoBehaviour
 
                     if (mID == 600)
                     {
-                        LoadingManager.LoadScene("ShopLv2");
-                        //LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
+                        
+                        LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
                     }
                     else if (mID == 120)
                     {
