@@ -10293,7 +10293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2155176713195827528, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_Padding.m_Bottom
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3032306186104813719, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_Layer
@@ -10413,6 +10413,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847116, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7996243897631847118, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
+      propertyPath: m_Padding.m_Top
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847118, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
