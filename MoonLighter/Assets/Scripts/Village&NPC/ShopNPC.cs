@@ -47,27 +47,26 @@ public class ShopNPC : MonoBehaviour
             ShopManager.Instance.mShopNPC.Add(this.gameObject);
             IsFirst = false;
         }
-        if (Shop.mIsShopStart)
+        if (Shop.mIsShopStart || mTablePosition != Vector3.zero)
         {
-            if(IsOrderIscome)
-            {
-                mNpcAni.SetBool("IsWalking", false);
-                MoveDirection();
-                IsOrderIscome = false;
-            }
+            
             if (mTablePosition != Vector3.zero)
             {
+               
                 if (IsOrderIscome)
                 {
+                    ShopManager.Instance.mWaitShopNPC.Add(this.gameObject);
                     mNpcAni.SetBool("IsWalking", false);
                     MoveDirection();
                     IsOrderIscome = false;
                 }
+
                 Vector3 tableDirection = mTablePosition - transform.position;
                 transform.Translate(tableDirection.normalized * mSpeed * Time.deltaTime);
                 if (Vector3.Distance(transform.position, mTablePosition) <= 0.2f)
                 {
                     mNpcAni.SetBool("IsWalking", false);
+
                     if (IsGoOut)
                     {
                         GoOutShop();
@@ -75,31 +74,31 @@ public class ShopNPC : MonoBehaviour
                     else
                     {
 
-                        if (!IsCalculate)
+                       
+                        if (IsWaitForCalculate)
                         {
-                            PlayerManager.Instance.mPlayerStat.Money += mItemPrice;
-                            PlayerManager.Instance.mIsMoneyChange = true;
-                            Invoke("GoOut", 0);
-                        }
-                        else if(IsWaitForCalculate)
-                        {
-                            // 계산대에 왔을때 계산대 대기 리스트에 자신을 추가
-                            if (IsSendOnManager)
+                            if (!IsCalculate)
                             {
-                                ShopManager.Instance.mWaitShopNPC.Add(this.gameObject);
-                                IsSendOnManager= false;
+                                PlayerManager.Instance.mPlayerStat.Money += mItemPrice;
+                                PlayerManager.Instance.mIsMoneyChange = true;
+                                ShopManager.Instance.mWaitShopNPC.Remove(this.gameObject);
+                                Invoke("GoOut", 0);
                             }
-                           
+
                         }
                         else
                         {
-                            
+
                             mItemPrice = ShopManager.Instance.mItemPrice[mTableNumber];
                             GameObject.Find("Shop").GetComponent<Shop>().SetOutItem(mTableNumber);
                             ShopManager.Instance.mItemTables[mTableNumber].transform.GetChild(0).gameObject.SetActive(false);
                             mGetItem.sprite = mItem;
                             mItem = null;
                             Invoke("GoCash", 0);
+                        }
+                        if(!IsCalculate)
+                        {
+                            IsCalculate = true;
                         }
                     }
 
@@ -112,6 +111,7 @@ public class ShopNPC : MonoBehaviour
                 if (Vector3.Distance(transform.position, mPosition) <= 0.2f)
                 {
                     mNpcAni.SetBool("IsWalking", false);
+
                     if (IsGoOut)
                     {
                         ShopManager.Instance.mShopNPC.Remove(this.gameObject);
@@ -119,18 +119,26 @@ public class ShopNPC : MonoBehaviour
                     }
                     if (mMoveCount < 3)
                     {
-                        Invoke("RandomPosition", 3);
+                        Invoke("RandomPosition",3);
                     }
                     else
                     {
-                        Invoke("GoOut", 3);
+                        Invoke("GoOut", 0);
                     }
+
                 }
             }
         }
         else
         {
-            Invoke("GoOut", 0);
+            Invoke("GoOut", 0); 
+            Vector3 direction = mPosition - transform.position;
+            transform.Translate(direction.normalized * mSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, mPosition) <= 0.2f)
+            {
+                ShopManager.Instance.mShopNPC.Remove(this.gameObject);
+                GoOutShop();
+            }
         }
 
     }
@@ -171,11 +179,11 @@ public class ShopNPC : MonoBehaviour
         mTablePosition = mCasherPosition;
         MoveDirection();
         IsWaitForCalculate = true;
-        //IsCalculate = false;
+        
     }
     public void GoOutShop()
     {
-        
+
         mMoveCount = 0;
         IsGoOut = false;
         IsCalculate = true;
