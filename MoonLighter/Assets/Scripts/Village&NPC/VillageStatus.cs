@@ -33,24 +33,8 @@ public class VillageStatus : MonoBehaviour
         }
         if(VillageManager.Instance.IsWillHouseUpgrade)
         {
+            ShopManager.Instance.mBedPosition = new Vector3(3.4f, 4.7f, 0);
             VillageManager.Instance.WillHouse = "ShopLv2";
-        }
+        }   
     }
-
-    //public void BuildBlackSmith()
-    //{
-    //    mBlackSmith.SetActive(false);
-    //    VillageManager.Instance.IsBlackSmithBuild= true;
-    //    mBlackSmithNew.SetActive(true);
-    //}
-    //public void BuildWitchHouse()
-    //{
-    //    mWitchHouse.SetActive(false);
-    //    VillageManager.Instance.IsWitchHouseBuild= true;
-    //    mWitchHouseNew.SetActive(true);
-    //}
-    //public void UpgradeWillHouse()
-    //{
-    //    VillageManager.Instance.WillHouse = "ShopLv2";
-    //}
 }

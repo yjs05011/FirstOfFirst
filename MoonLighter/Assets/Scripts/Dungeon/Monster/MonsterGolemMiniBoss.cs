@@ -14,8 +14,21 @@ public class MonsterGolemMiniBoss : Monster
     {
         base.Update();
 
+        // 몬스터가 있는 스테이지에 플레이어가 들어온경우.
+        if (mStage != DungeonManager.Instance.GetPlayerCurrStage())
+        {
+            return;
+        }
+
+        // 플레이어 입장전 대기
+        if (mCurrState == State.Ready)
+        {
+            // 상태 idle 로 변경.
+            SetState(State.Idle);
+        }
+
         // 대기 상태
-        if (mCurrState == State.Idle)
+        else if(mCurrState == State.Idle)
         {
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())

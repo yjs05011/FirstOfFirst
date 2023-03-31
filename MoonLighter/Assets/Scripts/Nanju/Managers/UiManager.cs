@@ -15,6 +15,7 @@ public class UiManager : MonoBehaviour
     public float mBossMaxHp;
     public float mBossCurrentHp;
 
+
     public bool mIsHpChange = false;
     // 던전 확인
     public bool mIsDungeonCheck = false;
@@ -23,6 +24,9 @@ public class UiManager : MonoBehaviour
     public bool mIsPlayerDie = false;
     public bool mIsPlayerUseAnimation = false;
     public bool mIsResultUi = false;
+    //키변경 하기 위한 변수 선언
+    public bool mIsKeyChaged = false;
+
 
     // [Ui]
     public bool mExitDungeonUiOnOffCheck = false;
@@ -92,10 +96,6 @@ public class UiManager : MonoBehaviour
         mIsPlayerUseAnimation = value;
     }
 
-
-    // [던전] 몇개 몬스터 잡았는지 확인 요청
-
-    // [던전] 어떤 몬스터 잡았는지 확인 요청
     // [플레이어] 어떤 몬스터에게 플레이어가 죽었는지 확인 [보류]
 
 

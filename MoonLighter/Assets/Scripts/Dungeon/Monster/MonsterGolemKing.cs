@@ -69,31 +69,31 @@ public class MonsterGolemKing : Monster
             {
                 if (mTarget)
                 {
-                    
-                   mTimer += Time.deltaTime;
-                   
-                   if (mTimer >= mWaveCoolTime)
-                   {
-                       mTimer = 0.0f;
-                       WaveAttack();
-                   }
-                                      
-                   if (Random.Range(0, 1000) < 500)
-                   {
-                       PunchAttack();
-                   }
-                   else
-                   {
-                       if (Random.Range(0, 1000) < 500)
-                       {
-                          // RockSpawnAttack();
-                       }
-                       else
-                       {
-                           StickyAttack();
-                       }
-                   
-                   }
+
+                    mTimer += Time.deltaTime;
+
+                    if (mTimer >= mWaveCoolTime)
+                    {
+                        mTimer = 0.0f;
+                        WaveAttack();
+                    }
+
+                    if (Random.Range(0, 1000) < 500)
+                    {
+                        PunchAttack();
+                    }
+                    else
+                    {
+                        if (Random.Range(0, 1000) < 500)
+                        {
+                            RockSpawnAttack();
+                        }
+                        else
+                        {
+                            StickyAttack();
+                        }
+
+                    }
 
                 }
                 else
@@ -140,19 +140,11 @@ public class MonsterGolemKing : Monster
             // 사망 로직 처리 후에 반드시 State.None 으로 보내서 더이상 업데이트문을 타지 않도록 상태 변경.
             this.SetState(State.None);
 
-            // 던전 퇴장 UI 연결 전 테스트용 코드
-            TestDungeonExit();
+          
         }
     }
 
-    // 던전 나가기 UI 연결 전 던전 탈출 테스트 함수 
-    public void TestDungeonExit()
-    {
-        DungeonGenerator.Instance.Init();
-        DungeonGenerator.Instance.OnDestroyMySelf();
-        DungeonManager.Instance.mKillMonsterList.Clear();
-        GFunc.LoadScene("VillageScene");
-    }
+    
 
 
     public void PunchAttack()
@@ -224,6 +216,7 @@ public class MonsterGolemKing : Monster
                 {
                     Rock rock = instance.GetComponent<Rock>();
                     rock.SetData(this, this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea")));
+                    rock.mAnimator.SetFloat("Rock", Random.Range(0.0f, 6.0f));
 
                 }
             }
@@ -298,6 +291,11 @@ public class MonsterGolemKing : Monster
             }
 
             return;
+        }
+        else
+        {
+            mPunchCount = 0;
+            mAnimator.SetTrigger("RecoverArm");
         }
     }
 

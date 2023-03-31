@@ -109,15 +109,28 @@ public class PlayerAct : MonoBehaviour
             SetPosition.Instance.mSettingPosition = Vector3.zero;
         }
 
+        if (!DataManager.Instance.FileCheck())
+        {
+            GameKeyManger.Instance.DefaultKeySetting();
+        }
+        else
+        {
+            GameKeyManger.Instance.DefaultKeySetting();
+        }
 
 
 
     }
+    private void OnGUI()
+    {
+        Event keyEvent = Event.current;
 
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
+
             GameManager.Instance.mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
             GameManager.Instance.mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
             GameManager.Instance.mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
@@ -130,12 +143,17 @@ public class PlayerAct : MonoBehaviour
             mPlayerHitBox.isTrigger = true;
             DataManager.Instance.JsonLoad();
         }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+
+        }
         if (PlayerManager.Instance.mIsUiActive)
         {
 
         }
         else
         {
+
             if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
             {
                 if (!mIsCombo)
@@ -314,6 +332,15 @@ public class PlayerAct : MonoBehaviour
             mIsFall = true;
 
         }
+        if (other.CompareTag("Trap"))
+        {
+            if (mPlayerSpeed >= PlayerManager.Instance.mPlayerStat.Speed * 0.7f)
+            {
+                mPlayerSpeed *= 0.9f;
+            }
+
+
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -326,6 +353,10 @@ public class PlayerAct : MonoBehaviour
             mPlayerAnimator.SetBool("IsEvasion", false);
             SetActionType(ActState.State_Move);
 
+        }
+        if (other.CompareTag("Trap"))
+        {
+            mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
         }
     }
     public void HoldingKey()
@@ -426,6 +457,7 @@ public class PlayerAct : MonoBehaviour
 
                 SetActionType(ActState.State_Die);
                 mPlayerAnimator.SetTrigger("IsDie");
+                PlayerManager.Instance.mPlayerWasKilled = (int)id;
                 PlayerManager.Instance.mPlayerStat.isDie = true;
             }
         }
@@ -499,6 +531,9 @@ public class PlayerAct : MonoBehaviour
         yield return new WaitForSeconds(Delay);
         mIsDelay = false;
     }
-
+    public void SetDie()
+    {
+        UiManager.Instance.PlayerFinishAnimation(true);
+    }
 
 }

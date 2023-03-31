@@ -8,7 +8,10 @@ public class DungeonChest : MonoBehaviour
     public GameObject mChest = null;
     private Animator mChestAnim = null;
 
-    public enum ChestState { Lock , Unlock , WaitInput , Open, Close}
+    public enum ChestID { None = 0, WoodChest = 1, BossChest =2 }
+    [SerializeField]
+    private ChestID mChestID = ChestID.None;
+    public enum ChestState { Lock , Unlock , WaitInput , Open, Close }
     public ChestState mState = ChestState.Lock;
     public GameObject mInteractionMenu = null;
     public TMP_Text mInteractionKey = null;
@@ -35,6 +38,10 @@ public class DungeonChest : MonoBehaviour
     {
         return mState;
     }
+    public ChestID GetChestID()
+    {
+        return mChestID;
+    }
 
     public void SetInteractionKeyValue(string value)
     {
@@ -44,9 +51,22 @@ public class DungeonChest : MonoBehaviour
     public void Update()
     {
         // 잠긴 상태이거나, 열린 상태이면 리턴.
-        if(mState == ChestState.Lock || mState == ChestState.Open)
+        if(mState == ChestState.Lock )//|| mState == ChestState.Open)
         {
             return;
+        }
+        if (mState == ChestState.Open)
+        {
+            //if (mChestID == ChestID.BossChest)
+            //{
+                // 임시> 상자 열면 탈출하게 처리.
+                   mState = ChestState.Lock;
+            // DungeonManager.Instance.TestDungeonExitInit();
+            //DungeonManager.Instance.TestDungeonEnterInit();
+            LoadingManager.LoadScene("Dungeon");
+            return;
+            //}
+           // return;
         }
         if(mState == ChestState.Unlock)
         {
@@ -84,6 +104,11 @@ public class DungeonChest : MonoBehaviour
         {
             // 키입력 대기 상태로 변경
             SetChestState(ChestState.WaitInput);
+            
+            // 옵션에 설정된 키로 키 변경
+            // 재욱이 코드 올라가면 주석 풀기.
+            // string keyValue = GameKeyManger.keyString[GameKeyManger.KeyAction.INTERRUPT];
+            //SetInteractionKeyValue("keyValue");
 
             // 오픈 키 UI 띄우기
             Debug.Log("UI : Chest open guide UI Active true");

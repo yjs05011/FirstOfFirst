@@ -49,12 +49,17 @@ public class LoadingManager : MonoBehaviour
             yield return null;
             if(op.progress > 0.9f || Mathf.Approximately(0.9f, op.progress))
             {
+                op.allowSceneActivation = true;
+                
+            }
+            if(op.progress > 1f || Mathf.Approximately(1f, op.progress))
+            {
                 IsDone= true;
             }
             mTimer += Time.deltaTime;
            
         }
-        op.allowSceneActivation = true;
+        
         
         StartCoroutine(FadeInStart());
 

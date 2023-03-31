@@ -8,7 +8,8 @@ public class VillageNPC : MonoBehaviour
     private Animator mNpcAni;
     private float mSpeed = 1f;
     private Vector3 mPosition;
-
+    public bool mIsplayerTalk = false;
+    
     // Start is called before the first frame update
     public void Start()
     {
@@ -19,17 +20,33 @@ public class VillageNPC : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        if(!mIsplayerTalk)
+        {
+            Vector3 direction = mPosition - transform.position;
+            transform.Translate(direction.normalized * mSpeed * Time.deltaTime);
+            mNpcAni.SetBool("IsWalking", true);
+            if (Vector3.Distance(transform.position, mPosition) <= 0.2f)
+            {
+                mNpcAni.SetBool("IsWalking", false);
 
-        Vector3 direction = mPosition - transform.position;
-        transform.Translate(direction.normalized * mSpeed * Time.deltaTime);
-        mNpcAni.SetBool("IsWalking",true);
-        if (Vector3.Distance(transform.position, mPosition) <= 0.2f)
+                Invoke("RandomPosition", 3);
+
+            }
+        }
+        else
         {
             mNpcAni.SetBool("IsWalking", false);
-            
-            Invoke("RandomPosition",3);
-            
         }
+
+        if(gameObject.GetComponent<ShowTextBox>().mTalkIndex == 1)
+        {
+            mIsplayerTalk=true;
+        }
+        else
+        {
+            mIsplayerTalk=false;
+        }
+        
     }
 
     public void RandomPosition()

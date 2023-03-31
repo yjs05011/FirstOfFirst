@@ -17,8 +17,11 @@ public class OptionUi : MonoBehaviour
     public GameObject corser;
     public Color yellow = new Color(0.9254903f, 0.9254903f, 0.7529413f, 1f);
     public Color green = new Color(0.1176471f, 0.5372549f, 0.3921569f, 1f);
+    [SerializeField]
     private int selectTitleIdx = 0;
+    [SerializeField]
     private int selectOptionIdx = 0;
+    [SerializeField]
     private int beforeOptionIdx = default;
     // 방향을 나타내는 변수 (false = 왼쪽, true = 오른쪽)
     private bool isDirection = default;
@@ -32,8 +35,9 @@ public class OptionUi : MonoBehaviour
         titlePos.Add(new Vector2(427, 0));
         CorsetSetGameObject();
         corser.transform.localPosition = CorsorSetPos(0);
+        Debug.Log(corser.transform.localPosition);
         SetActiveOption();
-        ColorChange(selectOptionIdx, green);
+        ColorChange(selectTitleIdx, selectOptionIdx, green);
 
 
 
@@ -48,16 +52,27 @@ public class OptionUi : MonoBehaviour
 
     public void Move()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (selectTitleIdx == 2)
+            {
+                RuningFunc(selectOptionIdx);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (selectTitleIdx >= 2)
             {
+
 
             }
             else
             {
                 selectTitleIdx++;
                 selectOptionIdx = 0;
+                CorsetSetGameObject();
+                corser.transform.localPosition = CorsorSetPos(0);
+                ColorChange(selectTitleIdx, selectOptionIdx, green);
                 StartCoroutine(TileRightMoving(0.5f));
             }
         }
@@ -71,18 +86,36 @@ public class OptionUi : MonoBehaviour
             {
                 selectTitleIdx--;
                 selectOptionIdx = 0;
+                CorsetSetGameObject();
+                corser.transform.localPosition = CorsorSetPos(0);
+                ColorChange(selectTitleIdx, selectOptionIdx, green);
                 StartCoroutine(TileLeftMoving(0.5f));
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            isDirection = false;
-            RuningFunc(selectOptionIdx, isDirection);
+            if (selectOptionIdx == 2)
+            {
+
+            }
+            else
+            {
+                isDirection = false;
+                RuningFunc(selectOptionIdx, isDirection);
+            }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            isDirection = true;
-            RuningFunc(selectOptionIdx, isDirection);
+            if (selectOptionIdx == 2)
+            {
+
+            }
+            else
+            {
+                isDirection = true;
+                RuningFunc(selectOptionIdx, isDirection);
+            }
+
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -95,15 +128,15 @@ public class OptionUi : MonoBehaviour
                 beforeOptionIdx = selectOptionIdx;
                 selectOptionIdx--;
                 CorsetSetGameObject();
-                ColorChange(beforeOptionIdx, yellow);
-                ColorChange(selectOptionIdx, green);
+                ColorChange(selectTitleIdx, beforeOptionIdx, yellow);
+                ColorChange(selectTitleIdx, selectOptionIdx, green);
                 corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log(option[selectOptionIdx].transform.childCount);
-            if (selectOptionIdx >= option[selectOptionIdx].transform.childCount)
+
+            if (selectOptionIdx >= option[selectTitleIdx].transform.GetChild(0).childCount - 1)
             {
 
             }
@@ -112,8 +145,8 @@ public class OptionUi : MonoBehaviour
                 beforeOptionIdx = selectOptionIdx;
                 selectOptionIdx++;
                 CorsetSetGameObject();
-                ColorChange(beforeOptionIdx, yellow);
-                ColorChange(selectOptionIdx, green);
+                ColorChange(selectTitleIdx, beforeOptionIdx, yellow);
+                ColorChange(selectTitleIdx, selectOptionIdx, green);
                 corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
             }
         }
@@ -125,6 +158,7 @@ public class OptionUi : MonoBehaviour
         Vector3 pos = new Vector2(titlePos[selectTitleIdx].x, 240);
         selectTitle.gameObject.SetActive(false);
         selectTitle.transform.localPosition = titlePos[selectTitleIdx];
+
         while (Vector3.Distance(scrollTile.transform.localPosition, pos) >= 10)
         {
             scrollTile.transform.localPosition += Vector3.right * 6;
@@ -184,18 +218,38 @@ public class OptionUi : MonoBehaviour
     {
         return option[selectTitleIdx].transform.GetChild(0).GetChild(num).localPosition;
     }
-    public void ColorChange(int num, Color color)
+    public void ColorChange(int titleidx, int num, Color color)
     {
-        Debug.Log(num);
-        int idx = option[selectTitleIdx].transform.GetChild(0).GetChild(num).childCount;
-        option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetChild(0).GetComponent<Text>().color = color;
-        for (int i = 1; i < idx; i++)
+        if (titleidx == 0)
         {
-            option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetChild(i).GetComponent<Image>().color = color;
+            int idx = option[selectTitleIdx].transform.GetChild(0).GetChild(num).childCount;
+            option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetChild(0).GetComponent<Text>().color = color;
+            for (int i = 1; i < idx; i++)
+            {
+                option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetChild(i).GetComponent<Image>().color = color;
+            }
         }
+        else if (titleidx == 1)
+        {
+            int idx = option[selectTitleIdx].transform.GetChild(0).GetChild(num).childCount;
+            option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetChild(0).GetComponent<Text>().color = color;
+            for (int i = 1; i < idx - 2; i++)
+            {
+                option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetChild(i).GetComponent<Image>().color = color;
+            }
+        }
+        else
+        {
+
+        }
+
     }
     public void RuningFunc(int num, bool direction)
     {
         option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetComponent<UIController>().Runing(direction);
+    }
+    public void RuningFunc(int num)
+    {
+        option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetComponent<UIController>().Runing();
     }
 }

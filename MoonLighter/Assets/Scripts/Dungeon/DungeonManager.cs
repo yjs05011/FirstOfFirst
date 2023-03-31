@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DungeonManager : MonoBehaviour
 {
@@ -20,13 +22,16 @@ public class DungeonManager : MonoBehaviour
     public List<Monster.MonsterID> mKillMonsterList = new List<Monster.MonsterID>();
 
     // 언락한 상자 리스트
-    public List<DungeonChest> mUnlockChestList = new List<DungeonChest>();
+    public List<DungeonChest.ChestID> mUnlockChestList = new List<DungeonChest.ChestID>();
+
+    
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            Instance.Init();
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -35,20 +40,70 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+#if UNITY_EDITOR
+        // 빌리지 가기
+        if(Input.GetKeyUp(KeyCode.F1))
+        {
+            LoadingManager.LoadScene("DungeonEntrance");
+        }
+
+        // 던전 가기
+        if(Input.GetKeyUp(KeyCode.F2))
+        {
+            LoadingManager.LoadScene("Dungeon");
+        }
+
+        if(Input.GetKeyUp(KeyCode.F3))
+        {
+            if(DungeonGenerator.Instance.mLastRoom)
+            {
+                DungeonStage prevStage = DungeonGenerator.Instance.mLastRoom.GetPrevStage();
+
+                GameObject player = GameObject.FindWithTag("Player");
+                if (player)
+                {
+                    player.transform.position = prevStage.transform.position;
+                }
+            }
+        }
+#endif
+    }
+
+    private void Init()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 던전씬이 로드된지 체크한다.
+        // 던전의 경우 씬이 로드된 이후에 던전을 생성하기 때문에 현재의 LoadingManager 는 적합하게 사용 불가
+        Debug.Log(scene.name);
+        if(scene.name == "Dungeon")
+        {
+            DungeonGenerator.Instance.DungeonGenerate();
+        }
+    }
+
+
     public void Start()
     {
+        
         mKillMonsterList.Clear();
         mUnlockChestList.Clear();
     }
+ 
 
     public void KillMonsterAdd(Monster.MonsterID monsterID)
     {
         mKillMonsterList.Add(monsterID);
     }
 
-    public void UnlockChestAdd(DungeonChest chest)
+    public void UnlockChestAdd(DungeonChest.ChestID chestID)
     {
-        mUnlockChestList.Add(chest);
+        mUnlockChestList.Add(chestID);
     }
 
     public DungeonUIFadeInOutTransition GetTransitionUI()
@@ -97,5 +152,4 @@ public class DungeonManager : MonoBehaviour
     {
          return mKillMonsterList.Count;
     }
-
 }
