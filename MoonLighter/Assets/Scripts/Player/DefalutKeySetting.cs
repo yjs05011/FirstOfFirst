@@ -7,6 +7,7 @@ public class DefalutKeySetting : UIController
     public override void Runing(int i)
     {
         GameKeyManger.Instance.DefaultKeySetting();
+        GameKeyManger.Instance.SaveKeyData();
         StartCoroutine("Delay");
     }
     IEnumerator Delay()

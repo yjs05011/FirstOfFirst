@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameKeyManger : GSingleton<GameKeyManger>
 {
@@ -25,6 +26,7 @@ public class GameKeyManger : GSingleton<GameKeyManger>
     }
 
     public string[] keyString;
+    public List<KeyCode> SaveKeyList;
     public KeyCode[] defaultKeys = new KeyCode[] { KeyCode.W,
      KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.E, KeyCode.Space, KeyCode.J, KeyCode.K, KeyCode.Z, KeyCode.L, KeyCode.I, KeyCode.Q, KeyCode.E, KeyCode.Z, KeyCode.C };
     protected override void Init()
@@ -46,6 +48,18 @@ public class GameKeyManger : GSingleton<GameKeyManger>
         for (int i = 0; i < (int)KeyAction.KEYCOUNT; i++)
         {
             KeySetting.keys.Add((KeyAction)i, defaultKeys[i]);
+        }
+    }
+    public void SaveKeyData()
+    {
+        SaveKeyList = KeySetting.keys.Values.ToList();
+
+    }
+    public void LoadKeyData()
+    {
+        for (int i = 0; i < (int)KeyAction.KEYCOUNT; i++)
+        {
+            KeySetting.keys[(KeyAction)i] = SaveKeyList[i];
         }
     }
 }

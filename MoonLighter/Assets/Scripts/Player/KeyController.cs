@@ -120,6 +120,7 @@ public class KeyController : UIController
                         text.text = GameKeyManger.KeySetting.keys[(GameKeyManger.KeyAction)mNowKeyNumber - 1].ToString();
                         break;
                 }
+                GameKeyManger.Instance.SaveKeyData();
                 mIsCheck = false;
                 UiManager.Instance.mIsKeyChanged = false;
             }

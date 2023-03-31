@@ -88,17 +88,17 @@ public class PlayerAct : MonoBehaviour
     {
         SetActionType(ActState.State_Move);
         mPlayerNowWeapone = 1;
-        PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
-        PlayerManager.Instance.mPlayerStat.Speed = mPlayerDefaultStat.Speed;
-        PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
-        PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
-        PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
-        PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
-        mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
-        mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
-        mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
-        mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
-        mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
+        // PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
+        // PlayerManager.Instance.mPlayerStat.Speed = mPlayerDefaultStat.Speed;
+        // PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
+        // PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
+        // PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
+        // PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
+        // mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
+        // mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
+        // mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
+        // mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
+        // mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
         if (PlayerManager.Instance.mPlayerBeforPos != default)
         {
             transform.position = PlayerManager.Instance.mPlayerBeforPos;
@@ -128,6 +128,10 @@ public class PlayerAct : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            DataManager.Instance.JsonLoad();
+        }
 
         if (PlayerManager.Instance.mIsUiActive)
         {
@@ -191,6 +195,7 @@ public class PlayerAct : MonoBehaviour
                         if (mPlayerNowWeapone == 1)
                         {
                             mPlayerNowWeapone = 2;
+
                         }
                         else
                         {
@@ -436,10 +441,12 @@ public class PlayerAct : MonoBehaviour
             {
                 mPlayerHp -= calculateDamage;
                 PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;
+                UiManager.Instance.mIsHpChange = true;
             }
             if (mPlayerHp <= 0)
             {
-
+                mPlayerHp = 0;
+                PlayerManager.Instance.mPlayerStat.Hp = 0;
                 SetActionType(ActState.State_Die);
                 mPlayerAnimator.SetTrigger("IsDie");
                 PlayerManager.Instance.mPlayerWasKilled = (int)id;
@@ -467,6 +474,7 @@ public class PlayerAct : MonoBehaviour
             {
                 mPlayerHp -= calculateDamage;
                 PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;
+
             }
             if (mPlayerHp < 0)
             {
