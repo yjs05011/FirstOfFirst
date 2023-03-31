@@ -11,6 +11,7 @@ public class Monster : MonoBehaviour
     {
         public string key;
         public GameObject preset;
+        public List<GameObject> presetList;
     }
 
     [System.Serializable]
@@ -64,8 +65,9 @@ public class Monster : MonoBehaviour
 
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
-    public List<SkillPreset> mSkillPresets = new List<SkillPreset>(); 
-
+    public List<SkillPreset> mSkillPresets = new List<SkillPreset>();
+    
+    
     [Header("Collider")]
     public List<Collider2DLink> mColliders = new List<Collider2DLink>();
 
@@ -300,6 +302,19 @@ public class Monster : MonoBehaviour
             if(mSkillPresets[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
             {
                 return mSkillPresets[idx].preset;
+            }
+        }
+        return null;
+    }
+
+    public List<GameObject> FindSkillPresetList(string key)
+    {
+        int count = mSkillPresets.Count;
+        for (int idx = 0; idx < count; ++idx)
+        {
+            if (mSkillPresets[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return mSkillPresets[idx].presetList;
             }
         }
         return null;

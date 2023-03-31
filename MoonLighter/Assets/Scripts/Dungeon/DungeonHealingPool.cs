@@ -55,7 +55,6 @@ public class DungeonHealingPool : MonoBehaviour
 
         if (mIsHealing)
         {
-            Debug.LogFormat("Èú Æ÷ÀÎÆ® : {0}", GetPoolHealPoint());
 
             if (mHealPoint <= 0)
             {

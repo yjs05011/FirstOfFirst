@@ -14,6 +14,7 @@ public class MonsterGolemKing : Monster
     private float mWaveCoolTime = 10.0f;
     public float mTimer = 0.0f;
 
+    
     public override void Update()
     {
         base.Update();
@@ -78,7 +79,7 @@ public class MonsterGolemKing : Monster
                         WaveAttack();
                     }
 
-                    if (Random.Range(0, 1000) < 500)
+                    if (Random.Range(0, 1000) < 350)
                     {
                         PunchAttack();
                     }
@@ -207,18 +208,22 @@ public class MonsterGolemKing : Monster
         {
             for (int i = 0; i < 40; i++)
             {
-                GameObject instance = GameObject.Instantiate<GameObject>(FindSkillPreset("RockSpwanPreset"));
+                //GameObject instance = GameObject.Instantiate<GameObject>(FindSkillPreset("RockSpwanPreset"));
+                //instance.transform.parent = this.mStage.transform;
+                List<GameObject> RockPreserList = FindSkillPresetList("RockSpwanPresetList");
+                int randomIndex = Random.Range(0, RockPreserList.Count);
+                GameObject instance = GameObject.Instantiate(RockPreserList[randomIndex]);
                 instance.transform.parent = this.mStage.transform;
 
                 if (instance)
                 {
                     Rock rock = instance.GetComponent<Rock>();
-                    rock.SetData(this);
-                    rock.transform.position = this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea"));
-
-                    rock.mAnimator.SetFloat("RockType", Random.Range(0.0f, 6.0f));
+                    rock.SetData(this, this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea")),30.0f);
+                    // 
+                    //rock.mAnimator.SetFloat("RockType", Random.Range(0.0f, 6.0f));
 
                 }
+                
             }
             
         }
