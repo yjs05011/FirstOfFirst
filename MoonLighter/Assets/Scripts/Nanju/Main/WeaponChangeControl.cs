@@ -90,7 +90,7 @@ public class WeaponChangeControl : MonoBehaviour
 
     void BackAndForthCheck()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (UiManager.Instance.mIsWeaponChange)
         {
             Vector2 posTemp = default;
             Vector2 SmallPosTemp = default;
@@ -136,6 +136,7 @@ public class WeaponChangeControl : MonoBehaviour
             mBigWeaponSmallCircleBase.transform.GetComponent<SpriteRenderer>().sortingOrder = mSpearSmallCircleBase.transform.GetComponent<SpriteRenderer>().sortingOrder;
             mSpearSmallCircleBase.transform.GetComponent<SpriteRenderer>().sortingOrder = smallWeaponTemp;
 
+            UiManager.Instance.mIsWeaponChange = true;
 
             // swap 방식(unit에서만 가능)
             // (mBigWeaponBase.transform.localPosition, mSpearBase.transform.localPosition) =
