@@ -1970,6 +1970,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8954031019102083146, guid: bed46fbf26a47844ea253a65e5d03137, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9091863850231180674, guid: bed46fbf26a47844ea253a65e5d03137, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

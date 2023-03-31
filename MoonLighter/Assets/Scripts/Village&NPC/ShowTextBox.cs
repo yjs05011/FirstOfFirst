@@ -76,6 +76,21 @@ public class ShowTextBox : MonoBehaviour
                             {
                                 SetPosition.Instance.mIsNight = true;
                             }
+                            GameManager.Instance.mIsNight = SetPosition.Instance.mIsNight;
+                            GameManager.Instance.mIsShop = VillageManager.Instance.IsWillHouseUpgrade;
+                            GameManager.Instance.mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
+                            GameManager.Instance.mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
+                            GameManager.Instance.mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
+                            GameManager.Instance.mPlayerMoney = PlayerManager.Instance.mPlayerStat.Money;
+                            GameManager.Instance.mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
+                            GameManager.Instance.mTableNumber = ShopManager.Instance.mTableNumber;
+                            GameManager.Instance.mItemPrice = ShopManager.Instance.mItemPrice;
+                            GameManager.Instance.mItemsNumber= ShopManager.Instance.mItemsNumber;
+                            GameManager.Instance.mBedPosition= ShopManager.Instance.mBedPosition;
+                            GameManager.Instance.mIsBlackSmithBuild = VillageManager.Instance.IsBlackSmithBuild;
+                            GameManager.Instance.mIsWitchHouseBuild = VillageManager.Instance.IsWitchHouseBuild;
+                            //GameManager.Instance.mInventorySlots = InventoryManager.Instance.mInventorySlots;
+                            //GameManager.Instance.mEquipmentSlots = InventoryManager.Instance.mEquipmentSlots;
                             //DataManager.Instance.JsonSave();
 
                             LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
