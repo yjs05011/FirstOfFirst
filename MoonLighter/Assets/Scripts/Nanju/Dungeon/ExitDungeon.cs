@@ -47,7 +47,7 @@ public class ExitDungeon : MonoBehaviour
     void Start()
     {
         // test
-        ExitDungeonKillMosterIamge();
+        //ExitDungeonKillMosterIamge();
 
         SetKillMonsterCount();
         SetDungeonChestCount();
@@ -71,7 +71,7 @@ public class ExitDungeon : MonoBehaviour
         {
             PlayerManager.Instance.mPlayerStat.isDie = false;
 
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
 
             LoadingManager.LoadScene("VillageScene");
 
@@ -80,7 +80,7 @@ public class ExitDungeon : MonoBehaviour
         {
             PlayerManager.Instance.mPlayerStat.isDie = false;
 
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
 
             // �׾��� ��  �ٽ��÷��� ��ư ������ ó�� ���� ������ �Ȱ��� ExitDungeon ui ����ä�� ��
             // -> �ε��� �״ٰ� ������  �ٽ� �ҷ������ϱ� ��Ͽ� �����غ��� 
@@ -223,21 +223,21 @@ public class ExitDungeon : MonoBehaviour
         //}
     }
 
-    public void ExitDungeonKillMosterIamge()
-    {
-        int MonsterKillCount = (int)(40 * 0.5f);
-        gridGroup = transform.GetChild(6).GetComponent<GridLayoutGroup>();
-        gridGroup.cellSize = new Vector2((float)450 / MonsterKillCount, 70);
+    //public void ExitDungeonKillMosterIamge()
+    //{
+    //    int MonsterKillCount = (int)(40 * 0.5f);
+    //    gridGroup = transform.GetChild(6).GetComponent<GridLayoutGroup>();
+    //    gridGroup.cellSize = new Vector2((float)450 / MonsterKillCount, 70);
 
-        for (int i = 0; i < MonsterKillCount * 2; i++)
-        {
+    //    for (int i = 0; i < MonsterKillCount * 2; i++)
+    //    {
 
-            Instantiate(monster, Parent);
+    //        Instantiate(monster, Parent);
 
-        }
+    //    }
 
 
-        Debug.Log($"킬 몬스터 개수 : {MonsterKillCount}");
-        // 절반 나눠서 해야되니까 오브젝트 이미지를 만들어야된다.
-    }
+    //    Debug.Log($"킬 몬스터 개수 : {MonsterKillCount}");
+    //    // 절반 나눠서 해야되니까 오브젝트 이미지를 만들어야된다.
+    //}
 }
