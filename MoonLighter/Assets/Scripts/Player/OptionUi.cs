@@ -25,6 +25,8 @@ public class OptionUi : MonoBehaviour
     private int beforeOptionIdx = default;
     // 방향을 나타내는 변수 (false = 왼쪽, true = 오른쪽)
     private bool isDirection = default;
+    public GameObject content = default;
+    private RectTransform contentRect = default;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,7 @@ public class OptionUi : MonoBehaviour
         titlePos.Add(new Vector2(-427, 0));
         titlePos.Add(new Vector2(0, 0));
         titlePos.Add(new Vector2(427, 0));
+        contentRect = content.GetComponent<RectTransform>();
         CorsetSetGameObject();
         corser.transform.localPosition = CorsorSetPos(0);
         Debug.Log(corser.transform.localPosition);
@@ -46,20 +49,33 @@ public class OptionUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (UiManager.Instance.mIsKeyChanged)
+        {
+
+        }
+        else
+        {
+            InputKey();
+        }
+
     }
 
 
-    public void Move()
+    public void InputKey()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.SetActive(false);
+            // UiManager.Instance.mOptionExit =false;
+        }
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
         {
             if (selectTitleIdx == 2)
             {
-                RuningFunc(selectOptionIdx);
+                RuningFunc(selectOptionIdx, selectOptionIdx);
             }
         }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.TOGGLEDOWNRIGHT]))
         {
             if (selectTitleIdx >= 2)
             {
@@ -71,12 +87,22 @@ public class OptionUi : MonoBehaviour
                 selectTitleIdx++;
                 selectOptionIdx = 0;
                 CorsetSetGameObject();
-                corser.transform.localPosition = CorsorSetPos(0);
-                ColorChange(selectTitleIdx, selectOptionIdx, green);
-                StartCoroutine(TileRightMoving(0.5f));
+                if (selectTitleIdx == 2)
+                {
+                    corser.transform.localPosition = CorsorSetPosKeySetting(0);
+
+                    StartCoroutine(TileRightMoving(0.5f));
+                }
+                else
+                {
+                    corser.transform.localPosition = CorsorSetPos(0);
+                    ColorChange(selectTitleIdx, selectOptionIdx, green);
+                    StartCoroutine(TileRightMoving(0.5f));
+                }
+
             }
         }
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.TOGGLEDOWNLEFT]))
         {
             if (selectTitleIdx <= 0)
             {
@@ -92,9 +118,9 @@ public class OptionUi : MonoBehaviour
                 StartCoroutine(TileLeftMoving(0.5f));
             }
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
         {
-            if (selectOptionIdx == 2)
+            if (selectTitleIdx == 2)
             {
 
             }
@@ -104,9 +130,9 @@ public class OptionUi : MonoBehaviour
                 RuningFunc(selectOptionIdx, isDirection);
             }
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
         {
-            if (selectOptionIdx == 2)
+            if (selectTitleIdx == 2)
             {
 
             }
@@ -117,38 +143,90 @@ public class OptionUi : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
         {
-            if (selectOptionIdx <= 0)
+            if (selectTitleIdx == 2)
             {
+                if (selectOptionIdx <= 0)
+                {
 
+                }
+                else
+                {
+                    beforeOptionIdx = selectOptionIdx;
+                    selectOptionIdx--;
+                    if (selectOptionIdx >= 4)
+                    {
+                        contentRect.anchoredPosition = new Vector2(contentRect.anchoredPosition.x, contentRect.anchoredPosition.y - 100);
+                    }
+                    else
+                    {
+                        CorsetSetGameObject();
+                        corser.transform.localPosition = CorsorSetPosKeySetting(selectOptionIdx);
+                    }
+
+                    Debug.Log(corser.transform.localPosition);
+                }
             }
             else
             {
-                beforeOptionIdx = selectOptionIdx;
-                selectOptionIdx--;
-                CorsetSetGameObject();
-                ColorChange(selectTitleIdx, beforeOptionIdx, yellow);
-                ColorChange(selectTitleIdx, selectOptionIdx, green);
-                corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
+                if (selectOptionIdx <= 0)
+                {
+
+                }
+                else
+                {
+                    beforeOptionIdx = selectOptionIdx;
+                    selectOptionIdx--;
+                    CorsetSetGameObject();
+                    ColorChange(selectTitleIdx, beforeOptionIdx, yellow);
+                    ColorChange(selectTitleIdx, selectOptionIdx, green);
+                    corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
+                }
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
         {
-
-            if (selectOptionIdx >= option[selectTitleIdx].transform.GetChild(0).childCount - 1)
+            if (selectTitleIdx == 2)
             {
+                if (selectOptionIdx >= option[selectTitleIdx].transform.GetChild(0).GetChild(0).GetChild(0).childCount - 1)
+                {
 
+                }
+                else
+                {
+                    Debug.Log(option[selectTitleIdx].transform.GetChild(0).GetChild(0).childCount - 1);
+                    beforeOptionIdx = selectOptionIdx;
+                    selectOptionIdx++;
+                    if (selectOptionIdx >= 5)
+                    {
+                        contentRect.anchoredPosition = new Vector2(contentRect.anchoredPosition.x, contentRect.anchoredPosition.y + 100);
+                    }
+                    else
+                    {
+                        CorsetSetGameObject();
+                        corser.transform.localPosition = CorsorSetPosKeySetting(selectOptionIdx);
+                    }
+
+                }
             }
             else
             {
-                beforeOptionIdx = selectOptionIdx;
-                selectOptionIdx++;
-                CorsetSetGameObject();
-                ColorChange(selectTitleIdx, beforeOptionIdx, yellow);
-                ColorChange(selectTitleIdx, selectOptionIdx, green);
-                corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
+                if (selectOptionIdx >= option[selectTitleIdx].transform.GetChild(0).childCount - 1)
+                {
+
+                }
+                else
+                {
+                    beforeOptionIdx = selectOptionIdx;
+                    selectOptionIdx++;
+                    CorsetSetGameObject();
+                    ColorChange(selectTitleIdx, beforeOptionIdx, yellow);
+                    ColorChange(selectTitleIdx, selectOptionIdx, green);
+                    corser.transform.localPosition = CorsorSetPos(selectOptionIdx);
+                }
             }
+
         }
 
     }
@@ -218,6 +296,12 @@ public class OptionUi : MonoBehaviour
     {
         return option[selectTitleIdx].transform.GetChild(0).GetChild(num).localPosition;
     }
+    public Vector3 CorsorSetPosKeySetting(int num)
+    {
+        RectTransform findIdxPos = option[selectTitleIdx].transform.GetChild(0).GetChild(0).GetChild(0).GetChild(num).GetComponent<RectTransform>();
+        Debug.Log($"[CorsorSetPosKeySetting] Obj name: {findIdxPos.name}, Local pos: {findIdxPos.anchoredPosition}");
+        return new Vector3(findIdxPos.anchoredPosition.x - 10, findIdxPos.anchoredPosition.y - 700, 0);
+    }
     public void ColorChange(int titleidx, int num, Color color)
     {
         if (titleidx == 0)
@@ -248,8 +332,8 @@ public class OptionUi : MonoBehaviour
     {
         option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetComponent<UIController>().Runing(direction);
     }
-    public void RuningFunc(int num)
+    public void RuningFunc(int num1, int num2)
     {
-        option[selectTitleIdx].transform.GetChild(0).GetChild(num).GetComponent<UIController>().Runing();
+        option[selectTitleIdx].transform.GetChild(0).GetChild(0).GetChild(0).GetChild(num1).GetComponent<UIController>().Runing(num2);
     }
 }

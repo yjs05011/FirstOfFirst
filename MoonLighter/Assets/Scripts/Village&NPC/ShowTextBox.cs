@@ -15,6 +15,7 @@ public class ShowTextBox : MonoBehaviour
     private bool IsTalking = false;
     private bool IsPlayerNearby = false;
     private bool IsPlayerGoToBed = false;
+    private UiManager mUiManager = default;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,7 @@ public class ShowTextBox : MonoBehaviour
         mTalk = transform.Find("Talk").gameObject;
         mButton = mTalk.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
         mTalk.SetActive(false);
+        mUiManager = GameObject.Find("UiManager").GetComponent<UiManager>();
     }
 
     // Update is called once per frame
@@ -91,7 +93,7 @@ public class ShowTextBox : MonoBehaviour
                             GameManager.Instance.mIsWitchHouseBuild = VillageManager.Instance.IsWitchHouseBuild;
                             //GameManager.Instance.mInventorySlots = InventoryManager.Instance.mInventorySlots;
                             //GameManager.Instance.mEquipmentSlots = InventoryManager.Instance.mEquipmentSlots;
-                            //DataManager.Instance.JsonSave();
+                            DataManager.Instance.JsonSave();
 
                             LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
 
@@ -114,26 +116,31 @@ public class ShowTextBox : MonoBehaviour
                     else if (mID == 120)
                     {
                         ShopManager.Instance.mTablesNumber= 0;
+                        mUiManager.GetItemTableOpen(true);
                         mShopUI.SetActive(true);
                         // 상점의 테이블
                     }
                     else if(mID == 130)
                     {
                         ShopManager.Instance.mTablesNumber = 1;
+                        mUiManager.GetItemTableOpen(true);
                         mShopUI.SetActive(true);
                         
                     }
                     else if (mID == 700)
                     {
+                        mUiManager.GetVillageNoticeBoardOpen(true);
                         // 게시판 UI
                     }
-                    
+
                     else if (mID == 2000 && mTalkIndex == 1)
                     {
+                        mUiManager.GetBlacksmithTalk(true);
                         // 대장간 UI
                     }
                     else if (mID == 3000 && mTalkIndex == 1)
                     {
+                        mUiManager.GetWitchTalk(true);
                         // 마녀 UI
                     }
                     else if(mID == 420)
@@ -142,7 +149,7 @@ public class ShowTextBox : MonoBehaviour
                         if(ShopManager.Instance.mWaitShopNPC != null)
                         {
                             ShopManager.Instance.mWaitShopNPC[0].GetComponent<ShopNPC>().IsCalculate = false;
-                            ShopManager.Instance.mWaitShopNPC.RemoveAt(0);
+                            //ShopManager.Instance.mWaitShopNPC.RemoveAt(0);
                         }
                     }
                     else if(mID == 900)

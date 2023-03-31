@@ -150,6 +150,8 @@ MonoBehaviour:
   mStartShop: {fileID: 1701383800992217861}
   mOpen: {fileID: 4203878435276171140}
   mNPCSpawner: {fileID: 0}
+  mButton1: {fileID: 5922330444654628575}
+  mButton2: {fileID: 9222231352817996382}
 --- !u!1001 &6102219563002533192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7850152027081030678, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_Text
-      value: "\n\t\t\t\uC885\uB8CC\n"
+      value: "\uC885\uB8CC"
       objectReference: {fileID: 0}
     - target: {fileID: 7996243896905322657, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -315,11 +317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.36
+      value: -0.456
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.341
+      value: -0.822
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -343,6 +345,11 @@ GameObject:
 --- !u!224 &4203878435276171143 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
+  m_PrefabInstance: {fileID: 6102219563002533192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5922330444654628575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 477144571959729047, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
   m_PrefabInstance: {fileID: 6102219563002533192}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8747357134997785033
@@ -438,7 +445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7850152027081030678, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_Text
-      value: "\n\t\t\t\uC0C1\uC810 \uC2DC\uC791\uD558\uAE30\n"
+      value: "\uC0C1\uC810 \uC2DC\uC791\uD558\uAE30"
       objectReference: {fileID: 0}
     - target: {fileID: 7996243896905322657, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -522,11 +529,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3.82
+      value: -3.805
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.341
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -550,5 +557,10 @@ GameObject:
 --- !u!224 &1701383800992217862 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7996243897631847119, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
+  m_PrefabInstance: {fileID: 8747357134997785033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9222231352817996382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 477144571959729047, guid: b2e5bc6616321ca4e97a22c8e7f80ae2, type: 3}
   m_PrefabInstance: {fileID: 8747357134997785033}
   m_PrefabAsset: {fileID: 0}

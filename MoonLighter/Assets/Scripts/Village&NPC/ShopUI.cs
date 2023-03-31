@@ -30,6 +30,7 @@ public class ShopUI : MonoBehaviour
 
     public void OnEnable()
     {
+        PlayerManager.Instance.mIsUiActive = true;
         mTableNumber = ShopManager.Instance.mTablesNumber;
         for (int indexX = 0; indexX < 4; indexX++)
         {
@@ -119,19 +120,11 @@ public class ShopUI : MonoBehaviour
             Table();
         }
         mSelector.transform.position = mSelectPosition;
-        if(Input.GetKeyDown(KeyCode.I)) 
+        if(Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK])) 
         {
             if(!mDontShutDownUI)
             {
-                mInventoryX = 0;
-                mInventoryY = 0;
-                mTableX = 0;
-                mTableY = 0;
-                mDontShutDownUI = false;
-                mIsInventory = true;
-                mIsGetPrice = false;
-                mSelectPosition = mInventoryItem[mInventoryX, mInventoryY].transform.position;
-                mSelectItem.SetActive(false);
+                PlayerManager.Instance.mIsUiActive = false;
                 gameObject.SetActive(false);
             }
         }
@@ -139,34 +132,56 @@ public class ShopUI : MonoBehaviour
 
     public void Inventory()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
         {
             if (mInventoryX > 0) { mInventoryX--; }
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
         {
             if (mInventoryX < 3) { mInventoryX++; }
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
         {
             if (mInventoryY > 0) { mInventoryY--; }
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
         {
             if (mInventoryY < 4) { mInventoryY++; }
             else { mIsInventory = false; }
         }
         mSelectPosition = mInventoryItem[mInventoryX, mInventoryY].transform.position;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
         {
             if (mInventoryItem[mInventoryX, mInventoryY].GetComponent<SpriteRenderer>().sprite != null) // 인벤토리 아이템이 있으면 (아이템을 들어올려야 한다)
             {
-
+                // 들고 있는 아이템이 없어야 실행
+                if(!mSelectItem.activeSelf)
+                {
+                    mDontShutDownUI = true;
+                    mSelectItem.SetActive(true);
+                    mSelectItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = mInventoryItem[mInventoryX, mInventoryY].GetComponent<SpriteRenderer>().sprite;
+                    mInventoryItem[mInventoryX, mInventoryY].GetComponent<SpriteRenderer>().sprite = null;
+                    mSelectItemNumber = mInventoryItemNumber[mInventoryX, mInventoryY];
+                    mInventoryItemNumber[mInventoryX, mInventoryY] = 0;
+                    mInventoryItem[mInventoryX, mInventoryY].SetActive(false);
+                    GFunc.SetTmpText(mSelectItem.transform.GetChild(0).GetChild(0).GetChild(0).gameObject, mSelectItemNumber.ToString());
+                }
             }
             else                                                                                        // 인벤토리 아이템이 없으면 (들어올린 아이템이 있으면 아이템을 인벤토리에 넣는다)
             {
-
+                // 들고 있는 아이템이 있어야 실행
+                if(mSelectItem.activeSelf)
+                {
+                    mDontShutDownUI = false;
+                    mInventoryItem[mInventoryX, mInventoryY].SetActive(true);
+                    mInventoryItem[mInventoryX, mInventoryY].GetComponent<SpriteRenderer>().sprite = mSelectItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+                    mSelectItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = null;
+                    mInventoryItemNumber[mInventoryX, mInventoryY] = mSelectItemNumber;
+                    mSelectItemNumber = 0;
+                    mSelectItem.SetActive(false);
+                    GFunc.SetTmpText(mInventoryItem[mInventoryX, mInventoryY].transform.GetChild(0).gameObject, mInventoryItemNumber[mInventoryX, mInventoryY].ToString());
+                }
             }
         }
     }
@@ -175,7 +190,7 @@ public class ShopUI : MonoBehaviour
         if (mIsGetPrice)
         {
             
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
             {
                 if (mTableX == 1)
                 {
@@ -198,7 +213,7 @@ public class ShopUI : MonoBehaviour
                     GFunc.SetTmpText(mTableItem[mTableX, mTableY].transform.GetChild(3).gameObject, $"{mTableItemMoney[1, mTableY] * mTableItemNumber[1, mTableY]}");
                 }
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
             {
                 if (mTableX == 1)
                 {
@@ -221,7 +236,7 @@ public class ShopUI : MonoBehaviour
                     GFunc.SetTmpText(mTableItem[mTableX, mTableY].transform.GetChild(3).gameObject, $"{mTableItemMoney[1, mTableY] * mTableItemNumber[1, mTableY]}");
                 }
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
             {
                 if (mDigits < 7)
                 {
@@ -229,7 +244,7 @@ public class ShopUI : MonoBehaviour
                     mTableItem[mTableX, mTableY].transform.GetChild(0).localPosition += new Vector3(-8.2f, 0, 0);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
             {
                 if (mDigits > 0)
                 {
@@ -237,7 +252,7 @@ public class ShopUI : MonoBehaviour
                     mTableItem[mTableX, mTableY].transform.GetChild(0).localPosition += new Vector3(8.2f, 0, 0);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.E)) // 가격을 정해주고 ShopManager의 mItemPrice에 최종 가격을 저장
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT])) // 가격을 정해주고 ShopManager의 mItemPrice에 최종 가격을 저장
             {
                 mTableItem[mTableX, mTableY].transform.GetChild(0).gameObject.SetActive(false);
                 if (mTableX == 1)
@@ -255,7 +270,7 @@ public class ShopUI : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
             {
                 if (mTableX > 0) //맨 위가 아니다
                 {
@@ -268,7 +283,7 @@ public class ShopUI : MonoBehaviour
 
                 }
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.DOWN]))
             {
                 if (mTableX < 3)
                 {
@@ -284,7 +299,7 @@ public class ShopUI : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
             {
                 if (mTableY > 0)
                 {
@@ -301,7 +316,7 @@ public class ShopUI : MonoBehaviour
 
                 else { mIsInventory = true; }
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
             {
                 if (mTableY < 1)
                 {
@@ -318,7 +333,7 @@ public class ShopUI : MonoBehaviour
             }
             mSelectPosition = mTableItem[mTableX, mTableY].transform.position;
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
             {
                 if (mTableX == 1 || mTableX == 3) // 가격 측정
                 {
@@ -335,6 +350,7 @@ public class ShopUI : MonoBehaviour
                         //조건 : 아이템을 들고 있지 않다면 실행 가능
                         if(!mSelectItem.activeSelf)
                         {
+                            mDontShutDownUI = true;
                             mSelectItem.SetActive(true);
                             mSelectItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = mTableItem[mTableX, mTableY].GetComponent<SpriteRenderer>().sprite;
                             mTableItem[mTableX, mTableY].GetComponent<SpriteRenderer>().sprite = null;
@@ -366,6 +382,7 @@ public class ShopUI : MonoBehaviour
                         //조건 : 아이템을 들고 있어야 실행 가능
                         if(mSelectItem.activeSelf)
                         {
+                            mDontShutDownUI = false;
                             mTableItem[mTableX, mTableY].SetActive(true);
                             mTableItem[mTableX, mTableY].GetComponent<SpriteRenderer>().sprite = mSelectItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
                             if (mTableX == 0)
