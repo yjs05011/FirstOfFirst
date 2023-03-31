@@ -42,7 +42,13 @@ public class ShopUi : MonoBehaviour
 
     void InputKey()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INVENTORY]) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameObject.SetActive(false);
+            PlayerManager.Instance.mIsUiActive = false;
+            UiManager.Instance.GetVillageNoticeBoardOpen(false);
+        }
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.TOGGLEUPRIGHT]))
         {
             if (mObjIndex)
             {
@@ -68,7 +74,7 @@ public class ShopUi : MonoBehaviour
 
 
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.TOGGLEUPLEFT]))
         {
             if (!mObjIndex)
             {
@@ -94,7 +100,7 @@ public class ShopUi : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
         {
             if (mMainIndex > 0)
             {
@@ -104,7 +110,7 @@ public class ShopUi : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.RIGHT]))
         {
             if (!mObjIndex)
             {
@@ -127,7 +133,7 @@ public class ShopUi : MonoBehaviour
 
 
         }
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
         {
             Choice(mMainIndex);
         }

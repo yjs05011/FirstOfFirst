@@ -109,14 +109,14 @@ public class PlayerAct : MonoBehaviour
             SetPosition.Instance.mSettingPosition = Vector3.zero;
         }
 
-        if (!DataManager.Instance.FileCheck())
-        {
-            GameKeyManger.Instance.DefaultKeySetting();
-        }
-        else
-        {
-            GameKeyManger.Instance.DefaultKeySetting();
-        }
+        // if (!DataManager.Instance.FileCheck())
+        // {
+        //     GameKeyManger.Instance.DefaultKeySetting();
+        // }
+        // else
+        // {
+        //     GameKeyManger.Instance.DefaultKeySetting();
+        // }
 
 
 
