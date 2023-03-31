@@ -24,7 +24,8 @@ public class DungeonManager : MonoBehaviour
     // 언락한 상자 리스트
     public List<DungeonChest.ChestID> mUnlockChestList = new List<DungeonChest.ChestID>();
 
-    
+    // 드랍 아이템 리스트
+    public List<Item> mDungeonDropItemList = new List<Item>(); 
 
     private void Awake()
     {
@@ -93,6 +94,7 @@ public class DungeonManager : MonoBehaviour
         
         mKillMonsterList.Clear();
         mUnlockChestList.Clear();
+        mDungeonDropItemList.Clear();
     }
  
 
@@ -147,9 +149,26 @@ public class DungeonManager : MonoBehaviour
         mCamera.CameraMoveByPos(NextPos);
     }
 
-
+    // 플레이어가 처치한 몬스터 카운트 반환 함수
     public int GetKillMonsterCount()
     {
          return mKillMonsterList.Count;
+    }
+
+    // 드랍 아이템 리스트에 아이템 추가 하는 함수.
+    public void DungeonDropItemAdd(Item dropItem)
+    {
+        mDungeonDropItemList.Add(dropItem);
+    }
+    // 드랍 아이템 리스트에서 아이템 제거 하는 함수
+    public void DungeonDropItemDelete(Item dropItem)
+    {
+        mDungeonDropItemList.Remove(dropItem);
+    }
+
+    // 드랍 아이템 리스트 초기화 
+    public void ClearDungeonDropItemList()
+    {
+        mDungeonDropItemList.Clear();
     }
 }

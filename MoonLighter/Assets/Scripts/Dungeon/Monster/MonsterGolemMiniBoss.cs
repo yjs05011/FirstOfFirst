@@ -121,8 +121,7 @@ public class MonsterGolemMiniBoss : Monster
             
             // 컬라이더 off
             this.GetComponent<Collider2D>().enabled = false;
-            //hp bar hide
-            mHpBar.SetActive(false);
+           
 
             // 처치 몬스터 리스트에 추가
             DungeonManager.Instance.KillMonsterAdd(mMonsterId);

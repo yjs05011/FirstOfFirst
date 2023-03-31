@@ -384,6 +384,8 @@ public class DungeonDoor : MonoBehaviour
         // 3층 이하
         if (currFloor < 3)
         {
+            // 현재 층에 드랍되어있는 아이템 전부 제거
+            DungeonManager.Instance.ClearDungeonDropItemList();
             // 다음 층 던전 생성
             DungeonStage nextFloor = DungeonGenerator.Instance.InitDungeonBorad(0, 0, currFloor + 1, nextFloorBackwardDirection);
             // 플레이어가 위치한 스테이지 정보 갱신 (다음 층 시작 스테이지)

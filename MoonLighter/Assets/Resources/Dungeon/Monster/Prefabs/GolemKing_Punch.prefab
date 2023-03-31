@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 629684267624232565}
   - component: {fileID: 1649853316276596046}
   m_Layer: 0
-  m_Name: Shadow
+  m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,12 +24,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168906338399640281}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3421677367322767584}
+  m_Father: {fileID: 1076045365733914517}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1649853316276596046
@@ -114,7 +114,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 629684267624232565}
   - {fileID: 1076045365733914517}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -145,7 +144,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 1.1466666}
@@ -163,6 +162,7 @@ GameObject:
   - component: {fileID: 6626619300822255326}
   - component: {fileID: 8527983850025568161}
   - component: {fileID: 4021046196782376167}
+  - component: {fileID: 6896705502162871175}
   m_Layer: 0
   m_Name: Punch
   m_TagString: Untagged
@@ -177,13 +177,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8000027460300181011}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 629684267624232565}
   m_Father: {fileID: 3421677367322767584}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6626619300822255326
 SpriteRenderer:
@@ -269,3 +270,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca15aa3e2eebe1469ec936f60b81904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &6896705502162871175
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000027460300181011}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.53}
+  m_Size: {x: 1.5, y: 1.5}
+  m_Direction: 0
