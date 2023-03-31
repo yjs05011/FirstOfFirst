@@ -112,8 +112,8 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-       
-        if(InventoryManager.Instance.mIsManagerAddCheck == true)
+
+        if (InventoryManager.Instance.mIsManagerAddCheck == true)
         {
             for (int indexY = 0; indexY < ARRAY_Y; indexY++)
             {
@@ -128,48 +128,68 @@ public class Inventory : MonoBehaviour
 
             }
         }
-        
-        
-        //인벤토리 On/Off를 계속 확인
+        //false 이면  
+
         TryOpenInventory();
+
         if (mIsInventoryOpen == true)
         {
             if (!mIsEquipmentCheck)
             {
-                InventoryMove();                
+                InventoryMove();
             }
             else
-            {                
+            {
                 EquipmentMove();
             }
         }
+
+
+
+        // if (InventoryManager.Instance.mIsMoveController)
+        // {
+
+        //     if (mIsInventoryOpen == true)
+        //     {
+        //         if (!mIsEquipmentCheck)
+        //         {
+        //             InventoryMove();
+        //         }
+        //         else
+        //         {
+        //             EquipmentMove();
+        //         }
+        //     }
+
+        // }
+        // else
+        // {
+        //     mIsInventoryOpen = false;
+        // }
+        //인벤토리 On/Off를 계속 확인
+
     }
 
     //인벤토리 켰을때
     private void TryOpenInventory()
     {
-        //KeyManager를 통해 키보드 입력(매니저에서 받는)
-        //if(Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
-        //화요일 머지시 지워야함(i눌러서 인벤토리 나오는 부분)
 
         if (Input.GetKeyDown(KeyCode.I))
         {
             mIsInventoryActiveCheck = !mIsInventoryActiveCheck;
 
-            if (Input.GetKeyDown(KeyCode.I))
+            mKeyCodeICount++;
+            if (mKeyCodeICount == 1)
             {
-                mKeyCodeICount++;
-                if (mKeyCodeICount == 1)
-                {
-                    OpenInventory();
-                }
-                if (mKeyCodeICount == 2)
-                {
-                    mKeyCodeICount = 0;
-                    CloseInventory();
-                }
+                OpenInventory();
+            }
+            if (mKeyCodeICount == 2)
+            {
+                mKeyCodeICount = 0;
+                CloseInventory();
             }
         }
+
     }
 
     public void InventoryMove()
@@ -187,7 +207,7 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (4 > mSelectX)
+            if (mSelectX < 4)
             {
                 mSelectX++;
                 mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
@@ -680,7 +700,7 @@ public class Inventory : MonoBehaviour
 
     }
 
-    
+
 
 
 
