@@ -82,6 +82,19 @@ public class DungeonStage : MonoBehaviour
         mDoorLeft.Init();
     }
 
+    // 스테이지에 몬스터가 모두 처치된 상태인지 체크해서 반환하는 함수.
+    public bool IsCleanStage()
+    {
+        // 보드의 몬스터수와 처치 몬스터수가 같을때 (모두 처치한경우)
+        if (mBoard.GetBoardMonsterCount() == mMonsterDieCount)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public void AddDieMonsterCount(int count = 1)
     {

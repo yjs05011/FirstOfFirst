@@ -125,8 +125,6 @@ public class MonsterGolemKing : Monster
             // 컬라이더 off
             //this.GetComponent<Collider2D>().enabled = false;
 
-            //hp bar 가 없음.
-            //mHpBar.SetActive(false);
 
             // 몬스터가 위치한 스테이지에 다이 정보 갱신
             if (mStage)
@@ -215,8 +213,10 @@ public class MonsterGolemKing : Monster
                 if (instance)
                 {
                     Rock rock = instance.GetComponent<Rock>();
-                    rock.SetData(this, this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea")));
-                    rock.mAnimator.SetFloat("Rock", Random.Range(0.0f, 6.0f));
+                    rock.SetData(this);
+                    rock.transform.position = this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea"));
+
+                    rock.mAnimator.SetFloat("RockType", Random.Range(0.0f, 6.0f));
 
                 }
             }
