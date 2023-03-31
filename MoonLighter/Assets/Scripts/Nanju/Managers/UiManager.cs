@@ -25,11 +25,21 @@ public class UiManager : MonoBehaviour
     public bool mIsPlayerUseAnimation = false;
     public bool mIsResultUi = false;
     //키변경 하기 위한 변수 선언
-    public bool mIsKeyChaged = false;
+    public bool mIsKeyChanged = false;
 
 
     // [Ui]
     public bool mExitDungeonUiOnOffCheck = false;
+
+    // [마을]
+    // 테이블 아이템을 열었을 시 값이 변하는 변수 선언
+    public bool mItemTableOpen = false;
+    // 마을 게시판을 열었을 시 값이 변하는 변수 선언
+    public bool mVillageNoticeBoardOpen = false;
+    // 대장간과 말했을때 값이 변하는 변수 선언
+    public bool mBlacksmithTalk = false;
+    // 마녀랑 말했을때 값이 변하는 변수 선언
+    public bool mWitchTalk = false;
 
 
     private void Awake()
@@ -96,10 +106,32 @@ public class UiManager : MonoBehaviour
         mIsPlayerUseAnimation = value;
     }
 
-    // [플레이어] 어떤 몬스터에게 플레이어가 죽었는지 확인 [보류]
+ 
+    // [마을]
 
+    // 테이블 아이템을 열었을 시 값이 확인 선언
+    public void GetItemTableOpen(bool value)
+    {
+        mItemTableOpen = value;
+    }
 
+    // 마을 게시판를 열었을 시 값 확인 함수
+    public void GetVillageNoticeBoardOpen(bool value)
+    {
+        mVillageNoticeBoardOpen = value;
+    }
 
+    // 대장장이와 이야기 했는지 확인하는 함수
+    public void GetBlacksmithTalk(bool value)
+    {
+        mBlacksmithTalk = value;
+    }
+
+    // 마녀와 이야기를 했는지 확인하는 함수
+    public void GetWitchTalk(bool value)
+    {
+        mWitchTalk = value;
+    }
 
 
 
