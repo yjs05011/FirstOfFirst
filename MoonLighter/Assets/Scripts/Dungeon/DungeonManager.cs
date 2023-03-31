@@ -85,6 +85,9 @@ public class DungeonManager : MonoBehaviour
         if(scene.name == "Dungeon")
         {
             DungeonGenerator.Instance.DungeonGenerate();
+            
+            // UI manager 던전체크 true . 
+            UiManager.Instance.mIsDungeonCheck = true;
         }
     }
 
@@ -170,5 +173,15 @@ public class DungeonManager : MonoBehaviour
     public void ClearDungeonDropItemList()
     {
         mDungeonDropItemList.Clear();
+    }
+
+    // 현재 플레이어가 위치한 스테이지가 클린한지 체크해 주는 함수
+    public bool IsClenStage()
+    {
+        if(mPlayerCurrStage != null)
+        {
+            return mPlayerCurrStage.IsCleanStage();
+        }
+        return false;
     }
 }
