@@ -59,10 +59,12 @@ public class DungeonChest : MonoBehaviour
         {
             //if (mChestID == ChestID.BossChest)
             //{
-                // 임시> 보스방 상자 열면 탈출하게 처리.
-                DungeonManager.Instance.TestDungeonExitInit();
-                
-                return;
+                // 임시> 상자 열면 탈출하게 처리.
+                   mState = ChestState.Lock;
+            // DungeonManager.Instance.TestDungeonExitInit();
+            //DungeonManager.Instance.TestDungeonEnterInit();
+            LoadingManager.LoadScene("Dungeon");
+            return;
             //}
            // return;
         }

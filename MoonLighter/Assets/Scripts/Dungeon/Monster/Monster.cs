@@ -154,7 +154,7 @@ public class Monster : MonoBehaviour
         }
 
         // °³¹ß¿ë
-        if(mStage == null)
+        if (mStage == null)
         {
             mStage = DungeonGenerator.Instance.mStages[0];
             mStage.mBoard.GetMonsters().Add(this);
@@ -335,6 +335,9 @@ public class Monster : MonoBehaviour
 
     public Vector3 IsRandomPositionInsidePolygonCollider(PolygonCollider2D collider)
     {
+        float worldX = collider.transform.position.x;
+        float worldY = collider.transform.position.y;
+
         float minX = Mathf.Infinity;
         float maxX = Mathf.NegativeInfinity;
         float minY = Mathf.Infinity;
@@ -361,17 +364,22 @@ public class Monster : MonoBehaviour
             }
         }
 
+        collider.gameObject.SetActive(true);
+
+        int count = 40;
+
         Vector2 position = new Vector2();
-        while (true)
+        while (count > 0)
         {
             Debug.Log("IsRandomPositionInsidePolygonCollider");
-            position.x = Random.Range(minX, maxX);
-            position.y = Random.Range(minY, maxY);
+            position.x = Random.Range(minX+worldX, maxX+worldX);
+            position.y = Random.Range(minY+worldY, maxY+worldY);
 
             if (collider.OverlapPoint(position))
             {
                 break;
             }
+            --count;
         }
         return position;
     }

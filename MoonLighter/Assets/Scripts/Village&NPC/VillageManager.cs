@@ -14,6 +14,7 @@ public class VillageManager : GSingleton<VillageManager>
         IsWitchHouseBuild = false;
         IsWillHouseUpgrade = false;
         WillHouse = "ShopLv1";
+
         //mBlackSmith = transform.Find("BlackSmithHouse_old").gameObject;
         //mWitchHouse = transform.Find("WitchHouse_old").gameObject;
     }

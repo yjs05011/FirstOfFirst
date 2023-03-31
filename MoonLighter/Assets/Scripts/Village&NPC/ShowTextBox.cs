@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ShowTextBox : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class ShowTextBox : MonoBehaviour
     public static Vector3 mBedPosition = new Vector3(3, 3, 0);
     public GameObject mShopUI;
     private float mTimer;
-    private GameObject talk = default;
+    private GameObject mTalk = default;
+    private GameObject mButton = default;
     private bool IsTalking = false;
     private bool IsPlayerNearby = false;
     private bool IsPlayerGoToBed = false;
@@ -19,8 +21,9 @@ public class ShowTextBox : MonoBehaviour
         IsPlayerGoToBed = false;
         mTimer = 0;
         mTalkIndex = 0;
-        talk = transform.Find("Talk").gameObject;
-        talk.SetActive(false);
+        mTalk = transform.Find("Talk").gameObject;
+        mButton = mTalk.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
+        mTalk.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,21 +31,29 @@ public class ShowTextBox : MonoBehaviour
     {
         if (IsPlayerNearby)
         {
-            talk.SetActive(true);
+            if(!mTalk.activeSelf)
+            {
+                mTalkIndex = 0;
+                string talkData = TalkManager.Instance.GetTalk(mID, mTalkIndex);
+                GFunc.SetText(mText, talkData);
+            }
+            mTalk.SetActive(true);
+            GFunc.SetText(mButton, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
+            
         }
-        else
+        else if(!IsPlayerNearby) 
         {
-            if (talk.activeSelf)
+            if (mTalk.activeSelf)
             {
                 mTalkIndex = 0;
                 IsTalking = false;
                 string talkData = TalkManager.Instance.GetTalk(mID, mTalkIndex);
                 GFunc.SetText(mText, talkData);
-                talk.SetActive(false);
+                mTalk.SetActive(false);
             }
 
         }
-        if (talk.activeSelf)
+        if (mTalk.activeSelf)
         {
             if (mID == 220)
             {
@@ -54,7 +65,7 @@ public class ShowTextBox : MonoBehaviour
                         if (mTimer > 2)
                         {
                             IsPlayerGoToBed = true;
-                            talk.SetActive(false);
+                            mTalk.SetActive(false);
                             SetPosition.Instance.mSettingPosition = mBedPosition;
 
                             if (SetPosition.Instance.mIsNight)
@@ -82,24 +93,26 @@ public class ShowTextBox : MonoBehaviour
 
                     if (mID == 600)
                     {
-                        //SetPosition.Instance.mSettingPosition = new Vector3(8, 10, 0);
+                        
                         LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
                     }
                     else if (mID == 120)
                     {
+                        ShopManager.Instance.mTablesNumber= 0;
                         mShopUI.SetActive(true);
-                        mShopUI.GetComponent<ShopUI>().mTableNumber = 0;
                         // 상점의 테이블
                     }
                     else if(mID == 130)
                     {
+                        ShopManager.Instance.mTablesNumber = 1;
                         mShopUI.SetActive(true);
-                        mShopUI.GetComponent<ShopUI>().mTableNumber = 1;
+                        
                     }
                     else if (mID == 700)
                     {
                         // 게시판 UI
                     }
+                    
                     else if (mID == 2000 && mTalkIndex == 1)
                     {
                         // 대장간 UI

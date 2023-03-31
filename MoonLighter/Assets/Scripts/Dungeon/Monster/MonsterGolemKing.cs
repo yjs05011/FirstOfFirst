@@ -69,31 +69,31 @@ public class MonsterGolemKing : Monster
             {
                 if (mTarget)
                 {
-                    
-                   mTimer += Time.deltaTime;
-                   
-                   if (mTimer >= mWaveCoolTime)
-                   {
-                       mTimer = 0.0f;
-                       WaveAttack();
-                   }
-                                      
-                   if (Random.Range(0, 1000) < 500)
-                   {
-                       PunchAttack();
-                   }
-                   else
-                   {
-                       if (Random.Range(0, 1000) < 500)
-                       {
-                          // RockSpawnAttack();
-                       }
-                       else
-                       {
-                           StickyAttack();
-                       }
-                   
-                   }
+
+                    mTimer += Time.deltaTime;
+
+                    if (mTimer >= mWaveCoolTime)
+                    {
+                        mTimer = 0.0f;
+                        WaveAttack();
+                    }
+
+                    if (Random.Range(0, 1000) < 500)
+                    {
+                        PunchAttack();
+                    }
+                    else
+                    {
+                        if (Random.Range(0, 1000) < 500)
+                        {
+                            RockSpawnAttack();
+                        }
+                        else
+                        {
+                            StickyAttack();
+                        }
+
+                    }
 
                 }
                 else
@@ -216,6 +216,7 @@ public class MonsterGolemKing : Monster
                 {
                     Rock rock = instance.GetComponent<Rock>();
                     rock.SetData(this, this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea")));
+                    rock.mAnimator.SetFloat("Rock", Random.Range(0.0f, 6.0f));
 
                 }
             }
@@ -290,6 +291,11 @@ public class MonsterGolemKing : Monster
             }
 
             return;
+        }
+        else
+        {
+            mPunchCount = 0;
+            mAnimator.SetTrigger("RecoverArm");
         }
     }
 
