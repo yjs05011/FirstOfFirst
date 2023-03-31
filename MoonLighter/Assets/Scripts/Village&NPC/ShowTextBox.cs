@@ -33,7 +33,7 @@ public class ShowTextBox : MonoBehaviour
     {
         if (IsPlayerNearby)
         {
-            if(!mTalk.activeSelf)
+            if (!mTalk.activeSelf)
             {
                 mTalkIndex = 0;
                 string talkData = TalkManager.Instance.GetTalk(mID, mTalkIndex);
@@ -41,9 +41,9 @@ public class ShowTextBox : MonoBehaviour
             }
             mTalk.SetActive(true);
             GFunc.SetText(mButton, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
-            
+
         }
-        else if(!IsPlayerNearby) 
+        else if (!IsPlayerNearby)
         {
             if (mTalk.activeSelf)
             {
@@ -87,10 +87,11 @@ public class ShowTextBox : MonoBehaviour
                             GameManager.Instance.mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
                             GameManager.Instance.mTableNumber = ShopManager.Instance.mTableNumber;
                             GameManager.Instance.mItemPrice = ShopManager.Instance.mItemPrice;
-                            GameManager.Instance.mItemsNumber= ShopManager.Instance.mItemsNumber;
-                            GameManager.Instance.mBedPosition= ShopManager.Instance.mBedPosition;
+                            GameManager.Instance.mItemsNumber = ShopManager.Instance.mItemsNumber;
+                            GameManager.Instance.mBedPosition = ShopManager.Instance.mBedPosition;
                             GameManager.Instance.mIsBlackSmithBuild = VillageManager.Instance.IsBlackSmithBuild;
                             GameManager.Instance.mIsWitchHouseBuild = VillageManager.Instance.IsWitchHouseBuild;
+                            GameKeyManger.Instance.SaveKeyData();
                             //GameManager.Instance.mInventorySlots = InventoryManager.Instance.mInventorySlots;
                             //GameManager.Instance.mEquipmentSlots = InventoryManager.Instance.mEquipmentSlots;
                             DataManager.Instance.JsonSave();
@@ -110,53 +111,53 @@ public class ShowTextBox : MonoBehaviour
 
                     if (mID == 600)
                     {
-                        
+
                         LoadingManager.LoadScene(VillageManager.Instance.WillHouse);
                     }
                     else if (mID == 120)
                     {
-                        ShopManager.Instance.mTablesNumber= 0;
+                        ShopManager.Instance.mTablesNumber = 0;
                         mUiManager.GetItemTableOpen(true);
                         mShopUI.SetActive(true);
-                        // »óÁ¡ÀÇ Å×ÀÌºí
+                        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
                     }
-                    else if(mID == 130)
+                    else if (mID == 130)
                     {
                         ShopManager.Instance.mTablesNumber = 1;
                         mUiManager.GetItemTableOpen(true);
                         mShopUI.SetActive(true);
-                        
+
                     }
                     else if (mID == 700)
                     {
                         mUiManager.GetVillageNoticeBoardOpen(true);
-                        // °Ô½ÃÆÇ UI
+                        // ï¿½Ô½ï¿½ï¿½ï¿½ UI
                     }
 
                     else if (mID == 2000 && mTalkIndex == 1)
                     {
                         mUiManager.GetBlacksmithTalk(true);
-                        // ´ëÀå°£ UI
+                        // ï¿½ï¿½ï¿½å°£ UI
                     }
                     else if (mID == 3000 && mTalkIndex == 1)
                     {
                         mUiManager.GetWitchTalk(true);
-                        // ¸¶³à UI
+                        // ï¿½ï¿½ï¿½ï¿½ UI
                     }
-                    else if(mID == 420)
+                    else if (mID == 420)
                     {
-                        //°è»ê´ë
-                        if(ShopManager.Instance.mWaitShopNPC != null)
+                        //ï¿½ï¿½ï¿½ï¿½
+                        if (ShopManager.Instance.mWaitShopNPC != null)
                         {
                             ShopManager.Instance.mWaitShopNPC[0].GetComponent<ShopNPC>().IsCalculate = false;
                             //ShopManager.Instance.mWaitShopNPC.RemoveAt(0);
                         }
                     }
-                    else if(mID == 900)
+                    else if (mID == 900)
                     {
 
                     }
-                    else if(mID == 910)
+                    else if (mID == 910)
                     {
 
                     }

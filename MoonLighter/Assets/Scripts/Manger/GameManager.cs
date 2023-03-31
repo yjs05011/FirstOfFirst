@@ -32,15 +32,16 @@ public class GameManager : GSingleton<GameManager>
     public bool mIsBlackSmithBuild = default;
     [SerializeField]
     public bool mIsWitchHouseBuild = default;
+
     //[SerializeField]
     //public Slot[,] mInventorySlots = default;
     //[SerializeField]
     //public Slot[,] mEquipmentSlots = default;
-    //// ÀÎº¥Åä¸®, ÇÃ·¹ÀÌ¾î°¡ ³¢°í ÀÖ´Â ¾ÆÀÌÅÛ
-    //// »óÁ¡ÀÇ ¾ÆÀÌÅÛ(±×³É »óÁ¡¸Å´ÏÀú¿¡ ÀúÀåÇÏ°í ÀÖ´Â°Å (NPC »©°í) ¸ðµÎ ´Ù)
-    //// ´ëÀå°£, ¸¶³à
-    // ¾ÆÀÌÅÛ Á¤º¸
-    // Ã¢°í
+    //// ï¿½Îºï¿½ï¿½ä¸®, ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´Â°ï¿½ (NPC ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ ï¿½ï¿½)
+    //// ï¿½ï¿½ï¿½å°£, ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // Ã¢ï¿½ï¿½
     protected override void Init()
     {
         base.Init();

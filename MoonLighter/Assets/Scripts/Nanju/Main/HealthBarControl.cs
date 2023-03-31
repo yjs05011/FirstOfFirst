@@ -42,7 +42,6 @@ public class HealthBarControl : MonoBehaviour
 
         if (UiManager.Instance.mIsHpChange)
         {
-            Debug.Log("!!!!!!!!");
             mCurrentHp = PlayerManager.Instance.mPlayerStat.Hp;
             mMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
             mHpBar.fillAmount = mCurrentHp / mMaxHp;

@@ -88,17 +88,11 @@ public class PlayerAct : MonoBehaviour
     {
         SetActionType(ActState.State_Move);
         mPlayerNowWeapone = 1;
-        // PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
-        // PlayerManager.Instance.mPlayerStat.Speed = mPlayerDefaultStat.Speed;
-        // PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
-        // PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
-        // PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
-        // PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
-        // mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
-        // mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
-        // mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
-        // mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
-        // mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
+        mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
+        mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
+        mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
+        mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
+        mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
         if (PlayerManager.Instance.mPlayerBeforPos != default)
         {
             transform.position = PlayerManager.Instance.mPlayerBeforPos;
@@ -128,11 +122,6 @@ public class PlayerAct : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad0))
-        {
-            DataManager.Instance.JsonLoad();
-        }
-
         if (PlayerManager.Instance.mIsUiActive)
         {
 
@@ -201,6 +190,7 @@ public class PlayerAct : MonoBehaviour
                         {
                             mPlayerNowWeapone = 1;
                         }
+                        UiManager.Instance.mIsWeaponChange = true;
                     }
                     break;
                 case ActState.State_Attack_Combo_One:
@@ -473,12 +463,9 @@ public class PlayerAct : MonoBehaviour
             else
             {
                 mPlayerHp -= calculateDamage;
-<<<<<<< HEAD
                 PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;
+                UiManager.Instance.mIsHpChange = true;
 
-=======
-                PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;  
->>>>>>> 743fdfda3419662489cb2c869d23a15b154e9da3
             }
             if (mPlayerHp < 0)
             {

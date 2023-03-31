@@ -11,6 +11,8 @@ public class TitleButtonControl : MonoBehaviour
     public GameObject mOptionCursorImage;
     public GameObject mExitCursorImage;
 
+    public PlayerScriptObjs mPlayerDefaultStat;
+
     public int mTextCheck;
 
     // Start is called before the first frame update
@@ -55,6 +57,12 @@ public class TitleButtonControl : MonoBehaviour
             {
                 case 0:
                     gameObject.SetActive(false);
+                    PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
+                    PlayerManager.Instance.mPlayerStat.Speed = mPlayerDefaultStat.Speed;
+                    PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
+                    PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
+                    PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
+                    PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
                     LoadingManager.LoadScene("VillageScene");
                     break;
 

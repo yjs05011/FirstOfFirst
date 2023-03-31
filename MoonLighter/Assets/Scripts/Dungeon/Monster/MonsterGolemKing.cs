@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.UI.GridLayoutGroup;
+
 
 public class MonsterGolemKing : Monster
 {
@@ -14,16 +12,16 @@ public class MonsterGolemKing : Monster
     private float mWaveCoolTime = 10.0f;
     public float mTimer = 0.0f;
 
-    
+
     public override void Update()
     {
         base.Update();
 
-        // ´ë±â »óÅÂ
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (mCurrState == State.Ready)
         {
 
-            // ¹üÀ§ ¾È¿¡ µé¾î¿Ô´ÂÁö Ã¼Å©ÇÏ°í, ¹üÀ§¾ÈÀÌ¸é, wake up ¾Ö´Ï¸ÞÀÌ¼Ç Ãâ·Â ÈÄ idle ·Î »óÅÂ º¯°æ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½, wake up ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ idle ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (IsInTraceScope())
             {
                 UiManager.Instance.mIsBossHpVisible = true;
@@ -44,8 +42,8 @@ public class MonsterGolemKing : Monster
             }
 
         }
-        // waitÁß¿¡µµ Å¸ÀÌ¸Ó´Â µ¿ÀÛÇÏ°Ô 
-        else if(mCurrState == State.Wait)
+        // waitï¿½ß¿ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸Ó´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ 
+        else if (mCurrState == State.Wait)
         {
             mTimer += Time.deltaTime;
 
@@ -55,17 +53,17 @@ public class MonsterGolemKing : Monster
                 WaveAttack();
             }
         }
-        // °ø°Ý »óÅÂ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         else if (mCurrState == State.Attack)
         {
-            // ÃßÀû ¿µ¿ªÀ» ¹þ¾î³­ °æ¿ì ´ë±â »óÅÂ·Î ¹Ù²Û´Ù.
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³­ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ù²Û´ï¿½.
             if (!IsInTraceScope())
             {
                 this.SetState(State.Idle);
                 return;
             }
 
-            // °ø°Ý ¿µ¿ª ¾È¿¡ ÀÖ´Â °æ¿ì °ø°Ý ÇÑ´Ù.
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
             if (IsInAttackRange())
             {
                 if (mTarget)
@@ -105,7 +103,7 @@ public class MonsterGolemKing : Monster
             }
 
         }
-        // °ø°Ý ÄðÅ¸ÀÓ (°ø°Ý ÈÄ)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
         else if (mCurrState == State.AttackCooltime)
         {
             mAttackTime += Time.deltaTime;
@@ -115,71 +113,71 @@ public class MonsterGolemKing : Monster
                 this.SetState(State.Attack);
             }
         }
-        // »ç¸Á »óÅÂ 
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
         else if (mCurrState == State.Die)
         {
 
-            // ¾Ö´Ï¸ÞÀÌ¼Ç ´ÙÀÌ 
+            // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ 
             mAnimator.SetTrigger("Dead");
 
-            // ÄÃ¶óÀÌ´õ off
+            // ï¿½Ã¶ï¿½ï¿½Ì´ï¿½ off
             //this.GetComponent<Collider2D>().enabled = false;
 
 
-            // ¸ó½ºÅÍ°¡ À§Ä¡ÇÑ ½ºÅ×ÀÌÁö¿¡ ´ÙÀÌ Á¤º¸ °»½Å
+            // ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (mStage)
             {
                 mStage.AddDieMonsterCount();
             }
 
-            // Ã³Ä¡ ¸ó½ºÅÍ ¸®½ºÆ®¿¡ Ãß°¡
+            // Ã³Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½
             DungeonManager.Instance.KillMonsterAdd(mMonsterId);
 
-            // »ç¸Á ·ÎÁ÷ Ã³¸® ÈÄ¿¡ ¹Ýµå½Ã State.None À¸·Î º¸³»¼­ ´õÀÌ»ó ¾÷µ¥ÀÌÆ®¹®À» Å¸Áö ¾Êµµ·Ï »óÅÂ º¯°æ.
+            // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½Ä¿ï¿½ ï¿½Ýµï¿½ï¿½ State.None ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
             this.SetState(State.None);
 
-          
+
         }
     }
 
-    
+
 
 
     public void PunchAttack()
     {
-        // ÆÝÄ¡ ½ºÅ³ ½ÃÀü ¾Ö´Ï¸ÞÀÌ¼Ç ½ÃÀÛ Æ®¸®°Å 
+        // ï¿½ï¿½Ä¡ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ 
         mAnimator.SetTrigger("LunchArm");
         this.SetState(State.Wait);
-        // -> OnAnimation:OnGolemKingPunchEnd ½ÃÁ¡¿¡¼­ idle »óÅÂ·Î ´Ù½Ã º¯°æ
+        // -> OnAnimation:OnGolemKingPunchEnd ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idle ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Debug.Log(" PunchAttack()");
     }
 
     public void WaveAttack()
     {
-        // wave Æ÷Áö¼Ç¿¡ wave ¿ÀºêÁ§Æ® Ãâ·Â
+        // wave ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ wave ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
         WaveSkill();
-        // wave ´Â ½ÃÀü ÇÏ°í °ñ·½Å·Àº 
+        // wave ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½ï¿½Å·ï¿½ï¿½ 
         //this.SetState(State.Attack);
         Debug.Log(" WaveAttack()");
     }
 
     public void StickyAttack()
     {
-        // ½ºÆ¼Å° ½ºÅ³ ½ÃÀü ¾Ö´Ï¸ÞÀÌ¼Ç ½ÃÀÛ Æ®¸®°Å 
+        // ï¿½ï¿½Æ¼Å° ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ 
         mAnimator.SetTrigger("StickyArm");
         this.SetState(State.Wait);
-        // -> OnAnimation:Finish ·Î Attack »óÅÂ·Î ´Ù½Ã º¯°æ
+        // -> OnAnimation:Finish ï¿½ï¿½ Attack ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Debug.Log(" StickyAttack()");
     }
 
     public void RockSpawnAttack()
     {
-        // ¶ô½ºÆù ½ºÅ³ ½ÃÀü ¾Ö´Ï¸ÞÀÌ¼Ç ½ÃÀÛ Æ®¸®°Å 
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ 
         mAnimator.SetTrigger("RockSpawn");
         this.SetState(State.Wait);
         Debug.Log(" RockSpawnAttack()");
-        // -> OnAnimation:OnGolemKingRockSpwan ·Î Rock »ý¼º , ½ºÆù ¸ð¼Ç ³¡³ª´Â ½ÃÁ¡(OnGolemKingRockSpwanFinish)¿¡  Attack »óÅÂ·Î ´Ù½Ã º¯°æ
+        // -> OnAnimation:OnGolemKingRockSpwan ï¿½ï¿½ Rock ï¿½ï¿½ï¿½ï¿½ , ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(OnGolemKingRockSpwanFinish)ï¿½ï¿½  Attack ï¿½ï¿½ï¿½Â·ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     public override void OnAnimationEvent(string name)
@@ -192,18 +190,18 @@ public class MonsterGolemKing : Monster
             }
             return;
         }
-        // ÆÝÄ¡ °ø°Ý ½ÃÀü ¾Ö´Ï¸ÞÀÌ¼Ç - punch arm ÇÏ´Ã¿¡ ³¯¸° ½ÃÁ¡¿¡ È£Ãâ. 
+        // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ - punch arm ï¿½Ï´Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½. 
         if ("OnGolemKingPunchStart".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             RepeatPunchAttack();
         }
-        // ÆÝÄ¡ °ø°Ý Á¾·á ÈÄ ÆÈ ´Ù½Ã ¿øÀ§Ä¡ recover arm ÀÌ ³¡³­ ½ÃÁ¡¿¡ È£Ãâ
+        // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ recover arm ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
         else if ("OnGolemKingPunchEnd".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             Debug.Log("OnGolemKingPunchEnd");
             this.SetState(State.Attack);
         }
-        // ¶ô ½ºÆù ½ÃÀü ¾Ö´Ï¸ÞÀÌ¼Ç - ¹Ù´Ú Âï´Â ½ÃÁ¡¿¡ È£Ãâ 
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ - ï¿½Ù´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ 
         else if ("OnGolemKingRockSpwan".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             for (int i = 0; i < 40; i++)
@@ -218,26 +216,26 @@ public class MonsterGolemKing : Monster
                 if (instance)
                 {
                     Rock rock = instance.GetComponent<Rock>();
-                    rock.SetData(this, this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea")),30.0f);
+                    rock.SetData(this, this.IsRandomPositionInsidePolygonCollider((PolygonCollider2D)this.FindCollider2D("RockSpawnArea")), 30.0f);
                     // 
                     //rock.mAnimator.SetFloat("RockType", Random.Range(0.0f, 6.0f));
 
                 }
-                
+
             }
-            
+
         }
-        // ¶ô ½ºÆù ¾Ö´Ï¸ÞÀÌ¼Ç ³¡³­ ½ÃÁ¡.
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         else if ("OnGolemKingRockSpwanFinish".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             this.SetState(State.Attack);
         }
-        // ½ºÆ¼Å° ¾Ï ½ºÅ³ Á¾·á.
-        else if("StickyArmAttackFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        // ï¿½ï¿½Æ¼Å° ï¿½ï¿½ ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½.
+        else if ("StickyArmAttackFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
             this.SetState(State.Attack);
         }
-        // ´ÙÀÌ ¾Ö´Ï¸ÞÀÌ¼Ç ³¡³ª¸é È£Ãâ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
         else if ("DeadFinish".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
         }
@@ -245,7 +243,7 @@ public class MonsterGolemKing : Monster
         {
             Debug.LogErrorFormat("Unknown Event Name:{0}", name);
         }
-        
+
     }
 
     public void WaveSkill()
@@ -264,7 +262,7 @@ public class MonsterGolemKing : Monster
 
     public void RepeatPunchAttack()
     {
-        if(mPunchCount >= PUNCH_COUNT)
+        if (mPunchCount >= PUNCH_COUNT)
         {
             mPunchCount = 0;
 
@@ -275,13 +273,13 @@ public class MonsterGolemKing : Monster
         ++mPunchCount;
 
 
-        // °ø°Ý ¿µ¿ª ¾È¿¡ ÀÖ´Â °æ¿ì °ø°Ý ÇÑ´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
         if (IsInAttackRange())
         {
             if (mTarget)
             {
 
-                // Å¸°ÙÀ§Ä¡ Àâ°í.
+                // Å¸ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½.
                 GameObject instance = GameObject.Instantiate<GameObject>(this.FindSkillPreset("PunchSpawnPreset"));
                 instance.transform.position = mTarget.transform.position;
                 instance.transform.parent = this.mStage.transform;

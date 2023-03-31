@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+
 
 public class Tables : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class Tables : MonoBehaviour
     void Awake()
     {
         mTables = new Transform[transform.childCount - 1];
-        mSprites= new SpriteRenderer[transform.childCount - 1];
+        mSprites = new SpriteRenderer[transform.childCount - 1];
         for (int i = 0; i < mTables.Length; i++)
         {
             mTables[i] = transform.GetChild(i);
@@ -22,9 +22,9 @@ public class Tables : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    public void SetItemOnTable(Sprite item,int tableNum)
+    public void SetItemOnTable(Sprite item, int tableNum)
     {
         mSprites[tableNum].sprite = item;
     }

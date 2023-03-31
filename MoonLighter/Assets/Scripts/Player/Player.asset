@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583301e7309ae2548aee4719dde2c6f5, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  hp: 100
-  MaxHp: 100
+  hp: 500
+  MaxHp: 500
   Speed: 5
-  str: 50
+  str: 20
   def: 10
   Money: 500

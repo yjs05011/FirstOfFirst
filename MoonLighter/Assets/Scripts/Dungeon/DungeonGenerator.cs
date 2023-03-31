@@ -1,12 +1,7 @@
-using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using static DungeonDoor;
-using static UnityEditor.VersionControl.Asset;
+
 
 
 public class DungeonGenerator : MonoBehaviour
@@ -27,37 +22,37 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    // ½ºÅ×ÀÌÁö ÇÁ¸®ÆÕ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public GameObject mStagePrefab = null;
     public GameObject mHiddenStagePrefab = null;
     public GameObject mBossStagePrefab = null;
 
-    // ´øÀü ¸Ê(½ºÅ×ÀÌÁö°¡ ±×·ÁÁø ÀüÃ¼ board)ÀÇ °¡·Î , ¼¼·Î
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ board)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ , ï¿½ï¿½ï¿½ï¿½
     public const int WIDTH = 10;
     public const int HEIGHT = 10;
 
-    // ¹æÇâ const (ºñÆ® ¿¬»êÀ» À§ÇÑ °ª)
+    // ï¿½ï¿½ï¿½ï¿½ const (ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
     public const int DIRECTION_NONE = 0;
     public const int DIRECTION_TOP = 1;
     public const int DIRECTION_BOTTOM = 2;
     public const int DIRECTION_LEFT = 4;
     public const int DIRECTION_RIGHT = 8;
 
-    // Èú¸µ Ç® max Èú·® const
+    // ï¿½ï¿½ï¿½ï¿½ Ç® max ï¿½ï¿½ï¿½ï¿½ const
     public const int POOL_MAX_HEAL_POINT = 100;
 
-    // »ý¼³µÉ ½ºÅ×ÀÌÁö ÃÖ´ë °³¼ö (½ÃÀÛ ½ºÅ×ÀÌÁö Á¦¿ÜÇÑ °³¼ö)
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
     public static int TOTAL_COUNT = 10;
-    // »ý¼ºµÈ ½ºÅ×ÀÌÁö Ä«¿îÆ®¿ë º¯¼ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public static int CREATE_COUNT = 0;
 
-    // ´øÀü ¸Ê (½ºÅ×ÀÌÁö°¡ ±×·ÁÁú ÀüÃ¼ º¸µå) 
-    public static int[] mDungeonBoard = new int[WIDTH * HEIGHT*3];
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½) 
+    public static int[] mDungeonBoard = new int[WIDTH * HEIGHT * 3];
 
-    // »ý¼ºµÈ ½ºÅ×ÀÌÁöµéÀÇ ¸®½ºÆ® 
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® 
     public List<DungeonStage> mStages = new List<DungeonStage>();
 
-    // Ä·ÇÁ Å¸ÀÔ ½ºÅ×ÀÌÁö »ý¼º¿©ºÎ Ã¼Å©¿ë bool type º¯¼ö
+    // Ä·ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ bool type ï¿½ï¿½ï¿½ï¿½
     public bool IsCreatedCampRoom = false;
 
 
@@ -69,8 +64,8 @@ public class DungeonGenerator : MonoBehaviour
     public int mStartX = 0;
     public int mStartY = 0;
     public int mStartFloor = 1;
- 
- 
+
+
     public void DungeonGenerate()
     {
         mStages.Clear();
@@ -78,25 +73,25 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     public DungeonStage InitDungeonBorad(int startX, int startY, int floor, int backwardDirection)
-    {        
-        // ¹æ »ý¼º Á¾ °³¼ö ¹æ¾î·ÎÁ÷
+    {
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         int safetyTotalCount = (Mathf.Max(WIDTH, HEIGHT) / 2) * Mathf.Min(WIDTH, HEIGHT);
         if (TOTAL_COUNT > safetyTotalCount)
         {
             TOTAL_COUNT = safetyTotalCount;
         }
 
-        // º¸µå ÀüÃ¼ ºó ¹æÀ¸·Î ¼³Á¤.
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         for (int idx = 0; idx < mDungeonBoard.Length; ++idx)
         {
             mDungeonBoard[idx] = 0;
         }
         IsCreatedCampRoom = false;
-        
-        // ½ºÅ×ÀÌÁö »ý¼º °³¼ö ÃÊ±âÈ­
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         CREATE_COUNT = 0;
-        
-        // ±âÁ¸¿¡ »ý¼ºÇß´ø ½ºÅ×ÀÌÁö¸¦ ¸ðµÎ »èÁ¦(°ÔÀÓ¿ÀºêÁ§Æ®)
+
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Æ®)
         StagesDelete();
 
 
@@ -110,17 +105,17 @@ public class DungeonGenerator : MonoBehaviour
         startStage.SetFloor(floor);
         startStage.SetBoardXY(startX, startY);
         startStage.mBackwardDirection = backwardDirection;
-        
+
         mStages.Add(startStage);
 
-        // prev stage Á¤º¸¸¦ ±âÁØÀ¸·Î ¹®À» ¸¸µé¾î¾ßÇÏ±â ¶§¹®¿¡ 1ÃþÀÎÁö ±¸ºÐÇÏ±â À§ÇÑ ÄÚµå
+        // prev stage ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
         if (floor == 1)
         {
             GenerateStage(startStage, startStage, GenerateDirections(backwardDirection, startX, startY), floor);
             CheckLastRoom(startStage, startStage, mDepth);
-            // ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ½ºÅ×ÀÌÁö Á¤º¸ °»½Å
+            // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             DungeonManager.Instance.SetPlayerCurrStage(startStage);
-            // ½ºÅ×ÀÌÁöÀÇ ÇÃ·¹ÀÌ¾î ÀÔÀå ¿©ºÎ °»½Å
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             startStage.SetIsEnterd(true);
         }
         else
@@ -128,7 +123,7 @@ public class DungeonGenerator : MonoBehaviour
             GenerateStage(startStage, mLastRoom, GenerateDirections(backwardDirection, startX, startY), floor);
             CheckLastRoom(startStage, mLastRoom, mDepth);
 
-            // 3ÃþÀÎ °æ¿ì, ¶ó½ºÆ®·ë À§¿¡ º¸½º ·ë Ãß°¡ »ý¼º
+            // 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (floor == 3)
             {
                 int bossRoomX = mLastRoom.GetBoardX();
@@ -155,29 +150,29 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
 
-         // [Notify] Enter Stage (First)
+        // [Notify] Enter Stage (First)
         startStage.OnStageEnter(DungeonDoor.TansferInfo.FirstRoom);
 
         return startStage;
     }
 
-  
+
 
     public void StagesDelete()
     {
         GameObject deletStage = null;
-        for (int i = 0; i < mStages.Count; ++i )
+        for (int i = 0; i < mStages.Count; ++i)
         {
             string stageName = mStages[i].name;
             deletStage = GameObject.Find(stageName);
             GameObject.Destroy(deletStage);
             mStages.RemoveAt(i);
-            --i;   
+            --i;
         }
     }
 
 
-    // ÁÂÇ¥¿¡ ¹æÀÌ ºñ¾ú´ÂÁö Ã¼Å©
+    // ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
     public bool IsEmpty(int x, int y)
     {
         if (mDungeonBoard[y * WIDTH + x] != 0)
@@ -192,7 +187,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public void SetDoorOpen()
     {
-        for(int i = 0; i< mStages.Count; ++i)
+        for (int i = 0; i < mStages.Count; ++i)
         {
             mStages[i].SetDoorsOpen();
         }
@@ -202,21 +197,21 @@ public class DungeonGenerator : MonoBehaviour
     {
         mDungeonBoard[y * WIDTH + x] = 1;
     }
-    
+
 
     public void GenerateStage(DungeonStage stage, DungeonStage prevStage, int directions, int floor)
     {
         int linkDoors = DIRECTION_NONE;
         int x = stage.GetBoardX();
         int y = stage.GetBoardY();
-    
+
         if ((directions & DIRECTION_TOP) == DIRECTION_TOP)
         {
             int nextX = x;
             int nextY = y + 1;
             if (nextX != prevStage.GetBoardX() || nextY != prevStage.GetBoardY())
             {
-                if(stage.mBackwardDirection != DIRECTION_TOP)
+                if (stage.mBackwardDirection != DIRECTION_TOP)
                 {
                     GameObject roomObject = Instantiate(mStagePrefab);
                     roomObject.name = string.Format("Stage {0},{1}", nextX, nextY);
@@ -224,8 +219,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     DungeonStage nextStage = roomObject.GetComponent<DungeonStage>();
                     nextStage.SetBoardXY(nextX, nextY);
-                    stage.SetConnectedStage(DIRECTION_TOP,  nextStage);
-                    nextStage.SetConnectedStage(DIRECTION_BOTTOM,  stage);
+                    stage.SetConnectedStage(DIRECTION_TOP, nextStage);
+                    nextStage.SetConnectedStage(DIRECTION_BOTTOM, stage);
                     nextStage.SetFloor(floor);
                     mStages.Add(nextStage);
                     GenerateStage(nextStage, stage, GenerateDirections(DIRECTION_BOTTOM, nextX, nextY), floor);
@@ -234,7 +229,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
-                stage.SetConnectedStage(DIRECTION_TOP,  prevStage);
+                stage.SetConnectedStage(DIRECTION_TOP, prevStage);
                 linkDoors |= DIRECTION_TOP;
             }
         }
@@ -246,15 +241,15 @@ public class DungeonGenerator : MonoBehaviour
             if (nextX != prevStage.GetBoardX() || nextY != prevStage.GetBoardY())
             {
                 if (stage.mBackwardDirection != DIRECTION_BOTTOM)
-                { 
+                {
                     GameObject roomObject = Instantiate(mStagePrefab);
                     roomObject.name = string.Format("Stage {0},{1}", nextX, nextY);
                     roomObject.transform.position = new Vector3(nextX * 26.0f, nextY * 15.0f, 0);
 
                     DungeonStage nextStage = roomObject.GetComponent<DungeonStage>();
                     nextStage.SetBoardXY(nextX, nextY);
-                    stage.SetConnectedStage(DIRECTION_BOTTOM,  nextStage);
-                    nextStage.SetConnectedStage(DIRECTION_TOP,  stage);
+                    stage.SetConnectedStage(DIRECTION_BOTTOM, nextStage);
+                    nextStage.SetConnectedStage(DIRECTION_TOP, stage);
                     nextStage.SetFloor(floor);
                     mStages.Add(nextStage);
                     GenerateStage(nextStage, stage, GenerateDirections(DIRECTION_TOP, nextX, nextY), floor);
@@ -263,7 +258,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
-                stage.SetConnectedStage(DIRECTION_BOTTOM,  prevStage);
+                stage.SetConnectedStage(DIRECTION_BOTTOM, prevStage);
                 linkDoors |= DIRECTION_BOTTOM;
             }
         }
@@ -282,8 +277,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     DungeonStage nextStage = roomObject.GetComponent<DungeonStage>();
                     nextStage.SetBoardXY(nextX, nextY);
-                    stage.SetConnectedStage(DIRECTION_LEFT,  nextStage);
-                    nextStage.SetConnectedStage(DIRECTION_RIGHT,  stage);
+                    stage.SetConnectedStage(DIRECTION_LEFT, nextStage);
+                    nextStage.SetConnectedStage(DIRECTION_RIGHT, stage);
                     nextStage.SetFloor(floor);
                     mStages.Add(nextStage);
                     GenerateStage(nextStage, stage, GenerateDirections(DIRECTION_RIGHT, nextX, nextY), floor);
@@ -292,7 +287,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
-                stage.SetConnectedStage(DIRECTION_LEFT,  prevStage);
+                stage.SetConnectedStage(DIRECTION_LEFT, prevStage);
                 linkDoors |= DIRECTION_LEFT;
             }
         }
@@ -312,7 +307,7 @@ public class DungeonGenerator : MonoBehaviour
                     DungeonStage nextStage = roomObject.GetComponent<DungeonStage>();
                     nextStage.SetBoardXY(nextX, nextY);
                     stage.SetConnectedStage(DIRECTION_RIGHT, nextStage);
-                    nextStage.SetConnectedStage(DIRECTION_LEFT,  stage);
+                    nextStage.SetConnectedStage(DIRECTION_LEFT, stage);
                     nextStage.SetFloor(floor);
                     mStages.Add(nextStage);
 
@@ -322,8 +317,8 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
-               
-                stage.SetConnectedStage(DIRECTION_RIGHT,  prevStage);
+
+                stage.SetConnectedStage(DIRECTION_RIGHT, prevStage);
                 linkDoors |= DIRECTION_RIGHT;
             }
         }
@@ -334,10 +329,10 @@ public class DungeonGenerator : MonoBehaviour
 
     public void SetRoomStyle(int startX, int startY)
     {
-       
+
         for (int i = 0; i < mStages.Count; ++i)
         {
-         
+
             if (mStages[i].GetBoardX() == startX && mStages[i].GetBoardY() == startY)
             {
                 mStages[i].SetBoadStyle(DungeonBoard.BoardType.Start);
@@ -354,7 +349,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 mStages[i].SetBoadStyle(DungeonBoard.BoardType.DungeonBoss);
             }
-            else if(i >= TOTAL_COUNT / 2)
+            else if (i >= TOTAL_COUNT / 2)
             {
                 if (IsCreatedCampRoom == false)
                 {
@@ -376,48 +371,48 @@ public class DungeonGenerator : MonoBehaviour
             }
 
         }
-     
+
     }
 
-    public void CheckLastRoom(DungeonStage stage,DungeonStage prevStage, int depth)
+    public void CheckLastRoom(DungeonStage stage, DungeonStage prevStage, int depth)
     {
 
         if (stage.GetConnectedStage(DIRECTION_TOP) != null)
         {
             if (prevStage != stage.GetConnectedStage(DIRECTION_TOP))
             {
-                CheckLastRoom(GetStageByXY(stage.GetBoardX(), stage.GetBoardY() + 1),stage, depth+1);
+                CheckLastRoom(GetStageByXY(stage.GetBoardX(), stage.GetBoardY() + 1), stage, depth + 1);
             }
         }
         if (stage.GetConnectedStage(DIRECTION_BOTTOM) != null)
         {
             if (prevStage != stage.GetConnectedStage(DIRECTION_BOTTOM))
             {
-                CheckLastRoom(GetStageByXY(stage.GetBoardX(), stage.GetBoardY() - 1),stage, depth+1);
+                CheckLastRoom(GetStageByXY(stage.GetBoardX(), stage.GetBoardY() - 1), stage, depth + 1);
             }
         }
         if (stage.GetConnectedStage(DIRECTION_RIGHT) != null)
         {
             if (prevStage != stage.GetConnectedStage(DIRECTION_RIGHT))
             {
-                CheckLastRoom(GetStageByXY(stage.GetBoardX() + 1, stage.GetBoardY()),stage, depth+1);
+                CheckLastRoom(GetStageByXY(stage.GetBoardX() + 1, stage.GetBoardY()), stage, depth + 1);
             }
         }
         if (stage.GetConnectedStage(DIRECTION_LEFT) != null)
         {
-            if (prevStage != stage.GetConnectedStage(DIRECTION_LEFT)) 
-            { 
-                CheckLastRoom(GetStageByXY(stage.GetBoardX() - 1, stage.GetBoardY()),stage, depth+1);
+            if (prevStage != stage.GetConnectedStage(DIRECTION_LEFT))
+            {
+                CheckLastRoom(GetStageByXY(stage.GetBoardX() - 1, stage.GetBoardY()), stage, depth + 1);
             }
 
         }
-       
+
         if (mDepth < depth)
         {
             mDepth = depth;
             mLastRoom = stage;
         }
-        
+
     }
     public DungeonStage GetLastRoom()
     {
@@ -436,15 +431,15 @@ public class DungeonGenerator : MonoBehaviour
         return null;
     }
 
-    // ¹® ¹æÇâ ·£´ý ¼³Á¤
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public int GenerateDirections(int backward, int x, int y)
     {
         int output = DIRECTION_NONE;
         int randomPercent = 90;
-        // ÀÌÀü¹æ ¹®°ú ¿¬°áµÉ ¹æÇâ ³Ö±â.(ÀÌÀü ¹æ¿¡¼­ À§ÀÇ ¹æÇâÀ¸·Î ¿Â°æ¿ì, ¾Æ·¡ ¹æÇâ ¹®ÀÌ ¿­·ÁÀÖ¾î¾ß ÇÏ´Ï±î, backward·Î ³Ö¾îÁØ´Ù)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½.(ï¿½ï¿½ï¿½ï¿½ ï¿½æ¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â°ï¿½ï¿½, ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ ï¿½Ï´Ï±ï¿½, backwardï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½)
         output |= backward;
 
-        // Ãß°¡ °¡´ÉÇÑ ¹æ °³¼ö°¡ 0ÀÎ°æ¿ì, ¿¬°áµÉ ¹® ¹æÇâ¸¸ ³Ö°í ¸®ÅÏ
+        // ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½Î°ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½â¸¸ ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (TOTAL_COUNT - CREATE_COUNT == 0)
         {
             return output;
@@ -458,7 +453,7 @@ public class DungeonGenerator : MonoBehaviour
                 if (TOTAL_COUNT - CREATE_COUNT >= 1 && backward != DIRECTION_TOP)
                 {
                     int random = UnityEngine.Random.Range(0, 100 + 1);
-                    if(random < randomPercent)
+                    if (random < randomPercent)
                     {
                         int nextValue = y + 1;
                         if (nextValue < (HEIGHT) && IsEmpty(x, nextValue))
@@ -490,7 +485,7 @@ public class DungeonGenerator : MonoBehaviour
 
                 if (TOTAL_COUNT - CREATE_COUNT >= 1 && backward != DIRECTION_BOTTOM)
                 {
-                    // 1Ãþ ½ºÅ¸Æ®¹æÀº ¾Æ·¡ ÀÔÀå ¹® ¸¸µé¾î¾ßÇØ¼­ ·£´ý »ý¼º Á¦¿ÜÇÏ±âÀ§ÇÑ ¿¹¿ÜÃ³¸®
+                    // 1ï¿½ï¿½ ï¿½ï¿½Å¸Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
                     if (backward == DIRECTION_NONE)
                     {
                         int random = UnityEngine.Random.Range(0, 100 + 1);
@@ -516,7 +511,7 @@ public class DungeonGenerator : MonoBehaviour
                     if (random < randomPercent)
                     {
                         int nextValue = x + 1;
-                        if(nextValue < (WIDTH) && IsEmpty(nextValue, y))
+                        if (nextValue < (WIDTH) && IsEmpty(nextValue, y))
                         {
                             SetRoom(nextValue, y);
 

@@ -136,7 +136,7 @@ public class WeaponChangeControl : MonoBehaviour
             mBigWeaponSmallCircleBase.transform.GetComponent<SpriteRenderer>().sortingOrder = mSpearSmallCircleBase.transform.GetComponent<SpriteRenderer>().sortingOrder;
             mSpearSmallCircleBase.transform.GetComponent<SpriteRenderer>().sortingOrder = smallWeaponTemp;
 
-            UiManager.Instance.mIsWeaponChange = true;
+            UiManager.Instance.mIsWeaponChange = false;
 
             // swap 방식(unit에서만 가능)
             // (mBigWeaponBase.transform.localPosition, mSpearBase.transform.localPosition) =

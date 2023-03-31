@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
-    
+
     [System.Serializable]
     public class SkillPreset
     {
@@ -29,32 +29,32 @@ public class Monster : MonoBehaviour
 
     public enum State
     {
-        None, // ºñÈ°¼ºÈ­
-        Idle, // ´ë±â
-        Wander, // ¹èÈ¸
-        Attack, // ÃßÀû+°ø°Ý
+        None, // ï¿½ï¿½È°ï¿½ï¿½È­
+        Idle, // ï¿½ï¿½ï¿½
+        Wander, // ï¿½ï¿½È¸
+        Attack, // ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½ï¿½
         Dash, // 
-        Wait, //¹«ÇÑ ´ë±â(ÄÚµå·Î Á¦¾î)
-        AttackCooltime, //°ø°Ý ÀÌÈÄ ÄðÅ¸ÀÓ
-        Die, // »ç¸Á -> ºñÈ°¼ºÈ­
-        Ready, // ÁØºñ (Wake ÀÌÀü »óÅÂ)
+        Wait, //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½Úµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+        AttackCooltime, //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½
+        Die, // ï¿½ï¿½ï¿½ -> ï¿½ï¿½È°ï¿½ï¿½È­
+        Ready, // ï¿½Øºï¿½ (Wake ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
     }
 
-    // ¸ó½ºÅÍ id 
+    // ï¿½ï¿½ï¿½ï¿½ id 
     public enum MonsterID
     {
         None = 0,
         BabySlime = 1,
         GolemTurret = 2,
         FlyingGolem = 3,
-        GolemMine  =4,
+        GolemMine = 4,
         GolemMiniBoss = 5,
         GolemCorruptMiniBoss = 6,
         GolemKing = 10
     }
 
 
-    // ÄÄÆ÷³ÍÆ®
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     [Header("Componenet")]
     public Rigidbody2D mRigidBody = null;
     public SpriteRenderer mSpriteRenderer = null;
@@ -66,33 +66,33 @@ public class Monster : MonoBehaviour
     [Header("Preset")]
     public GameObject mProjectilePreset = null;
     public List<SkillPreset> mSkillPresets = new List<SkillPreset>();
-    
-    
+
+
     [Header("Collider")]
     public List<Collider2DLink> mColliders = new List<Collider2DLink>();
 
     [Header("Monster Info")]
-    public MonsterID mMonsterId = MonsterID.None; // ¸ó½ºÅÍ id
-    public Type mType; // ¸ó½ºÅÍ Å¸ÀÔ
-    public Rect mMovableArea; // ÀÌµ¿ °¡´ÉÇÑ ¿µ¿ª
+    public MonsterID mMonsterId = MonsterID.None; // ï¿½ï¿½ï¿½ï¿½ id
+    public Type mType; // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
+    public Rect mMovableArea; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [Range(0.1f, 20.0f)]
-    public float mAttackDistance = 1.0f; // ÀÚ½ÅÀÇ À§Ä¡¸¦ ±âÁØÀ¸·Î ÇÃ·¹ÀÌ¾î¸¦ °ø°Ý °¡´ÉÇÑ °Å¸®
+    public float mAttackDistance = 1.0f; // ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
     [Range(1.2f, 20.0f)]
-    public float mTraceScope = 3.0f; // ÀÚ½ÅÀÇ À§Ä¡¸¦ ±âÁØÀ¸·Î ÇÃ·¹ÀÌ¾î¸¦ ÃßÀû(ÀÌµ¿) °¡´ÉÇÑ °Å¸®
+    public float mTraceScope = 3.0f; // ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½(ï¿½Ìµï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
     [Range(0.0f, 20.0f)]
-    public float mSpeed = 1.0f; // ¸ó½ºÅÍÀÇ ÀÌµ¿ ¼Óµµ (ÃßÀû)
+    public float mSpeed = 1.0f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½ (ï¿½ï¿½ï¿½ï¿½)
     [Range(0.0f, 2.0f)]
-    public float mWanderDistance = 1.0f; // ¸ó½ºÅÍ°¡ ¹èÈ¸ÇÒ¶§ ·£´ýÇÏ°Ô ¼±ÅÃµÉ À§Ä¡ÀÇ ÃÖ´ë °Å¸®
+    public float mWanderDistance = 1.0f; // ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¸ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Å¸ï¿½
     [Range(0.0f, 3.0f)]
-    public float mSplashAttackDistance = 0.0f; // ½ºÇÃ·¡½Ã °ø°Ý ¹üÀ§.
+    public float mSplashAttackDistance = 0.0f; // ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
     [Header("Monster Hp")]
     public float mHp = 100.0f;
     public float mMaxHP = 100.0f;
     [Header("Monster Damage")]
     public float mDamage = 10.0f;
-    public float mAttackInterval = 1.0f; // ¾îÅÃ ÄðÅ¸ÀÓ
-    public float mAttackTime = 0.0f;    // ¾îÅÃ ÄðÅ¸ÀÓ (¹Ù²î´Â°ª)
+    public float mAttackInterval = 1.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½
+    public float mAttackTime = 0.0f;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ (ï¿½Ù²ï¿½Â°ï¿½)
     public bool mIsAttackBlock = false;
 
     [Header("Monster Dash")]
@@ -101,18 +101,18 @@ public class Monster : MonoBehaviour
     public float mDashSpeed = 5.0f;
     [Range(1.2f, 20.0f)]
     public float mDashDistance = 1.0f;
-    public Vector3 mDashDestination = Vector3.zero; // ´ë½Ã´Â Á¤ÇØÁø À§Ä¡·Î¸¸ ´Þ¸°´Ù ( ÃßÀû ºÒ°¡´É )
+    public Vector3 mDashDestination = Vector3.zero; // ï¿½ï¿½Ã´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Î¸ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½ ( ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ )
 
     [Header("Monster State")]
     public State mPrevState = State.Idle;
     public State mCurrState = State.Idle;
     protected Vector3 mWanderPosition = Vector3.zero;
 
-    // °ªÀÌ ¹Ù²ð ¼ö ÀÖ´Â Á¤º¸
-    public PlayerAct mTarget = null; // Å¸°Ù
-    public DungeonStage mStage = null; // ½ºÅ×ÀÌÁö
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public PlayerAct mTarget = null; // Å¸ï¿½ï¿½
+    public DungeonStage mStage = null; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // UI : hp bar ¿ÀºêÁ§Æ®
+    // UI : hp bar ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     public GameObject mHpBar = null;
     // UI : HP fill image (normal monster hp)
     public Image mImgHp = null;
@@ -120,7 +120,7 @@ public class Monster : MonoBehaviour
 
     public void Start()
     {
-        if(mAnimationEvent)
+        if (mAnimationEvent)
         {
             mAnimationEvent.SetDelegate(OnAnimationEvent);
         }
@@ -128,10 +128,10 @@ public class Monster : MonoBehaviour
 
     public virtual void OnAnimationEvent(string name)
     {
-        
+
     }
 
-    // ¸ó½ºÅÍ¸¦ ÃÊ±âÈ­ ÇÒ¶§ »ç¿ë
+    // ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ê±ï¿½È­ ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½
     public void Init(float attackDistance, float traceScope, float speed, float wanderDistance, float maxHp, float damage)
     {
         mAttackDistance = attackDistance;
@@ -145,17 +145,17 @@ public class Monster : MonoBehaviour
 
     public virtual void Update()
     {
-        if(mTarget == null)
+        if (mTarget == null)
         {
             this.mTarget = GameObject.FindObjectOfType<PlayerAct>();
         }
 
-        if(mRigidBody.bodyType != RigidbodyType2D.Static)
+        if (mRigidBody.bodyType != RigidbodyType2D.Static)
         {
             mRigidBody.velocity = Vector2.zero;
         }
 
-        // °³¹ß¿ë
+        // ï¿½ï¿½ï¿½ß¿ï¿½
         if (mStage == null)
         {
             mStage = DungeonGenerator.Instance.mStages[0];
@@ -190,7 +190,7 @@ public class Monster : MonoBehaviour
 
     public void Movement(Vector3 destination, float speed, bool changeWanderWhenBlocked)
     {
-        // ÀÏ¹Ý ¼Óµµ ÀÌµ¿
+        // ï¿½Ï¹ï¿½ ï¿½Óµï¿½ ï¿½Ìµï¿½
         Vector3 nextPosition = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
         if (changeWanderWhenBlocked && !IsMovablePosition(nextPosition))
         {
@@ -204,20 +204,20 @@ public class Monster : MonoBehaviour
 
     public virtual void OnDamage(float damage)
     {
-        if (mHp <= 0) 
+        if (mHp <= 0)
         {
             return;
         }
-        if(mIsAttackBlock)
+        if (mIsAttackBlock)
         {
             Debug.Log("attack block");
             return;
         }
 
         mHp -= damage;
-        //ÇÇ°Ý ¿¬Ãâ
+        //ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½
         this.Flash();
-        //hp °»½Å
+        //hp ï¿½ï¿½ï¿½ï¿½
         if (mType == Type.NORMAL)
         {
             if (mImgHp != null)
@@ -227,22 +227,22 @@ public class Monster : MonoBehaviour
             if (mHp <= 0.0f)
             {
                 this.SetState(State.Die);
-                // ÀÎº¥ UI¿¬°áµÇ¸é ÁÖ¼® Ç®±â ÇöÀç ¾Ö·¯³²
-                // ItemManager.Instance.DropItem(this.transform.position);
+                // ï¿½Îºï¿½ UIï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½Ö¼ï¿½ Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö·ï¿½ï¿½ï¿½
+                ItemManager.Instance.DropItem(this.transform.position);
             }
         }
-        if(mType == Type.BOSS)
+        if (mType == Type.BOSS)
         {
-            
+
             UiManager.Instance.BossCurrentHp(mHp);
-            
+
             if (mHp <= 0.0f)
             {
                 this.SetState(State.Die);
                 if (mMonsterId != MonsterID.GolemKing)
-                { 
-                    // ÀÎº¥ UI¿¬°áµÇ¸é ÁÖ¼® Ç®±â ÇöÀç ¾Ö·¯³²
-                    // ItemManager.Instance.DropItem(this.transform.position);
+                {
+                    // ï¿½Îºï¿½ UIï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½Ö¼ï¿½ Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö·ï¿½ï¿½ï¿½
+                    ItemManager.Instance.DropItem(this.transform.position);
                 }
                 UiManager.Instance.SetBossHpVisible(false);
             }
@@ -273,12 +273,12 @@ public class Monster : MonoBehaviour
     }
 
 
-    public Vector3 GenerateRandomAroundPosition(float distance=1.0f)
+    public Vector3 GenerateRandomAroundPosition(float distance = 1.0f)
     {
-        // ³» À§Ä¡¿¡¼­ºÎÅÍ ·£´ýÇÑ ¹æÇâ º¤ÅÍ »ý¼º
+        // ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector2 direction = Random.insideUnitCircle.normalized;
 
-        // ·£´ýÇÑ ¹æÇâ º¤ÅÍÀÇ Å©±â¸¦ °Å¸® N ÀÌÇÏ·Î Á¶Á¤
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½Å¸ï¿½ N ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½
         float length = Random.Range(0f, distance);
         Vector3 destination = transform.position + (Vector3)direction * length;
 
@@ -297,9 +297,9 @@ public class Monster : MonoBehaviour
     public GameObject FindSkillPreset(string key)
     {
         int count = mSkillPresets.Count;
-        for(int idx=0; idx<count; ++idx)
+        for (int idx = 0; idx < count; ++idx)
         {
-            if(mSkillPresets[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
+            if (mSkillPresets[idx].key.Equals(key, System.StringComparison.OrdinalIgnoreCase))
             {
                 return mSkillPresets[idx].preset;
             }
@@ -333,10 +333,10 @@ public class Monster : MonoBehaviour
         return null;
     }
 
-    // ÇöÀç ÁÂÇ¥°¡ ÀÌµ¿ °¡´ÉÇÑ ¿µ¿ªÀÎÁö Ã¼Å©
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
     public bool IsMovablePosition(Vector3 position)
     {
-        if(mMovableArea.Contains(position))
+        if (mMovableArea.Contains(position))
         {
             int layerMask = LayerMask.GetMask("Default");
             Vector3 direction = (position - this.transform.position).normalized;
@@ -389,8 +389,8 @@ public class Monster : MonoBehaviour
         while (count > 0)
         {
             Debug.Log("IsRandomPositionInsidePolygonCollider");
-            position.x = Random.Range(minX+worldX, maxX+worldX);
-            position.y = Random.Range(minY+worldY, maxY+worldY);
+            position.x = Random.Range(minX + worldX, maxX + worldX);
+            position.y = Random.Range(minY + worldY, maxY + worldY);
 
             if (collider.OverlapPoint(position))
             {
@@ -401,7 +401,7 @@ public class Monster : MonoBehaviour
         return position;
     }
 
-    // ÃßÀû °¡´ÉÇÑ °Å¸® ¾È¿¡ µé¾î¿Ô´ÂÁö Ã¼Å©ÇÑ´Ù.
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½.
     public bool IsInTraceScope()
     {
         float distance = 0.0f;
@@ -418,9 +418,9 @@ public class Monster : MonoBehaviour
     public bool IsInDashRange()
     {
         float distance = 0.0f;
-        if(mIsDash && GetTargetDistance(mTarget.transform.position, ref distance))
+        if (mIsDash && GetTargetDistance(mTarget.transform.position, ref distance))
         {
-            if(distance <= mDashDistance)
+            if (distance <= mDashDistance)
             {
                 return true;
             }
@@ -428,11 +428,11 @@ public class Monster : MonoBehaviour
         return false;
     }
 
-    // Å¸°ÙÀ» °ø°Ý ÇÒ ¼ö ÀÖ´Â °Å¸® ¾È¿¡ µé¾î¿Ô´ÂÁö Ã¼Å©ÇÑ´Ù.
+    // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Å¸ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½.
     public bool IsInAttackRange()
     {
         float distance = 0.0f;
-        if(GetTargetDistance(mTarget.transform.position, ref distance))
+        if (GetTargetDistance(mTarget.transform.position, ref distance))
         {
             if (distance <= mAttackDistance)
             {
@@ -442,25 +442,25 @@ public class Monster : MonoBehaviour
         return false;
     }
 
-    // Å¸°Ù°úÀÇ °Å¸®¸¦ ÃøÁ¤ÇÑ´Ù
-    // Å¸°ÙÀÌ ÀÌ ÇÔ¼ö¸¦ »ç¿ëÇÒ ¼ö ¾ø´Â °æ¿ì False ¸¦ ¹ÝÈ¯ÇÑ´Ù.
+    // Å¸ï¿½Ù°ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
+    // Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ False ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
     public bool GetTargetDistance(Vector3 to, ref float output)
     {
-        if(mTarget)
+        if (mTarget)
         {
-            Vector3 from = this.transform.position; //¸ó½ºÅÍ
+            Vector3 from = this.transform.position; //ï¿½ï¿½ï¿½ï¿½
 
-            Vector3 distance = from - to; //°Å¸®
-            
-            output = distance.magnitude; //±æÀÌ
-            return true; // ÀÌ ÇÔ¼öÀÇ °ªÀ» »ç¿ë ÇÒ ¼ö ÀÖÀ½
+            Vector3 distance = from - to; //ï¿½Å¸ï¿½
+
+            output = distance.magnitude; //ï¿½ï¿½ï¿½ï¿½
+            return true; // ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         output = 0.0f;
-        return false; // ÀÌ ÇÔ¼öÀÇ °ªÀ» »ç¿ë ÇÒ ¼ö ¾øÀ½
+        return false; // ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
-    // ½ºÇÃ·¡½Ã ¹üÀ§¾È¿¡ Æ÷Áö¼Ç Æ÷ÇÔ¿©ºÎ Ã¼Å© ÇÔ¼ö
+    // ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ Ã¼Å© ï¿½Ô¼ï¿½
     public bool IsInSplashDamageRange(Vector3 position)
     {
         float distance = 0.0f;
@@ -475,7 +475,7 @@ public class Monster : MonoBehaviour
     }
 
 
-    // ½ÇÁ¦ °ÔÀÓ¿¡´Â Ç¥±âµÇÁö ¾Ê°í ¿¡µðÅÍ»ó¿¡¼­ °Å¸® µð¹ö±ëÀ» À§ÇÑ ±âÁî¸ð Ç¥±â
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í»ó¿¡¼ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -496,7 +496,7 @@ public class Monster : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(this.transform.position, mSplashAttackDistance);
 
-        // ÇÃ·¹ÀÌ¾î°¡ Å¸°ÙÀÎ °æ¿ì
+        // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (mTarget && IsInTraceScope())
         {
             if (IsInAttackRange())
