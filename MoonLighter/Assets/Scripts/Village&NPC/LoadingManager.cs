@@ -9,6 +9,7 @@ public class LoadingManager : MonoBehaviour
 {
     public static string nextScene;
     public static bool IsLoadingStart = false;
+    
     public GameObject mFadeImage;
     public GameObject mLoadingAnimation;
     private Canvas mCanvas;
@@ -33,6 +34,7 @@ public class LoadingManager : MonoBehaviour
         if (IsLoadingStart)
         {
             mTimer = 0;
+            
             StartCoroutine(FadeOutStart());
             IsLoadingStart = false;
         }
@@ -47,16 +49,19 @@ public class LoadingManager : MonoBehaviour
         while (!IsDone && mTimer < 15)
         {
             yield return null;
-            if(op.progress > 0.9f || Mathf.Approximately(0.9f, op.progress))
+            mTimer += Time.deltaTime;
+            if (op.progress > 0.9f || Mathf.Approximately(0.9f, op.progress))
             {
-                op.allowSceneActivation = true;
-                
+                if(LoadingAni.IsAnimationFinished || mTimer < 0.2f)
+                {
+                    op.allowSceneActivation = true;
+                }
             }
             if(op.progress > 1f || Mathf.Approximately(1f, op.progress))
             {
                 IsDone= true;
             }
-            mTimer += Time.deltaTime;
+            
            
         }
         
@@ -66,6 +71,7 @@ public class LoadingManager : MonoBehaviour
     }
     public IEnumerator FadeInStart()
     {
+        LoadingAni.IsAnimationFinished = false;
         mLoadingAnimation.SetActive(false);
         Color c = mFadeImage.GetComponent<Image>().color;
         c.a = 1;
@@ -99,5 +105,10 @@ public class LoadingManager : MonoBehaviour
         mLoadingAnimation.SetActive(true);
         StartCoroutine(Loading());
 
+    }
+
+    public void AnimationFinish()
+    {
+        LoadingAni.IsAnimationFinished = true;
     }
 }

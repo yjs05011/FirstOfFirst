@@ -7,9 +7,10 @@ public class Rock : MonoBehaviour
 {
     public enum State 
     { 
-        None, // none
-        Fall, // 떨어지는 상태
-        Wait, // 대기 상태 (5초정도 있다가 터지면서 사라짐)
+        None,  // none
+        Spwan, // 스폰상태
+        Fall,  // 떨어지는 상태
+        Wait,  // 대기 상태 (5초정도 있다가 터지면서 사라짐)
         Explosion // 폭발? 사라지는 
     }
 
@@ -26,21 +27,23 @@ public class Rock : MonoBehaviour
 
     [Header("Rock Data")]
     public State mState = State.None;
+    public float mDamage = 10.0f;
 
     public Monster mOwner = null;
     public Vector3 mDropPosition = Vector3.zero;
    
     public Transform mRock = null;
 
-    public float mWaitTime = 3.0f;
+    private float mWaitTime = 3.0f;
 
-    public void SetData(Monster owner)
+    public void SetData(Monster owner, Vector3 spwanPos, float damage)
     {
         mOwner = owner;
-       
-               
+        mDropPosition = spwanPos;
+        mDamage = damage;
+        this.transform.position = mDropPosition;
         mAnimationEvent.SetDelegate(OnAnimationEvent);
-        mState = State.Fall;
+        mState = State.Spwan;
        
     }
 
@@ -48,14 +51,14 @@ public class Rock : MonoBehaviour
 
     public void Update()
     {
-        if (mState == State.Fall)
+        if (mState == State.Spwan)
         {
-           // mAnimator.SetTrigger("RockFall");
+            mAnimator.SetTrigger("RockFall");
             
-            if (!mOwner.IsMovablePosition(this.transform.position))
-            {
-                SetState(State.Wait);
-            }
+            //if (!mOwner.IsMovablePosition(this.transform.position))
+            //{
+                SetState(State.Fall); // fall -> wait 는 떨어지는 애니메이션 종료 시점에 FallFinished 이벤트로 변경. 
+            //}
         }
         if(mState == State.Wait)
         {
@@ -104,9 +107,9 @@ public class Rock : MonoBehaviour
 
     public void OnAnimationEvent(string name)
     {
-        //if ("destroy".Equals(name, System.StringComparison.OrdinalIgnoreCase))
-        //{
-        //    GameObject.Destroy(this.gameObject);
-        //}
+        if ("FallFinished".Equals(name, System.StringComparison.OrdinalIgnoreCase))
+        {
+             SetState(State.Wait);
+        }
     }
 }

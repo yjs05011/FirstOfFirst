@@ -473,8 +473,12 @@ public class PlayerAct : MonoBehaviour
             else
             {
                 mPlayerHp -= calculateDamage;
+<<<<<<< HEAD
                 PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;
 
+=======
+                PlayerManager.Instance.mPlayerStat.Hp -= calculateDamage;  
+>>>>>>> 743fdfda3419662489cb2c869d23a15b154e9da3
             }
             if (mPlayerHp < 0)
             {

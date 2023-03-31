@@ -530,31 +530,5 @@ public class DungeonGenerator : MonoBehaviour
         return output;
     }
 
-    public IEnumerator DungeonReTry(GameObject player)
-    {
-         mDepth = 0;
-         mLastRoom = null;
-        // 로딩 씬 fade in
-        DungeonUIFadeInOutTransition transition = DungeonManager.Instance.GetTransitionUI();
 
-        yield return transition.TransitionFadeOut();
-        // 다시 첫 스테이지 생성
-        DungeonGenerate();
-        
-        Debug.LogFormat("player retry ");
-
-        player.transform.position = Vector3.zero;
-        DungeonManager.Instance.mCamera.SetCameraInit();
-
-        //// 카메라 이동 타입 변경 (다음 층 첫 스테이지 입장시 즉시 카메라 이동을위해)
-        //DungeonManager.Instance.GetDungeonCamera().SetCameraType(DungeonCameraController.CameraMoveType.Immediately);
-        //// 플레이어가 이동한 스테이지 좌표로 카메라 이동 
-        //Vector3 movepos = new Vector3(0, 0, -10);
-        //DungeonManager.Instance.CameraMoveByPos(movepos);
-
-        // 층이동 로딩 씬 fade out
-        yield return transition.TransitionFadeIn();
-        
-
-    }
 }

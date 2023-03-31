@@ -90,7 +90,7 @@ public class MainUi : MonoBehaviour
     public void ExitDungeon()
     {
 
-        if (UiManager.Instance.mIsPlayerUseAnimation == true)
+        if (UiManager.Instance.mIsPlayerFinishAnimation == true)
         {
             // 보스 hp바 끄기
             UiManager.Instance.SetBossHpVisible(false);

@@ -21,10 +21,15 @@ public class InventoryManager : GSingleton<InventoryManager>
 
     //체스트 창 인벤토리
     public Slot[,] mChestInventorySlots = new Slot[4,5];
+    public List<Slot> testList = default;
 
     //상자 Slot 저장
     public Slot[,] mChestSlots = new Slot[4,7];
 
-   // public Slot[,] mInventoryChestSlot = new Slot[4,5];   
-   
+     
+    
+     // FOR DEBUG:
+    //  public System.DateTime objActivedTime = default;
+    //  public System.DateTime spRendererInitializedTime = default;
+    //  public System.DateTime afterItemAddedTime = default;
 }

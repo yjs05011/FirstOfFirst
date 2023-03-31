@@ -1,8 +1,9 @@
 {
     "mPlayerHp": 100.0,
     "mPlayerSpeed": 5.0,
-    "mPlayerStr": 5.0,
+    "mPlayerStr": 50.0,
     "mPlayerDef": 10.0,
+<<<<<<< HEAD
     "mPlayerMoney": 300.0,
     "mPlayerMaxHp": 100.0,
     "mIsNight": false,
@@ -33,4 +34,8 @@
         122,
         99
     ]
+=======
+    "mPlayerMoney": 500.0,
+    "mPlayerMaxHp": 100.0
+>>>>>>> 743fdfda3419662489cb2c869d23a15b154e9da3
 }

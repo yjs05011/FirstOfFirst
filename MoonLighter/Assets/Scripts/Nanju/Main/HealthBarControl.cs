@@ -31,7 +31,6 @@ public class HealthBarControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DamageZone();
         HpChange();
 
     }
@@ -41,9 +40,9 @@ public class HealthBarControl : MonoBehaviour
     public void HpChange()
     {
 
-        if (PlayerManager.Instance.mIsPlayerHpChange)
+        if (UiManager.Instance.mIsHpChange)
         {
-            mMaxHp = PlayerManager.Instance.mPlayerStat.Hp;
+            Debug.Log("!!!!!!!!");
             mCurrentHp = PlayerManager.Instance.mPlayerStat.Hp;
             mMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
             mHpBar.fillAmount = mCurrentHp / mMaxHp;
