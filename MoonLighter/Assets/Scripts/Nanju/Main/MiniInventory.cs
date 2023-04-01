@@ -36,10 +36,13 @@ public class MiniInventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
+            PlayerManager.Instance.mIsUiActive = false;
+
             mUiInventory++;
             if (mUiInventory == 1)
             {
-                Debug.Log(UiManager.Instance.mIsInventoryLock);
+                // Debug.Log(UiManager.Instance.mIsInventoryLock);
+
                 // 락이 아닐때 인벤토리 열기
                 if (UiManager.Instance.mIsInventoryLock == false)
                 {
