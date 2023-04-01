@@ -22,7 +22,6 @@ public class UiManager : MonoBehaviour
     public bool mIsDungeonCheck = false;
 
     // [플레이어]
-    public bool mIsPlayerDie = false;
     public bool mIsPlayerUseAnimation = false;
     public bool mIsPlayerFinishAnimation = false;
     public bool mIsResultUi = false;
@@ -47,7 +46,7 @@ public class UiManager : MonoBehaviour
     // 마녀랑 말했을때 값이 변하는 변수 선언
     public bool mWitchTalk = false;
 
-  
+
 
 
     private void Awake()
@@ -96,11 +95,6 @@ public class UiManager : MonoBehaviour
         mIsDungeonCheck = value;
     }
 
-    // [플레이어] 플레이어가 죽었는지 확인 요청
-    public void PlayerDie(bool value)
-    {
-        mIsPlayerDie = value;
-    }
 
     // [플레이어] 팬던트를 사용하였을때 애니메이션 실행 요청 함수
     public void PlayerUsePendant(bool value)
@@ -114,7 +108,7 @@ public class UiManager : MonoBehaviour
         mIsPlayerFinishAnimation = value;
     }
 
- 
+
     // [마을]
 
     // 테이블 아이템을 열었을 시 값이 확인 선언

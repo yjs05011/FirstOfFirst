@@ -13,6 +13,12 @@ public class ExitDungeon : MonoBehaviour
     public GameObject mThreeFloor;
     public GameObject mThreeFloorClear;
 
+    // 퇴장 ui 열린 방식
+    // 플레이어가 죽어서 열렸을 때 이미지
+    public GameObject mExitUiOpenMethodPlayerDie;
+    // 팬던트를 사용해서 열렸을 때 이미지
+    public GameObject mExitUiOpenMethodUsePendant;
+
     // test
     public GameObject monster;
     public Transform Parent;
@@ -48,19 +54,38 @@ public class ExitDungeon : MonoBehaviour
     {
         // test
         //ExitDungeonKillMosterIamge();
-
+        ExitUiOpenMethodCheck();
         SetKillMonsterCount();
         SetDungeonChestCount();
         FloorCheck();
-        // ���� ���� üũ �Լ�
-        CheckExitReason();
-
     }
 
     // Update is called once per frame
     void Update()
     {
         UiInputKeyControl();
+
+
+    }
+
+    // 퇴장 ui Open 방식 체크하는 함수
+    public void ExitUiOpenMethodCheck()
+    {
+        if (PlayerManager.Instance.mPlayerStat.isDie == true)
+        {
+            // 방식에 따라서 이미지 교체
+            mExitUiOpenMethodPlayerDie.SetActive(true);
+            mExitUiOpenMethodUsePendant.SetActive(false);
+            // 처치한 몬스터 수 
+            PlayerKillMonsterCheck();
+        }
+        else
+        {
+            // 방식에 따라서 이미지 교체
+            mExitUiOpenMethodPlayerDie.SetActive(false);
+            mExitUiOpenMethodUsePendant.SetActive(true);
+        }
+
 
     }
 
@@ -73,7 +98,7 @@ public class ExitDungeon : MonoBehaviour
             UiManager.Instance.mIsPlayerUseAnimation = false;
             PlayerManager.Instance.mIsUiActive = false;
             UiManager.Instance.mIsPlayerFinishAnimation = false;
-            UiManager.Instance.mIsDungeonCheck = false; 
+            UiManager.Instance.mIsDungeonCheck = false;
             this.gameObject.SetActive(false);
 
             LoadingManager.LoadScene("VillageScene");
@@ -86,25 +111,9 @@ public class ExitDungeon : MonoBehaviour
             PlayerManager.Instance.mIsUiActive = false;
             this.gameObject.SetActive(false);
 
-            // �׾��� ��  �ٽ��÷��� ��ư ������ ó�� ���� ������ �Ȱ��� ExitDungeon ui ����ä�� ��
-            // -> �ε��� �״ٰ� ������  �ٽ� �ҷ������ϱ� ��Ͽ� �����غ��� 
-            // �ӽ÷� Ż���Ѱ� ����� ���� Ȯ���ϱ�
             LoadingManager.LoadScene("Dungeon");
 
         }
-    }
-
-    public void CheckExitReason()
-    {
-        if (PlayerManager.Instance.mPlayerStat.isDie == true)
-        {
-            PlayerKillMonsterCheck();
-        }
-        else
-        {
-            PendantUseExit();
-        }
-
     }
 
 
@@ -164,11 +173,6 @@ public class ExitDungeon : MonoBehaviour
 
     }
 
-    public void PendantUseExit()
-    {
-        // �Ҵ�Ʈ ������� Ż�� UI ������ ���� ǥ������.
-        //mPlayerKillMonster.sprite = mPendantSprite;
-    }
 
     // [����] � ���ڸ� �������� Ȯ��
     public void SetDungeonChestCount()
@@ -182,49 +186,7 @@ public class ExitDungeon : MonoBehaviour
     {
         killMonster = DungeonManager.Instance.mKillMonsterList.Count;
         mKillMonsterCount.text = killMonster.ToString();
-        //// ���� �̹��� enum Ÿ�� ��϶� �����ϱ� (���������� �̿�)
-        //List<int> killMonsterlist = new List<int>();
-        //foreach (var sd in DungeonManager.Instance.mKillMonsterList)
-        //{
-        //    killMonsterlist.Add((int)sd);
-        //}
-        //Vector3 FirstPosition = new Vector3(-190, 40, 0);
-        //float gap = 380 / (killMonster / 2);
-        //for (int i = 0; i < killMonster; i++)
-        //{
-        //    GameObject MonsterObj = null;
-        //    switch (killMonsterlist[i])
-        //    {
-        //        case 1:
-        //            MonsterObj = mMonsterList[1];
-        //            break;
-        //        case 2:
-        //            MonsterObj = mMonsterList[2];
-        //            break;
-        //        case 3:
-        //            MonsterObj = mMonsterList[3];
-        //            break;
-        //        case 4:
-        //            MonsterObj = mMonsterList[4];
-        //            break;
-        //        case 5:
-        //            MonsterObj = mMonsterList[5];
-        //            break;
-        //        case 6:
-        //            MonsterObj = mMonsterList[6];
-        //            break;
-        //        case 10:
-        //            MonsterObj = mMonsterList[10];
-        //            break;
-        //    }
-        //    Instantiate(MonsterObj);
-        //    MonsterObj.transform.SetParent(transform, false);
-        //    MonsterObj.transform.localPosition = FirstPosition + new Vector3(gap * i, 0, 0);
-        //    if (i > (killMonster / 2))
-        //    {
-        //        FirstPosition += new Vector3(0, -80, 0);
-        //    }
-        //}
+
     }
 
     //public void ExitDungeonKillMosterIamge()

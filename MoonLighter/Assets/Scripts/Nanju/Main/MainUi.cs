@@ -94,11 +94,30 @@ public class MainUi : MonoBehaviour
         {
             // 보스 hp바 끄기
             UiManager.Instance.SetBossHpVisible(false);
+            // 팬던트 off 하기
+            UiManager.Instance.mIsDungeonCheck = false;
 
-            mExitDungeon.SetActive(true);
+            // 다시하기 버튼 키 끄기
             mReplayKeyboard.SetActive(false);
+            // 퇴장 ui 키기
+            mExitDungeon.SetActive(true);
             PlayerManager.Instance.mIsUiActive = true;
         }
+        if (PlayerManager.Instance.mPlayerStat.isDie == true)
+        {
+            // 보스 hp바 끄기
+            UiManager.Instance.SetBossHpVisible(false);
+            // 팬던트 off 하기
+            UiManager.Instance.mIsDungeonCheck = false;
+
+            // 다시하기 버튼 키 키기
+            mReplayKeyboard.SetActive(true);
+            // 퇴장 ui 키기
+            mExitDungeon.SetActive(true);
+            PlayerManager.Instance.mIsUiActive = true;
+        }
+
+
         // if (PlayerManager.Instance.mPlayerStat.isDie == true)    // UiManager.Instance.mIsPlayerDie
         // {
         //     mExitDungeon.SetActive(true);

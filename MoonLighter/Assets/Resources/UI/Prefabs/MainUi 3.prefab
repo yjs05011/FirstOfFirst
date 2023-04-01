@@ -52129,6 +52129,8 @@ MonoBehaviour:
   mScendFloorClear: {fileID: 7990409186939096741}
   mThreeFloor: {fileID: 7990409187469256708}
   mThreeFloorClear: {fileID: 7990409188118077783}
+  mExitUiOpenMethodPlayerDie: {fileID: 7990409186809505040}
+  mExitUiOpenMethodUsePendant: {fileID: 7990409188857215808}
   monster: {fileID: 0}
   Parent: {fileID: 0}
   gridGroup: {fileID: 0}
@@ -56262,7 +56264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7990409188857215809
 RectTransform:
   m_ObjectHideFlags: 0
