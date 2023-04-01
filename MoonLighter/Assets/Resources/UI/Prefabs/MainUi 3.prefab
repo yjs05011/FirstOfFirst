@@ -12791,7 +12791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7990409187182026438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17408,7 +17408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7990409187379551463
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36438,7 +36438,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7990409188109697159}
   - component: {fileID: 7990409188109697209}
-  - component: {fileID: 7990409188109697208}
   m_Layer: 5
   m_Name: QuickInventory
   m_TagString: Untagged
@@ -36483,20 +36482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMiniInventory: {fileID: 7990409186837756257}
-  mInventroy: {fileID: 0}
+  mInventroy: {fileID: 7990409187182026437}
   mUiInventory: 0
---- !u!114 &7990409188109697208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7990409188109697158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7a8559202ea36641b6023675a4cd60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   mChangeText: {fileID: 7990409186878114216}
   mCurrentMiniInventoryText: 0
   mForbidden: {fileID: 7990409187825601816}
