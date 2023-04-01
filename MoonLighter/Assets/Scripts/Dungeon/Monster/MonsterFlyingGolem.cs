@@ -8,7 +8,11 @@ public class MonsterFlyingGolem : Monster
     public override void Update()
     {
         base.Update();
-
+        // 몬스터가 있는 스테이지에 플레이어가 들어온경우.
+        if (mStage != DungeonManager.Instance.GetPlayerCurrStage())
+        {
+            return;
+        }
         // 대기 상태
         if (mCurrState == State.Idle)
         {
