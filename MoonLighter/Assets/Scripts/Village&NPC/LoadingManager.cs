@@ -52,7 +52,7 @@ public class LoadingManager : MonoBehaviour
             mTimer += Time.deltaTime;
             if (op.progress > 0.9f || Mathf.Approximately(0.9f, op.progress))
             {
-                if(LoadingAni.IsAnimationFinished || mTimer < 0.2f)
+                if(LoadingAni.IsAnimationFinished || mTimer < 0.1f)
                 {
                     op.allowSceneActivation = true;
                 }
@@ -77,7 +77,7 @@ public class LoadingManager : MonoBehaviour
         c.a = 1;
         mFadeImage.GetComponent<Image>().color = c;
         //yield return new WaitForSecondsRealtime(1f);
-        for (float f = 1f; f > 0; f -= 0.01f)
+        for (float f = 1f; f > 0; f -= 0.05f)
         {
             c.a = f;
             mFadeImage.GetComponent<Image>().color = c;
@@ -95,7 +95,7 @@ public class LoadingManager : MonoBehaviour
         c.a = 0;
         mFadeImage.GetComponent<Image>().color = c;
         //yield return new WaitForSecondsRealtime(0.5f);
-        for (float f = 0; f < 1f; f += 0.01f)
+        for (float f = 0; f < 1f; f += 0.05f)
         {
             c.a = f;
             mFadeImage.GetComponent<Image>().color = c;
