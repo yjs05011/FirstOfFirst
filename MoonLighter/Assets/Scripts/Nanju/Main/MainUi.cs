@@ -118,18 +118,7 @@ public class MainUi : MonoBehaviour
         }
 
 
-        // if (PlayerManager.Instance.mPlayerStat.isDie == true)    // UiManager.Instance.mIsPlayerDie
-        // {
-        //     mExitDungeon.SetActive(true);
-
-
-        // }
-
     }
 
-
-
-    // 키보드 누르면 인벤토리 
-    // 미니(퀵슬롯) 인벤토리 On, Off 유무 함수
 
 }
