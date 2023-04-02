@@ -66,6 +66,7 @@ public class TitleButtonControl : MonoBehaviour
                     PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
                     PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
                     LoadingManager.LoadScene("VillageScene");
+                    UiManager.Instance.mIsKeySelection = false;
                     break;
                 case 1:
                     mStartScreenLogo.SetActive(false);

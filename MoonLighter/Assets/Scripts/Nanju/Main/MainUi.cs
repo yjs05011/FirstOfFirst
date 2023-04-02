@@ -14,7 +14,9 @@ public class MainUi : MonoBehaviour
 
     // EscUI 켜고, 끄기 
     public GameObject mEscUI;
-    public int mEscControl = 0;
+    private int mEscControl = 0;
+
+
 
 
     private float mTimer;
@@ -120,6 +122,8 @@ public class MainUi : MonoBehaviour
             // 퇴장 ui 키기
             mExitDungeon.SetActive(true);
             PlayerManager.Instance.mIsUiActive = true;
+
+
         }
 
 
@@ -128,23 +132,25 @@ public class MainUi : MonoBehaviour
     // esc 키 받았을 때 esc ui 컨트롤 하기
     public void EscUiControl()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             mEscControl++;
             if (mEscControl == 1)
             {
                 PlayerManager.Instance.mIsUiActive = true;
+                UiManager.Instance.mIsKeySelection = false;
+
                 mEscUI.SetActive(true);
-            }
-            else if (mEscControl == 2)
-            {
-                PlayerManager.Instance.mIsUiActive = false;
-                mEscUI.SetActive(false);
                 mEscControl = 0;
+
             }
 
         }
+
+
+        Debug.Log(mEscControl);
+
+
     }
 
 

@@ -25,73 +25,98 @@ public class EscControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        Debug.Log(UiManager.Instance.mIsKeySelection);
+        if (UiManager.Instance.mIsKeySelection == false)
         {
-            if (mTextCheck == 3)
+            if (Input.GetKeyDown(KeyCode.S))
             {
+                if (mTextCheck == 3)
+                {
+
+                }
+                else
+                {
+                    mTextCheck++;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (mTextCheck == 0)
+                {
+
+                }
+                else
+                {
+                    mTextCheck--;
+                }
+            }
+            // ESC UI 끄기
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PlayerManager.Instance.mIsUiActive = false;
+                if (mOptionUi.activeSelf)
+                {
+
+                }
+                else
+                {
+
+                    this.gameObject.SetActive(false);
+                }
 
             }
-            else
-            {
-                mTextCheck++;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            if (mTextCheck == 0)
-            {
 
-            }
-            else
+            // 선택하였을때 실행
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                mTextCheck--;
-            }
-        }
-        // 선택하였을때 실행
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            switch (mTextCheck)
-            {
-                case 0:
-                    gameObject.SetActive(false);
-                    break;
-                case 1:
-                    mOptionUi.SetActive(true);
-                    break;
-                case 2:
-
-                    break;
-                case 3:
+                switch (mTextCheck)
+                {
+                    case 0:
+                        gameObject.SetActive(false);
+                        break;
+                    case 1:
+                        PlayerManager.Instance.mIsUiActive = true;
+                        UiManager.Instance.mIsKeySelection = true;
+                        mOptionUi.SetActive(true);
+                        break;
+                    case 2:
+                        LoadingManager.LoadScene("TitleScene");
+                        break;
+                    case 3:
 #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
+                        UnityEditor.EditorApplication.isPlaying = false;
 #else
                     Application.Quit();
 #endif
-                    break;
+                        break;
+                }
             }
-        }
-        // 무슨 이름인지 체크하여 활성화,비활성화 하기
-        switch (mTextCheck)
-        {
-            case 0:
-                mGameBackCursorImage.SetActive(true);
-                mOptionCursorImage.SetActive(false);
-                break;
+            // 무슨 이름인지 체크하여 활성화,비활성화 하기
+            switch (mTextCheck)
+            {
+                case 0:
+                    mGameBackCursorImage.SetActive(true);
+                    mOptionCursorImage.SetActive(false);
+                    break;
+                case 1:
+                    mOptionCursorImage.SetActive(true);
+                    mGameBackCursorImage.SetActive(false);
+                    mMainMenuCursorImage.SetActive(false);
+                    break;
+                case 2:
+                    mMainMenuCursorImage.SetActive(true);
+                    mOptionCursorImage.SetActive(false);
+                    mExitCursorImage.SetActive(false);
+                    break;
+                case 3:
+                    mExitCursorImage.SetActive(true);
+                    mMainMenuCursorImage.SetActive(false);
+                    break;
 
-            case 1:
-                mOptionCursorImage.SetActive(true);
-                mGameBackCursorImage.SetActive(false);
-                mMainMenuCursorImage.SetActive(false);
-                break;
-            case 2:
-                mMainMenuCursorImage.SetActive(true);
-                mOptionCursorImage.SetActive(false);
-                mExitCursorImage.SetActive(false);
-                break;
-            case 3:
-                mExitCursorImage.SetActive(true);
-                mMainMenuCursorImage.SetActive(false);
-                break;
+            }
+
+
+
         }
 
     }

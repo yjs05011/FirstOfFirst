@@ -40347,9 +40347,9 @@ RectTransform:
   - {fileID: 7990409187379551463}
   - {fileID: 7990409187182026438}
   - {fileID: 7990409186837756258}
-  - {fileID: 3214229038450663355}
   - {fileID: 8498083697356121629}
   - {fileID: 4136447582692121315}
+  - {fileID: 3214229038450663355}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40436,7 +40436,6 @@ MonoBehaviour:
   mExitDungeon: {fileID: 7990409188687163416}
   mReplayKeyboard: {fileID: 7990409186857595134}
   mEscUI: {fileID: 1059577960699257715}
-  mEscControl: 0
 --- !u!1 &7990409188536870758
 GameObject:
   m_ObjectHideFlags: 0
@@ -48120,7 +48119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949852507581382865, guid: f64cdf46e5e5334419e66e2adbcfb698, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2949852507581382865, guid: f64cdf46e5e5334419e66e2adbcfb698, type: 3}
       propertyPath: m_AnchorMax.x
@@ -48232,6 +48231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f64cdf46e5e5334419e66e2adbcfb698, type: 3}
+--- !u!1 &3214229038450663351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2949852507581382877, guid: f64cdf46e5e5334419e66e2adbcfb698, type: 3}
+  m_PrefabInstance: {fileID: 321100816787693418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3214229038450663355 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2949852507581382865, guid: f64cdf46e5e5334419e66e2adbcfb698, type: 3}
@@ -48258,7 +48262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376900051600105755, guid: 2ca1def10a0995642950104086b2ea74, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6376900051600105755, guid: 2ca1def10a0995642950104086b2ea74, type: 3}
       propertyPath: m_AnchorMax.x
@@ -48356,7 +48360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 303906986572704352, guid: 12937d0ed1998ac40befd779f6595ab7, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 303906986572704352, guid: 12937d0ed1998ac40befd779f6595ab7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -48430,6 +48434,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1140402784968333167, guid: 12937d0ed1998ac40befd779f6595ab7, type: 3}
+      propertyPath: mOptionUi
+      value: 
+      objectReference: {fileID: 3214229038450663351}
     - target: {fileID: 3739197603443643376, guid: 12937d0ed1998ac40befd779f6595ab7, type: 3}
       propertyPath: m_Name
       value: EscUi 2
