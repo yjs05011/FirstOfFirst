@@ -19,8 +19,7 @@ public class DoorController : MonoBehaviour
         mStartShop.SetActive(false);
         mOpen.SetActive(false);
         mDoorAni = GetComponent<Animator>();
-        GFunc.SetTmpText(mButton1, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
-        GFunc.SetTmpText(mButton2, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
+        
     }
 
     // Update is called once per frame
@@ -98,6 +97,8 @@ public class DoorController : MonoBehaviour
         {
             mStartShop.SetActive(true);
             mOpen.SetActive(true);
+            GFunc.SetText(mButton1, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
+            GFunc.SetText(mButton2, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
         }
         if (other.tag == "Npc")
         {

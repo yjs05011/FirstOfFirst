@@ -3859,7 +3859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1149271769279675448, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Npc
       objectReference: {fileID: 0}
     - target: {fileID: 1540987294780313237, guid: 54f5614e39afbc245a90c539f5f942ba, type: 3}
       propertyPath: m_TagString
@@ -5011,7 +5011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846129166825051852, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_TagString
-      value: Wall
+      value: Npc
       objectReference: {fileID: 0}
     - target: {fileID: 2029077364389334316, guid: 319befe96ccb3e54bb4e77570c32b15e, type: 3}
       propertyPath: m_SortingLayer
