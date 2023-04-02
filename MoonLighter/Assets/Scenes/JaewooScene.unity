@@ -1287,7 +1287,6 @@ MonoBehaviour:
   mBossCurrentHp: 0
   mIsHpChange: 0
   mIsDungeonCheck: 0
-  mIsPlayerDie: 0
   mIsPlayerUseAnimation: 0
   mIsPlayerFinishAnimation: 0
   mIsResultUi: 0
@@ -1296,6 +1295,8 @@ MonoBehaviour:
   mExitDungeonUiOnOffCheck: 0
   mOptionExit: 0
   mIsInventoryInteraction: 0
+  mIsKeySelection: 0
+  mIsEscContol: 0
   mItemTableOpen: 0
   mVillageNoticeBoardOpen: 0
   mBlacksmithTalk: 0
@@ -2317,7 +2318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.84, y: 0.3}
+  m_AnchoredPosition: {x: -4.514, y: 0.3}
   m_SizeDelta: {x: 0.9583333, y: 1.7083334}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &218722680568544613
