@@ -75,16 +75,5 @@ public class HealthBarControl : MonoBehaviour
 
     }
 
-    // 체력 소모가 되는지 시간 줘서 확인하기
-    // IEnumerator WaiteForIt()
-    // {
-    //     while (true)
-    //     {
-    //         yield return new WaitForSeconds(1f);
-    //         // DamageZone();
-    //         HealZone();
-    //     }
-
-    // }
 
 }

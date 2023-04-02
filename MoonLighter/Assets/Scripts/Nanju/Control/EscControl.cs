@@ -9,6 +9,8 @@ public class EscControl : MonoBehaviour
     public GameObject mMainMenuCursorImage;
     public GameObject mExitCursorImage;
 
+    public GameObject mOptionUi;
+
     // public KeyCode mUpKey= KeyCode.W;
 
     public int mTextCheck;
@@ -53,10 +55,11 @@ public class EscControl : MonoBehaviour
                 case 0:
                     gameObject.SetActive(false);
                     break;
-
                 case 1:
+                    mOptionUi.SetActive(true);
                     break;
                 case 2:
+
                     break;
                 case 3:
 #if UNITY_EDITOR

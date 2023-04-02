@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class StartButton : MonoBehaviour
 {
-    public GameObject mStartScreenLogo;
+
     public GameObject mStartScreenText;
     public GameObject mStartScreenLine;
     public GameObject mStartButton;

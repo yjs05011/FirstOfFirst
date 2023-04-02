@@ -10,10 +10,14 @@ public class TitleButtonControl : MonoBehaviour
     public GameObject mPlayingGameCursorImage;
     public GameObject mOptionCursorImage;
     public GameObject mExitCursorImage;
+    public GameObject mOptionUi;
+    public GameObject mStartScreenLogo;
+    public GameObject mTitleButtons;
 
     public PlayerScriptObjs mPlayerDefaultStat;
 
     public int mTextCheck;
+    public int mOptionKey = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +28,8 @@ public class TitleButtonControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.J))
-        // {
-        //     EnterGame();
-        // }
+        UiManager.Instance.mIsKeySelection = true;
+
         if (Input.GetKeyDown(KeyCode.S))
         {
             if (mTextCheck == 2)
@@ -65,8 +67,10 @@ public class TitleButtonControl : MonoBehaviour
                     PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
                     LoadingManager.LoadScene("VillageScene");
                     break;
-
                 case 1:
+                    mStartScreenLogo.SetActive(false);
+                    // mTitleButtons.SetActive(false);
+                    mOptionUi.SetActive(true);
                     break;
                 case 2:
 #if UNITY_EDITOR
@@ -77,6 +81,14 @@ public class TitleButtonControl : MonoBehaviour
                     break;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            mStartScreenLogo.SetActive(true);
+            mTitleButtons.SetActive(true);
+
+        }
+
         // 무슨 이름인지 체크하여 활성화,비활성화 하기
         switch (mTextCheck)
         {

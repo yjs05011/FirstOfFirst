@@ -12,8 +12,12 @@ public class MainUi : MonoBehaviour
     public GameObject mExitDungeon;
     public GameObject mReplayKeyboard;
 
+    // EscUI 켜고, 끄기 
+    public GameObject mEscUI;
+    public int mEscControl = 0;
 
-    public float mTimer;
+
+    private float mTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,7 @@ public class MainUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        EscUiControl();
         BossHp();
         Pendont();
         PendantUseCheck(mTimer);
@@ -94,23 +99,53 @@ public class MainUi : MonoBehaviour
         {
             // 보스 hp바 끄기
             UiManager.Instance.SetBossHpVisible(false);
+            // 팬던트 off 하기
+            UiManager.Instance.mIsDungeonCheck = false;
 
-            mExitDungeon.SetActive(true);
+            // 다시하기 버튼 키 끄기
             mReplayKeyboard.SetActive(false);
+            // 퇴장 ui 키기
+            mExitDungeon.SetActive(true);
             PlayerManager.Instance.mIsUiActive = true;
         }
-        // if (PlayerManager.Instance.mPlayerStat.isDie == true)    // UiManager.Instance.mIsPlayerDie
-        // {
-        //     mExitDungeon.SetActive(true);
+        if (PlayerManager.Instance.mPlayerStat.isDie == true)
+        {
+            // 보스 hp바 끄기
+            UiManager.Instance.SetBossHpVisible(false);
+            // 팬던트 off 하기
+            UiManager.Instance.mIsDungeonCheck = false;
 
+            // 다시하기 버튼 키 키기
+            mReplayKeyboard.SetActive(true);
+            // 퇴장 ui 키기
+            mExitDungeon.SetActive(true);
+            PlayerManager.Instance.mIsUiActive = true;
+        }
 
-        // }
 
     }
 
+    // esc 키 받았을 때 esc ui 컨트롤 하기
+    public void EscUiControl()
+    {
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            mEscControl++;
+            if (mEscControl == 1)
+            {
+                PlayerManager.Instance.mIsUiActive = true;
+                mEscUI.SetActive(true);
+            }
+            else if (mEscControl == 2)
+            {
+                PlayerManager.Instance.mIsUiActive = false;
+                mEscUI.SetActive(false);
+                mEscControl = 0;
+            }
 
-    // 키보드 누르면 인벤토리 
-    // 미니(퀵슬롯) 인벤토리 On, Off 유무 함수
+        }
+    }
+
 
 }
