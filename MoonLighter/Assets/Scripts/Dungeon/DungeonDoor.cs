@@ -350,6 +350,9 @@ public class DungeonDoor : MonoBehaviour
         // [Notify] Enter Stage
         mNextStage.OnStageEnter(TansferInfo.Boss);
 
+        // 던전 보스방 bgm 출력 
+        //SoundManager.Instance.BgmSoundPlay();
+
     }
 
 
