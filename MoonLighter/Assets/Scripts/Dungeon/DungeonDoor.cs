@@ -97,7 +97,7 @@ public class DungeonDoor : MonoBehaviour
         {
             if(mCurrStage.GetBoardX() == 0 && mCurrStage.GetBoardY() == 0)
             {
-                Debug.Log("Door Close");
+                //Debug.Log("Door Close");
             }
 
             mFloorDoorAnim.SetTrigger("DoorClose");
@@ -235,12 +235,12 @@ public class DungeonDoor : MonoBehaviour
                         mCurrStage.OnStageExit(TansferInfo.Normal);
 
                         // 캐릭터 다음 스테이지로 이동
-                        Debug.LogFormat("{0} stage로 이동", mNextStage.name);
+                        //Debug.LogFormat("{0} stage로 이동", mNextStage.name);
 
 
                         if ((mDirection & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
                         {
-                            Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).y);
+                            //Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).y);
                             other.transform.position = mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM);
 
                             mNextStage.SetEntryPoint(DungeonGenerator.DIRECTION_BOTTOM);
@@ -248,20 +248,20 @@ public class DungeonDoor : MonoBehaviour
                         }
                         if ((mDirection & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
                         {
-                            Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_TOP).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_TOP).y);
+                            //Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_TOP).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_TOP).y);
                             other.transform.position = mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_TOP);
                             mNextStage.SetEntryPoint(DungeonGenerator.DIRECTION_TOP);
                         }
                         if ((mDirection & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
                         {
-                            Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).y);
+                            //Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).y);
 
                             other.transform.position = mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT);
                             mNextStage.SetEntryPoint(DungeonGenerator.DIRECTION_RIGHT);
                         }
                         if ((mDirection & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
                         {
-                            Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).y);
+                            //Debug.LogFormat("player x:{0} y:{1}로 이동", mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).x, mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).y);
 
                             other.transform.position = mNextStage.GetStartPoint(DungeonGenerator.DIRECTION_LEFT);
                             mNextStage.SetEntryPoint(DungeonGenerator.DIRECTION_LEFT);
@@ -302,7 +302,7 @@ public class DungeonDoor : MonoBehaviour
                             }
                             else
                             {
-                                Debug.LogError("잘못생성된 문입니다.");
+                                //Debug.LogError("잘못생성된 문입니다.");
                             }
                             break;
                         }
@@ -326,7 +326,7 @@ public class DungeonDoor : MonoBehaviour
         // Exit Stage
         mCurrStage.OnStageExit(TansferInfo.Normal);
 
-        Debug.Log("player 보스방으로 이동");
+        //Debug.Log("player 보스방으로 이동");
         DungeonStage bossStage = DungeonManager.Instance.GetDungeonBossRoom();
 
         // 플레이어 hide off 
@@ -395,28 +395,28 @@ public class DungeonDoor : MonoBehaviour
             // 플레이어 방향에 맞춰 포지션 설정. 
             if ((mDirection & DungeonGenerator.DIRECTION_TOP) == DungeonGenerator.DIRECTION_TOP)
             {
-                Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).y);
+                //Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM).y);
                 mPlayerCollider.transform.position = nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_BOTTOM);
                 nextFloor.SetEntryPoint(DungeonGenerator.DIRECTION_BOTTOM);
                 
             }
             if ((mDirection & DungeonGenerator.DIRECTION_BOTTOM) == DungeonGenerator.DIRECTION_BOTTOM)
             {
-                Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_TOP).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_TOP).y);
+                //Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_TOP).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_TOP).y);
                 mPlayerCollider.transform.position = nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_TOP);
                 nextFloor.SetEntryPoint(DungeonGenerator.DIRECTION_TOP);
             }
 
             if ((mDirection & DungeonGenerator.DIRECTION_LEFT) == DungeonGenerator.DIRECTION_LEFT)
             {
-                Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).y);
+                //Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT).y);
 
                 mPlayerCollider.transform.position = nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_RIGHT);
                 nextFloor.SetEntryPoint(DungeonGenerator.DIRECTION_RIGHT);
             }
             if ((mDirection & DungeonGenerator.DIRECTION_RIGHT) == DungeonGenerator.DIRECTION_RIGHT)
             {
-                Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).y);
+                //Debug.LogFormat("player [{0}F | x:{1} y:{2}]로 이동", currFloor + 1, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).x, nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_LEFT).y);
 
                 mPlayerCollider.transform.position = nextFloor.GetStartPoint(DungeonGenerator.DIRECTION_LEFT);
                 nextFloor.SetEntryPoint(DungeonGenerator.DIRECTION_LEFT);

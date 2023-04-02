@@ -112,7 +112,7 @@ public class MonsterFlyingGolem : Monster
             }
             return;
         }
-        Debug.LogFormat("MonsterFlyingGolem : {0}", name);
+        //Debug.LogFormat("MonsterFlyingGolem : {0}", name);
 
         if ("Attack".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
@@ -142,7 +142,7 @@ public class MonsterFlyingGolem : Monster
         }
         else
         {
-            Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+            //Debug.LogErrorFormat("Unknown Event Name:{0}", name);
         }
 
     }

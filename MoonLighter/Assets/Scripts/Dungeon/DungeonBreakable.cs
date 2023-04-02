@@ -35,8 +35,11 @@ public class DungeonBreakable : MonoBehaviour
     // 공격 받아야 깨지는 오브젝트 
     public void OnBreak()
     {
-        mBreakable.SetActive(false);
-        mBroken.SetActive(true);
+        if (mType == BreakType.Attack)
+        {
+            mBreakable.SetActive(false);
+            mBroken.SetActive(true);
+        }
     }
    
 }

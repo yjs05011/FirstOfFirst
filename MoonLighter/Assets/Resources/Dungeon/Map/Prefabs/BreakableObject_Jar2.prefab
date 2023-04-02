@@ -4936,7 +4936,7 @@ GameObject:
   - component: {fileID: 6666162554704838955}
   m_Layer: 0
   m_Name: BreakableObject_Jar2
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4998,7 +4998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mBreakable: {fileID: 7433523346888934106}
   mBroken: {fileID: 3518057090171334482}
-  mType: 1
+  mType: 2
 --- !u!1 &7433523346888934106
 GameObject:
   m_ObjectHideFlags: 0

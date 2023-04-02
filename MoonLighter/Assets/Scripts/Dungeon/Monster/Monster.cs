@@ -213,7 +213,7 @@ public class Monster : MonoBehaviour
         }
         if (mIsAttackBlock)
         {
-            Debug.Log("attack block");
+            //Debug.Log("attack block");
             return;
         }
 
@@ -231,7 +231,7 @@ public class Monster : MonoBehaviour
             {
                 this.SetState(State.Die);
                 // �κ� UI����Ǹ� �ּ� Ǯ�� ���� �ַ���
-                //ItemManager.Instance.DropItem(this.transform.position);
+                ItemManager.Instance.DropItem(this.transform.position);
             }
         }
         if (mType == Type.BOSS)
@@ -245,7 +245,7 @@ public class Monster : MonoBehaviour
                 if (mMonsterId != MonsterID.GolemKing)
                 {
                     // �κ� UI����Ǹ� �ּ� Ǯ�� ���� �ַ���
-                    //ItemManager.Instance.DropItem(this.transform.position);
+                    ItemManager.Instance.DropItem(this.transform.position);
                 }
                 UiManager.Instance.SetBossHpVisible(false);
             }
@@ -260,7 +260,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            Debug.LogErrorFormat("SpriteRenderer is Null.");
+            //Debug.LogErrorFormat("SpriteRenderer is Null.");
         }
     }
 
@@ -391,7 +391,7 @@ public class Monster : MonoBehaviour
         Vector2 position = new Vector2();
         while (count > 0)
         {
-            Debug.Log("IsRandomPositionInsidePolygonCollider");
+            //Debug.Log("IsRandomPositionInsidePolygonCollider");
             position.x = Random.Range(minX + worldX, maxX + worldX);
             position.y = Random.Range(minY + worldY, maxY + worldY);
 

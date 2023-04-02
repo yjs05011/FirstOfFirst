@@ -12,6 +12,7 @@ TagManager:
   - Pool
   - ItemTable
   - Wall
+  - Breakable
   layers:
   - Default
   - TransparentFX

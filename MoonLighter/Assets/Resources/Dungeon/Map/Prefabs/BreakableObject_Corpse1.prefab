@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8674931402176292052}
   m_Layer: 0
   m_Name: BreakableObject_Corpse1
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
