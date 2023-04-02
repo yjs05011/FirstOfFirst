@@ -47,7 +47,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 20
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -69,7 +69,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.27}
+  m_Offset: {x: 0, y: 0.02}
   serializedVersion: 2
   m_Radius: 0.22
 --- !u!114 &2552959306023619173
@@ -99,10 +99,10 @@ MonoBehaviour:
     y: -5
     width: 18
     height: 10
-  mAttackDistance: 1.2
-  mTraceScope: 2.3
+  mAttackDistance: 0.5
+  mTraceScope: 3
   mSpeed: 2
-  mWanderDistance: 0.25
+  mWanderDistance: 1.5
   mSplashAttackDistance: 0
   mHp: 100
   mMaxHP: 100
@@ -111,7 +111,7 @@ MonoBehaviour:
   mAttackTime: 0
   mIsAttackBlock: 0
   mIsDash: 0
-  mDashSpeed: 5
+  mDashSpeed: 3
   mDashDistance: 1
   mDashDestination: {x: 0, y: 0, z: 0}
   mPrevState: 1
@@ -400,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5827087984032040430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.215, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

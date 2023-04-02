@@ -8,7 +8,11 @@ public class MonsterFlyingGolem : Monster
     public override void Update()
     {
         base.Update();
-
+        // 몬스터가 있는 스테이지에 플레이어가 들어온경우.
+        if (mStage != DungeonManager.Instance.GetPlayerCurrStage())
+        {
+            return;
+        }
         // 대기 상태
         if (mCurrState == State.Idle)
         {
@@ -108,7 +112,7 @@ public class MonsterFlyingGolem : Monster
             }
             return;
         }
-        Debug.LogFormat("MonsterFlyingGolem : {0}", name);
+        //Debug.LogFormat("MonsterFlyingGolem : {0}", name);
 
         if ("Attack".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
@@ -138,7 +142,7 @@ public class MonsterFlyingGolem : Monster
         }
         else
         {
-            Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+            //Debug.LogErrorFormat("Unknown Event Name:{0}", name);
         }
 
     }

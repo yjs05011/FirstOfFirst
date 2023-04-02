@@ -465,16 +465,18 @@ MonoBehaviour:
   mSkillPresets: []
   mColliders: []
   mMonsterId: 2
+  mType: 0
   mMovableArea:
     serializedVersion: 2
     x: -9
     y: -5
     width: 18
     height: 10
-  mAttackDistance: 20
-  mTraceScope: 20
+  mAttackDistance: 11.2
+  mTraceScope: 11.3
   mSpeed: 0
   mWanderDistance: 0
+  mSplashAttackDistance: 0
   mHp: 100
   mMaxHP: 100
   mDamage: 25

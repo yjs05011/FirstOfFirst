@@ -145,10 +145,13 @@ public class Monster : MonoBehaviour
 
     public virtual void Update()
     {
+       
+
         if (mTarget == null)
         {
             this.mTarget = GameObject.FindObjectOfType<PlayerAct>();
         }
+    
 
         if (mRigidBody.bodyType != RigidbodyType2D.Static)
         {
@@ -195,7 +198,7 @@ public class Monster : MonoBehaviour
         if (changeWanderWhenBlocked && !IsMovablePosition(nextPosition))
         {
             mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-            this.SetState(State.Wander);
+            //this.SetState(State.Wander);
             return;
         }
 
@@ -210,7 +213,7 @@ public class Monster : MonoBehaviour
         }
         if (mIsAttackBlock)
         {
-            Debug.Log("attack block");
+            //Debug.Log("attack block");
             return;
         }
 
@@ -257,7 +260,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            Debug.LogErrorFormat("SpriteRenderer is Null.");
+            //Debug.LogErrorFormat("SpriteRenderer is Null.");
         }
     }
 
@@ -279,7 +282,7 @@ public class Monster : MonoBehaviour
         Vector2 direction = Random.insideUnitCircle.normalized;
 
         // ������ ���� ������ ũ�⸦ �Ÿ� N ���Ϸ� ����
-        float length = Random.Range(0f, distance);
+        float length = Random.Range(1.0f, distance);
         Vector3 destination = transform.position + (Vector3)direction * length;
 
         return destination;
@@ -342,7 +345,7 @@ public class Monster : MonoBehaviour
             Vector3 direction = (position - this.transform.position).normalized;
 
             RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction, 1.0f, layerMask);
-            if (hit.collider == null)
+            if (hit.collider == null || hit.collider.CompareTag("Trap"))
             {
                 return true;
             }
@@ -388,7 +391,7 @@ public class Monster : MonoBehaviour
         Vector2 position = new Vector2();
         while (count > 0)
         {
-            Debug.Log("IsRandomPositionInsidePolygonCollider");
+            //Debug.Log("IsRandomPositionInsidePolygonCollider");
             position.x = Random.Range(minX + worldX, maxX + worldX);
             position.y = Random.Range(minY + worldY, maxY + worldY);
 

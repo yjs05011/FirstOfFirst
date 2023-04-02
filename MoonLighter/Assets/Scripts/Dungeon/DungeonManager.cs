@@ -85,6 +85,9 @@ public class DungeonManager : MonoBehaviour
         if(scene.name == "Dungeon")
         {
             DungeonGenerator.Instance.DungeonGenerate();
+
+            // 던전 bgm 출력 
+            //SoundManager.Instance.BgmSoundPlay();
             
             // UI manager 던전체크 true . 
             UiManager.Instance.mIsDungeonCheck = true;

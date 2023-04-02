@@ -64,12 +64,12 @@ public class DungeonCameraController : MonoBehaviour
                 {
                     if (mIsBossRoom)
                     {
-                        Debug.Log("카메라 즉시 이동 완료, 무브 타입 fllow 모드로 변경");
+                        //Debug.Log("카메라 즉시 이동 완료, 무브 타입 fllow 모드로 변경");
                         SetCameraType(CameraMoveType.Follow);
                     }
                     else
                     {
-                        Debug.Log("카메라 즉시 이동 완료, 무브 타입 Default 모드로 변경");
+                        //Debug.Log("카메라 즉시 이동 완료, 무브 타입 Default 모드로 변경");
                         SetCameraType(CameraMoveType.Default);
                     }
                 }

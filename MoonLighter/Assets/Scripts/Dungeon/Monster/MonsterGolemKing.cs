@@ -150,7 +150,7 @@ public class MonsterGolemKing : Monster
         mAnimator.SetTrigger("LunchArm");
         this.SetState(State.Wait);
         // -> OnAnimation:OnGolemKingPunchEnd �������� idle ���·� �ٽ� ����
-        Debug.Log(" PunchAttack()");
+        //Debug.Log(" PunchAttack()");
     }
 
     public void WaveAttack()
@@ -159,7 +159,7 @@ public class MonsterGolemKing : Monster
         WaveSkill();
         // wave �� ���� �ϰ� ��ŷ�� 
         //this.SetState(State.Attack);
-        Debug.Log(" WaveAttack()");
+        //Debug.Log(" WaveAttack()");
     }
 
     public void StickyAttack()
@@ -168,7 +168,7 @@ public class MonsterGolemKing : Monster
         mAnimator.SetTrigger("StickyArm");
         this.SetState(State.Wait);
         // -> OnAnimation:Finish �� Attack ���·� �ٽ� ����
-        Debug.Log(" StickyAttack()");
+        //Debug.Log(" StickyAttack()");
     }
 
     public void RockSpawnAttack()
@@ -176,7 +176,7 @@ public class MonsterGolemKing : Monster
         // ������ ��ų ���� �ִϸ��̼� ���� Ʈ���� 
         mAnimator.SetTrigger("RockSpawn");
         this.SetState(State.Wait);
-        Debug.Log(" RockSpawnAttack()");
+        //Debug.Log(" RockSpawnAttack()");
         // -> OnAnimation:OnGolemKingRockSpwan �� Rock ���� , ���� ��� ������ ����(OnGolemKingRockSpwanFinish)��  Attack ���·� �ٽ� ����
     }
 
@@ -198,7 +198,7 @@ public class MonsterGolemKing : Monster
         // ��ġ ���� ���� �� �� �ٽ� ����ġ recover arm �� ���� ������ ȣ��
         else if ("OnGolemKingPunchEnd".Equals(name, System.StringComparison.OrdinalIgnoreCase))
         {
-            Debug.Log("OnGolemKingPunchEnd");
+            //Debug.Log("OnGolemKingPunchEnd");
             this.SetState(State.Attack);
         }
         // �� ���� ���� �ִϸ��̼� - �ٴ� ��� ������ ȣ�� 
@@ -241,7 +241,7 @@ public class MonsterGolemKing : Monster
         }
         else
         {
-            Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+            //Debug.LogErrorFormat("Unknown Event Name:{0}", name);
         }
 
     }
@@ -267,7 +267,7 @@ public class MonsterGolemKing : Monster
             mPunchCount = 0;
 
             mAnimator.SetTrigger("RecoverArm");
-            Debug.Log("recoverarm start");
+            //Debug.Log("recoverarm start");
             return;
         }
         ++mPunchCount;

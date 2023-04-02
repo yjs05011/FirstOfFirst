@@ -10,7 +10,7 @@ public class ShopCameraController : MonoBehaviour
     public Vector3 mRoomPOsition;
 
     private Vector3 mPosition;
-    private float smoothing = 0.002f;
+    private float smoothing = 0.01f;
     // Update is called once per frame
     void Update()
     {
