@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : GSingleton<GameManager>
 {
+    public List<ItemStat> mItemList = new List<ItemStat>();
     [SerializeField]
     public bool mIsShop = default;
     [SerializeField]
@@ -33,6 +34,8 @@ public class GameManager : GSingleton<GameManager>
     [SerializeField]
     public bool mIsWitchHouseBuild = default;
 
+    public ItemStat[] mInventory = new ItemStat[20];
+
     //[SerializeField]
     //public Slot[,] mInventorySlots = default;
     //[SerializeField]
@@ -46,7 +49,20 @@ public class GameManager : GSingleton<GameManager>
     {
         base.Init();
     }
+    public void AddItemList(ItemStat item)
+    {
 
+        mItemList.Add(item);
+
+
+    }
+    public void DefaultItemAdd()
+    {
+        for (int i = 0; i < mInventory.Length; i++)
+        {
+            mInventory[i] = mItemList[0];
+        }
+    }
 
 }
 

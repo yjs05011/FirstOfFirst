@@ -103,15 +103,6 @@ public class PlayerAct : MonoBehaviour
             SetPosition.Instance.mSettingPosition = Vector3.zero;
         }
 
-        // if (!DataManager.Instance.FileCheck())
-        // {
-        //     GameKeyManger.Instance.DefaultKeySetting();
-        // }
-        // else
-        // {
-        //     GameKeyManger.Instance.DefaultKeySetting();
-        // }
-
 
 
     }
@@ -404,6 +395,7 @@ public class PlayerAct : MonoBehaviour
         {
             mPlayerHp += number;
             PlayerManager.Instance.mPlayerStat.Hp += number;
+            UiManager.Instance.mIsHpChange = true;
             if (mPlayerHp <= mPlayerMaxHp)
             {
                 mPlayerHp = mPlayerMaxHp;

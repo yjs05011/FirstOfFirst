@@ -16,7 +16,7 @@ public class WitchAct : VillageUpgrade
         {
             PlayerManager.Instance.mPlayerStat.Money -= money;
             VillageManager.Instance.IsWitchHouseBuild = false;
-            Debug.Log(VillageManager.Instance.IsWitchHouseBuild);
+            LoadingManager.LoadScene("VillageScene");
         }
     }
 }
