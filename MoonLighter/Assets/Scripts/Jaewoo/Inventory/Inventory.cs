@@ -155,6 +155,8 @@ public class Inventory : MonoBehaviour
 
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
+        transform.GetChild(2).gameObject.SetActive(false);
+
         transform.GetChild(3).gameObject.SetActive(false);
 
         mInventory.SetActive(false);
@@ -181,14 +183,9 @@ public class Inventory : MonoBehaviour
         {
             for (int indexX = 0; indexX < ARRAY_X; indexX++)
             {
-
                 Debug.Log($"{mInventoryArray[indexY, indexX]}, 업데이트 위치");
-
             }
-
         }
-
-        //false 이면  
 
         TryOpenInventory();
 
@@ -221,9 +218,7 @@ public class Inventory : MonoBehaviour
     #region 상자용 코드
     private void TryOpenChest()
     {
-        //KeyManager를 통해 키보드 입력(매니저에서 받는)
-        //if(Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
-        //화요일 머지시 지워야함(i눌러서 인벤토리 나오는 부분)
+      
 
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -236,7 +231,7 @@ public class Inventory : MonoBehaviour
                 if (mKeyCount == 1)
                 {
                     OpenChest();
-                    // LoadItem();      
+                        
 
                 }
                 if (mKeyCount == 2)
