@@ -13,6 +13,7 @@ public class SoundManager : GSingleton<SoundManager>
     protected override void Init()
     {
         base.Init();
+        bgm = gameObject.AddComponent<AudioSource>();
     }
     public void SfxPlay(string SfxName, AudioClip clip, float volume)
     {
@@ -35,9 +36,9 @@ public class SoundManager : GSingleton<SoundManager>
 
         Destroy(go, 2f);
     }
-    public void BgmSoundPlay(AudioClip clip)
+    public void BgmSoundPlay(int i)
     {
-        bgm.clip = clip;
+        bgm.clip = bgms[i];
         bgm.loop = true;
         bgm.volume = 0.1f;
         bgm.Play();
@@ -48,7 +49,7 @@ public class SoundManager : GSingleton<SoundManager>
         {
             if (arg0.name == bgms[i].name)
             {
-                BgmSoundPlay(bgms[i]);
+                BgmSoundPlay(i);
             }
 
         }

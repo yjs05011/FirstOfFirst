@@ -14,7 +14,7 @@ public class BlacksmithAct : VillageUpgrade
         {
             PlayerManager.Instance.mPlayerStat.Money -= money;
             VillageManager.Instance.IsBlackSmithBuild = true;
-            Debug.Log(VillageManager.Instance.IsBlackSmithBuild);
+            LoadingManager.LoadScene("VillageScene");
         }
 
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InitManager : MonoBehaviour
 {
+    public GameObject[] objs;
+    ItemStat mitemList;
     private void Awake()
     {
         GameKeyManger.Instance.Create();
@@ -18,13 +20,18 @@ public class InitManager : MonoBehaviour
         ItemManager.Instance.Create();
 
         VillageManager.Instance.Create();
-        GFunc.LoadScene("TitleScene");
+
 
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        for (int i = 0; i < objs.Length; i++)
+        {
+            GameManager.Instance.AddItemList(objs[i].GetComponent<ItemStat>());
+        }
+        GameManager.Instance.DefaultItemAdd();
+        // GFunc.LoadScene("TitleScene");
     }
 
     // Update is called once per frame

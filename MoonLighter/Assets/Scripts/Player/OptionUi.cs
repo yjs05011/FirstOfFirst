@@ -66,7 +66,7 @@ public class OptionUi : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gameObject.SetActive(false);
-            // UiManager.Instance.mOptionExit =false;
+            DataManager.Instance.JsonSave();
         }
         if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
         {

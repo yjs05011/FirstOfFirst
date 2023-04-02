@@ -5,7 +5,8 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    public SaveData(List<KeyCode> _mKeySave, float _playerHp, float _playerMaxHp, float _playerSpeed, float _playerStr, float _playerDef, float _playerMoney)
+    public SaveData(List<KeyCode> _mKeySave, float _playerHp, float _playerMaxHp, float _playerSpeed, float _playerStr, float _playerDef, float _playerMoney, bool _isNight,
+    List<int> _tableNumber, int[] _itemPrice, int[] _itemsNumber, Vector3 _bedPostion, bool _isBlackSmithBuild, bool _isWitchHouseBuild)
     {
         mPlayerMaxHp = _playerMaxHp;
         mPlayerHp = _playerHp;
@@ -14,6 +15,14 @@ public class SaveData
         mPlayerStr = _playerStr;
         mPlayerSpeed = _playerSpeed;
         mKeySave = _mKeySave;
+        mIsNight = _isNight;
+        mTableNumber = _tableNumber;
+        mItemPrice = _itemPrice;
+        mItemsNumber = _itemsNumber;
+        mBedPosition = _bedPostion;
+        mIsBlackSmithBuild = _isBlackSmithBuild;
+        mIsWitchHouseBuild = _isWitchHouseBuild;
+
     }
     public SaveData()
     {
@@ -53,8 +62,12 @@ public class DataManager : GSingleton<DataManager>
     public override void Awake()
     {
 
+<<<<<<< HEAD
         path = Path.Combine(Application.dataPath, "test.json");
         // JsonLoad();
+=======
+        path = Path.Combine(Application.dataPath, "MoonLightSaveFile.json");
+>>>>>>> ae5728c4b45307803931f17480e77465b8e31469
         base.Init();
     }
 
@@ -95,8 +108,9 @@ public class DataManager : GSingleton<DataManager>
     public void JsonSave()
     {
         Debug.Log(path);
-        SaveData saveData = new SaveData(GameKeyManger.Instance.SaveKeyList, GameManager.Instance.mPlayerHp, GameManager.Instance.mPlayerMaxHp, GameManager.Instance.mPlayerDef,
-        GameManager.Instance.mPlayerStr, GameManager.Instance.mPlayerMoney, GameManager.Instance.mPlayerSpeed);
+        SaveData saveData = new SaveData(GameKeyManger.Instance.SaveKeyList, GameManager.Instance.mPlayerHp, GameManager.Instance.mPlayerMaxHp, GameManager.Instance.mPlayerSpeed,
+        GameManager.Instance.mPlayerStr, GameManager.Instance.mPlayerDef, GameManager.Instance.mPlayerMoney, GameManager.Instance.mIsNight, GameManager.Instance.mTableNumber, GameManager.Instance.mItemPrice,
+        GameManager.Instance.mItemsNumber, GameManager.Instance.mBedPosition, GameManager.Instance.mIsBlackSmithBuild, GameManager.Instance.mIsWitchHouseBuild);
 
         string json = JsonUtility.ToJson(saveData, true);
 

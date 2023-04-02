@@ -1,10 +1,18 @@
 {
     "mPlayerHp": 0.0,
+<<<<<<< HEAD
     "mPlayerSpeed": 0.0,
     "mPlayerStr": 0.0,
     "mPlayerDef": 0.0,
     "mPlayerMoney": 0.0,
     "mPlayerMaxHp": 0.0,
+=======
+    "mPlayerSpeed": 10.0,
+    "mPlayerStr": 20.0,
+    "mPlayerDef": 500.0,
+    "mPlayerMoney": 5.0,
+    "mPlayerMaxHp": 500.0,
+>>>>>>> ae5728c4b45307803931f17480e77465b8e31469
     "mIsNight": false,
     "mTableNumber": [],
     "mItemPrice": [],
@@ -16,5 +24,25 @@
     },
     "mIsBlackSmithBuild": false,
     "mIsWitchHouseBuild": false,
+<<<<<<< HEAD
     "mKeySave": []
+=======
+    "mKeySave": [
+        119,
+        115,
+        97,
+        100,
+        101,
+        32,
+        106,
+        107,
+        122,
+        108,
+        105,
+        113,
+        101,
+        122,
+        99
+    ]
+>>>>>>> ae5728c4b45307803931f17480e77465b8e31469
 }
