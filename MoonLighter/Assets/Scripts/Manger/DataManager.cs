@@ -54,7 +54,7 @@ public class DataManager : GSingleton<DataManager>
     {
 
         path = Path.Combine(Application.dataPath, "test.json");
-        JsonLoad();
+        // JsonLoad();
         base.Init();
     }
 

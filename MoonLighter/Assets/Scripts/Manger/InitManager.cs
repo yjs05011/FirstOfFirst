@@ -18,7 +18,7 @@ public class InitManager : MonoBehaviour
         ItemManager.Instance.Create();
 
         VillageManager.Instance.Create();
-        //GFunc.LoadScene("TitleScene");
+        GFunc.LoadScene("TitleScene");
 
     }
     // Start is called before the first frame update
