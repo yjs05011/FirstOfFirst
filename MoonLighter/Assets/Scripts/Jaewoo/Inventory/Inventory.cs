@@ -119,7 +119,6 @@ public class Inventory : MonoBehaviour
                 mInventoryArray[indexY, indexX] = mInventoryFindSlot.transform.GetChild(indexAdd).gameObject.GetComponent<Slot>();
 
             }
-
         }
        
         mSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
