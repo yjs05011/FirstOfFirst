@@ -56,10 +56,10 @@ public class EscControl : MonoBehaviour
                     gameObject.SetActive(false);
                     break;
                 case 1:
-                    gameObject.SetActive(false);
+                    mOptionUi.SetActive(true);
                     break;
                 case 2:
-                    mOptionUi.SetActive(true);
+
                     break;
                 case 3:
 #if UNITY_EDITOR

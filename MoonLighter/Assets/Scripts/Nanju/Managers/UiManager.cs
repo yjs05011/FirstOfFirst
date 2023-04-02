@@ -35,6 +35,8 @@ public class UiManager : MonoBehaviour
     public bool mExitDungeonUiOnOffCheck = false;
     public bool mOptionExit = false;
     public bool mIsInventoryInteraction = false;
+    // 키 선택이 안되게 하기
+    public bool mIsKeySelection = false;
 
     // [마을]
     // 테이블 아이템을 열었을 시 값이 변하는 변수 선언

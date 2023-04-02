@@ -24,25 +24,22 @@ public class MiniInventory : MonoBehaviour
     void Update()
     {
         LockCheck();
-        MiniInventoryCheck();
+        MiniInventoryItemCountCheck();
         OpenMiniInventory();
 
-
-        Debug.Log(mUiInventory);
     }
 
     // �κ��丮 �� ui �� ���� ui ���� �������� Ȯ���ϱ� ���� �ӽ� �Լ�
     public void OpenMiniInventory()
     {
+
         if (Input.GetKeyDown(KeyCode.I))
         {
-            PlayerManager.Instance.mIsUiActive = false;
+            PlayerManager.Instance.mIsUiActive = true;
 
             mUiInventory++;
             if (mUiInventory == 1)
             {
-                // Debug.Log(UiManager.Instance.mIsInventoryLock);
-
                 // 락이 아닐때 인벤토리 열기
                 if (UiManager.Instance.mIsInventoryLock == false)
                 {
@@ -57,6 +54,8 @@ public class MiniInventory : MonoBehaviour
             }
             else if (mUiInventory == 2)
             {
+                PlayerManager.Instance.mIsUiActive = false;
+
                 mMiniInventory.SetActive(false);
                 mUiInventory = 0;
 
@@ -79,8 +78,7 @@ public class MiniInventory : MonoBehaviour
     }
 
     // 지금은 텍스트로 체크하고 있고, 사실은 아이템개수로 체크하여 텍스트 바꿔야됨
-    // 지금은 텍스트로 체크하고 있고, 사실은 아이템개수로 체크하여 텍스트 바꿔야됨
-    void MiniInventoryCheck()
+    void MiniInventoryItemCountCheck()
     {
         mChangeText.text = mCurrentMiniInventoryText.ToString();
 

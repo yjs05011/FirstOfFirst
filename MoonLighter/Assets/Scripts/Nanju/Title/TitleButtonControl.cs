@@ -28,10 +28,8 @@ public class TitleButtonControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.J))
-        // {
-        //     EnterGame();
-        // }
+        UiManager.Instance.mIsKeySelection = true;
+
         if (Input.GetKeyDown(KeyCode.S))
         {
             if (mTextCheck == 2)
@@ -71,8 +69,7 @@ public class TitleButtonControl : MonoBehaviour
                     break;
                 case 1:
                     mStartScreenLogo.SetActive(false);
-                    mTitleButtons.SetActive(false);
-                    // this.gameObject.SetActive(false);
+                    // mTitleButtons.SetActive(false);
                     mOptionUi.SetActive(true);
                     break;
                 case 2:
@@ -89,7 +86,6 @@ public class TitleButtonControl : MonoBehaviour
 
             mStartScreenLogo.SetActive(true);
             mTitleButtons.SetActive(true);
-            mOptionUi.SetActive(false);
 
         }
 
