@@ -235,7 +235,7 @@ public class MonsterGolemMiniBoss : Monster
         }
         else
         {
-            Debug.LogErrorFormat("Unknown Event Name:{0}", name);
+            //Debug.LogErrorFormat("Unknown Event Name:{0}", name);
         }
     }
 }

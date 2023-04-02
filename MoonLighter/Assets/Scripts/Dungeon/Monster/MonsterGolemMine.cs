@@ -28,25 +28,6 @@ public class MonsterGolemMine : Monster
                 this.SetState(State.Attack);
                 return;
             }
-            else
-            {
-                mWanderPosition = GenerateRandomAroundPosition(this.mWanderDistance);
-                this.SetState(State.Wander);
-            }
-        
-        }
-        // 배회 상태 ( wake 후 추적 가능한 상태가 아닌경우 )
-        else if (mCurrState == State.Wander)
-        {
-            // 배회 목적지에 도착했는지 체크한다.
-            if (Vector3.Distance(transform.position, mWanderPosition) < Mathf.Epsilon)
-            {
-                this.SetState(State.Idle);
-                return;
-            }
-
-            // 배회 한다.
-            this.Movement(mWanderPosition, mSpeed, true);
         }
         // 공격 상태
         else if (mCurrState == State.Attack)

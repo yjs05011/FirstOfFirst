@@ -84,7 +84,7 @@ public class Projectile : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Hole"))
+        if (collision.CompareTag("Hole") || collision.CompareTag("Monster"))
         {
             return;
         }

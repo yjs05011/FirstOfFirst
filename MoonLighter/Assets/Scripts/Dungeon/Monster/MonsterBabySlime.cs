@@ -7,12 +7,16 @@ public class MonsterBabySlime : Monster
     public override void Update()
     {
         base.Update();
-
+        // 몬스터가 있는 스테이지에 플레이어가 들어온경우.
+        if (mStage != DungeonManager.Instance.GetPlayerCurrStage())
+        {
+            return;
+        }
         // 대기 상태
         if (mCurrState == State.Idle)
         {
-            mAnimator.SetBool("IsMove", false);
 
+            mAnimator.SetBool("IsMove", false);
             // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
             if (IsInTraceScope())
             {
@@ -30,15 +34,21 @@ public class MonsterBabySlime : Monster
         // 배회 상태 ( 할게 없는 경우 )
         else if (mCurrState == State.Wander)
         {
+            
+            // 추적 가능한지 체크하고 추적가능하면 공격 상태로 바꾼다.
+            if (IsInTraceScope())
+            {
+                this.SetState(State.Attack);
+                return;
+            }
+            
             mAnimator.SetBool("IsMove", true);
-
             // 배회 목적지에 도착했는지 체크한다.
             if (Vector3.Distance(transform.position, mWanderPosition) < Mathf.Epsilon)
             {
                 this.SetState(State.Idle);
                 return;
             }
-
             // 배회 한다.
             this.Movement(mWanderPosition, mSpeed, true);
         }
@@ -56,10 +66,11 @@ public class MonsterBabySlime : Monster
             // 공격 영역 안에 있는 경우 공격 한다.
             if (IsInAttackRange())
             {
+                this.Movement(mTarget.transform.position, mSpeed, true);
                 if (mTarget)
                 {
                     mTarget.OnDamage(mMonsterId,this.mDamage);
-                    //mTarget.OnDamage(this.mDamage);
+                    
                 }
                 else
                 {

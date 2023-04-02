@@ -94,8 +94,7 @@ public class DungeonGenerator : MonoBehaviour
         // ������ �����ߴ� ���������� ��� ����(���ӿ�����Ʈ)
         StagesDelete();
 
-
-        Debug.LogFormat("w: {0}, h : {1}", WIDTH, HEIGHT);
+        //Debug.LogFormat("w: {0}, h : {1}", WIDTH, HEIGHT);
 
         GameObject roomObject = Instantiate(mStagePrefab);
         roomObject.name = string.Format("Stage {0},{1}", startX, startY);
@@ -148,7 +147,7 @@ public class DungeonGenerator : MonoBehaviour
         SetRoomStyle(startX, startY);
         SetDoorOpen();
 
-        Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
+        //Debug.LogFormat("TotalCount:{0} CreateCount:{1}", TOTAL_COUNT, CREATE_COUNT);
 
         // [Notify] Enter Stage (First)
         startStage.OnStageEnter(DungeonDoor.TansferInfo.FirstRoom);

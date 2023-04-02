@@ -156,7 +156,7 @@ public class DungeonStage : MonoBehaviour
         }
 
 
-        Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
+        //Debug.LogFormat("The player is enter the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
     }
 
     // 층 이동으로 입장한 방향의 문 찾아 반환하는 함수. 
@@ -193,7 +193,7 @@ public class DungeonStage : MonoBehaviour
 
     public IEnumerator OnStageExitCoroutine(DungeonDoor.TansferInfo transferInfo)
     {
-        Debug.LogFormat("The player is exit the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
+        //Debug.LogFormat("The player is exit the stage. ({0} Floor X:{1}, Y:{2}) - {3}", mFloor, mBoardX, mBoardY, transferInfo.ToString());
         yield return true;
     }
 
@@ -341,7 +341,7 @@ public class DungeonStage : MonoBehaviour
 
         for(int index=0; index < boards.Count; ++index)
         {
-            Debug.Log(boards[index].gameObject.name);
+            //Debug.Log(boards[index].gameObject.name);
             
             if(index == random)
             {

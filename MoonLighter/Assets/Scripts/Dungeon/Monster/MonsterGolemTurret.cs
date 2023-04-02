@@ -10,7 +10,7 @@ public class MonsterGolemTurret : Monster
     public override void Update()
     {
         base.Update();
-
+      
         // 대기 상태
         if (mCurrState == State.Idle)
         {
@@ -142,7 +142,7 @@ public class MonsterGolemTurret : Monster
                         }
                         else
                         {
-                            Debug.LogErrorFormat("mProjectilePreset is Null");
+                            //Debug.LogErrorFormat("mProjectilePreset is Null");
                         }
                     
                 }

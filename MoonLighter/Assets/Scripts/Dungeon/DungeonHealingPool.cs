@@ -58,7 +58,7 @@ public class DungeonHealingPool : MonoBehaviour
 
             if (mHealPoint <= 0)
             {
-                Debug.LogFormat("Èú empty");
+                //Debug.LogFormat("Èú empty");
                 mIsHealing = false;
                 SetPoolHealEmpty();
             }
@@ -96,7 +96,7 @@ public class DungeonHealingPool : MonoBehaviour
 
             StartCoroutine(Healing(other));
             
-            Debug.Log("Player Healing");
+            //Debug.Log("Player Healing");
 
         }
     }
