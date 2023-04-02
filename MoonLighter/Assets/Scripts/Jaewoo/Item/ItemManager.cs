@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemManager : GSingleton<ItemManager>
 {
     public Inventory mInventory;
+    public Item mItem;
     //프리팹 배열
     public GameObject[] mItemPrefab = new GameObject[6];
     //public Object[] mListTest = new Object[6];
@@ -44,6 +45,8 @@ public class ItemManager : GSingleton<ItemManager>
             GameObject item = Instantiate(dropItem);
             
             item.gameObject.transform.position = new Vector3(position.x + RandomX,position.y + RandomY,0);
+            //던전매니저에게 드랍할때보내주는거
+            DungeonManager.Instance.DungeonDropItemAdd(mItem);
         }              
     }
 

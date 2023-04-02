@@ -6,30 +6,46 @@ public class InventoryManager : GSingleton<InventoryManager>
 {   
     public Inventory mInventory;
     public int mBagCount = 0;
-    public bool mIsManagerAddCheck = false;
-
-    //상자 열었을때 와 인벤토리를 열었을때 키입력 서로 안되게.
+    public bool mIsManagerAddCheck = false;    
     public bool mIsMoveController = false;
-
     public Dictionary<int,Slot> mDataInventory = new Dictionary<int, Slot>();
-    //인벤토리아이템 Slot 저장
-    //public Slot[,] mInventorySlots = new Slot[4,5];
     public Slot[,] mInventorySlots = new Slot[4,5];
 
-    //장비창아이템 Slot 저장    
     public Slot[,] mEquipmentSlots = new Slot[4,2];  
-
-    //체스트 창 인벤토리
-    public Slot[,] mChestInventorySlots = new Slot[4,5];
-    public List<Slot> testList = default;
-
-    //상자 Slot 저장
-    public Slot[,] mChestSlots = new Slot[4,7];
-
-     
     
-     // FOR DEBUG:
-    //  public System.DateTime objActivedTime = default;
-    //  public System.DateTime spRendererInitializedTime = default;
-    //  public System.DateTime afterItemAddedTime = default;
+    public Slot[,] mChestInventorySlots = new Slot[4,5];
+       
+    public Slot[,] mChestSlots = new Slot[4,7];
+    public Sprite[,] mInventoryFind = new Sprite[4,5];
+    public int[,] mInventoryCount = new int[4,5];
+
+    
+    public void InventoryFind()
+    {
+        for(int y=0; y < 4; y ++)
+        {
+            for(int x =0; x < 5; x++)
+            {
+                mInventoryFind[y,x] = mInventorySlots[y,x].mItemSprite;
+                mInventoryCount[y,x] = mInventorySlots[y,x].mItemCount;
+            }
+        }      
+    }
+
+    public void BagCount()
+    {
+        mBagCount = 0;
+        for(int y = 0; y < 4; y ++)
+        {
+            for(int x = 0; x <5; x ++)
+            {               
+                if(mInventorySlots[y,x].mItem !=null)
+                {                    
+                    mBagCount++;
+                }
+                
+            }
+        }
+    }
+    
 }
