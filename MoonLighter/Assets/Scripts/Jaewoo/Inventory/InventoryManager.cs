@@ -10,7 +10,6 @@ public class InventoryManager : GSingleton<InventoryManager>
     public bool mIsMoveController = false;
     public Dictionary<int,Slot> mDataInventory = new Dictionary<int, Slot>();
     public Slot[,] mInventorySlots = new Slot[4,5];
-
     public Slot[,] mEquipmentSlots = new Slot[4,2];  
     
     public Slot[,] mChestInventorySlots = new Slot[4,5];

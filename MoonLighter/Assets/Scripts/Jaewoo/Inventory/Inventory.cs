@@ -118,11 +118,10 @@ public class Inventory : MonoBehaviour
                 int indexAdd = indexY * ARRAY_X + indexX;
                 mInventoryArray[indexY, indexX] = mInventoryFindSlot.transform.GetChild(indexAdd).gameObject.GetComponent<Slot>();
 
-
             }
 
         }
-
+       
         mSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
         mEquipmentArray = new Slot[4, 2];
         for (int indexY = 0; indexY < EQUIPMENT_ARRAY_Y; indexY++)
@@ -183,9 +182,14 @@ public class Inventory : MonoBehaviour
         {
             for (int indexX = 0; indexX < ARRAY_X; indexX++)
             {
+
                 Debug.Log($"{mInventoryArray[indexY, indexX]}, 업데이트 위치");
+
             }
+
         }
+
+        //false 이면  
 
         TryOpenInventory();
 
@@ -218,7 +222,9 @@ public class Inventory : MonoBehaviour
     #region 상자용 코드
     private void TryOpenChest()
     {
-      
+        //KeyManager를 통해 키보드 입력(매니저에서 받는)
+        //if(Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.UP]))
+        //화요일 머지시 지워야함(i눌러서 인벤토리 나오는 부분)
 
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -231,7 +237,7 @@ public class Inventory : MonoBehaviour
                 if (mKeyCount == 1)
                 {
                     OpenChest();
-                        
+                    // LoadItem();      
 
                 }
                 if (mKeyCount == 2)
@@ -293,12 +299,7 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             ChestSelectSlot();
-        }
-        //빠른 위치로 넣기
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            //ItemSelfInsert();
-        }
+        }       
 
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -355,7 +356,7 @@ public class Inventory : MonoBehaviour
             {
                 mSelectY = 0;
             }
-            
+            //Debug.Log(mInventoryArray[mSelectY, mSelectX]);
             mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
         }
     }
@@ -428,18 +429,18 @@ public class Inventory : MonoBehaviour
     public void ChestSelectSlot()
     {
 
-        
+        //인벤토리에서 포인터 움직일때
         if (!mIsChestSlotCheck)
         {
-            
+            //인벤토리 배열에 아이템이 없을때
             if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem == null)
             {
-               
+                //포인터에 아이템이 없을때
                 if (mChestSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem == null)
                 {
 
                 }
-               
+                //인벤토리 배열에 아이템이 없고 포인터에 아이템이 있으면
                 else
                 {
                     mSelectCount = 0;
@@ -452,21 +453,21 @@ public class Inventory : MonoBehaviour
                 }
 
             }
-            
+            //인벤토리 배열에 아이템이 있고
             else if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem != null)
             {
-              
+                //포인터에 켜져있고
                 if (mChestSelectPoint.transform.GetChild(0).gameObject.activeSelf)
                 {
-                    
+                    //인벤토리 배열의 아이템과 포인터의 아이템이 같을때
                     if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem == mChestSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem)
                     {
-                        
+                        //아이템 타입이 장비면
                         if (mInventoryArray[mSelectY, mSelectX].GetComponent<Slot>().mItem.mItemType == Item.ItemEnumType.Equiment)
                         {
 
                         }
-                        
+                        //아이템 타입이 장비가 아니면
                         else
                         {
                             SelectSwap();
@@ -484,18 +485,18 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        
+        //창고에서 포인터 움직일때
         else
         {
-            
+            //창고 배열에 아이템이 없을때
             if (mChestArray[mSelectChestY, mSelectChestX].GetComponent<Slot>().mItem == null)
             {
-                
+                //포인터에 아이템이 없을때
                 if (mChestSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem == null)
                 {
 
                 }
-                
+                //창고 배열에 아이템이 없고 포인터에 아이템이 있으면
                 else
                 {
                     
@@ -508,20 +509,20 @@ public class Inventory : MonoBehaviour
                 }
 
             }
-            
+            //창고 배열에 아이템이 있을때
             else if (mChestArray[mSelectChestY, mSelectChestX].GetComponent<Slot>().mItem != null)
             {
-                
+                //포인터에 아이템이 있고
                 if (mChestSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem != null)
-                { 
+                { //인벤토리 배열의 아이템과 포인터의 아이템이 같을때
                     if (mChestArray[mSelectY, mSelectX].GetComponent<Slot>().mItem == mChestSelectPoint.transform.GetChild(0).GetComponent<Slot>().mItem)
                     {
-                        
+                        //아이템 타입이 장비면
                         if (mChestArray[mSelectY, mSelectX].GetComponent<Slot>().mItem.mItemType == Item.ItemEnumType.Equiment)
                         {
                             SelectSwap();
                         }
-                       
+                        //아이템 타입이 장비가 아니면
                         else
                         {
                             SelectSwap();
@@ -541,7 +542,7 @@ public class Inventory : MonoBehaviour
         }
     }
     #endregion
-    
+    //인벤토리 켰을때
     private void TryOpenInventory()
     {
 
@@ -567,11 +568,17 @@ public class Inventory : MonoBehaviour
 
     public void InventoryMove()
     {
-        
+        //슬롯에서 아이템 선택
         if (Input.GetKeyDown(KeyCode.J))
         {
             SelectSlot();
         }
+        //빠른 위치로 넣기
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ItemSelfInsert();
+        }
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             if (mSelectX < 4)
@@ -610,7 +617,7 @@ public class Inventory : MonoBehaviour
             {
                 mSelectY = 3;
             }
-            
+            //Debug.Log(mInventoryArray[mSelectY, mSelectX]);
             mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -620,7 +627,7 @@ public class Inventory : MonoBehaviour
             {
                 mSelectY = 0;
             }
-            
+            //Debug.Log(mInventoryArray[mSelectY, mSelectX]);
             mSelectPoint.transform.localPosition = mInventoryArray[mSelectY, mSelectX].transform.localPosition;
         }
     }
@@ -688,9 +695,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
-
-    
     private void OpenInventory()
     {
 
@@ -740,7 +744,7 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
-   
+    
     private void CloseInventory()
     {
 
