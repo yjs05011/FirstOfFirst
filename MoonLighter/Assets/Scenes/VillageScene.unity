@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1996,7 +1996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7990409187182026437, guid: 54acd8b50261b9a409d88a90f8cc1c24, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7990409187325464854, guid: 54acd8b50261b9a409d88a90f8cc1c24, type: 3}
       propertyPath: m_SortingLayer
@@ -2016,7 +2016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7990409187379551462, guid: 54acd8b50261b9a409d88a90f8cc1c24, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7990409187395565341, guid: 54acd8b50261b9a409d88a90f8cc1c24, type: 3}
       propertyPath: m_SortingLayer
@@ -2041,6 +2041,10 @@ PrefabInstance:
     - target: {fileID: 7990409187439782879, guid: 54acd8b50261b9a409d88a90f8cc1c24, type: 3}
       propertyPath: m_SortingLayerID
       value: -1281908001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990409187486787450, guid: 54acd8b50261b9a409d88a90f8cc1c24, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7990409187577401999, guid: 54acd8b50261b9a409d88a90f8cc1c24, type: 3}
       propertyPath: m_SortingLayer

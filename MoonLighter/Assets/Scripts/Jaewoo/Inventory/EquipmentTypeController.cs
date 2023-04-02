@@ -15,15 +15,7 @@ public class EquipmentTypeController : MonoBehaviour
             mEquipmentSlot[index] = transform.GetChild(index).gameObject;
         }
     }
-
-    // void Start()
-    // {
-    //     if(mEquipmentSlot[0] || mEquipmentSlot[1])
-    //     {
-    //         mItem.mItemType = Item.ItemEnumType.Equiment;
-            
-    //     }
-    // }
+    
 
         
 

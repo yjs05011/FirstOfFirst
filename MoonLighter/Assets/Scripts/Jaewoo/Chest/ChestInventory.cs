@@ -45,6 +45,9 @@ public class ChestInventory : MonoBehaviour
     public GameObject mChestSelectPoint = null;
     public GameObject mChestSelectItem;
 
+    [Header("ChestInventory Input ReSource")]
+    public GameObject mInventoryResource;
+
     //기본상태 인벤토리 배열
     //같은 인벤토리라서 이름이 같음
     public GameObject[,] mInventoryGameObjectArray;
@@ -78,7 +81,10 @@ public class ChestInventory : MonoBehaviour
 
                 mInventoryArray[indexY, indexX] = mInventoryFindSlot.transform.GetChild(indexAdd).GetComponent<Slot>();
                 mInventoryArray[indexY, indexX].gameObject.SetActive(true);
+                
                 InventoryManager.Instance.mChestInventorySlots[indexY, indexX] = mInventoryArray[indexY, indexX].GetComponent<Slot>();
+                
+                
             }
         }
         mChestSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
@@ -114,7 +120,7 @@ public class ChestInventory : MonoBehaviour
         //     LoadItem();
         //     InventoryManager.Instance.mIsManagerAddCheck = false;
         // }
-
+        Debug.Log($"{mInventoryArray[0,0].tag}, 업데이트중");
         TryOpenChest();
         if (mChestIsInventoryOpen == true)
         {
@@ -136,8 +142,9 @@ public class ChestInventory : MonoBehaviour
         //화요일 머지시 지워야함(i눌러서 인벤토리 나오는 부분)
 
         if (Input.GetKeyDown(KeyCode.U))
+       // if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
         {
-            Invoke("DeleyItemList", 0.001f);
+            Invoke("DeleyItemList", 0.001f);             
             mIsChestActiveCheck = !mIsChestActiveCheck;
 
             if (Input.GetKeyDown(KeyCode.U))
@@ -146,7 +153,8 @@ public class ChestInventory : MonoBehaviour
                 if (mKeyCount == 1)
                 {
                     OpenChest();
-                    LoadItem();
+                   // LoadItem();      
+                    
                 }
                 if (mKeyCount == 2)
                 {
@@ -174,14 +182,17 @@ public class ChestInventory : MonoBehaviour
             // mChestSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
         }
         mInventoryArray = new Slot[4,5];
-        mInventoryArray = InventoryManager.Instance.mInventorySlots;
+        mInventoryArray = InventoryManager.Instance.mChestInventorySlots;
+         Debug.Log($"{ mInventoryArray[0, 0].tag}, 열떄바뀌나?");
+       
         mSelectY = 0;
         mSelectX = 0;
         //mChestSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
         mChestIsInventoryOpen = true;
+        mInventoryResource.SetActive(true);
         SetActiveAll(true);
         // 
-
+        
 
     }
     public void CloseChest()
@@ -193,12 +204,14 @@ public class ChestInventory : MonoBehaviour
             // mChestSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
         }
         mChestIsInventoryOpen = false;
-        
+       
         mChestSelectPoint.transform.localPosition = mInventoryArray[0, 0].transform.localPosition;
         
 
         
         InventoryManager.Instance.mInventorySlots = mInventoryArray;
+         Debug.Log($"{ mInventoryArray[0, 0].tag}, 닫을때 바뀌니?");
+          mInventoryResource.SetActive(false);
         SetActiveAll(false);
     }
 
@@ -209,10 +222,12 @@ public class ChestInventory : MonoBehaviour
         {
             for (int indexX = 0; indexX < ARRAY_X; indexX++)
             {
-
+               
                 mInventoryArray[indexY, indexX] = InventoryManager.Instance.mInventorySlots[indexY, indexX];
+                 Debug.Log($"{ mInventoryArray[0, 0].tag}, 로드할때 바뀌나?");
             }
-        }
+        }    
+       
     }
 
     bool ItemNullCheck()
@@ -238,10 +253,12 @@ public class ChestInventory : MonoBehaviour
                     int indexAdd = indexY * ARRAY_X + indexX;
                     if (mInventoryArray[indexY, indexX].mItem != null)
                     {
+                       
                         mInventoryFindSlot.transform.GetChild(indexAdd).GetComponent<Slot>().AddItem(mInventoryArray[indexY, indexX].mItem, mInventoryArray[indexY, indexX].mItemCount);
                         mInventoryArray[indexY, indexX].gameObject.SetActive(true);
                         InventoryManager.Instance.mChestInventorySlots[indexY, indexX] = mInventoryArray[indexY, indexX].GetComponent<Slot>();
-                        Debug.Log(mInventoryArray[0, 0].transform.localPosition);
+                         Debug.Log($"{ mInventoryArray[0, 0].tag}, 딜레이할때 바뀌나?");
+                        
                     }
                 }
             }
@@ -449,10 +466,10 @@ public class ChestInventory : MonoBehaviour
                         }
                         for (int i = 0; i < 4; i++)
                         {
-                            for (int j = 0; j < 2; j++)
+                            for (int j = 0; j < 7; j++)
                             {
                                 if (mChestArray[i, j].GetComponent<Slot>().mItem != null)
-                                    InventoryManager.Instance.mEquipmentSlots[i, j] = mChestArray[i, j].GetComponent<Slot>();
+                                    InventoryManager.Instance.mChestSlots[i, j] = mChestArray[i, j].GetComponent<Slot>();
                             }
                         }
                         return;
@@ -479,9 +496,9 @@ public class ChestInventory : MonoBehaviour
                         }
                         for (int i = 0; i < 4; i++)
                         {
-                            for (int j = 0; j < 2; j++)
+                            for (int j = 0; j < 7; j++)
                             {
-                                InventoryManager.Instance.mEquipmentSlots[i, j] = mChestArray[i, j].GetComponent<Slot>();
+                                InventoryManager.Instance.mChestSlots[i, j] = mChestArray[i, j].GetComponent<Slot>();
                             }
                         }
                         return;

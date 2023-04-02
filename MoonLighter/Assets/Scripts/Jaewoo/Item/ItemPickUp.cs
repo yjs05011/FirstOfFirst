@@ -7,6 +7,7 @@ public class ItemPickUp : MonoBehaviour
     public Slot[] mSlot;
     
     public Inventory mInventory;
+    public ChestInventory mChestInventory;
    
     public Item mItem;
     
@@ -31,16 +32,19 @@ public class ItemPickUp : MonoBehaviour
             
             if(this.gameObject.transform.GetComponent<ItemPickUp>().mItem != null)
             {
-                mInventory.AcpuireItem(this.gameObject.transform.GetComponent<ItemPickUp>().mItem, mItemCount);
-
                 InventoryManager.Instance.mIsManagerAddCheck = true;   
+                
+                mInventory.AcpuireItem(this.gameObject.transform.GetComponent<ItemPickUp>().mItem, mItemCount);
+                DungeonManager.Instance.DungeonDropItemDelete(mItem);
+                
+                
                 GetItemMove();
                 return;
             }                       
         }        
         if(other.CompareTag("Hole"))
         {
-            
+            GetItemMove();
         }
     }
    
