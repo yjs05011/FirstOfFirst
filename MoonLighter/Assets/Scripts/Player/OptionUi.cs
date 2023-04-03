@@ -98,7 +98,7 @@ public class OptionUi : MonoBehaviour
                 {
                     corser.transform.localPosition = CorsorSetPos(0);
                     ColorChange(selectTitleIdx, selectOptionIdx, green);
-                    StartCoroutine(TileRightMoving(0.5f));
+                    StartCoroutine(TileRightMoving(0.001f));
                 }
 
             }
@@ -116,7 +116,7 @@ public class OptionUi : MonoBehaviour
                 CorsetSetGameObject();
                 corser.transform.localPosition = CorsorSetPos(0);
                 ColorChange(selectTitleIdx, selectOptionIdx, green);
-                StartCoroutine(TileLeftMoving(0.5f));
+                StartCoroutine(TileLeftMoving(0.001f));
             }
         }
         if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.LEFT]))
@@ -233,7 +233,7 @@ public class OptionUi : MonoBehaviour
     }
     IEnumerator TileRightMoving(float Delay)
     {
-        float time = Delay / 1280;
+        float time = Delay / 2500;
         Vector3 pos = new Vector2(titlePos[selectTitleIdx].x, 240);
         selectTitle.gameObject.SetActive(false);
         selectTitle.transform.localPosition = titlePos[selectTitleIdx];
@@ -252,7 +252,7 @@ public class OptionUi : MonoBehaviour
     }
     IEnumerator TileLeftMoving(float Delay)
     {
-        float time = Delay / 1280;
+        float time = Delay / 2500;
         Vector3 pos = new Vector2(titlePos[selectTitleIdx].x, 240);
         selectTitle.gameObject.SetActive(false);
         selectTitle.transform.localPosition = titlePos[selectTitleIdx];
