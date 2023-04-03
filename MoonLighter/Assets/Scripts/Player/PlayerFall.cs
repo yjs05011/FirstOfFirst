@@ -23,7 +23,9 @@ public class PlayerFall : PlayerState
         {
             player.mIsDelay = true;
             player.mPlayerHp -= Mathf.Floor(player.mPlayerMaxHp / 10);
+            PlayerManager.Instance.mPlayerStat.Hp -= Mathf.Floor(player.mPlayerMaxHp / 10);
             player.mPlayerAnimator.SetTrigger("IsFalling");
+            UiManager.Instance.mIsHpChange = true;
             player.mPlayerRigid.velocity *= 0.1f;
             yield return new WaitForSeconds(Delay);
             transform.position = DungeonManager.Instance.GetPlayerCurrStage().GetEntryPosition();

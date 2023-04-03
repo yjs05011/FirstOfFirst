@@ -9,7 +9,7 @@ public class LoadingManager : MonoBehaviour
 {
     public static string nextScene;
     public static bool IsLoadingStart = false;
-    
+
     public GameObject mFadeImage;
     public GameObject mLoadingAnimation;
     private Canvas mCanvas;
@@ -17,7 +17,7 @@ public class LoadingManager : MonoBehaviour
     private void Awake()
     {
         mCanvas = GetComponent<Canvas>();
-        mCanvas.worldCamera= Camera.main;
+        mCanvas.worldCamera = Camera.main;
         DontDestroyOnLoad(gameObject);
         mFadeImage.SetActive(false);
         mLoadingAnimation.SetActive(false);
@@ -34,7 +34,7 @@ public class LoadingManager : MonoBehaviour
         if (IsLoadingStart)
         {
             mTimer = 0;
-            
+
             StartCoroutine(FadeOutStart());
             IsLoadingStart = false;
         }
@@ -52,20 +52,20 @@ public class LoadingManager : MonoBehaviour
             mTimer += Time.deltaTime;
             if (op.progress > 0.9f || Mathf.Approximately(0.9f, op.progress))
             {
-                if(LoadingAni.IsAnimationFinished || mTimer < 0.1f)
+                if (LoadingAni.IsAnimationFinished || mTimer < 0.1f)
                 {
                     op.allowSceneActivation = true;
                 }
             }
-            if(op.progress > 1f || Mathf.Approximately(1f, op.progress))
+            if (op.progress > 1f || Mathf.Approximately(1f, op.progress))
             {
-                IsDone= true;
+                IsDone = true;
             }
-            
-           
+
+
         }
-        
-        
+
+
         StartCoroutine(FadeInStart());
 
     }
@@ -77,7 +77,7 @@ public class LoadingManager : MonoBehaviour
         c.a = 1;
         mFadeImage.GetComponent<Image>().color = c;
         //yield return new WaitForSecondsRealtime(1f);
-        for (float f = 1f; f > 0; f -= 0.05f)
+        for (float f = 1f; f > 0; f -= 0.1f)
         {
             c.a = f;
             mFadeImage.GetComponent<Image>().color = c;
@@ -95,7 +95,7 @@ public class LoadingManager : MonoBehaviour
         c.a = 0;
         mFadeImage.GetComponent<Image>().color = c;
         //yield return new WaitForSecondsRealtime(0.5f);
-        for (float f = 0; f < 1f; f += 0.05f)
+        for (float f = 0; f < 1f; f += 0.1f)
         {
             c.a = f;
             mFadeImage.GetComponent<Image>().color = c;

@@ -67,6 +67,7 @@ public class OptionUi : MonoBehaviour
         {
             gameObject.SetActive(false);
             DataManager.Instance.JsonSave();
+            UiManager.Instance.mIsOptionActive = false;
         }
         if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.ATTACK]))
         {

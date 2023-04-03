@@ -29,6 +29,7 @@ public class UiManager : MonoBehaviour
     public bool mIsKeyChanged = false;
     // 무기 변경
     public bool mIsWeaponChange = false;
+    public bool mIsSceneChaged = false;
 
 
     // [Ui]
@@ -38,6 +39,7 @@ public class UiManager : MonoBehaviour
     // 키 선택이 안되게 하기
     public bool mIsKeySelection = false;
     public bool mIsEscContol = false;
+    public bool mIsOptionActive = false;
 
 
 

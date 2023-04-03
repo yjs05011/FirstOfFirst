@@ -88,11 +88,6 @@ public class PlayerAct : MonoBehaviour
     {
         SetActionType(ActState.State_Move);
         mPlayerNowWeapone = 1;
-        mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
-        mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
-        mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
-        mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
-        mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
         if (PlayerManager.Instance.mPlayerBeforPos != default)
         {
             transform.position = PlayerManager.Instance.mPlayerBeforPos;
@@ -101,6 +96,16 @@ public class PlayerAct : MonoBehaviour
         {
             transform.position = SetPosition.Instance.mSettingPosition;
             SetPosition.Instance.mSettingPosition = Vector3.zero;
+        }
+        if (UiManager.Instance.mIsSceneChaged)
+        {
+            PlayerManager.Instance.mPlayerStat.Hp = PlayerManager.Instance.mPlayerStat.MaxHp;
+            mPlayerDef = PlayerManager.Instance.mPlayerStat.Def;
+            mPlayerSpeed = PlayerManager.Instance.mPlayerStat.Speed;
+            mPlayerHp = PlayerManager.Instance.mPlayerStat.Hp;
+            mPlayerStr = PlayerManager.Instance.mPlayerStat.Str;
+            mPlayerMaxHp = PlayerManager.Instance.mPlayerStat.MaxHp;
+            UiManager.Instance.mIsSceneChaged = false;
         }
 
 

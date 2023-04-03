@@ -56,13 +56,7 @@ public class GameManager : GSingleton<GameManager>
 
 
     }
-    public void DefaultItemAdd()
-    {
-        for (int i = 0; i < mInventory.Length; i++)
-        {
-            mInventory[i] = mItemList[0];
-        }
-    }
+
 
 }
 

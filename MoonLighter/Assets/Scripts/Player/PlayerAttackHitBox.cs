@@ -42,7 +42,7 @@ public class PlayerAttackHitBox : MonoBehaviour
         }
         if (other.CompareTag("Breakable"))
         {
-            // other.GetComponent<DungeonBreakable>().OnDamage();
+            other.GetComponent<DungeonBreakable>().OnBreak();
         }
     }
 }

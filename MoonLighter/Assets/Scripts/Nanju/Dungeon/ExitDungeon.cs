@@ -113,6 +113,7 @@ public class ExitDungeon : MonoBehaviour
             PlayerManager.Instance.mIsUiActive = false;
             UiManager.Instance.mIsPlayerFinishAnimation = false;
             UiManager.Instance.mIsDungeonCheck = false;
+            UiManager.Instance.mIsSceneChaged = true;
             this.gameObject.SetActive(false);
 
             LoadingManager.LoadScene("VillageScene");
@@ -124,7 +125,7 @@ public class ExitDungeon : MonoBehaviour
             UiManager.Instance.mIsPlayerUseAnimation = false;
             PlayerManager.Instance.mIsUiActive = false;
             UiManager.Instance.mIsPlayerFinishAnimation = false;
-
+            UiManager.Instance.mIsSceneChaged = true;
             this.gameObject.SetActive(false);
 
             LoadingManager.LoadScene("Dungeon");
