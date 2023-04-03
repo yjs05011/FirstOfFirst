@@ -28,67 +28,77 @@ public class TitleButtonControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UiManager.Instance.mIsKeySelection = true;
-
-        if (Input.GetKeyDown(KeyCode.S))
+        if (UiManager.Instance.mIsOptionActive)
         {
-            if (mTextCheck == 2)
-            {
-
-            }
-            else
-            {
-                mTextCheck++;
-            }
+            mTitleButtons.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        else
         {
-            if (mTextCheck == 0)
+            mTitleButtons.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.S))
             {
+                if (mTextCheck == 2)
+                {
 
+                }
+                else
+                {
+                    mTextCheck++;
+                }
             }
-            else
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                mTextCheck--;
+                if (mTextCheck == 0)
+                {
+
+                }
+                else
+                {
+                    mTextCheck--;
+                }
             }
-        }
-        // 선택하였을때 실행
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            switch (mTextCheck)
+            // 선택하였을때 실행
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                case 0:
-                    gameObject.SetActive(false);
-                    PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
-                    PlayerManager.Instance.mPlayerStat.Speed = mPlayerDefaultStat.Speed;
-                    PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
-                    PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
-                    PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
-                    PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
-                    LoadingManager.LoadScene("VillageScene");
-                    UiManager.Instance.mIsKeySelection = false;
-                    break;
-                case 1:
-                    mStartScreenLogo.SetActive(false);
-                    // mTitleButtons.SetActive(false);
-                    mOptionUi.SetActive(true);
-                    break;
-                case 2:
+                switch (mTextCheck)
+                {
+                    case 0:
+                        gameObject.SetActive(false);
+                        PlayerManager.Instance.mPlayerStat.Hp = mPlayerDefaultStat.hp;
+                        PlayerManager.Instance.mPlayerStat.Speed = mPlayerDefaultStat.Speed;
+                        PlayerManager.Instance.mPlayerStat.Str = mPlayerDefaultStat.str;
+                        PlayerManager.Instance.mPlayerStat.Def = mPlayerDefaultStat.def;
+                        PlayerManager.Instance.mPlayerStat.Money = mPlayerDefaultStat.Money;
+                        PlayerManager.Instance.mPlayerStat.MaxHp = mPlayerDefaultStat.MaxHp;
+                        LoadingManager.LoadScene("VillageScene");
+                        UiManager.Instance.mIsKeySelection = false;
+                        UiManager.Instance.mIsSceneChaged = true;
+                        break;
+                    case 1:
+                        mStartScreenLogo.SetActive(false);
+
+                        mOptionUi.SetActive(true);
+                        UiManager.Instance.mIsOptionActive = true; ;
+                        break;
+                    case 2:
 #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
+                        UnityEditor.EditorApplication.isPlaying = false;
 #else
                     Application.Quit();
 #endif
-                    break;
+                        break;
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+            // if (Input.GetKeyDown(KeyCode.Escape))
+            // {
 
-            mStartScreenLogo.SetActive(true);
-            mTitleButtons.SetActive(true);
+            //     mStartScreenLogo.SetActive(true);
+            //     mTitleButtons.SetActive(true);
 
+            // }
         }
+
+
 
         // 무슨 이름인지 체크하여 활성화,비활성화 하기
         switch (mTextCheck)

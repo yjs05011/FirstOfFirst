@@ -62,12 +62,7 @@ public class DataManager : GSingleton<DataManager>
     public override void Awake()
     {
 
-<<<<<<< HEAD
-        path = Path.Combine(Application.dataPath, "test.json");
-        // JsonLoad();
-=======
         path = Path.Combine(Application.dataPath, "MoonLightSaveFile.json");
->>>>>>> ae5728c4b45307803931f17480e77465b8e31469
         base.Init();
     }
 

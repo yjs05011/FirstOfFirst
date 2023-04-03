@@ -1,0 +1,20 @@
+{
+    "mPlayerHp": 0.0,
+    "mPlayerSpeed": 0.0,
+    "mPlayerStr": 0.0,
+    "mPlayerDef": 0.0,
+    "mPlayerMoney": 0.0,
+    "mPlayerMaxHp": 0.0,
+    "mIsNight": false,
+    "mTableNumber": [],
+    "mItemPrice": [],
+    "mItemsNumber": [],
+    "mBedPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "mIsBlackSmithBuild": false,
+    "mIsWitchHouseBuild": false,
+    "mKeySave": []
+}

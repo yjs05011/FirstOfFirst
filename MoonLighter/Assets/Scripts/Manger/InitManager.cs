@@ -30,8 +30,7 @@ public class InitManager : MonoBehaviour
         {
             GameManager.Instance.AddItemList(objs[i].GetComponent<ItemStat>());
         }
-        GameManager.Instance.DefaultItemAdd();
-        // GFunc.LoadScene("TitleScene");
+        GFunc.LoadScene("TitleScene");
     }
 
     // Update is called once per frame
