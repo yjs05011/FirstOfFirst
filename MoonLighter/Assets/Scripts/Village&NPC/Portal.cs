@@ -13,7 +13,7 @@ public class Portal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        portalAni= GetComponent<Animator>();
+        portalAni = GetComponent<Animator>();
         talk = transform.Find("Talk").gameObject;
         talk.SetActive(false);
         GFunc.SetTmpText(Button, GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT].ToString());
@@ -23,12 +23,12 @@ public class Portal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        portalAni.SetBool("IsPlayerNearby",Isplayernearby);
-        if(Isplayernearby)
+        portalAni.SetBool("IsPlayerNearby", Isplayernearby);
+        if (Isplayernearby)
         {
             Vector3 mPlayerPos = player.transform.localPosition;
             float mDistance = Vector3.Distance(this.transform.localPosition, mPlayerPos);
-            if(mDistance <2)
+            if (mDistance < 2)
             {
                 talk.SetActive(true);
                 if (Input.GetKeyDown(GameKeyManger.KeySetting.keys[GameKeyManger.KeyAction.INTERRUPT]))
@@ -48,23 +48,25 @@ public class Portal : MonoBehaviour
     public void EnterTheDungeon()
     {
         LoadingManager.LoadScene("Dungeon");
+        UiManager.Instance.mIsSceneChaged = true;
+
     }
 
     private void OnTriggerEnter2D(Collider2D mCollision)
     {
-        
+
         if (mCollision.tag == "Player")
         {
-            Isplayernearby=true;
+            Isplayernearby = true;
             player = mCollision.gameObject;
         }
-        
+
     }
     private void OnTriggerExit2D(Collider2D mCollision)
     {
-        if(mCollision.tag == "Player")
+        if (mCollision.tag == "Player")
         {
-            Isplayernearby=false;   
+            Isplayernearby = false;
         }
     }
 
